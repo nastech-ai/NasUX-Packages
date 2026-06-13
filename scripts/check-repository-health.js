@@ -175,13 +175,22 @@ async function getTermuxPackages(
           `Duplicate package "${pkgName}" earlier found in "${termuxPackages.get(pkgName).repo}" also in "${pkgRepo}" needs to be removed from nasux-packages`,
         );
       }
-      const { stdout } = execFileAsync("git", [
-        "log",
-        "-1",
-        "--format=%at",
-        `${repoPathMap.get(pkgRepo)}`,
-      ]);
-      const lastModified = Number.parseInt(stdout);
+      const repoPath = repoPathMap.get(pkgRepo);
+      let lastModified = Math.floor(new Date().getTime() / 1000);
+      if (repoPath) {
+        try {
+          const { stdout } = await execFileAsync("git", [
+            "log",
+            "-1",
+            "--format=%at",
+            repoPath,
+          ]);
+          const parsed = Number.parseInt(stdout);
+          if (!isNaN(parsed)) lastModified = parsed;
+        } catch (_e) {
+          // git log failed — fall back to current time
+        }
+      }
       termuxPackages.set(pkgName, {
         version: pkgVersion,
         repo: pkgRepo,
