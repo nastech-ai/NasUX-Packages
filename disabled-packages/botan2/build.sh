@@ -1,16 +1,16 @@
-TERMUX_PKG_HOMEPAGE=https://botan.randombit.net/
-TERMUX_PKG_DESCRIPTION="Crypto and TLS for Modern C++"
-TERMUX_PKG_LICENSE="BSD 2-Clause"
-TERMUX_PKG_MAINTAINER="@termux"
+NASUX_PKG_HOMEPAGE=https://botan.randombit.net/
+NASUX_PKG_DESCRIPTION="Crypto and TLS for Modern C++"
+NASUX_PKG_LICENSE="BSD 2-Clause"
+NASUX_PKG_MAINTAINER="@nastech-ai"
 # This specific package is for libbotan-2.
-TERMUX_PKG_VERSION=2.19.3
+NASUX_PKG_VERSION=2.19.3
 TERMUX_PKG_REVISION=1
-TERMUX_PKG_SRCURL=https://botan.randombit.net/releases/Botan-${TERMUX_PKG_VERSION}.tar.xz
-TERMUX_PKG_SHA256=dae047f399c5a47f087db5d3d9d9e8f11ae4985d14c928d71da1aff801802d55
-TERMUX_PKG_DEPENDS="libbz2, libc++, liblzma, libsqlite, zlib"
+NASUX_PKG_SRCURL=https://botan.randombit.net/releases/Botan-${NASUX_PKG_VERSION}.tar.xz
+NASUX_PKG_SHA256=dae047f399c5a47f087db5d3d9d9e8f11ae4985d14c928d71da1aff801802d55
+NASUX_PKG_DEPENDS="libbz2, libc++, liblzma, libsqlite, zlib"
 TERMUX_PKG_BUILD_DEPENDS="boost, boost-headers"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
---cpu=$TERMUX_ARCH
+--cpu=$NASUX_ARCH
 --os=linux
 --no-install-python-module
 --without-documentation
@@ -20,7 +20,7 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --with-sqlite3
 --with-zlib
 --prefix=$TERMUX_PREFIX
---program-suffix=$(echo ${TERMUX_PKG_VERSION#*:} | cut -d . -f 1)
+--program-suffix=$(echo ${NASUX_PKG_VERSION#*:} | cut -d . -f 1)
 "
 
 termux_step_pre_configure() {

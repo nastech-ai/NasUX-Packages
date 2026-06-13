@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://www.gtk.org/
-TERMUX_PKG_DESCRIPTION="GObject-based multi-platform GUI toolkit"
-TERMUX_PKG_LICENSE="LGPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="4.22.4"
-TERMUX_PKG_SRCURL=https://download.gnome.org/sources/gtk/${TERMUX_PKG_VERSION%.*}/gtk-${TERMUX_PKG_VERSION}.tar.xz
-TERMUX_PKG_SHA256=51bd9f60c7d23a665a556c7364c21fb2e4e282566b3e7e092455e8f910330893
-TERMUX_PKG_DEPENDS="adwaita-icon-theme, fontconfig, fribidi, gdk-pixbuf, glib, graphene, gtk-update-icon-cache, harfbuzz, iso-codes, libcairo, libdrm, libepoxy, libjpeg-turbo, libpng, librsvg, libtiff, libwayland, libx11, libxcursor, libxdamage, libxext, libxfixes, libxi, libxinerama, libxkbcommon, libxrandr, pango, shared-mime-info"
+NASUX_PKG_HOMEPAGE=https://www.gtk.org/
+NASUX_PKG_DESCRIPTION="GObject-based multi-platform GUI toolkit"
+NASUX_PKG_LICENSE="LGPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="4.22.4"
+NASUX_PKG_SRCURL=https://download.gnome.org/sources/gtk/${NASUX_PKG_VERSION%.*}/gtk-${NASUX_PKG_VERSION}.tar.xz
+NASUX_PKG_SHA256=51bd9f60c7d23a665a556c7364c21fb2e4e282566b3e7e092455e8f910330893
+NASUX_PKG_DEPENDS="adwaita-icon-theme, fontconfig, fribidi, gdk-pixbuf, glib, graphene, gtk-update-icon-cache, harfbuzz, iso-codes, libcairo, libdrm, libepoxy, libjpeg-turbo, libpng, librsvg, libtiff, libwayland, libx11, libxcursor, libxdamage, libxext, libxfixes, libxi, libxinerama, libxkbcommon, libxrandr, pango, shared-mime-info"
 TERMUX_PKG_BUILD_DEPENDS="g-ir-scanner, glib-cross, libwayland-protocols, libwayland-cross-scanner, xorgproto"
 TERMUX_PKG_RECOMMENDS="desktop-file-utils, librsvg, ttf-dejavu"
-TERMUX_PKG_VERSIONED_GIR=false
+NASUX_PKG_VERSIONED_GIR=false
 TERMUX_PKG_DISABLE_GIR=false
 # Prevent updating to unstable branch
 TERMUX_PKG_AUTO_UPDATE=false
@@ -27,8 +27,8 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 "
 
 termux_step_pre_configure() {
-	termux_setup_cmake
-	termux_setup_gir
-	termux_setup_ninja
-	termux_setup_pkg_config_wrapper "${TERMUX_PREFIX}/opt/glib/cross/lib/x86_64-linux-gnu/pkgconfig:${TERMUX_PREFIX}/opt/libwayland/cross/lib/x86_64-linux-gnu/pkgconfig"
+	nasux_setup_cmake
+	nasux_setup_gir
+	nasux_setup_ninja
+	nasux_setup_pkg_config_wrapper "${TERMUX_PREFIX}/opt/glib/cross/lib/x86_64-linux-gnu/pkgconfig:${TERMUX_PREFIX}/opt/libwayland/cross/lib/x86_64-linux-gnu/pkgconfig"
 }

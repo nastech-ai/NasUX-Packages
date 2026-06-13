@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://zen-browser.app
-TERMUX_PKG_DESCRIPTION="Zen is a firefox-based browser with the aim of pushing your productivity to a new level!"
-TERMUX_PKG_LICENSE="MPL-2.0"
-TERMUX_PKG_MAINTAINER="@sabamdarif"
-TERMUX_PKG_VERSION="1.21.1b"
-TERMUX_PKG_SRCURL="https://github.com/zen-browser/desktop/releases/download/${TERMUX_PKG_VERSION}/zen.source.tar.zst"
-TERMUX_PKG_SHA256=e218d89839fa601931939c48f3cd811a80dd053cb5e33ef659573873262106ab
+NASUX_PKG_HOMEPAGE=https://zen-browser.app
+NASUX_PKG_DESCRIPTION="Zen is a firefox-based browser with the aim of pushing your productivity to a new level!"
+NASUX_PKG_LICENSE="MPL-2.0"
+NASUX_PKG_MAINTAINER="@sabamdarif"
+NASUX_PKG_VERSION="1.21.1b"
+NASUX_PKG_SRCURL="https://github.com/zen-browser/desktop/releases/download/${NASUX_PKG_VERSION}/zen.source.tar.zst"
+NASUX_PKG_SHA256=e218d89839fa601931939c48f3cd811a80dd053cb5e33ef659573873262106ab
 # ffmpeg and pulseaudio are dependencies through dlopen(3):
-TERMUX_PKG_DEPENDS="ffmpeg, fontconfig, freetype, gdk-pixbuf, glib, gtk3, libandroid-shmem, libandroid-spawn, libc++, libcairo, libevent, libffi, libice, libicu, libjpeg-turbo, libnspr, libnss, libpixman, libsm, libvpx, libwebp, libx11, libxcb, libxcomposite, libxdamage, libxext, libxfixes, libxrandr, libxtst, pango, pulseaudio, zlib"
+NASUX_PKG_DEPENDS="ffmpeg, fontconfig, freetype, gdk-pixbuf, glib, gtk3, libandroid-shmem, libandroid-spawn, libc++, libcairo, libevent, libffi, libice, libicu, libjpeg-turbo, libnspr, libnss, libpixman, libsm, libvpx, libwebp, libx11, libxcb, libxcomposite, libxdamage, libxext, libxfixes, libxrandr, libxtst, pango, pulseaudio, zlib"
 TERMUX_PKG_BUILD_DEPENDS="libcpufeatures, libice, libsm"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_AUTO_UPDATE=true
 
 termux_step_post_get_source() {
@@ -20,14 +20,14 @@ termux_step_post_get_source() {
 	sed -i 's|^\(\[patch\.crates-io\]\)$|\1\ncc = { path = "third_party/rust/cc" }|g' \
 		Cargo.toml
 	(
-		termux_setup_rust
+		nasux_setup_rust
 		cargo update -p cc
 	)
 }
 
 termux_step_pre_configure() {
-	termux_setup_nodejs
-	termux_setup_rust
+	nasux_setup_nodejs
+	nasux_setup_rust
 
 	if [ "$TERMUX_DEBUG_BUILD" = false ]; then
 		local env_host=$(printf $CARGO_TARGET_NAME | tr a-z A-Z | sed s/-/_/g)
@@ -47,7 +47,7 @@ termux_step_pre_configure() {
 	CXXFLAGS+=" -U__ANDROID__ -D_LIBCPP_HAS_NO_C11_ALIGNED_ALLOC"
 	LDFLAGS+=" -landroid-shmem -landroid-spawn -llog"
 
-	if [ "$TERMUX_ARCH" = "arm" ]; then
+	if [ "$NASUX_ARCH" = "arm" ]; then
 		# For symbol android_getCpuFeatures
 		LDFLAGS+=" -l:libndk_compat.a"
 	fi
@@ -63,7 +63,7 @@ termux_step_configure() {
 		-e "s|@TERMUX_HOST_PLATFORM@|${TERMUX_HOST_PLATFORM}|" \
 		-e "s|@TERMUX_PREFIX@|${TERMUX_PREFIX}|" \
 		-e "s|@CARGO_TARGET_NAME@|${CARGO_TARGET_NAME}|" \
-		-e "s|@TERMUX_PKG_VERSION@|${TERMUX_PKG_VERSION}|" \
+		-e "s|@NASUX_PKG_VERSION@|${NASUX_PKG_VERSION}|" \
 		"$TERMUX_PKG_BUILDER_DIR/mozconfig.cfg" >.mozconfig
 
 	./mach configure

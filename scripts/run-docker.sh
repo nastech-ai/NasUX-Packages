@@ -1,9 +1,9 @@
 #!/bin/bash
 set -euo pipefail
 
-TERMUX_SCRIPTDIR=$(cd "$(realpath "$(dirname "$0")")"; cd ..; pwd)
-: ${TERMUX_BUILDER_IMAGE_NAME:=ghcr.io/termux/package-builder}
-: ${CONTAINER_NAME:=termux-package-builder}
+NASUX_SCRIPTDIR=$(cd "$(realpath "$(dirname "$0")")"; cd ..; pwd)
+: ${TERMUX_BUILDER_IMAGE_NAME:=ghcr.io/nastech-ai/nasux-package-builder}
+: ${CONTAINER_NAME:=nasux-package-builder}
 : ${TERMUX_DOCKER_RUN_EXTRA_ARGS:=}
 : ${TERMUX_DOCKER_EXEC_EXTRA_ARGS:=}
 BUILDSCRIPT_NAME=build-package.sh
@@ -12,14 +12,14 @@ CONTAINER_HOME_DIR=/home/builder
 _show_usage() {
 	echo "Usage: $0 [OPTIONS] [COMMAND]"
 	echo ""
-	echo "Run a command in the Termux package builder container. If no command is given, an interactive shell will be started."
+	echo "Run a command in the NasUX package builder container. If no command is given, an interactive shell will be started."
 	echo ""
 	echo "Options:"
 	echo "  -h, --help                 Show this help message and exit"
 	echo "  -d, --dry-run              Run 'build-package-dry-run-simulation.sh' before"
 	echo "                             building any package. This is useful for CI to"
 	echo "                             skip unnecessary docker runs."
-	echo "  -m, --mount-termux-dirs    Mount /data and ~/.termux-build into the container."
+	echo "  -m, --mount-nasux-dirs    Mount /data and ~/.nasux-build into the container."
 	echo "                             This is useful for building locally for development"
 	echo "                             with host IDE and editors."
 	echo "Supported environment variables:"
@@ -39,7 +39,7 @@ _show_usage() {
 	echo "  container already exists."
 	echo "- To apply new TERMUX_DOCKER_RUN_EXTRA_ARGS, the existing container needs to be"
 	echo "  removed first."
-	echo "- The above rules also apply to -m/--mount-termux-dirs option as it adds the"
+	echo "- The above rules also apply to -m/--mount-nasux-dirs option as it adds the"
 	echo "  mount arguments to TERMUX_DOCKER_RUN_EXTRA_ARGS."
 	echo "- The dry-run option will only work if the first argument passed to this script"
 	echo "  which runs docker contains '$BUILDSCRIPT_NAME', and it will run"
@@ -55,8 +55,8 @@ while (( $# != 0 )); do
 		-d|--dry-run)
 			dry_run="true"
 			shift 1;;
-		-m|--mount-termux-dirs)
-			TERMUX_DOCKER_RUN_EXTRA_ARGS="--volume /data:/data --volume $HOME/.termux-build:$CONTAINER_HOME_DIR/.termux-build $TERMUX_DOCKER_RUN_EXTRA_ARGS"
+		-m|--mount-nasux-dirs)
+			TERMUX_DOCKER_RUN_EXTRA_ARGS="--volume /data:/data --volume $HOME/.nasux-build:$CONTAINER_HOME_DIR/.nasux-build $TERMUX_DOCKER_RUN_EXTRA_ARGS"
 			shift 1;;
 		--) shift 1; break;;
 		-*) echo "Error: Unknown option '$1'" 1>&2; shift 1; exit 1;;
@@ -72,7 +72,7 @@ if [ "${dry_run}" = "true" ]; then
 	case "${1:-}" in
 		*"/$BUILDSCRIPT_NAME")
 			RETURN_VALUE=0
-			OUTPUT="$("$TERMUX_SCRIPTDIR/scripts/bin/build-package-dry-run-simulation.sh" "$@" 2>&1)" || RETURN_VALUE=$?
+			OUTPUT="$("$NASUX_SCRIPTDIR/scripts/bin/build-package-dry-run-simulation.sh" "$@" 2>&1)" || RETURN_VALUE=$?
 			if [ $RETURN_VALUE -ne 0 ]; then
 				echo "$OUTPUT" 1>&2
 				if [ $RETURN_VALUE -eq 85 ]; then # EX_C__NOOP
@@ -92,7 +92,7 @@ if [ "$UNAME" = Darwin ]; then
 	SEC_OPT=""
 else
 	REPOROOT="$(dirname $(readlink -f $0))/../"
-	SEC_OPT=" --security-opt seccomp=$REPOROOT/scripts/profile.json --security-opt apparmor=_custom-termux-package-builder-$CONTAINER_NAME --cap-add CAP_SYS_ADMIN --device /dev/fuse"
+	SEC_OPT=" --security-opt seccomp=$REPOROOT/scripts/profile.json --security-opt apparmor=_custom-nasux-package-builder-$CONTAINER_NAME --cap-add CAP_SYS_ADMIN --device /dev/fuse"
 fi
 
 if [ "${CI:-}" = "true" ]; then
@@ -105,9 +105,9 @@ fi
 # To reset, use "restorecon -Fr ."
 # To check, use "ls -Z ."
 if [ -n "$(command -v getenforce)" ] && [ "$(getenforce)" = Enforcing ]; then
-	VOLUME=$REPOROOT:$CONTAINER_HOME_DIR/termux-packages:z
+	VOLUME=$REPOROOT:$CONTAINER_HOME_DIR/nasux-packages:z
 else
-	VOLUME=$REPOROOT:$CONTAINER_HOME_DIR/termux-packages
+	VOLUME=$REPOROOT:$CONTAINER_HOME_DIR/nasux-packages
 fi
 
 USER=builder
@@ -212,7 +212,7 @@ fi
 load_apparmor_profile ./scripts/profile-restricted.apparmor "Loading restricted AppArmor profile"
 
 # Set traps to ensure that the process started with docker exec and all its children are killed.
-. "$TERMUX_SCRIPTDIR/scripts/utils/docker/docker.sh"; docker__setup_docker_exec_traps
+. "$NASUX_SCRIPTDIR/scripts/utils/docker/docker.sh"; docker__setup_docker_exec_traps
 
 if [ "$#" -eq "0" ]; then
 	set -- bash

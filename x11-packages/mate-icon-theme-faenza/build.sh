@@ -1,16 +1,16 @@
-TERMUX_PKG_HOMEPAGE=https://mate-desktop.org/
-TERMUX_PKG_DESCRIPTION="Faenza icon theme for MATE"
-TERMUX_PKG_LICENSE="GPL-3.0-only"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="1.20.0"
-TERMUX_PKG_SRCURL="https://github.com/mate-desktop-legacy-archive/mate-icon-theme-faenza/archive/refs/tags/v$TERMUX_PKG_VERSION.tar.gz"
-TERMUX_PKG_SHA256=3e838a08c18116d4d69fcacf50b456d79846db12bf249b44c7d971cf2df7b9c0
+NASUX_PKG_HOMEPAGE=https://mate-desktop.org/
+NASUX_PKG_DESCRIPTION="Faenza icon theme for MATE"
+NASUX_PKG_LICENSE="GPL-3.0-only"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="1.20.0"
+NASUX_PKG_SRCURL="https://github.com/mate-desktop-legacy-archive/mate-icon-theme-faenza/archive/refs/tags/v$NASUX_PKG_VERSION.tar.gz"
+NASUX_PKG_SHA256=3e838a08c18116d4d69fcacf50b456d79846db12bf249b44c7d971cf2df7b9c0
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_UPDATE_TAG_TYPE=newest-tag
 TERMUX_PKG_BUILD_DEPENDS="mate-common"
 TERMUX_PKG_PLATFORM_INDEPENDENT=true
 TERMUX_PKG_HOSTBUILD=true
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 
 termux_step_host_build() {
 	termux_download_ubuntu_packages mate-common

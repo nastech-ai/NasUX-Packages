@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://hostap.epitest.fi/wpa_supplicant
-TERMUX_PKG_DESCRIPTION="Utility providing key negotiation for WPA wireless networks"
-TERMUX_PKG_LICENSE="BSD 3-Clause"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="2.11"
+NASUX_PKG_HOMEPAGE=https://hostap.epitest.fi/wpa_supplicant
+NASUX_PKG_DESCRIPTION="Utility providing key negotiation for WPA wireless networks"
+NASUX_PKG_LICENSE="BSD 3-Clause"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="2.11"
 TERMUX_PKG_REVISION=1
-TERMUX_PKG_SRCURL=https://w1.fi/releases/wpa_supplicant-${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_DEPENDS="openssl, readline, libnl"
-TERMUX_PKG_SHA256=912ea06f74e30a8e36fbb68064d6cdff218d8d591db0fc5d75dee6c81ac7fc0a
+NASUX_PKG_SRCURL=https://w1.fi/releases/wpa_supplicant-${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_DEPENDS="openssl, readline, libnl"
+NASUX_PKG_SHA256=912ea06f74e30a8e36fbb68064d6cdff218d8d591db0fc5d75dee6c81ac7fc0a
 TERMUX_PKG_EXTRA_MAKE_ARGS="-C wpa_supplicant"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 
 termux_step_post_configure() {
 	cp wpa_supplicant/defconfig wpa_supplicant/.config

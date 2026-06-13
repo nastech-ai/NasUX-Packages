@@ -1,11 +1,11 @@
-TERMUX_PKG_HOMEPAGE=https://www.qemu.org
-TERMUX_PKG_DESCRIPTION="A generic and open source machine emulator and virtualizer"
-TERMUX_PKG_LICENSE="GPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="1:10.2.1"
-TERMUX_PKG_SRCURL="https://download.qemu.org/qemu-${TERMUX_PKG_VERSION:2}.tar.xz"
-TERMUX_PKG_SHA256=a3717477d8e2c84d630bfffbc20f6cd3293eb45aa1e6dac6d0cc27689991c9e1
-TERMUX_PKG_DEPENDS="alsa-lib, dtc, gdk-pixbuf, glib, jack2, gtk3, libbz2, libcairo, libcurl, libdw, libepoxy, libgmp, libgnutls, libiconv, libjpeg-turbo, liblzo, libnettle, libnfs, libpixman, libpng, libslirp, libspice-server, libssh, libusb, libusbredir, libx11, mesa, ncurses, pulseaudio, qemu-common, resolv-conf, sdl2 | sdl2-compat, sdl2-image, virglrenderer, zlib, zstd"
+NASUX_PKG_HOMEPAGE=https://www.qemu.org
+NASUX_PKG_DESCRIPTION="A generic and open source machine emulator and virtualizer"
+NASUX_PKG_LICENSE="GPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="1:10.2.1"
+NASUX_PKG_SRCURL="https://download.qemu.org/qemu-${NASUX_PKG_VERSION:2}.tar.xz"
+NASUX_PKG_SHA256=a3717477d8e2c84d630bfffbc20f6cd3293eb45aa1e6dac6d0cc27689991c9e1
+NASUX_PKG_DEPENDS="alsa-lib, dtc, gdk-pixbuf, glib, jack2, gtk3, libbz2, libcairo, libcurl, libdw, libepoxy, libgmp, libgnutls, libiconv, libjpeg-turbo, liblzo, libnettle, libnfs, libpixman, libpng, libslirp, libspice-server, libssh, libusb, libusbredir, libx11, mesa, ncurses, pulseaudio, qemu-common, resolv-conf, sdl2 | sdl2-compat, sdl2-image, virglrenderer, zlib, zstd"
 # Required by configuration script, but I can't find any binary that uses it.
 TERMUX_PKG_BUILD_DEPENDS="libtasn1"
 TERMUX_PKG_ANTI_BUILD_DEPENDS="sdl2-compat"
@@ -39,11 +39,11 @@ share/qemu
 TERMUX_PKG_CONFLICTS="qemu-system-x86_64, qemu-system-x86_64-headless, qemu-system-x86-64-headless"
 TERMUX_PKG_REPLACES="qemu-system-x86_64, qemu-system-x86_64-headless, qemu-system-x86-64-headless"
 TERMUX_PKG_PROVIDES="qemu-system-x86_64"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 
 termux_step_pre_configure() {
-	# Workaround for https://github.com/termux/termux-packages/issues/12261.
-	if [ $TERMUX_ARCH = "aarch64" ]; then
+	# Workaround for https://github.com/nastech-ai/NasUX-Packages/issues/12261.
+	if [ $NASUX_ARCH = "aarch64" ]; then
 		rm -f $TERMUX_PKG_BUILDDIR/_lib
 		mkdir -p $TERMUX_PKG_BUILDDIR/_lib
 
@@ -65,26 +65,26 @@ termux_step_pre_configure() {
 }
 
 termux_step_configure() {
-	termux_setup_ninja
+	nasux_setup_ninja
 
-	if [ "$TERMUX_ARCH" = "i686" ]; then
+	if [ "$NASUX_ARCH" = "i686" ]; then
 		LDFLAGS+=" -latomic"
 	fi
 
 	local QEMU_TARGETS=""
 
 	# System emulation.
-	if [[ "$TERMUX_ARCH_BITS" == "64" ]]; then
+	if [[ "$NASUX_ARCH_BITS" == "64" ]]; then
 		QEMU_TARGETS+="aarch64-softmmu,"
 	fi
 	QEMU_TARGETS+="arm-softmmu,"
 	QEMU_TARGETS+="i386-softmmu,"
 	QEMU_TARGETS+="m68k-softmmu,"
-	if [[ "$TERMUX_ARCH_BITS" == "64" ]]; then
+	if [[ "$NASUX_ARCH_BITS" == "64" ]]; then
 		QEMU_TARGETS+="ppc64-softmmu,"
 	fi
 	QEMU_TARGETS+="ppc-softmmu,"
-	if [[ "$TERMUX_ARCH_BITS" == "64" ]]; then
+	if [[ "$NASUX_ARCH_BITS" == "64" ]]; then
 		QEMU_TARGETS+="riscv32-softmmu,"
 		QEMU_TARGETS+="riscv64-softmmu,"
 		QEMU_TARGETS+="x86_64-softmmu"

@@ -1,6 +1,6 @@
-TERMUX_SUBPKG_DESCRIPTION="Additional utilities for OpenEthereum (like evm, ethstore, ethkey)"
+NASUX_SUBPKG_DESCRIPTION="Additional utilities for OpenEthereum (like evm, ethstore, ethkey)"
 TERMUX_SUBPKG_CONFLICTS="geth-utils"
-TERMUX_SUBPKG_INCLUDE="
+NASUX_SUBPKG_INCLUDE="
 bin/openethereum-evm
 bin/ethkey
 bin/ethstore

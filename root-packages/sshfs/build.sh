@@ -1,9 +1,9 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/libfuse/sshfs
-TERMUX_PKG_DESCRIPTION="FUSE client based on the SSH File Transfer Protocol"
-TERMUX_PKG_LICENSE="GPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="3.7.6"
-TERMUX_PKG_SRCURL=https://github.com/libfuse/sshfs/archive/refs/tags/sshfs-${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=67a3e166a39b07708497ee0aee308547dba386053cf8d816b4ce8a9b3066a6ce
+NASUX_PKG_HOMEPAGE=https://github.com/libfuse/sshfs
+NASUX_PKG_DESCRIPTION="FUSE client based on the SSH File Transfer Protocol"
+NASUX_PKG_LICENSE="GPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="3.7.6"
+NASUX_PKG_SRCURL=https://github.com/libfuse/sshfs/archive/refs/tags/sshfs-${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=67a3e166a39b07708497ee0aee308547dba386053cf8d816b4ce8a9b3066a6ce
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="libfuse3, glib, openssh | dropbear"
+NASUX_PKG_DEPENDS="libfuse3, glib, openssh | dropbear"

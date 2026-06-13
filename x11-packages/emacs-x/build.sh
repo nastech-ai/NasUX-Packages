@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE=https://www.gnu.org/software/emacs/
-TERMUX_PKG_DESCRIPTION="Extensible, customizable text editor-and more"
-TERMUX_PKG_LICENSE="GPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
+NASUX_PKG_HOMEPAGE=https://www.gnu.org/software/emacs/
+NASUX_PKG_DESCRIPTION="Extensible, customizable text editor-and more"
+NASUX_PKG_LICENSE="GPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
 # Update both emacs and emacs-x to the same version in one PR.
-TERMUX_PKG_VERSION="30.2"
+NASUX_PKG_VERSION="30.2"
 TERMUX_PKG_REVISION=3
-TERMUX_PKG_SRCURL="https://ftpmirror.gnu.org/gnu/emacs/emacs-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=b3f36f18a6dd2715713370166257de2fae01f9d38cfe878ced9b1e6ded5befd9
-TERMUX_PKG_DEPENDS="dbus, fontconfig, freetype, gdk-pixbuf, giflib, glib, harfbuzz, libgmp, libgnutls, libice, libjpeg-turbo, libpng, librsvg, libsm, libsqlite, libtiff, libwebp, libx11, libxaw, libxcb, libxext, libxfixes, libxft, libxinerama, libxml2, libxmu, libxpm, libxrandr, libxrender, libxt, littlecms, ncurses, tree-sitter, zlib"
+NASUX_PKG_SRCURL="https://ftpmirror.gnu.org/gnu/emacs/emacs-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=b3f36f18a6dd2715713370166257de2fae01f9d38cfe878ced9b1e6ded5befd9
+NASUX_PKG_DEPENDS="dbus, fontconfig, freetype, gdk-pixbuf, giflib, glib, harfbuzz, libgmp, libgnutls, libice, libjpeg-turbo, libpng, librsvg, libsm, libsqlite, libtiff, libwebp, libx11, libxaw, libxcb, libxext, libxfixes, libxft, libxinerama, libxml2, libxmu, libxpm, libxrandr, libxrender, libxt, littlecms, ncurses, tree-sitter, zlib"
 TERMUX_PKG_CONFLICTS="emacs"
 TERMUX_PKG_REPLACES="emacs"
 TERMUX_PKG_PROVIDES="emacs"
@@ -40,7 +40,7 @@ if [[ "$TERMUX_DEBUG_BUILD" == "true" ]]; then
 fi
 
 # Avoid misdetection of sigaltstack with strict C99:
-# https://github.com/termux/termux-packages/issues/15852
+# https://github.com/nastech-ai/NasUX-Packages/issues/15852
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" emacs_cv_alternate_stack=yes"
 # Ensure use of system malloc:
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" emacs_cv_sanitize_address=yes"
@@ -50,11 +50,11 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" emacs_cv_prog_cc_no_pie=no"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" ac_cv_lib_elf_elf_begin=no"
 # implemented using dup3(), which fails if oldfd == newfd
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" gl_cv_func_dup2_works=no"
-# disable setrlimit function to make termux-am work from within emacs
+# disable setrlimit function to make nasux-am work from within emacs
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" ac_cv_func_setrlimit=no"
-if [[ "$TERMUX_ARCH_BITS" == "32" ]]; then
+if [[ "$NASUX_ARCH_BITS" == "32" ]]; then
 	# setjmp does not work properly on 32bit android:
-	# https://github.com/termux/termux-packages/issues/2599
+	# https://github.com/nastech-ai/NasUX-Packages/issues/2599
 	TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" emacs_cv_func__setjmp=no"
 	TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" emacs_cv_func_sigsetjmp=no"
 fi
@@ -72,7 +72,7 @@ share/man/man1/grep-changelog.1.gz
 # program still remain in the emacs package):
 TERMUX_PKG_RM_AFTER_INSTALL+=" bin/ctags share/man/man1/ctags.1 share/man/man1/ctags.1.gz"
 
-# Get shellcheck to shut up about "$TERMUX_PKG_VERSION"
+# Get shellcheck to shut up about "$NASUX_PKG_VERSION"
 # getting reassigned in a subshell down below.
 # shellcheck disable=SC2031
 termux_step_post_get_source() {
@@ -84,8 +84,8 @@ termux_step_post_get_source() {
 
 	# Version guard
 	local ver_e ver_x
-	ver_e="$(. "$TERMUX_SCRIPTDIR/packages/emacs/build.sh"; echo "${TERMUX_PKG_VERSION#*:}")"
-	ver_x="${TERMUX_PKG_VERSION#*:}"
+	ver_e="$(. "$NASUX_SCRIPTDIR/packages/emacs/build.sh"; echo "${NASUX_PKG_VERSION#*:}")"
+	ver_x="${NASUX_PKG_VERSION#*:}"
 	if [ "${ver_e}" != "${ver_x}" ]; then
 		termux_error_exit "Version mismatch between emacs and emacs-x."
 	fi
@@ -94,14 +94,14 @@ termux_step_post_get_source() {
 	#      to avoid build error when cross compiling.
 	rm -Rf "$TERMUX_PKG_HOSTBUILD_DIR"
 
-	# Termux only use info pages for emacs. Remove the info directory
+	# NasUX only use info pages for emacs. Remove the info directory
 	# to get a clean Info directory file dir.
 	rm -Rf "$TERMUX_PREFIX/share/info"
 }
 
 # shellcheck disable=SC2031
 termux_step_host_build() {
-	local _VERSION="${TERMUX_PKG_VERSION#*:}"
+	local _VERSION="${NASUX_PKG_VERSION#*:}"
 	# Build a bootstrap-emacs binary to be used in termux_step_post_configure.
 	local NATIVE_PREFIX=$TERMUX_PKG_TMPDIR/emacs-native
 	mkdir -p "$NATIVE_PREFIX/share/emacs/${_VERSION}"
@@ -125,18 +125,18 @@ termux_step_post_configure() {
 
 # shellcheck disable=SC2031
 termux_step_post_make_install() {
-	mkdir -p "$TERMUX_PREFIX/share/emacs/${TERMUX_PKG_VERSION}/lisp/emacs-lisp/"
+	mkdir -p "$TERMUX_PREFIX/share/emacs/${NASUX_PKG_VERSION}/lisp/emacs-lisp/"
 	install -Dm600 "$TERMUX_PKG_BUILDER_DIR/site-start.el" \
 		"$TERMUX_PREFIX/share/emacs/site-lisp/site-start.el"
 }
 
 # shellcheck disable=SC2031
 termux_step_create_debscripts() {
-	local _VERSION="${TERMUX_PKG_VERSION#*:}"
+	local _VERSION="${NASUX_PKG_VERSION#*:}"
 	cat <<- EOF > ./postinst
 	#!$TERMUX_PREFIX/bin/sh
 	cd $TERMUX_PREFIX/share/emacs/${_VERSION}/lisp
 	LC_ALL=C $TERMUX_PREFIX/bin/emacs -batch -l loadup --temacs=pdump
-	mv $TERMUX_PREFIX/bin/emacs*.pdmp $TERMUX_PREFIX/libexec/emacs/${_VERSION}/${TERMUX_ARCH}-linux-android*/
+	mv $TERMUX_PREFIX/bin/emacs*.pdmp $TERMUX_PREFIX/libexec/emacs/${_VERSION}/${NASUX_ARCH}-linux-android*/
 	EOF
 }

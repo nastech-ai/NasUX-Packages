@@ -5,18 +5,18 @@ termux_gitlab_api_get_tag() {
 	tag_type="$TERMUX_PKG_UPDATE_TAG_TYPE"
 
 	# Example:
-	# https://gitlab.freedesktop.org/xorg/app/xeyes/-/archive/xeyes-${TERMUX_PKG_VERSION}/xeyes-xeyes-${TERMUX_PKG_VERSION}.tar.gz
+	# https://gitlab.freedesktop.org/xorg/app/xeyes/-/archive/xeyes-${NASUX_PKG_VERSION}/xeyes-xeyes-${NASUX_PKG_VERSION}.tar.gz
 	#        _="https:"
 	#        _=""
 	# api_host="gitlab.freedesktop.org"
-	#  project="xorg/app/xeyes/-/archive/xeyes-${TERMUX_PKG_VERSION}/xeyes-xeyes-${TERMUX_PKG_VERSION}.tar.gz"
-	IFS='/' read -r _ _ api_host project <<< "${TERMUX_PKG_SRCURL}"
+	#  project="xorg/app/xeyes/-/archive/xeyes-${NASUX_PKG_VERSION}/xeyes-xeyes-${NASUX_PKG_VERSION}.tar.gz"
+	IFS='/' read -r _ _ api_host project <<< "${NASUX_PKG_SRCURL}"
 	# Some projects like `xeyes` have are in a sub-namespace, e.g. 'xorg/app/xeyes' instead of 'xorg/xeyes'
 	# cutting the project portion at the '/-/' is more reliable to get the project portion of the URL.
 	project="${project%/-/*}"
 
 	if [[ -z "${tag_type}" ]]; then # If not set, then decide on the basis of url.
-		if [[ "${TERMUX_PKG_SRCURL:0:4}" == "git+" ]]; then
+		if [[ "${NASUX_PKG_SRCURL:0:4}" == "git+" ]]; then
 			tag_type="newest-tag" # Get newest tag.
 		elif [[ -n "$TERMUX_PKG_UPDATE_VERSION_REGEXP" ]]; then
 			tag_type="latest-regex" # Get the latest release tag.
@@ -30,7 +30,7 @@ termux_gitlab_api_get_tag() {
 	# for unauthenticated users and non-protected paths which should be more than enough for our needs.
 	# see: https://docs.gitlab.com/administration/settings/rate_limits_on_raw_endpoints/
 	local -a curl_opts=(
-		-A "Termux update checker 1.1 (github.com/termux/termux-packages)"
+		-A "NasUX update checker 1.1 (github.com/nastech-ai/NasUX-Packages)"
 		--silent
 		--location
 		--retry 10

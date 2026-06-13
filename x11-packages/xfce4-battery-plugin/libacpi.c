@@ -38,7 +38,7 @@ int read_termux_battery_status() {
         close(pipefd[0]);
         dup2(pipefd[1], STDOUT_FILENO);
         close(pipefd[1]);
-        execlp("termux-battery-status", "termux-battery-status", NULL);
+        execlp("nasux-battery-status", "nasux-battery-status", NULL);
         perror("execlp");
         exit(EXIT_FAILURE);
     } else if (pid > 0) { // Parent process

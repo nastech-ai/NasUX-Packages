@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/hrkfdn/ncspot
-TERMUX_PKG_DESCRIPTION="An ncurses Spotify client written in Rust (with MPRIS support)"
-TERMUX_PKG_LICENSE="BSD 2-Clause"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="1.3.4"
-TERMUX_PKG_SRCURL=https://github.com/hrkfdn/ncspot/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=93c4448b2c027c08c02295b2ffb1a48b684b65100cf4730b1dc9ae35afe06ea6
-TERMUX_PKG_DEPENDS="dbus, pulseaudio"
+NASUX_PKG_HOMEPAGE=https://github.com/hrkfdn/ncspot
+NASUX_PKG_DESCRIPTION="An ncurses Spotify client written in Rust (with MPRIS support)"
+NASUX_PKG_LICENSE="BSD 2-Clause"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="1.3.4"
+NASUX_PKG_SRCURL=https://github.com/hrkfdn/ncspot/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=93c4448b2c027c08c02295b2ffb1a48b684b65100cf4730b1dc9ae35afe06ea6
+NASUX_PKG_DEPENDS="dbus, pulseaudio"
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_CONFLICTS="ncspot"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --no-default-features
@@ -18,9 +18,9 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 # share_clipboard cannot be used due to 1Password/arboard#56.
 
 termux_step_pre_configure() {
-	termux_setup_cmake
-	termux_setup_ninja
-	termux_setup_rust
+	nasux_setup_cmake
+	nasux_setup_ninja
+	nasux_setup_rust
 
 	# bindgen-cli@0.71.0 is broken
 	cargo install --force --locked bindgen-cli@0.69.5

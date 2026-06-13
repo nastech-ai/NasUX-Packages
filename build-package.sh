@@ -21,17 +21,17 @@ fi
 set -euo pipefail
 
 cd "$(realpath "$(dirname "$0")")"
-TERMUX_SCRIPTDIR=$(pwd)
-export TERMUX_SCRIPTDIR
+NASUX_SCRIPTDIR=$(pwd)
+export NASUX_SCRIPTDIR
 
 # Store pid of current process in a file for docker__run_docker_exec_trap
 # shellcheck source=scripts/utils/docker/docker.sh
-source "$TERMUX_SCRIPTDIR/scripts/utils/docker/docker.sh"
+source "$NASUX_SCRIPTDIR/scripts/utils/docker/docker.sh"
 docker__create_docker_exec_pid_file
 
 # Source the `termux_package` library.
-# shellcheck source=scripts/utils/termux/package/termux_package.sh
-source "$TERMUX_SCRIPTDIR/scripts/utils/termux/package/termux_package.sh"
+# shellcheck source=scripts/utils/nasux/package/termux_package.sh
+source "$NASUX_SCRIPTDIR/scripts/utils/nasux/package/termux_package.sh"
 
 export SOURCE_DATE_EPOCH=${SOURCE_DATE_EPOCH:-$(git -c log.showSignature=false log -1 --pretty=%ct 2>/dev/null || date "+%s")}
 
@@ -49,19 +49,19 @@ else
 fi
 
 # Automatically enable offline set of sources and build tools.
-# Offline termux-packages bundle can be created by executing
+# Offline nasux-packages bundle can be created by executing
 # script ./scripts/setup-offline-bundle.sh.
-if [[ -f "${TERMUX_SCRIPTDIR}/build-tools/.installed" ]]; then
+if [[ -f "${NASUX_SCRIPTDIR}/build-tools/.installed" ]]; then
 	export TERMUX_PACKAGES_OFFLINE=true
 fi
 
 # Lock file to prevent parallel running in the same environment.
-TERMUX_BUILD_LOCK_FILE="${TMPDIR}/.termux-build.lck"
+TERMUX_BUILD_LOCK_FILE="${TMPDIR}/.nasux-build.lck"
 if [[ ! -e "$TERMUX_BUILD_LOCK_FILE" ]]; then
 	touch "$TERMUX_BUILD_LOCK_FILE"
 fi
 
-TERMUX_REPO_PKG_FORMAT="$(jq --raw-output '.pkg_format // "debian"' "${TERMUX_SCRIPTDIR}/repo.json")"
+TERMUX_REPO_PKG_FORMAT="$(jq --raw-output '.pkg_format // "debian"' "${NASUX_SCRIPTDIR}/repo.json")"
 export TERMUX_REPO_PKG_FORMAT
 
 # Special variable for internal use. It forces script to ignore
@@ -70,200 +70,200 @@ export TERMUX_REPO_PKG_FORMAT
 
 # Utility function to log an error message and exit with an error code.
 # shellcheck source=scripts/build/termux_error_exit.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_error_exit.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_error_exit.sh"
 
 # Utility function to download a resource with an expected checksum.
 # shellcheck source=scripts/build/termux_download.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_download.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_download.sh"
 
-# Utility function to run binaries under termux environment via proot.
-# shellcheck source=scripts/build/setup/termux_setup_proot.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_proot.sh"
+# Utility function to run binaries under nasux environment via proot.
+# shellcheck source=scripts/build/setup/nasux_setup_proot.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_proot.sh"
 
 # Utility function to setup blueprint-compiler (may be used by gnome-calculator and epiphany).
-# shellcheck source=scripts/build/setup/termux_setup_bpc.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_bpc.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_bpc.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_bpc.sh"
 
 # Installing packages if necessary for the full operation of CGCT.
 # shellcheck source=scripts/build/termux_step_setup_cgct_environment.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_setup_cgct_environment.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_setup_cgct_environment.sh"
 
 # Utility function to setup capnproto (may be used by bitcoin).
-# shellcheck source=scripts/build/setup/termux_setup_capnp.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_capnp.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_capnp.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_capnp.sh"
 
 # Utility function for setting up Cargo C-ABI helpers.
-# shellcheck source=scripts/build/setup/termux_setup_cargo_c.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_cargo_c.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_cargo_c.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_cargo_c.sh"
 
 # Utility function for setting up pkg-config wrapper.
-# shellcheck source=scripts/build/setup/termux_setup_pkg_config_wrapper.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_pkg_config_wrapper.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_pkg_config_wrapper.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_pkg_config_wrapper.sh"
 
 # Utility function for setting up Crystal toolchain.
-# shellcheck source=scripts/build/setup/termux_setup_crystal.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_crystal.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_crystal.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_crystal.sh"
 
 # Utility function for setting up DotNet toolchain.
-# shellcheck source=scripts/build/setup/termux_setup_dotnet.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_dotnet.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_dotnet.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_dotnet.sh"
 
 # Utility function for setting up Flang toolchain.
-# shellcheck source=scripts/build/setup/termux_setup_flang.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_flang.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_flang.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_flang.sh"
 
 # Utility function to setup a GHC cross-compiler toolchain targeting Android.
-# shellcheck source=scripts/build/setup/termux_setup_ghc.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_ghc.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_ghc.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_ghc.sh"
 
 # Utility function to setup GHC iserv to cross-compile haskell-template.
-# shellcheck source=scripts/build/setup/termux_setup_ghc_iserv.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_ghc_iserv.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_ghc_iserv.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_ghc_iserv.sh"
 
 # Utility function to setup cabal-install (may be used by ghc toolchain).
-# shellcheck source=scripts/build/setup/termux_setup_cabal.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_cabal.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_cabal.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_cabal.sh"
 
 # Utility function to setup jailbreak-cabal. It is used to remove version constraints
 # from Cabal packages.
-# shellcheck source=scripts/build/setup/termux_setup_jailbreak_cabal.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_jailbreak_cabal.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_jailbreak_cabal.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_jailbreak_cabal.sh"
 
 # Utility function for setting up GObject Introspection cross environment.
-# shellcheck source=scripts/build/setup/termux_setup_gir.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_gir.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_gir.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_gir.sh"
 
 # Utility function for setting up GN toolchain.
-# shellcheck source=scripts/build/setup/termux_setup_gn.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_gn.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_gn.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_gn.sh"
 
 # Utility function for golang-using packages to setup a go toolchain.
-# shellcheck source=scripts/build/setup/termux_setup_golang.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_golang.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_golang.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_golang.sh"
 
 # Utility function for setting up LDC cross environment.
-# shellcheck source=scripts/build/setup/termux_setup_ldc.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_ldc.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_ldc.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_ldc.sh"
 
 # Utility function for setting up no-integrated (GNU Binutils) as.
-# shellcheck source=scripts/build/setup/termux_setup_no_integrated_as.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_no_integrated_as.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_no_integrated_as.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_no_integrated_as.sh"
 
 # Utility function for setting up build-python for cross-compilation of Python and crossenv
-# shellcheck source=scripts/build/setup/termux_setup_build_python.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_build_python.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_build_python.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_build_python.sh"
 
 # Utility function for python packages to setup a python.
-# shellcheck source=scripts/build/setup/termux_setup_python_pip.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_python_pip.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_python_pip.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_python_pip.sh"
 
 # Utility function for rust-using packages to setup a rust toolchain.
-# shellcheck source=scripts/build/setup/termux_setup_rust.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_rust.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_rust.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_rust.sh"
 
 # Utility function for swift-using packages to setup a swift toolchain
-# shellcheck source=scripts/build/setup/termux_setup_swift.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_swift.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_swift.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_swift.sh"
 
 # Utility function to setup a current xmake build system.
-# shellcheck source=scripts/build/setup/termux_setup_xmake.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_xmake.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_xmake.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_xmake.sh"
 
 # Utility function for zig-using packages to setup a zig toolchain.
-# shellcheck source=scripts/build/setup/termux_setup_zig.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_zig.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_zig.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_zig.sh"
 
 # Utility function to setup a current ninja build system.
-# shellcheck source=scripts/build/setup/termux_setup_ninja.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_ninja.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_ninja.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_ninja.sh"
 
 # Utility function to setup Node.js JavaScript Runtime
-# shellcheck source=scripts/build/setup/termux_setup_nodejs.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_nodejs.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_nodejs.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_nodejs.sh"
 
 # Utility function to setup a current meson build system.
-# shellcheck source=scripts/build/setup/termux_setup_meson.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_meson.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_meson.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_meson.sh"
 
 # Utility function to setup a current cmake build system
-# shellcheck source=scripts/build/setup/termux_setup_cmake.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_cmake.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_cmake.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_cmake.sh"
 
 # Utility function to setup protobuf:
-# shellcheck source=scripts/build/setup/termux_setup_protobuf.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_protobuf.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_protobuf.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_protobuf.sh"
 
 # Utility function to setup the current version of the tree-sitter CLI
-# shellcheck source=scripts/build/setup/termux_setup_treesitter.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/setup/termux_setup_treesitter.sh"
+# shellcheck source=scripts/build/setup/nasux_setup_treesitter.sh
+source "$NASUX_SCRIPTDIR/scripts/build/setup/nasux_setup_treesitter.sh"
 
 # Setup variables used by the build. Not to be overridden by packages.
 # shellcheck source=scripts/build/termux_step_setup_variables.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_setup_variables.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_setup_variables.sh"
 
 # Save away and restore build setups which may change between builds.
 # shellcheck source=scripts/build/termux_step_handle_buildarch.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_handle_buildarch.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_handle_buildarch.sh"
 
-# Function to get TERMUX_PKG_VERSION from build.sh
+# Function to get NASUX_PKG_VERSION from build.sh
 # shellcheck source=scripts/build/termux_extract_dep_info.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_extract_dep_info.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_extract_dep_info.sh"
 
 # Function that downloads a .deb (using the termux_download function)
 # shellcheck source=scripts/build/termux_download_deb_pac.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_download_deb_pac.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_download_deb_pac.sh"
 
 # Function that downloads and extracts multiple Ubuntu packages (using the termux_download function)
 # shellcheck source=scripts/build/termux_download_ubuntu_packages.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_download_ubuntu_packages.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_download_ubuntu_packages.sh"
 
 # Script to download InRelease, verify it's signature and then download Packages.xz by hash
 # shellcheck source=scripts/build/termux_get_repo_files.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_get_repo_files.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_get_repo_files.sh"
 
 # Download or build dependencies. Not to be overridden by packages.
 # shellcheck source=scripts/build/termux_step_get_dependencies.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_get_dependencies.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_get_dependencies.sh"
 
 # Download python dependency modules for compilation.
 # shellcheck source=scripts/build/termux_step_get_dependencies_python.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_get_dependencies_python.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_get_dependencies_python.sh"
 
 # Handle config scripts that needs to be run during build. Not to be overridden by packages.
 # shellcheck source=scripts/build/termux_step_override_config_scripts.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_override_config_scripts.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_override_config_scripts.sh"
 
 # Remove old src and build folders and create new ones
 # shellcheck source=scripts/build/termux_step_setup_build_folders.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_setup_build_folders.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_setup_build_folders.sh"
 
 # Source the package build script and start building. Not to be overridden by packages.
 # shellcheck source=scripts/build/termux_step_start_build.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_start_build.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_start_build.sh"
 
 # Cleans up files from already built packages. Not to be overridden by packages.
 # shellcheck source=scripts/build/termux_step_start_build.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_cleanup_packages.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_cleanup_packages.sh"
 
 # Download or build dependencies. Not to be overridden by packages.
 # shellcheck source=scripts/build/termux_step_create_timestamp_file.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_create_timestamp_file.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_create_timestamp_file.sh"
 
 # Run just after sourcing $TERMUX_PKG_BUILDER_SCRIPT. Can be overridden by packages.
 # shellcheck source=scripts/build/get_source/termux_step_get_source.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/get_source/termux_step_get_source.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/get_source/termux_step_get_source.sh"
 
-# Run from termux_step_get_source if TERMUX_PKG_SRCURL begins with "git+".
+# Run from termux_step_get_source if NASUX_PKG_SRCURL begins with "git+".
 # shellcheck source=scripts/build/get_source/termux_step_get_source.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/get_source/termux_git_clone_src.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/get_source/termux_git_clone_src.sh"
 
-# Run from termux_step_get_source if TERMUX_PKG_SRCURL does not begin with "git+".
+# Run from termux_step_get_source if NASUX_PKG_SRCURL does not begin with "git+".
 # shellcheck source=scripts/build/get_source/termux_download_src_archive.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/get_source/termux_download_src_archive.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/get_source/termux_download_src_archive.sh"
 
 # Run from termux_step_get_source after termux_download_src_archive.
 # shellcheck source=scripts/build/get_source/termux_unpack_src_archive.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/get_source/termux_unpack_src_archive.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/get_source/termux_unpack_src_archive.sh"
 
 # Hook for packages to act just after the package sources have been obtained.
 # Invoked from $TERMUX_PKG_SRCDIR.
@@ -273,36 +273,36 @@ termux_step_post_get_source() {
 
 # Optional host build. Not to be overridden by packages.
 # shellcheck source=scripts/build/termux_step_handle_host_build.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_handle_host_build.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_handle_host_build.sh"
 
 # Perform a host build. Will be called in $TERMUX_PKG_HOSTBUILD_DIR.
 # After termux_step_post_get_source() and before termux_step_patch_package()
 # shellcheck source=scripts/build/termux_step_host_build.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_host_build.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_host_build.sh"
 
 # Setup a standalone Android NDK toolchain. Called from termux_step_setup_toolchain.
-# shellcheck source=scripts/build/toolchain/termux_setup_toolchain_29.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/toolchain/termux_setup_toolchain_29.sh"
+# shellcheck source=scripts/build/toolchain/nasux_setup_toolchain_29.sh
+source "$NASUX_SCRIPTDIR/scripts/build/toolchain/nasux_setup_toolchain_29.sh"
 
 # Setup a standalone Android NDK 23c toolchain. Called from termux_step_setup_toolchain.
-# shellcheck source=scripts/build/toolchain/termux_setup_toolchain_23c.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/toolchain/termux_setup_toolchain_23c.sh"
+# shellcheck source=scripts/build/toolchain/nasux_setup_toolchain_23c.sh
+source "$NASUX_SCRIPTDIR/scripts/build/toolchain/nasux_setup_toolchain_23c.sh"
 
 # Setup a standalone Glibc GNU toolchain. Called from termux_step_setup_toolchain.
-# shellcheck source=scripts/build/toolchain/termux_setup_toolchain_gnu.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/toolchain/termux_setup_toolchain_gnu.sh"
+# shellcheck source=scripts/build/toolchain/nasux_setup_toolchain_gnu.sh
+source "$NASUX_SCRIPTDIR/scripts/build/toolchain/nasux_setup_toolchain_gnu.sh"
 
 # Runs termux_step_setup_toolchain_${TERMUX_NDK_VERSION}. Not to be overridden by packages.
 # shellcheck source=scripts/build/termux_step_setup_toolchain.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_setup_toolchain.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_setup_toolchain.sh"
 
 # Apply all *.patch files for the package. Not to be overridden by packages.
 # shellcheck source=scripts/build/termux_step_patch_package.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_patch_package.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_patch_package.sh"
 
 # Replace autotools build-aux/config.{sub,guess} with ours to add android targets.
 # shellcheck source=scripts/build/termux_step_replace_guess_scripts.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_replace_guess_scripts.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_replace_guess_scripts.sh"
 
 # For package scripts to override. Called in $TERMUX_PKG_BUILDDIR.
 termux_step_pre_configure() {
@@ -311,23 +311,23 @@ termux_step_pre_configure() {
 
 # Setup configure args and run $TERMUX_PKG_SRCDIR/configure. This function is called from termux_step_configure
 # shellcheck source=scripts/build/configure/termux_step_configure_autotools.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/configure/termux_step_configure_autotools.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/configure/termux_step_configure_autotools.sh"
 
 # Setup configure args and run cmake. This function is called from termux_step_configure
 # shellcheck source=scripts/build/configure/termux_step_configure_cmake.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/configure/termux_step_configure_cmake.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/configure/termux_step_configure_cmake.sh"
 
 # Setup configure args and run meson. This function is called from termux_step_configure
 # shellcheck source=scripts/build/configure/termux_step_configure_meson.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/configure/termux_step_configure_meson.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/configure/termux_step_configure_meson.sh"
 
 # Setup configure args and run cabal. This function is called from termux_step_configure
 # shellcheck source=scripts/build/configure/termux_step_configure_cabal.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/configure/termux_step_configure_cabal.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/configure/termux_step_configure_cabal.sh"
 
 # Configure the package
 # shellcheck source=scripts/build/configure/termux_step_configure.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/configure/termux_step_configure.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/configure/termux_step_configure.sh"
 
 # Hook for packages after configure step
 termux_step_post_configure() {
@@ -336,11 +336,11 @@ termux_step_post_configure() {
 
 # Make package, either with ninja or make
 # shellcheck source=scripts/build/termux_step_make.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_make.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_make.sh"
 
 # Make install, either with ninja, make of cargo
 # shellcheck source=scripts/build/termux_step_make_install.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_make_install.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_make_install.sh"
 
 # Hook function for package scripts to override.
 termux_step_post_make_install() {
@@ -349,43 +349,43 @@ termux_step_post_make_install() {
 
 # Install hooks (alpm-hooks) and hook-scripts into the pacman package
 # shellcheck source=scripts/build/termux_step_install_pacman_hooks.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_install_pacman_hooks.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_install_pacman_hooks.sh"
 
 # Add service scripts from array TERMUX_PKG_SERVICE_SCRIPT, if it is set
 # shellcheck source=scripts/build/termux_step_install_service_scripts.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_install_service_scripts.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_install_service_scripts.sh"
 
 # Link/copy the LICENSE for the package to $TERMUX_PREFIX/share/$TERMUX_PKG_NAME/
 # shellcheck source=scripts/build/termux_step_install_license.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_install_license.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_install_license.sh"
 
 # Function to cp (through tar) installed files to massage dir
 # shellcheck source=scripts/build/termux_step_copy_into_massagedir.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_copy_into_massagedir.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_copy_into_massagedir.sh"
 
 # Hook function to create {pre,post}install, {pre,post}rm-scripts for subpkgs
 # shellcheck source=scripts/build/termux_step_create_subpkg_debscripts.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_create_subpkg_debscripts.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_create_subpkg_debscripts.sh"
 
 # Create all subpackages. Run from termux_step_massage
 # shellcheck source=scripts/build/termux_create_debian_subpackages.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_create_debian_subpackages.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_create_debian_subpackages.sh"
 
 # Create all subpackages. Run from termux_step_massage
 # shellcheck source=scripts/build/termux_create_pacman_subpackages.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_create_pacman_subpackages.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_create_pacman_subpackages.sh"
 
 # Function to run various cleanup/fixes
 # shellcheck source=scripts/build/termux_step_massage.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_massage.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_massage.sh"
 
 # Function to run strip symbols during termux_step_massage
 # shellcheck source=scripts/build/termux_step_strip_elf_symbols.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_strip_elf_symbols.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_strip_elf_symbols.sh"
 
-# Function to run termux-elf-cleaner during termux_step_massage
+# Function to run nasux-elf-cleaner during termux_step_massage
 # shellcheck source=scripts/build/termux_step_elf_cleaner.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_elf_cleaner.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_elf_cleaner.sh"
 
 # Hook for packages before massage step
 termux_step_pre_massage() {
@@ -399,51 +399,51 @@ termux_step_post_massage() {
 
 # Function to create {pre,post}install, {pre,post}rm-scripts and similar
 # shellcheck source=scripts/build/termux_step_create_debscripts.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_create_debscripts.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_create_debscripts.sh"
 
 # Function to generate debscripts for python packages.
 # shellcheck source=scripts/build/termux_step_create_python_debscripts.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_create_python_debscripts.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_create_python_debscripts.sh"
 
 # Convert Debian maintainer scripts into pacman-compatible installation hooks.
 # This is used only when creating pacman packages.
 # shellcheck source=scripts/build/termux_step_create_pacman_install_hook.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_create_pacman_install_hook.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_create_pacman_install_hook.sh"
 
 # Create the build deb file. Not to be overridden by package scripts.
 # shellcheck source=scripts/build/termux_step_create_debian_package.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_create_debian_package.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_create_debian_package.sh"
 
 # Create the build .pkg.tar.xz file. Not to be overridden by package scripts.
 # shellcheck source=scripts/build/termux_step_create_pacman_package.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_create_pacman_package.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_create_pacman_package.sh"
 
 # Process 'update-alternatives' entries from `.alternatives` files.
 # Not to be overridden by package scripts.
 # shellcheck source=scripts/build/termux_step_update_alternatives.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_update_alternatives.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_update_alternatives.sh"
 
 # Finish the build. Not to be overridden by package scripts.
 # shellcheck source=scripts/build/termux_step_finish_build.sh
-source "$TERMUX_SCRIPTDIR/scripts/build/termux_step_finish_build.sh"
+source "$NASUX_SCRIPTDIR/scripts/build/termux_step_finish_build.sh"
 
 ################################################################################
 
 # shellcheck source=scripts/properties.sh
-source "$TERMUX_SCRIPTDIR/scripts/properties.sh"
+source "$NASUX_SCRIPTDIR/scripts/properties.sh"
 
 if [[ "$TERMUX_ON_DEVICE_BUILD" == "true" ]]; then
 	# Setup TERMUX_APP_PACKAGE_MANAGER
 	# shellcheck source=/dev/null
-	source "$TERMUX_PREFIX/bin/termux-setup-package-manager"
+	source "$TERMUX_PREFIX/bin/nasux-setup-package-manager"
 
 	# For on device builds cross compiling is not supported.
 	# Target architecture must be same as for environment used currently.
 	case "$TERMUX_APP_PACKAGE_MANAGER" in
-		"apt") TERMUX_ARCH=$(dpkg --print-architecture);;
-		"pacman") TERMUX_ARCH=$(pacman-conf Architecture);;
+		"apt") NASUX_ARCH=$(dpkg --print-architecture);;
+		"pacman") NASUX_ARCH=$(pacman-conf Architecture);;
 	esac
-	export TERMUX_ARCH
+	export NASUX_ARCH
 fi
 
 # Check if the package is in the compiled list
@@ -471,13 +471,13 @@ termux_check_package_in_building_packages_list() {
 	return $?
 }
 
-# Configure variables (TERMUX_ARCH, TERMUX__PREFIX__INCLUDE_DIR, TERMUX__PREFIX__LIB_DIR) for multilib-compilation
+# Configure variables (NASUX_ARCH, TERMUX__PREFIX__INCLUDE_DIR, TERMUX__PREFIX__LIB_DIR) for multilib-compilation
 termux_conf_multilib_vars() {
-	# Change the 64-bit architecture type to its 32-bit counterpart in the `TERMUX_ARCH` variable
-	case "$TERMUX_ARCH" in
-		"aarch64") TERMUX_ARCH="arm";;
-		"x86_64") TERMUX_ARCH="i686";;
-		*) termux_error_exit "It is impossible to set multilib arch for ${TERMUX_ARCH} arch."
+	# Change the 64-bit architecture type to its 32-bit counterpart in the `NASUX_ARCH` variable
+	case "$NASUX_ARCH" in
+		"aarch64") NASUX_ARCH="arm";;
+		"x86_64") NASUX_ARCH="i686";;
+		*) termux_error_exit "It is impossible to set multilib arch for ${NASUX_ARCH} arch."
 	esac
 	TERMUX__PREFIX__INCLUDE_SUBDIR="$TERMUX__PREFIX__MULTI_INCLUDE_SUBDIR"
 	TERMUX__PREFIX__INCLUDE_DIR="$TERMUX__PREFIX__MULTI_INCLUDE_DIR"
@@ -570,7 +570,7 @@ while (( $# )); do
 				termux_error_exit "./build-package.sh: option '-a' requires an argument"
 			fi
 			shift 1
-			export TERMUX_ARCH="$1"
+			export NASUX_ARCH="$1"
 		;;
 		-d) export TERMUX_DEBUG_BUILD=true;;
 		-D) TERMUX_IS_DISABLED=true;;
@@ -653,15 +653,15 @@ if [[ "${TERMUX_INSTALL_DEPS-false}" == "true" || "${TERMUX_PACKAGE_LIBRARY-bion
 	# Setup PGP keys for verifying integrity of dependencies.
 	# Keys are obtained from our keyring package.
 	gpg --list-keys 2C7F29AE97891F6419A9E2CDB0076E490B71616B > /dev/null 2>&1 || {
-		gpg --import "$TERMUX_SCRIPTDIR/packages/termux-keyring/grimler.gpg"
+		gpg --import "$NASUX_SCRIPTDIR/packages/nasux-keyring/grimler.gpg"
 		gpg --no-tty --command-file <(echo -e "trust\n5\ny") --edit-key 2C7F29AE97891F6419A9E2CDB0076E490B71616B
 	}
 	gpg --list-keys CC72CF8BA7DBFA0182877D045A897D96E57CF20C > /dev/null 2>&1 || {
-		gpg --import "$TERMUX_SCRIPTDIR/packages/termux-keyring/termux-autobuilds.gpg"
+		gpg --import "$NASUX_SCRIPTDIR/packages/nasux-keyring/nasux-autobuilds.gpg"
 		gpg --no-tty --command-file <(echo -e "trust\n5\ny") --edit-key CC72CF8BA7DBFA0182877D045A897D96E57CF20C
 	}
 	gpg --list-keys 998DE27318E867EA976BA877389CEED64573DFCA > /dev/null 2>&1 || {
-		gpg --import "$TERMUX_SCRIPTDIR/packages/termux-keyring/termux-pacman.gpg"
+		gpg --import "$NASUX_SCRIPTDIR/packages/nasux-keyring/nasux-pacman.gpg"
 		gpg --no-tty --command-file <(echo -e "trust\n5\ny") --edit-key 998DE27318E867EA976BA877389CEED64573DFCA
 	}
 fi
@@ -679,7 +679,7 @@ for (( i=0; i < ${#PACKAGE_LIST[@]}; i++ )); do
 		fi
 		(
 		# Handle 'all' arch:
-		if [[ "$TERMUX_ON_DEVICE_BUILD" == "false" && -n "${TERMUX_ARCH+x}" && "${TERMUX_ARCH}" == 'all' ]]; then
+		if [[ "$TERMUX_ON_DEVICE_BUILD" == "false" && -n "${NASUX_ARCH+x}" && "${NASUX_ARCH}" == 'all' ]]; then
 			_SELF_ARGS=()
 			[[ "${TERMUX_CLEANUP_BUILT_PACKAGES_ON_LOW_DISK_SPACE:-}" == "true" ]] && _SELF_ARGS+=("-C")
 			[[ "${TERMUX_DEBUG_BUILD:-}" == "true" ]] && _SELF_ARGS+=("-d")
@@ -696,7 +696,7 @@ for (( i=0; i < ${#PACKAGE_LIST[@]}; i++ )); do
 			[[ -n "${TERMUX_PACKAGE_LIBRARY:-}" ]] && _SELF_ARGS+=("--library" "$TERMUX_PACKAGE_LIBRARY")
 
 			for arch in 'aarch64' 'arm' 'i686' 'x86_64'; do
-				env TERMUX_ARCH="$arch" TERMUX_BUILD_IGNORE_LOCK=true ./build-package.sh \
+				env NASUX_ARCH="$arch" TERMUX_BUILD_IGNORE_LOCK=true ./build-package.sh \
 					"${_SELF_ARGS[@]}" "${PACKAGE_LIST[i]}"
 			done
 			exit
@@ -713,11 +713,11 @@ for (( i=0; i < ${#PACKAGE_LIST[@]}; i++ )); do
 			# Package name:
 			# FIXME: TERMUX_PACKAGES_DIRECTORIES should be made into an array.
 			for package_directory in $TERMUX_PACKAGES_DIRECTORIES; do
-				if [[ -d "${TERMUX_SCRIPTDIR}/${package_directory}/${TERMUX_PKG_NAME}" ]]; then
-					export TERMUX_PKG_BUILDER_DIR="${TERMUX_SCRIPTDIR}/$package_directory/$TERMUX_PKG_NAME"
+				if [[ -d "${NASUX_SCRIPTDIR}/${package_directory}/${TERMUX_PKG_NAME}" ]]; then
+					export TERMUX_PKG_BUILDER_DIR="${NASUX_SCRIPTDIR}/$package_directory/$TERMUX_PKG_NAME"
 					break
-				elif [[ -n "${TERMUX_IS_DISABLED=""}" && -d "${TERMUX_SCRIPTDIR}/disabled-packages/${TERMUX_PKG_NAME}" ]]; then
-					export TERMUX_PKG_BUILDER_DIR="$TERMUX_SCRIPTDIR/disabled-packages/$TERMUX_PKG_NAME"
+				elif [[ -n "${TERMUX_IS_DISABLED=""}" && -d "${NASUX_SCRIPTDIR}/disabled-packages/${TERMUX_PKG_NAME}" ]]; then
+					export TERMUX_PKG_BUILDER_DIR="$NASUX_SCRIPTDIR/disabled-packages/$TERMUX_PKG_NAME"
 					break
 				fi
 			done
@@ -737,8 +737,8 @@ for (( i=0; i < ${#PACKAGE_LIST[@]}; i++ )); do
 		termux_step_cleanup_packages
 		termux_step_start_build
 
-		if ! termux_check_package_in_building_packages_list "${TERMUX_PKG_BUILDER_DIR#"${TERMUX_SCRIPTDIR}/"}"; then
-			echo "${TERMUX_PKG_BUILDER_DIR#"${TERMUX_SCRIPTDIR}/"}" >> "$TERMUX_BUILD_PACKAGE_CALL_BUILDING_PACKAGES_LIST_FILE_PATH"
+		if ! termux_check_package_in_building_packages_list "${TERMUX_PKG_BUILDER_DIR#"${NASUX_SCRIPTDIR}/"}"; then
+			echo "${TERMUX_PKG_BUILDER_DIR#"${NASUX_SCRIPTDIR}/"}" >> "$TERMUX_BUILD_PACKAGE_CALL_BUILDING_PACKAGES_LIST_FILE_PATH"
 		fi
 
 		if [[ "$TERMUX_CONTINUE_BUILD" == "false" ]]; then
@@ -803,8 +803,8 @@ for (( i=0; i < ${#PACKAGE_LIST[@]}; i++ )); do
 			*) termux_error_exit "Unknown package format '$TERMUX_PACKAGE_FORMAT'.";;
 		esac
 		# Save a list of compiled packages for further work with it
-		if termux_check_package_in_building_packages_list "${TERMUX_PKG_BUILDER_DIR#"${TERMUX_SCRIPTDIR}/"}"; then
-			sed -i "\|^${TERMUX_PKG_BUILDER_DIR#"${TERMUX_SCRIPTDIR}/"}$|d" "$TERMUX_BUILD_PACKAGE_CALL_BUILDING_PACKAGES_LIST_FILE_PATH"
+		if termux_check_package_in_building_packages_list "${TERMUX_PKG_BUILDER_DIR#"${NASUX_SCRIPTDIR}/"}"; then
+			sed -i "\|^${TERMUX_PKG_BUILDER_DIR#"${NASUX_SCRIPTDIR}/"}$|d" "$TERMUX_BUILD_PACKAGE_CALL_BUILDING_PACKAGES_LIST_FILE_PATH"
 		fi
 		termux_add_package_to_built_packages_list "$TERMUX_PKG_NAME"
 		termux_step_finish_build

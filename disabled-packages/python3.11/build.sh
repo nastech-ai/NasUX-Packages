@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://python.org/
-TERMUX_PKG_DESCRIPTION="Python 3 programming language intended to enable clear programs"
+NASUX_PKG_HOMEPAGE=https://python.org/
+NASUX_PKG_DESCRIPTION="Python 3 programming language intended to enable clear programs"
 # License: PSF-2.0
-TERMUX_PKG_LICENSE="custom"
-TERMUX_PKG_LICENSE_FILE="LICENSE"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=3.11.10
-TERMUX_PKG_SRCURL=https://www.python.org/ftp/python/${TERMUX_PKG_VERSION}/Python-${TERMUX_PKG_VERSION}.tar.xz
-TERMUX_PKG_SHA256=07a4356e912900e61a15cb0949a06c4a05012e213ecd6b4e84d0f67aabbee372
+NASUX_PKG_LICENSE="custom"
+NASUX_PKG_LICENSE_FILE="LICENSE"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=3.11.10
+NASUX_PKG_SRCURL=https://www.python.org/ftp/python/${NASUX_PKG_VERSION}/Python-${NASUX_PKG_VERSION}.tar.xz
+NASUX_PKG_SHA256=07a4356e912900e61a15cb0949a06c4a05012e213ecd6b4e84d0f67aabbee372
 TERMUX_PKG_AUTO_UPDATE=false
-TERMUX_PKG_DEPENDS="gdbm, libandroid-posix-semaphore, libandroid-support, libbz2, libcrypt, libexpat, libffi, liblzma, libsqlite, ncurses, ncurses-ui-libs, openssl, readline, zlib"
+NASUX_PKG_DEPENDS="gdbm, libandroid-posix-semaphore, libandroid-support, libbz2, libcrypt, libexpat, libffi, liblzma, libsqlite, ncurses, ncurses-ui-libs, openssl, readline, zlib"
 TERMUX_PKG_BUILD_DEPENDS="tk"
 TERMUX_PKG_RECOMMENDS="python-ensurepip-wheels, python-pip"
 TERMUX_PKG_SUGGESTS="python-tkinter"
@@ -17,10 +17,10 @@ TERMUX_PKG_REPLACES="python-dev"
 # Let "python3" will be alias to this package.
 TERMUX_PKG_PROVIDES="python3"
 
-# https://github.com/termux/termux-packages/issues/15908
+# https://github.com/nastech-ai/NasUX-Packages/issues/15908
 TERMUX_PKG_MAKE_PROCESSES=1
 
-_MAJOR_VERSION="${TERMUX_PKG_VERSION%.*}"
+_MAJOR_VERSION="${NASUX_PKG_VERSION%.*}"
 
 # Set ac_cv_func_wcsftime=no to avoid errors such as "character U+ca0025 is not in range [U+0000; U+10ffff]"
 # when executing e.g. "from time import time, strftime, localtime; print(strftime(str('%Y-%m-%d %H:%M'), localtime()))"
@@ -35,7 +35,7 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" ac_cv_func_linkat=no"
 # Do not assume getaddrinfo is buggy when cross compiling:
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" ac_cv_buggy_getaddrinfo=no"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" --enable-loadable-sqlite-extensions"
-# Fix https://github.com/termux/termux-packages/issues/2236:
+# Fix https://github.com/nastech-ai/NasUX-Packages/issues/2236:
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" ac_cv_little_endian_double=yes"
 # Force enable posix semaphores.
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" ac_cv_posix_semaphores_enabled=yes"
@@ -64,7 +64,7 @@ termux_step_pre_configure() {
 	# zlib extension module is not built without this):
 	CPPFLAGS+=" -I$TERMUX_STANDALONE_TOOLCHAIN/sysroot/usr/include"
 	LDFLAGS+=" -L$TERMUX_STANDALONE_TOOLCHAIN/sysroot/usr/lib"
-	if [ $TERMUX_ARCH = x86_64 ]; then LDFLAGS+=64; fi
+	if [ $NASUX_ARCH = x86_64 ]; then LDFLAGS+=64; fi
 
 	if [ "$TERMUX_ON_DEVICE_BUILD" = "true" ]; then
 		# Python's configure script fails with

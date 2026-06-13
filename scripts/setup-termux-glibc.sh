@@ -1,7 +1,7 @@
 #!/bin/bash
 
 . $(dirname "$(realpath "$0")")/properties.sh
-source "$TERMUX_PREFIX/bin/termux-setup-package-manager" || true
+source "$TERMUX_PREFIX/bin/nasux-setup-package-manager" || true
 
 if [ "$TERMUX_APP_PACKAGE_MANAGER" = "apt" ]; then
 	echo "Error: apt does not have glibc packages"

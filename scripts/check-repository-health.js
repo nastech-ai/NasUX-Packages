@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 //
 // A script to check for checking difference between apt repository and
-// termux-packages
+// nasux-packages
 //
 // Currently checks the following:
 // - Missing packages in apt repository
-// - Version mismatches in apt repository and termux-packages
+// - Version mismatches in apt repository and nasux-packages
 // - Packages in apt repository that shouldn't exist (this may happen when a
-//   packages is removed in termux-packages, but wasn't removed from the apt
+//   packages is removed in nasux-packages, but wasn't removed from the apt
 //   repository)
 //
 import { readFile } from "node:fs/promises";
@@ -170,9 +170,9 @@ async function getTermuxPackages(
       let [pkgName, pkgRepo, pkgVersion, pkgMayHaveStaticSubpkg] =
         line.split(" ");
       if (termuxPackages.has(pkgName)) {
-        errors.push(`Duplicate package in termux-packages: "${pkgName}"`);
+        errors.push(`Duplicate package in nasux-packages: "${pkgName}"`);
         proposedManualFixes.push(
-          `Duplicate package "${pkgName}" earlier found in "${termuxPackages.get(pkgName).repo}" also in "${pkgRepo}" needs to be removed from termux-packages`,
+          `Duplicate package "${pkgName}" earlier found in "${termuxPackages.get(pkgName).repo}" also in "${pkgRepo}" needs to be removed from nasux-packages`,
         );
       }
       const { stdout } = execFileAsync("git", [
@@ -232,10 +232,10 @@ async function getErrorsForArch(arch) {
             `aptly repo remove "${pkgInfo.repo}" "${pkgName} (=${pkgInfo.version}) {${arch}}"`,
           );
         } else {
-          // If it's in the correct repo, make sure it is the same version as we have in termux-packages
+          // If it's in the correct repo, make sure it is the same version as we have in nasux-packages
           if (termuxPackages.get(pkgName).version != pkgInfo.version) {
             errors.push(
-              `"${pkgName}" "${pkgInfo.version}" (in apt repository) != "${termuxPackages.get(pkgName).version}" (in termux-packages)`,
+              `"${pkgName}" "${pkgInfo.version}" (in apt repository) != "${termuxPackages.get(pkgName).version}" (in nasux-packages)`,
             );
             proposedManualFixes.push(
               `The package "${pkgName}" in "${pkgInfo.repo}" may not be up to date on the apt repository or a bogus version may be present`,
@@ -281,9 +281,9 @@ async function getErrorsForArch(arch) {
             );
           }
         } else {
-          // It's not a static package, and it does not exists in termux-packages for that repository. So it should not exist
+          // It's not a static package, and it does not exists in nasux-packages for that repository. So it should not exist
           errors.push(
-            `"${pkgName}" "${pkgInfo.version}" does not exist in termux-packages`,
+            `"${pkgName}" "${pkgInfo.version}" does not exist in nasux-packages`,
           );
           proposedAutomatedFixes.push(
             `aptly repo remove "${pkgInfo.repo}" "${pkgName} (=${pkgInfo.version}) {${arch}}"`,
@@ -293,7 +293,7 @@ async function getErrorsForArch(arch) {
     }
   }
 
-  // Now check for packages missing in apt repository but present in termux-packages
+  // Now check for packages missing in apt repository but present in nasux-packages
   for (const [termuxPkgName, termuxPkgInfo] of termuxPackages) {
     if (!aptPackages.has(termuxPkgName)) {
       errors.push(`"${termuxPkgName}" missing in apt repository`);

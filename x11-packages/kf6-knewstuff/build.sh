@@ -1,12 +1,12 @@
-TERMUX_PKG_HOMEPAGE='https://invent.kde.org/frameworks/knewstuff'
-TERMUX_PKG_DESCRIPTION='Support for downloading application assets from the network'
-TERMUX_PKG_LICENSE="LGPL-2.0, LGPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="6.27.0"
-TERMUX_PKG_SRCURL="https://download.kde.org/stable/frameworks/${TERMUX_PKG_VERSION%.*}/knewstuff-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=8c19df7ba5940c36ff15051703acd3a16c664b4a570817b6770fafc7ab59d6de
-TERMUX_PKG_DEPENDS="kf6-attica (>= ${TERMUX_PKG_VERSION%.*}), kf6-karchive (>= ${TERMUX_PKG_VERSION%.*}), kf6-kconfig (>= ${TERMUX_PKG_VERSION%.*}), kf6-kcoreaddons (>= ${TERMUX_PKG_VERSION%.*}), kf6-ki18n (>= ${TERMUX_PKG_VERSION%.*}), kf6-kpackage (>= ${TERMUX_PKG_VERSION%.*}), kf6-kwidgetsaddons (>= ${TERMUX_PKG_VERSION%.*}), kf6-syndication (>= ${TERMUX_PKG_VERSION%.*}), libc++, qt6-qtbase, qt6-qtdeclarative"
-TERMUX_PKG_BUILD_DEPENDS="extra-cmake-modules (>= ${TERMUX_PKG_VERSION%.*}), kf6-kirigami (>= ${TERMUX_PKG_VERSION%.*}), qt6-qttools"
+NASUX_PKG_HOMEPAGE='https://invent.kde.org/frameworks/knewstuff'
+NASUX_PKG_DESCRIPTION='Support for downloading application assets from the network'
+NASUX_PKG_LICENSE="LGPL-2.0, LGPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="6.27.0"
+NASUX_PKG_SRCURL="https://download.kde.org/stable/frameworks/${NASUX_PKG_VERSION%.*}/knewstuff-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=8c19df7ba5940c36ff15051703acd3a16c664b4a570817b6770fafc7ab59d6de
+NASUX_PKG_DEPENDS="kf6-attica (>= ${NASUX_PKG_VERSION%.*}), kf6-karchive (>= ${NASUX_PKG_VERSION%.*}), kf6-kconfig (>= ${NASUX_PKG_VERSION%.*}), kf6-kcoreaddons (>= ${NASUX_PKG_VERSION%.*}), kf6-ki18n (>= ${NASUX_PKG_VERSION%.*}), kf6-kpackage (>= ${NASUX_PKG_VERSION%.*}), kf6-kwidgetsaddons (>= ${NASUX_PKG_VERSION%.*}), kf6-syndication (>= ${NASUX_PKG_VERSION%.*}), libc++, qt6-qtbase, qt6-qtdeclarative"
+TERMUX_PKG_BUILD_DEPENDS="extra-cmake-modules (>= ${NASUX_PKG_VERSION%.*}), kf6-kirigami (>= ${NASUX_PKG_VERSION%.*}), qt6-qttools"
 TERMUX_PKG_RECOMMENDS="kf6-kirigami"
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="

@@ -1,21 +1,21 @@
-TERMUX_PKG_HOMEPAGE=https://pwasforfirefox.filips.si/
-TERMUX_PKG_DESCRIPTION="A tool to install, manage and use Progressive Web Apps (PWAs) in Mozilla Firefox (native component)"
-TERMUX_PKG_LICENSE="MPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="2.18.3"
-TERMUX_PKG_SRCURL="https://github.com/filips123/PWAsForFirefox/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz"
-TERMUX_PKG_SHA256=597bb57eb7041829940bf6d6592f7d312d76386c246b29e3f1a000fea255d6cf
-TERMUX_PKG_DEPENDS="firefox"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_HOMEPAGE=https://pwasforfirefox.filips.si/
+NASUX_PKG_DESCRIPTION="A tool to install, manage and use Progressive Web Apps (PWAs) in Mozilla Firefox (native component)"
+NASUX_PKG_LICENSE="MPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="2.18.3"
+NASUX_PKG_SRCURL="https://github.com/filips123/PWAsForFirefox/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz"
+NASUX_PKG_SHA256=597bb57eb7041829940bf6d6592f7d312d76386c246b29e3f1a000fea255d6cf
+NASUX_PKG_DEPENDS="firefox"
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_UPDATE_TAG_TYPE=latest-release-tag
 
 termux_step_make() {
 	cd native
-	termux_setup_rust
+	nasux_setup_rust
 	# Set the correct version in source files
-	sed -i "s/version = \"0.0.0\"/version = \"${TERMUX_PKG_VERSION}\"/g" Cargo.toml
-	sed -i "s/DISTRIBUTION_VERSION = '0.0.0'/DISTRIBUTION_VERSION = '${TERMUX_PKG_VERSION}'/g" userchrome/profile/chrome/pwa/chrome.sys.mjs
+	sed -i "s/version = \"0.0.0\"/version = \"${NASUX_PKG_VERSION}\"/g" Cargo.toml
+	sed -i "s/DISTRIBUTION_VERSION = '0.0.0'/DISTRIBUTION_VERSION = '${NASUX_PKG_VERSION}'/g" userchrome/profile/chrome/pwa/chrome.sys.mjs
 
 	local release_arg="--release"
 	if [[ "$TERMUX_DEBUG_BUILD" == "true" ]]; then
@@ -36,7 +36,7 @@ termux_step_make_install() {
 	install -Dm755 -t "$TERMUX_PREFIX/bin" "$build_dir/firefoxpwa"
 	install -Dm755 -t "$TERMUX_PREFIX/libexec" "$build_dir/firefoxpwa-connector"
 	# manifest
-	install -DTm644 manifests/termux.json "$TERMUX_PREFIX/lib/mozilla/native-messaging-hosts/firefoxpwa.json"
+	install -DTm644 manifests/nasux.json "$TERMUX_PREFIX/lib/mozilla/native-messaging-hosts/firefoxpwa.json"
 	# completions
 	install -Dm644 -t "$TERMUX_PREFIX/share/bash-completion/completions" "$build_dir/completions/firefoxpwa.bash"
 	install -Dm644 -t "$TERMUX_PREFIX/share/fish/vendor_completions.d" "$build_dir/completions/firefoxpwa.fish"

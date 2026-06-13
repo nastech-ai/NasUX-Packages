@@ -1,15 +1,15 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/jart/hiptext
-TERMUX_PKG_DESCRIPTION="Turn images into text better than caca/aalib"
-TERMUX_PKG_LICENSE="Apache-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=0.2
+NASUX_PKG_HOMEPAGE=https://github.com/jart/hiptext
+NASUX_PKG_DESCRIPTION="Turn images into text better than caca/aalib"
+NASUX_PKG_LICENSE="Apache-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=0.2
 TERMUX_PKG_REVISION=8
-TERMUX_PKG_SRCURL=https://github.com/jart/hiptext/releases/download/$TERMUX_PKG_VERSION/hiptext-$TERMUX_PKG_VERSION.tar.gz
-TERMUX_PKG_SHA256=7f2217dec8775b445be6745f7bd439c24ce99c4316a9faf657bee7b42bc72e8f
+NASUX_PKG_SRCURL=https://github.com/jart/hiptext/releases/download/$NASUX_PKG_VERSION/hiptext-$NASUX_PKG_VERSION.tar.gz
+NASUX_PKG_SHA256=7f2217dec8775b445be6745f7bd439c24ce99c4316a9faf657bee7b42bc72e8f
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="ffmpeg, freetype, gflags, google-glog, libjpeg-turbo, libpng, ncurses"
+NASUX_PKG_DEPENDS="ffmpeg, freetype, gflags, google-glog, libjpeg-turbo, libpng, ncurses"
 TERMUX_PKG_BUILD_DEPENDS="ragel"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 
 termux_step_pre_configure() {
 	#Font reference on file font.cc --> Patch by font.cc.patch

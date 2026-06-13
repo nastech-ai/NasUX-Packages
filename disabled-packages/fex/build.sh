@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE=https://fex-emu.com/
-TERMUX_PKG_DESCRIPTION="Fast x86 emulation frontend"
-TERMUX_PKG_LICENSE="MIT"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=2404
-TERMUX_PKG_SRCURL=git+https://github.com/FEX-Emu/FEX
-TERMUX_PKG_GIT_BRANCH=FEX-${TERMUX_PKG_VERSION}
-TERMUX_PKG_DEPENDS="libandroid-shmem, libc++"
+NASUX_PKG_HOMEPAGE=https://fex-emu.com/
+NASUX_PKG_DESCRIPTION="Fast x86 emulation frontend"
+NASUX_PKG_LICENSE="MIT"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=2404
+NASUX_PKG_SRCURL=git+https://github.com/FEX-Emu/FEX
+TERMUX_PKG_GIT_BRANCH=FEX-${NASUX_PKG_VERSION}
+NASUX_PKG_DEPENDS="libandroid-shmem, libc++"
 TERMUX_PKG_BUILD_DEPENDS="gdb"
-TERMUX_PKG_EXCLUDED_ARCHES="arm, i686, x86_64"
+NASUX_PKG_EXCLUDED_ARCHES="arm, i686, x86_64"
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DBUILD_TESTS=OFF
@@ -24,8 +24,8 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 "
 
 termux_pkg_auto_update() {
-	local latest_tag="$(termux_github_api_get_tag "${TERMUX_PKG_SRCURL}")"
-	[[ -z "${latest_tag}" ]] && termux_error_exit "Unable to get tag from ${TERMUX_PKG_SRCURL}"
+	local latest_tag="$(termux_github_api_get_tag "${NASUX_PKG_SRCURL}")"
+	[[ -z "${latest_tag}" ]] && termux_error_exit "Unable to get tag from ${NASUX_PKG_SRCURL}"
 	termux_pkg_upgrade_version "${latest_tag#FEX-}"
 }
 

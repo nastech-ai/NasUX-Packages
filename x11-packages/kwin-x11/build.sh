@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE="https://invent.kde.org/plasma/kwin-x11"
-TERMUX_PKG_DESCRIPTION="An easy to use, but flexible, X Window Manager"
-TERMUX_PKG_LICENSE="LGPL-2.0-or-later"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="6.6.5"
-TERMUX_PKG_SRCURL="https://download.kde.org/stable/plasma/${TERMUX_PKG_VERSION}/kwin-x11-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=d5172772d5b9dd6ef0f3230cb5f8a78df9148dd07019d8f282a0931cad946b24
+NASUX_PKG_HOMEPAGE="https://invent.kde.org/plasma/kwin-x11"
+NASUX_PKG_DESCRIPTION="An easy to use, but flexible, X Window Manager"
+NASUX_PKG_LICENSE="LGPL-2.0-or-later"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="6.6.5"
+NASUX_PKG_SRCURL="https://download.kde.org/stable/plasma/${NASUX_PKG_VERSION}/kwin-x11-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=d5172772d5b9dd6ef0f3230cb5f8a78df9148dd07019d8f282a0931cad946b24
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_HOSTBUILD=true
-TERMUX_PKG_DEPENDS="aurorae, breeze, kf6-kauth, kf6-kcmutils, kf6-kcolorscheme, kf6-kconfig, kf6-kcoreaddons, kf6-kcrash, kf6-kdeclarative, kdecoration, kf6-kglobalaccel, kglobalacceld, kf6-kguiaddons, kf6-ki18n, kf6-kidletime, kf6-kirigami, kf6-kitemmodels, kf6-knewstuff, kf6-knotifications, kf6-kpackage, kf6-kservice, kf6-ksvg, kf6-kwidgetsaddons, kf6-kwindowsystem, kf6-kxmlgui, knighttime, libc++, libcanberra, libdisplay-info, libdrm, libepoxy, libplasma, libqaccessibilityclient-qt6, libwayland, libx11, libxcb, libxi, libxkbcommon, littlecms, mesa, plasma-activities, qt6-qt5compat, qt6-qtbase, qt6-qtdeclarative, qt6-qtsensors, qt6-qtsvg, qt6-qttools, qt6-qtwayland, xcb-util-cursor, xcb-util-keysyms, xcb-util-wm"
+NASUX_PKG_DEPENDS="aurorae, breeze, kf6-kauth, kf6-kcmutils, kf6-kcolorscheme, kf6-kconfig, kf6-kcoreaddons, kf6-kcrash, kf6-kdeclarative, kdecoration, kf6-kglobalaccel, kglobalacceld, kf6-kguiaddons, kf6-ki18n, kf6-kidletime, kf6-kirigami, kf6-kitemmodels, kf6-knewstuff, kf6-knotifications, kf6-kpackage, kf6-kservice, kf6-ksvg, kf6-kwidgetsaddons, kf6-kwindowsystem, kf6-kxmlgui, knighttime, libc++, libcanberra, libdisplay-info, libdrm, libepoxy, libplasma, libqaccessibilityclient-qt6, libwayland, libx11, libxcb, libxi, libxkbcommon, littlecms, mesa, plasma-activities, qt6-qt5compat, qt6-qtbase, qt6-qtdeclarative, qt6-qtsensors, qt6-qtsvg, qt6-qttools, qt6-qtwayland, xcb-util-cursor, xcb-util-keysyms, xcb-util-wm"
 TERMUX_PKG_BUILD_DEPENDS="extra-cmake-modules, plasma-wayland-protocols, libwayland-protocols"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DCMAKE_SYSTEM_NAME=Linux
@@ -24,8 +24,8 @@ termux_step_host_build() {
 		return
 	fi
 
-	termux_setup_cmake
-	termux_setup_ninja
+	nasux_setup_cmake
+	nasux_setup_ninja
 
 	cmake -G Ninja \
 		-S "${TERMUX_PKG_SRCDIR}/src/wayland/tools" \

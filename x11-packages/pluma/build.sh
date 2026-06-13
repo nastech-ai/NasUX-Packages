@@ -1,12 +1,12 @@
-TERMUX_PKG_HOMEPAGE=https://mate-desktop.org/
-TERMUX_PKG_DESCRIPTION="Powerful text editor for MATE"
-TERMUX_PKG_LICENSE="GPL-2.0-or-later"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="1.28.1"
-TERMUX_PKG_SRCURL="https://github.com/mate-desktop/pluma/releases/download/v$TERMUX_PKG_VERSION/pluma-$TERMUX_PKG_VERSION.tar.xz"
-TERMUX_PKG_SHA256=27137ff1bb1c53a90d2308b8a6b203e5d07f13a644a0d950f3ead7bb9cf1e241
+NASUX_PKG_HOMEPAGE=https://mate-desktop.org/
+NASUX_PKG_DESCRIPTION="Powerful text editor for MATE"
+NASUX_PKG_LICENSE="GPL-2.0-or-later"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="1.28.1"
+NASUX_PKG_SRCURL="https://github.com/mate-desktop/pluma/releases/download/v$NASUX_PKG_VERSION/pluma-$NASUX_PKG_VERSION.tar.xz"
+NASUX_PKG_SHA256=27137ff1bb1c53a90d2308b8a6b203e5d07f13a644a0d950f3ead7bb9cf1e241
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="iso-codes, mate-desktop, zenity, gtksourceview4, glib, gobject-introspection, libpeas, gettext, enchant, libsm"
+NASUX_PKG_DEPENDS="iso-codes, mate-desktop, zenity, gtksourceview4, glib, gobject-introspection, libpeas, gettext, enchant, libsm"
 TERMUX_PKG_SUGGESTS="pygobject"
 TERMUX_PKG_BUILD_DEPENDS="autoconf-archive, mate-common"
 # the python plugins do not work because of a libpeas-related dependency conflict
@@ -23,8 +23,8 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 "
 
 termux_step_pre_configure() {
-	termux_setup_gir
-	termux_setup_glib_cross_pkg_config_wrapper
+	nasux_setup_gir
+	nasux_setup_glib_cross_pkg_config_wrapper
 
 	autoreconf -fi
 }

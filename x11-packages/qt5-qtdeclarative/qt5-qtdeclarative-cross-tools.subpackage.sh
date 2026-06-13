@@ -1,5 +1,5 @@
-TERMUX_SUBPKG_DESCRIPTION="Qt declarative module for cross build (NOT for Termux)"
+NASUX_SUBPKG_DESCRIPTION="Qt declarative module for cross build (NOT for NasUX)"
 TERMUX_SUBPKG_DEPENDS="qt5-qtdeclarative"
-TERMUX_SUBPKG_INCLUDE="
+NASUX_SUBPKG_INCLUDE="
 opt/qt/cross/*
 "

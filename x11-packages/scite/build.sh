@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE=https://www.scintilla.org/SciTE.html
-TERMUX_PKG_DESCRIPTION="A free source code editor"
-TERMUX_PKG_LICENSE="HPND"
-TERMUX_PKG_LICENSE_FILE="scite/License.txt"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="5.6.3"
-TERMUX_PKG_SRCURL=https://www.scintilla.org/scite${TERMUX_PKG_VERSION//./}.tgz
-TERMUX_PKG_SHA256=269c6408e78d54e2ac54ff91c3c6485fda8b87d316f7fc9b68b5efd8abd9d490
-TERMUX_PKG_DEPENDS="at-spi2-core, gdk-pixbuf, glib, gtk3, libc++, libcairo, pango"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_HOMEPAGE=https://www.scintilla.org/SciTE.html
+NASUX_PKG_DESCRIPTION="A free source code editor"
+NASUX_PKG_LICENSE="HPND"
+NASUX_PKG_LICENSE_FILE="scite/License.txt"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="5.6.3"
+NASUX_PKG_SRCURL=https://www.scintilla.org/scite${NASUX_PKG_VERSION//./}.tgz
+NASUX_PKG_SHA256=269c6408e78d54e2ac54ff91c3c6485fda8b87d316f7fc9b68b5efd8abd9d490
+NASUX_PKG_DEPENDS="at-spi2-core, gdk-pixbuf, glib, gtk3, libc++, libcairo, pango"
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_EXTRA_MAKE_ARGS="
 CLANG=1
@@ -16,13 +16,13 @@ NO_LUA=1
 "
 
 termux_extract_src_archive() {
-	local file="$TERMUX_PKG_CACHEDIR/$(basename "${TERMUX_PKG_SRCURL}")"
+	local file="$TERMUX_PKG_CACHEDIR/$(basename "${NASUX_PKG_SRCURL}")"
 	mkdir -p "$TERMUX_PKG_SRCDIR"
 	tar xf "$file" -C "$TERMUX_PKG_SRCDIR" --strip-components=0
 }
 
 termux_step_pre_configure() {
-	# https://github.com/termux/termux-packages/issues/18810
+	# https://github.com/nastech-ai/NasUX-Packages/issues/18810
 	LDFLAGS+=" -Wl,--undefined-version"
 }
 

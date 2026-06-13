@@ -1,10 +1,10 @@
-TERMUX_PKG_HOMEPAGE=https://mate-desktop.org/
-TERMUX_PKG_DESCRIPTION="MATE default icon theme"
-TERMUX_PKG_LICENSE="GPL-2.0-or-later"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="1.28.0"
-TERMUX_PKG_SRCURL="https://github.com/mate-desktop/mate-icon-theme/releases/download/v$TERMUX_PKG_VERSION/mate-icon-theme-$TERMUX_PKG_VERSION.tar.xz"
-TERMUX_PKG_SHA256=94d6079060ca5df74542921de4eea38b7d02d07561c919356d95de876f9a6d3a
+NASUX_PKG_HOMEPAGE=https://mate-desktop.org/
+NASUX_PKG_DESCRIPTION="MATE default icon theme"
+NASUX_PKG_LICENSE="GPL-2.0-or-later"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="1.28.0"
+NASUX_PKG_SRCURL="https://github.com/mate-desktop/mate-icon-theme/releases/download/v$NASUX_PKG_VERSION/mate-icon-theme-$NASUX_PKG_VERSION.tar.xz"
+NASUX_PKG_SHA256=94d6079060ca5df74542921de4eea38b7d02d07561c919356d95de876f9a6d3a
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_BUILD_DEPENDS="mate-common, icon-naming-utils"
 TERMUX_PKG_PLATFORM_INDEPENDENT=true
@@ -15,7 +15,7 @@ termux_step_host_build() {
 		return
 	fi
 	# XML::Simple for running $TERMUX_PREFIX/libexec/icon-name-mapping in
-	# the Ubuntu termux-package-builder's perl during cross-compilation
+	# the Ubuntu nasux-package-builder's perl during cross-compilation
 	termux_download_ubuntu_packages libxml-simple-perl
 }
 

@@ -1,12 +1,12 @@
 # Contributing
 
-Termux is an open source application and it is built on users' contributions.
-However, most of work is done by Termux maintainers on their spare time and
+NasUX is an open source application and it is built on users' contributions.
+However, most of work is done by NasUX maintainers on their spare time and
 therefore only priority tasks are being completed.
 
-Developer's wiki is available at https://github.com/termux/termux-packages/wiki.
+Developer's wiki is available at https://github.com/nastech-ai/NasUX-Packages/wiki.
 
-## How you can contribute to Termux project
+## How you can contribute to NasUX project
 
 - **Reporting issues**
 
@@ -23,7 +23,7 @@ Developer's wiki is available at https://github.com/termux/termux-packages/wiki.
   You may report only issues happening within our official packages. Do not
   submit issues happening in third-party software - we will ignore them.
 
-  Bugs reports for legacy Termux installations (Android 5.x / 6.x) are not
+  Bugs reports for legacy NasUX installations (Android 5.x / 6.x) are not
   accepted. We already dropped support for these Android OS versions.
 
 - **Examining existing packages for potential issues**
@@ -32,17 +32,17 @@ Developer's wiki is available at https://github.com/termux/termux-packages/wiki.
   dependencies, unprefixed hardcoded FHS paths, crashes, etc.
 
   If you can't submit a pull request with patches fixing the problem, you can
-  open new [issue](https://github.com/termux/termux-packages/issues/new/choose).
+  open new [issue](https://github.com/nastech-ai/NasUX-Packages/issues/new/choose).
 
 - **Fixing known bugs**
 
-  Take a look at https://github.com/termux/termux-packages/issues. There many
+  Take a look at https://github.com/nastech-ai/NasUX-Packages/issues. There many
   issue tickets having tag `bug report` or `help wanted`. They all are waiting
   to be resolved.
 
 - **Submitting new packages**
 
-  There are lots of unresolved [package requests](https://github.com/termux/termux-packages/issues?q=is%3Aissue+is%3Aopen+label%3A%22package+request%22).
+  There are lots of unresolved [package requests](https://github.com/nastech-ai/NasUX-Packages/issues?q=is%3Aissue+is%3Aopen+label%3A%22package+request%22).
   Pay attention to tickets having tag `help wanted`.
 
 - **Keeping existing packages up-to-date**
@@ -55,19 +55,19 @@ Developer's wiki is available at https://github.com/termux/termux-packages/wiki.
 
 - **Hosting a package repository mirror**
 
-  Termux generates lots of traffic. Mirrors help to reduce load on primary
+  NasUX generates lots of traffic. Mirrors help to reduce load on primary
   server, provide better download speeds and eliminate single point of failure.
 
 - **Donate**
 
-  See https://github.com/termux/termux-packages/wiki/Donate for details.
+  See https://github.com/nastech-ai/NasUX-Packages/wiki/Donate for details.
 
 ## Requesting new package
 
 If you are looking for specific package and didn't find it included in our
 repositories, you can request it.
 
-Open a new [issue](https://github.com/termux/termux-packages/issues/new/choose)
+Open a new [issue](https://github.com/nastech-ai/NasUX-Packages/issues/new/choose)
 filling the `package request` template. You will need to provide at least
 package description and its home page and URL to source repository. Remember
 that your request will not be processed immediately.
@@ -76,7 +76,7 @@ Requested package must comply with our [packaging policy](#packaging-policy).
 
 ## Packaging policy
 
-There are already more than 1000 packages added to Termux repositories. All
+There are already more than 1000 packages added to NasUX repositories. All
 of them needs to be maintained, kept up-to-date. Unlike the major distributions,
 our developers team is small and we also limited on server disk space.
 
@@ -86,7 +86,7 @@ met these conditions:
 - **Packages must be active, well-known projects**
 
   Software available in major Linux distributions has more chances to be
-  included into Termux repositories. We will not accept outdated, dead projects
+  included into NasUX repositories. We will not accept outdated, dead projects
   as well as projects which do not have active community.
 
 - **Packages must be licensed under widely recognized open source license**
@@ -142,19 +142,19 @@ met these conditions:
 **Important**: standalone library packages are of interest mostly for developers
 and we will not package them unless required as dependency for another package.
 This is not a strong rule, but needed to ensure that repository is clean and
-provides content useful for average Termux user.
+provides content useful for average NasUX user.
 
 Packages that require root permission to get working or rely on features that
 are available only with SELinux permissive mode or require custom firmware
 are handled in a dedicated
-[apt repository](https://packages-cf.termux.dev/apt/termux-root/) whose build
+[apt repository](https://packages-cf.nasux.dev/apt/nasux-root/) whose build
 recipes you can find in [root-packages directory](/root-packages).
-Remember that Termux is designed primarily for non-root use and we may
+Remember that NasUX is designed primarily for non-root use and we may
 remove functionality requiring root from packages if it interfere with
 non-root usage or cause build time issues.
 
 Packages that do not comply with this policy may be requested in User Repository:
-https://github.com/termux-user-repository/tur
+https://github.com/nasux-user-repository/tur
 
 ## Submitting pull requests
 
@@ -167,9 +167,9 @@ but that DOES NOT mean they will do all work instead of you.
 - Experience with Linux distribution like Debian (preferred), Arch, Fedora, etc.
 - Experience with compiling software from source.
 - Good shell scripting skills.
-- You have read https://github.com/termux/termux-packages/wiki.
+- You have read https://github.com/nastech-ai/NasUX-Packages/wiki.
 
-If you never used Linux distribution or Termux was your first experience with
+If you never used Linux distribution or NasUX was your first experience with
 Linux environment, we strongly recommending to NOT send pull requests since
 we will reject low quality work.
 
@@ -178,7 +178,7 @@ new package, as your pull request will be closed without merge.
 
 Do not send disruptive changes, like without reason reverting commits or
 deleting files, creating spam content, etc. Authors of such pull requests may
-be blocked from contributing to [Termux](https://github.com/termux) project.
+be blocked from contributing to [NasUX](https://github.com/nasux) project.
 
 ### Submitting new packages: checklist
 
@@ -198,7 +198,7 @@ request with new package. Pay attention to things listed below.
 
 2. **Versioning: if using specific Git commit**
 
-   `TERMUX_PKG_VERSION` must contain a commit date in case if you are using
+   `NASUX_PKG_VERSION` must contain a commit date in case if you are using
    specific Git commit. Date format should be `YYYY.MM.DD` or `YYYYMMDD`.
 
    Never use Git hash, branch name or something else that can break version
@@ -207,24 +207,24 @@ request with new package. Pay attention to things listed below.
 3. **Source URL**
 
    Source URL must be deterministic and guarantee that it always pointing
-   on content matching version specified in `TERMUX_PKG_VERSION` and
-   checksum in `TERMUX_PKG_SHA256`. In very rare cases we could make
+   on content matching version specified in `NASUX_PKG_VERSION` and
+   checksum in `NASUX_PKG_SHA256`. In very rare cases we could make
    exception, but don't expect that it will apply to your pull request.
 
    Don't hardcode version in source code URL. Reference it through variable
-   `${TERMUX_PKG_VERSION}` and remember that Bash supports slicing and
+   `${NASUX_PKG_VERSION}` and remember that Bash supports slicing and
    other ways to manipulate content referenced through variables.
 
    Examples:
 
    ```
-   TERMUX_PKG_VERSION=1.0
-   TERMUX_PKG_SRCURL=https://example.com/archive/package-${TERMUX_PKG_VERSION}.tar.gz
+   NASUX_PKG_VERSION=1.0
+   NASUX_PKG_SRCURL=https://example.com/archive/package-${NASUX_PKG_VERSION}.tar.gz
    ```
 
    ```
-   TERMUX_PKG_VERSION=5:4.11.3
-   TERMUX_PKG_SRCURL=https://example.com/archive/package-${TERMUX_PKG_VERSION:2}.tar.gz
+   NASUX_PKG_VERSION=5:4.11.3
+   NASUX_PKG_SRCURL=https://example.com/archive/package-${NASUX_PKG_VERSION:2}.tar.gz
    ```
 
 4. **Dependencies: build tools**
@@ -235,7 +235,7 @@ request with new package. Pay attention to things listed below.
 
 5. **Dependencies: build & run time**
 
-   `TERMUX_PKG_DEPENDS` should contain only dependencies required during
+   `NASUX_PKG_DEPENDS` should contain only dependencies required during
    package run time.
 
    All dependencies that are used only during build time, for example
@@ -266,8 +266,8 @@ request with new package. Pay attention to things listed below.
    - `/usr`
    - `/var`
 
-   These paths do not exist in Termux and have been replaced by prefixed
-   equivalents. Termux installation prefix is
+   These paths do not exist in NasUX and have been replaced by prefixed
+   equivalents. NasUX installation prefix is
 
    ```
    /data/data/com.termux/files/usr
@@ -314,9 +314,9 @@ request with new package. Pay attention to things listed below.
 
 # Working with packages
 
-All software available in Termux repositories aims to be compatible with Android
+All software available in NasUX repositories aims to be compatible with Android
 OS and is built by Android NDK. This often introduces compatibility issues as
-Android (specifically Termux) is not a standard platform. Do not expect there
+Android (specifically NasUX) is not a standard platform. Do not expect there
 are exist package recipes available out-of-box.
 
 ## Commit guidelines
@@ -328,14 +328,14 @@ Commit messages should describe the changes done, so that maintainers can unders
 
 [An optional but **highly recommended** commit message describing the changes made in the commit]
 
-[Fixes (termux/repo)#<issue number>]
-[Closes (termux/repo)#<pr number>]
+[Fixes (nasux/repo)#<issue number>]
+[Closes (nasux/repo)#<pr number>]
 ```
 
 Where:
 
 - `<repo>` may be one of `main`, `root` or `x11`. It is the repository in which the package resides.
-  Other definition for this property can be done as the name property of the package directory as defined in `repo.json` file after removing the 'termux-' prefix (if any).
+  Other definition for this property can be done as the name property of the package directory as defined in `repo.json` file after removing the 'nasux-' prefix (if any).
 - `<package>` is the actual name of the package.
 
 Any line in the commit **should not exceed 80 characters**. In case it does, consider using different wordings or language style which better summarizes the changes done.
@@ -345,7 +345,7 @@ Any line in the commit **should not exceed 80 characters**. In case it does, con
     Commit summary should include a short description of the package. Optional extended commit message may include usage instructions for the package and/or reasons for inclusion.
   - `bump(<repo>/<package>)`: One or more package(s) was/were updated.
     Commit summary should include the newer version/tag to which the package was updated to. Optional extended commit message may include new list of features in the new version, and detailed list of changes in build scripts and/or patches
-  - `fix(<repo>/<package>)`: Fix a Termux specific bug in a package
+  - `fix(<repo>/<package>)`: Fix a NasUX specific bug in a package
     Commit summary should contain a summary of old incorrect behaviour of the package. Extended commit message may contain a deeper analysis of the bug.
   - `dwnpkg(<repo>/<package>)`: One or more package(s) was/were downgraded due to build issues or potential bugs
     Commit summary should justify the downgrading of the package(s). If the summary can't completely describe the reason for downgrade, extended commit message should contain full reason for downgrade.
@@ -478,19 +478,19 @@ it also used to override default packaging steps defined in our build system.
 Here is example of `build.sh`:
 
 ```.sh
-TERMUX_PKG_HOMEPAGE=https://example.com
-TERMUX_PKG_DESCRIPTION="Termux package"
-TERMUX_PKG_LICENSE="GPL-3.0"
-TERMUX_PKG_MAINTAINER="@github"
-TERMUX_PKG_VERSION=1.0
-TERMUX_PKG_SRCURL=https://example.com/sources-${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=0000000000000000000000000000000000000000000000000000000000000000
-TERMUX_PKG_DEPENDS="libiconv, ncurses"
+NASUX_PKG_HOMEPAGE=https://example.com
+NASUX_PKG_DESCRIPTION="NasUX package"
+NASUX_PKG_LICENSE="GPL-3.0"
+NASUX_PKG_MAINTAINER="@github"
+NASUX_PKG_VERSION=1.0
+NASUX_PKG_SRCURL=https://example.com/sources-${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=0000000000000000000000000000000000000000000000000000000000000000
+NASUX_PKG_DEPENDS="libiconv, ncurses"
 ```
 
 It can contain some additional variables:
 
-- `TERMUX_PKG_BUILD_IN_SRC=true`
+- `NASUX_PKG_BUILD_IN_SRC=true`
 
   Use this variable if package supports in-tree builds only, for example if
   package uses raw Makefile instead of build system like CMake.
@@ -500,14 +500,14 @@ It can contain some additional variables:
   This variable specifies that package is platform-independent and can run
   on any device regardless of CPU architecture.
 
-`TERMUX_PKG_LICENSE` should specify the license using SPDX license identifier
+`NASUX_PKG_LICENSE` should specify the license using SPDX license identifier
 or can contain values "custom" or "non-free". Multiple licenses should be
 separated by commas.
 
-`TERMUX_PKG_SRCURL` should contain URL only for the official source bundle.
+`NASUX_PKG_SRCURL` should contain URL only for the official source bundle.
 Use of forks is allowed only under a good reason.
 
-More about `build.sh` variables you can read on [developer's wiki](https://github.com/termux/termux-packages/wiki/Creating-new-package#table-of-available-package-control-fields).
+More about `build.sh` variables you can read on [developer's wiki](https://github.com/nastech-ai/NasUX-Packages/wiki/Creating-new-package#table-of-available-package-control-fields).
 
 ### Creating patch files
 
@@ -572,7 +572,7 @@ generated by either GNU `diff`, `git` or other compatible utility.
 
    ```bash
    cd ./packages/your-package
-   (source build.sh 2>/dev/null; curl -LO "$TERMUX_PKG_SRCURL")
+   (source build.sh 2>/dev/null; curl -LO "$NASUX_PKG_SRCURL")
    ```
 
 2. Extract tarball and make a copy of source code tree:
@@ -613,24 +613,24 @@ modification is stored in a separate patch file.
 
 [![asciicast](https://asciinema.org/a/gVwMqf1bGbqrXmuILvxozy3IG.svg)](https://asciinema.org/a/gVwMqf1bGbqrXmuILvxozy3IG?autoplay=1&speed=2.0)
 
-You can check which packages are out-of-date by visiting Termux page on
-[Repology](https://repology.org/projects/?inrepo=termux&outdated=1).
+You can check which packages are out-of-date by visiting NasUX page on
+[Repology](https://repology.org/projects/?inrepo=nasux&outdated=1).
 
 ### General package update procedure
 
 Usually to update packages you need to just modify few variables and commit
 the changes.
 
-1. Assign the new version value to `TERMUX_PKG_VERSION`. Be careful to not
+1. Assign the new version value to `NASUX_PKG_VERSION`. Be careful to not
    remove the epoch (numbered prefix, e.g `1:`, `2:`) accidentally.
 2. If there is `TERMUX_PKG_REVISION` variable set, remove it. Revision
    should be set only for subsequent package builds within the same version.
 3. Download the source code archive and compute SHA-256 checksum:
    ```
    cd ./packages/${YOUR_PACKAGE}
-   (source build.sh 2>/dev/null; curl -LO "$TERMUX_PKG_SRCURL")
+   (source build.sh 2>/dev/null; curl -LO "$NASUX_PKG_SRCURL")
    ```
-4. Assign the new checksum value to `TERMUX_PKG_SHA256`.
+4. Assign the new checksum value to `NASUX_PKG_SHA256`.
 
 ### Dealing with patch errors
 
@@ -666,10 +666,10 @@ rebuild. In order to make package recognized as update, a build number should
 be set. This is done through defining variable `TERMUX_PKG_REVISION` or
 incrementing its value if already set.
 
-`TERMUX_PKG_REVISION` should be set exactly below `TERMUX_PKG_VERSION`:
+`TERMUX_PKG_REVISION` should be set exactly below `NASUX_PKG_VERSION`:
 
 ```.sh
-TERMUX_PKG_VERSION=1.0
+NASUX_PKG_VERSION=1.0
 TERMUX_PKG_REVISION=4
 ```
 
@@ -681,14 +681,14 @@ If package needs to be downgraded or for versioning scheme needs to be changed,
 you need to set or increment package epoch. This is needed to tell package
 manager force recognize new version as package update.
 
-Epoch should be specified in same variable as version (`TERMUX_PKG_VERSION`),
+Epoch should be specified in same variable as version (`NASUX_PKG_VERSION`),
 but its value will take different format (`{EPOCH}:{VERSION}`):
 
 ```.sh
-TERMUX_PKG_VERSION=1:5.0.0
+NASUX_PKG_VERSION=1:5.0.0
 ```
 
-Note that if you are not @termux collaborator, pull request must contain a
+Note that if you are not @nastech-ai collaborator, pull request must contain a
 _description_ why you are submitting a package downgrade. All pull requests
 which submit package downgrading without any serious reason will be rejected.
 
@@ -701,7 +701,7 @@ No files in package. Maybe you need to run autoreconf -fi before configuring?
 Means that build system cannot find the Makefile. Depending on project, there
 are some tips for trying:
 
-- Set `TERMUX_PKG_BUILD_IN_SRC=true` - applicable to Makefile-only projects.
+- Set `NASUX_PKG_BUILD_IN_SRC=true` - applicable to Makefile-only projects.
 - Run `./autogen.sh` or `autoreconf -fi` in `termux_step_pre_configure`. This
   is applicable to projects that use Autotools.
 
@@ -710,4 +710,4 @@ No LICENSE file was installed for ...
 ```
 
 This error happens when build system cannot find license file and it should be
-specified manually through `TERMUX_PKG_LICENSE_FILE`.
+specified manually through `NASUX_PKG_LICENSE_FILE`.

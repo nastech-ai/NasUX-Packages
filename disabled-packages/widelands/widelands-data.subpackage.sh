@@ -1,3 +1,3 @@
-TERMUX_SUBPKG_DESCRIPTION="Platform-independent data for widelands"
+NASUX_SUBPKG_DESCRIPTION="Platform-independent data for widelands"
 TERMUX_SUBPKG_PLATFORM_INDEPENDENT=true
-TERMUX_SUBPKG_INCLUDE="share/$TERMUX_PKG_NAME/"
+NASUX_SUBPKG_INCLUDE="share/$TERMUX_PKG_NAME/"

@@ -2,20 +2,20 @@
 # shellcheck disable=SC2039,SC2059
 
 # Title:         build-bootstrap.sh
-# Description:   A script to build bootstrap archives for the termux-app
+# Description:   A script to build bootstrap archives for the nasux-app
 #                from local package sources instead of debs published in
 #                apt repo like done by generate-bootstrap.sh. It allows
-#                bootstrap archives to be easily built for (forked) termux
+#                bootstrap archives to be easily built for (forked) nasux
 #                apps without having to publish an apt repo first.
 # Usage:         run "build-bootstrap.sh --help"
 version=0.1.0
 
 set -e
 
-export TERMUX_SCRIPTDIR=$(realpath "$(dirname "$(realpath "$0")")/../")
-: "${TERMUX_TOPDIR:="$HOME/.termux-build"}"
-. "${TERMUX_SCRIPTDIR}"/scripts/properties.sh
-. "${TERMUX_SCRIPTDIR}"/scripts/build/termux_step_handle_buildarch.sh
+export NASUX_SCRIPTDIR=$(realpath "$(dirname "$(realpath "$0")")/../")
+: "${TERMUX_TOPDIR:="$HOME/.nasux-build"}"
+. "${NASUX_SCRIPTDIR}"/scripts/properties.sh
+. "${NASUX_SCRIPTDIR}"/scripts/build/termux_step_handle_buildarch.sh
 
 BOOTSTRAP_TMPDIR=$(mktemp -d "${TMPDIR:-/tmp}/bootstrap-tmp.XXXXXXXX")
 
@@ -24,12 +24,12 @@ BOOTSTRAP_TMPDIR=$(mktemp -d "${TMPDIR:-/tmp}/bootstrap-tmp.XXXXXXXX")
 BOOTSTRAP_ANDROID10_COMPATIBLE=false
 
 # By default, bootstrap archives will be built for all architectures
-# supported by Termux application.
+# supported by NasUX application.
 # Override with option '--architectures'.
 TERMUX_DEFAULT_ARCHITECTURES=("aarch64" "arm" "i686" "x86_64")
 TERMUX_ARCHITECTURES=("${TERMUX_DEFAULT_ARCHITECTURES[@]}")
 
-TERMUX_PACKAGES_DIRECTORY="/home/builder/termux-packages"
+TERMUX_PACKAGES_DIRECTORY="/home/builder/nasux-packages"
 TERMUX_BUILT_DEBS_DIRECTORY="$TERMUX_PACKAGES_DIRECTORY/output"
 TERMUX_BUILT_PACKAGES_DIRECTORY="/data/data/.built-packages"
 
@@ -63,7 +63,7 @@ build_package() {
 
 	local return_value
 
-	local TERMUX_ARCH="$1"
+	local NASUX_ARCH="$1"
 	local package_name="$2"
 
 	local build_output
@@ -73,12 +73,12 @@ build_package() {
 	cd "$TERMUX_PACKAGES_DIRECTORY"
 	echo $'\n\n\n'"[*] Building '$package_name'..."
 	exec 99>&1
-	build_output="$("$TERMUX_PACKAGES_DIRECTORY"/build-package.sh "${BUILD_PACKAGE_OPTIONS[@]}" -a "$TERMUX_ARCH" "$package_name" 2>&1 | tee >(cat - >&99); exit ${PIPESTATUS[0]})";
+	build_output="$("$TERMUX_PACKAGES_DIRECTORY"/build-package.sh "${BUILD_PACKAGE_OPTIONS[@]}" -a "$NASUX_ARCH" "$package_name" 2>&1 | tee >(cat - >&99); exit ${PIPESTATUS[0]})";
 	return_value=$?
 	echo "[*] Building '$package_name' exited with exit code $return_value"
 	exec 99>&-
 	if [ $return_value -ne 0 ]; then
-		echo "Failed to build package '$package_name' for arch '$TERMUX_ARCH'" 1>&2
+		echo "Failed to build package '$package_name' for arch '$NASUX_ARCH'" 1>&2
 
 		# Dependency packages may not have a build.sh, so we ignore the error.
 		# A better way should be implemented to validate if its actually a dependency
@@ -199,12 +199,12 @@ extract_debs() {
 
 }
 
-# Add termux bootstrap second stage files
+# Add nasux bootstrap second stage files
 add_termux_bootstrap_second_stage_files() {
 
 	local package_arch="$1"
 
-	echo $'\n\n\n'"[*] Adding termux bootstrap second stage files..."
+	echo $'\n\n\n'"[*] Adding nasux bootstrap second stage files..."
 
 	mkdir -p "${BOOTSTRAP_ROOTFS}/${TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_DIR}"
 	sed -e "s|@TERMUX_PREFIX@|${TERMUX_PREFIX}|g" \
@@ -214,18 +214,18 @@ add_termux_bootstrap_second_stage_files() {
 		-e "s|@TERMUX_PACKAGE_ARCH@|${package_arch}|g" \
 		-e "s|@TERMUX_APP__NAME@|${TERMUX_APP__NAME}|g" \
 		-e "s|@TERMUX_ENV__S_TERMUX@|${TERMUX_ENV__S_TERMUX}|g" \
-		"$TERMUX_SCRIPTDIR/scripts/bootstrap/$TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUBFILE" \
+		"$NASUX_SCRIPTDIR/scripts/bootstrap/$TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUBFILE" \
 		> "${BOOTSTRAP_ROOTFS}/${TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_DIR}/$TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUBFILE"
 	chmod 700 "${BOOTSTRAP_ROOTFS}/${TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_DIR}/$TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUBFILE"
 
-	# TODO: Remove it when Termux app supports `pacman` bootstraps installation.
+	# TODO: Remove it when NasUX app supports `pacman` bootstraps installation.
 	sed -e "s|@TERMUX_PREFIX@|${TERMUX_PREFIX}|g" \
 		-e "s|@TERMUX__PREFIX__PROFILE_D_DIR@|${TERMUX__PREFIX__PROFILE_D_DIR}|g" \
 		-e "s|@TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_DIR@|${TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_DIR}|g" \
 		-e "s|@TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUBFILE@|${TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUBFILE}|g" \
-		"$TERMUX_SCRIPTDIR/scripts/bootstrap/01-termux-bootstrap-second-stage-fallback.sh" \
-		> "${BOOTSTRAP_ROOTFS}/${TERMUX__PREFIX__PROFILE_D_DIR}/01-termux-bootstrap-second-stage-fallback.sh"
-	chmod 600 "${BOOTSTRAP_ROOTFS}/${TERMUX__PREFIX__PROFILE_D_DIR}/01-termux-bootstrap-second-stage-fallback.sh"
+		"$NASUX_SCRIPTDIR/scripts/bootstrap/01-nasux-bootstrap-second-stage-fallback.sh" \
+		> "${BOOTSTRAP_ROOTFS}/${TERMUX__PREFIX__PROFILE_D_DIR}/01-nasux-bootstrap-second-stage-fallback.sh"
+	chmod 600 "${BOOTSTRAP_ROOTFS}/${TERMUX__PREFIX__PROFILE_D_DIR}/01-nasux-bootstrap-second-stage-fallback.sh"
 
 }
 
@@ -282,9 +282,9 @@ show_usage() {
     cat <<'HELP_EOF'
 
 build-bootstraps.sh is a script to build bootstrap archives for the
-termux-app from local package sources instead of debs published in
+nasux-app from local package sources instead of debs published in
 apt repo like done by generate-bootstrap.sh. It allows bootstrap archives
-to be easily built for (forked) termux apps without having to publish
+to be easily built for (forked) nasux apps without having to publish
 an apt repo first.
 
 
@@ -308,7 +308,7 @@ Available command_options:
 
 
 The package name/prefix that the bootstrap is built for is defined by
-TERMUX_APP_PACKAGE in 'scrips/properties.sh'. It defaults to 'com.termux'.
+TERMUX_APP_PACKAGE in 'scrips/properties.sh'. It defaults to 'com.nasux'.
 If package name is changed, make sure to run
 `./scripts/run-docker.sh ./clean.sh` or pass '-f' to force rebuild of packages.
 
@@ -385,15 +385,15 @@ main() {
 
 	set_build_bootstrap_traps
 
-	for TERMUX_ARCH in "${TERMUX_ARCHITECTURES[@]}"; do
-		if [[ " ${TERMUX_DEFAULT_ARCHITECTURES[*]} " != *" $TERMUX_ARCH "* ]]; then
-			echo "Unsupported architecture '$TERMUX_ARCH' for in architectures list: '${TERMUX_ARCHITECTURES[*]}'" 1>&2
+	for NASUX_ARCH in "${TERMUX_ARCHITECTURES[@]}"; do
+		if [[ " ${TERMUX_DEFAULT_ARCHITECTURES[*]} " != *" $NASUX_ARCH "* ]]; then
+			echo "Unsupported architecture '$NASUX_ARCH' for in architectures list: '${TERMUX_ARCHITECTURES[*]}'" 1>&2
 			echo "Supported architectures: '${TERMUX_DEFAULT_ARCHITECTURES[*]}'" 1>&2
 			return 1
 		fi
 	done
 
-	for TERMUX_ARCH in "${TERMUX_ARCHITECTURES[@]}"; do
+	for NASUX_ARCH in "${TERMUX_ARCHITECTURES[@]}"; do
 		termux_step_handle_buildarch
 
 		if [[ $FORCE_BUILD_PACKAGES == "1" ]]; then
@@ -401,8 +401,8 @@ main() {
 			rm -f "$TERMUX_BUILT_DEBS_DIRECTORY"/*
 		fi
 
-		BOOTSTRAP_ROOTFS="$BOOTSTRAP_TMPDIR/rootfs-${TERMUX_ARCH}"
-		BOOTSTRAP_PKGDIR="$BOOTSTRAP_TMPDIR/packages-${TERMUX_ARCH}"
+		BOOTSTRAP_ROOTFS="$BOOTSTRAP_TMPDIR/rootfs-${NASUX_ARCH}"
+		BOOTSTRAP_PKGDIR="$BOOTSTRAP_TMPDIR/packages-${NASUX_ARCH}"
 
 		# Create initial directories for $TERMUX_PREFIX
 		if ! ${BOOTSTRAP_ANDROID10_COMPATIBLE}; then
@@ -428,7 +428,7 @@ main() {
 		fi
 
 		# Core utilities.
-		PACKAGES+=("bash") # Used by `termux-bootstrap-second-stage.sh`
+		PACKAGES+=("bash") # Used by `nasux-bootstrap-second-stage.sh`
 		PACKAGES+=("bzip2")
 		if ! ${BOOTSTRAP_ANDROID10_COMPATIBLE}; then
 			PACKAGES+=("command-not-found")
@@ -447,10 +447,10 @@ main() {
 		PACKAGES+=("psmisc")
 		PACKAGES+=("sed")
 		PACKAGES+=("tar")
-		PACKAGES+=("termux-core")
+		PACKAGES+=("nasux-core")
 		PACKAGES+=("termux-exec")
-		PACKAGES+=("termux-keyring")
-		PACKAGES+=("termux-tools")
+		PACKAGES+=("nasux-keyring")
+		PACKAGES+=("nasux-tools")
 		PACKAGES+=("util-linux")
 
 		# Additional.
@@ -475,18 +475,18 @@ main() {
 		# Build packages.
 		for package_name in "${PACKAGES[@]}"; do
 			set +e
-			build_package "$TERMUX_ARCH" "$package_name" || return $?
+			build_package "$NASUX_ARCH" "$package_name" || return $?
 			set -e
 		done
 
 		# Extract all debs.
-		extract_debs "$TERMUX_ARCH" || return $?
+		extract_debs "$NASUX_ARCH" || return $?
 
-		# Add termux bootstrap second stage files
+		# Add nasux bootstrap second stage files
 		add_termux_bootstrap_second_stage_files "$package_arch"
 
 		# Create bootstrap archive.
-		create_bootstrap_archive "$TERMUX_ARCH" || return $?
+		create_bootstrap_archive "$NASUX_ARCH" || return $?
 
 	done
 

@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://librewolf.net/
-TERMUX_PKG_DESCRIPTION="A custom version of Firefox, focused on privacy, security and freedom."
-TERMUX_PKG_LICENSE="MPL-2.0"
-TERMUX_PKG_MAINTAINER="@3ls-it"
-TERMUX_PKG_VERSION="151.0.4-1"
-TERMUX_PKG_SRCURL="https://codeberg.org/api/packages/librewolf/generic/librewolf-source/${TERMUX_PKG_VERSION}/librewolf-${TERMUX_PKG_VERSION}.source.tar.gz"
-TERMUX_PKG_SHA256=c270c1ab946c71e458f41b9eb8db88b76f30b98c4b87cbd9c23cce8d91925b92
+NASUX_PKG_HOMEPAGE=https://librewolf.net/
+NASUX_PKG_DESCRIPTION="A custom version of Firefox, focused on privacy, security and freedom."
+NASUX_PKG_LICENSE="MPL-2.0"
+NASUX_PKG_MAINTAINER="@3ls-it"
+NASUX_PKG_VERSION="151.0.4-1"
+NASUX_PKG_SRCURL="https://codeberg.org/api/packages/librewolf/generic/librewolf-source/${NASUX_PKG_VERSION}/librewolf-${NASUX_PKG_VERSION}.source.tar.gz"
+NASUX_PKG_SHA256=c270c1ab946c71e458f41b9eb8db88b76f30b98c4b87cbd9c23cce8d91925b92
 # ffmpeg and pulseaudio are dependencies through dlopen(3):
-TERMUX_PKG_DEPENDS="ffmpeg, fontconfig, freetype, gdk-pixbuf, glib, gtk3, libandroid-shmem, libandroid-spawn, libc++, libcairo, libevent, libffi, libice, libicu, libjpeg-turbo, libnspr, libnss, libpixman, libsm, libvpx, libwebp, libx11, libxcb, libxcomposite, libxdamage, libxext, libxfixes, libxrandr, libxtst, pango, pulseaudio, zlib"
+NASUX_PKG_DEPENDS="ffmpeg, fontconfig, freetype, gdk-pixbuf, glib, gtk3, libandroid-shmem, libandroid-spawn, libc++, libcairo, libevent, libffi, libice, libicu, libjpeg-turbo, libnspr, libnss, libpixman, libsm, libvpx, libwebp, libx11, libxcb, libxcomposite, libxdamage, libxext, libxfixes, libxrandr, libxtst, pango, pulseaudio, zlib"
 TERMUX_PKG_BUILD_DEPENDS="libcpufeatures, libice, libsm"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_AUTO_UPDATE=true
 
 
@@ -18,7 +18,7 @@ termux_pkg_auto_update() {
 	local latest_version
 	latest_version="$(
 		curl -fsL \
-			-A "Termux update checker 1.1 (github.com/termux/termux-packages)" \
+			-A "NasUX update checker 1.1 (github.com/nastech-ai/NasUX-Packages)" \
 			-H "accept: application/json" \
 			"$api_url" \
 		| jq -r '.[0].tag_name'
@@ -56,14 +56,14 @@ termux_step_post_get_source() {
 	sed -i 's|^\(\[patch\.crates-io\]\)$|\1\ncc = { path = "third_party/rust/cc" }|g' \
 		Cargo.toml
 	(
-		termux_setup_rust
+		nasux_setup_rust
 		cargo update -p cc
 	)
 }
 
 termux_step_pre_configure() {
-	termux_setup_nodejs
-	termux_setup_rust
+	nasux_setup_nodejs
+	nasux_setup_rust
 
 	# https://github.com/rust-lang/rust/issues/49853
 	# https://github.com/rust-lang/rust/issues/45854
@@ -88,7 +88,7 @@ termux_step_pre_configure() {
 	CXXFLAGS+=" -U__ANDROID__ -D_LIBCPP_HAS_NO_C11_ALIGNED_ALLOC"
 	LDFLAGS+=" -landroid-shmem -landroid-spawn -llog"
 
-	if [ "$TERMUX_ARCH" = "arm" ]; then
+	if [ "$NASUX_ARCH" = "arm" ]; then
 		# For symbol android_getCpuFeatures
 		LDFLAGS+=" -l:libndk_compat.a"
 	fi
@@ -144,7 +144,7 @@ termux_step_make_install() {
 }
 
 termux_step_post_make_install() {
-	# https://github.com/termux/termux-packages/issues/18429
+	# https://github.com/nastech-ai/NasUX-Packages/issues/18429
 	# https://phabricator.services.mozilla.com/D181687
 	# Android 8.x and older not support "-z pack-relative-relocs" / DT_RELR
 	local r=$("${READELF}" -d "${TERMUX_PREFIX}/bin/librewolf")

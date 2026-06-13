@@ -1,11 +1,11 @@
-TERMUX_PKG_HOMEPAGE=https://www.audacityteam.org/
-TERMUX_PKG_DESCRIPTION="An easy-to-use, multi-track audio editor and recorder"
-TERMUX_PKG_LICENSE="GPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="3.7.8"
-TERMUX_PKG_SRCURL="https://github.com/audacity/audacity/archive/refs/tags/Audacity-${TERMUX_PKG_VERSION}.tar.gz"
-TERMUX_PKG_SHA256=ed680774b9ac104949b962e0642155ad093ab5ade14ad5d8468c6cfae0f1d9ea
-TERMUX_PKG_DEPENDS="ffmpeg, gdk-pixbuf, glib, gtk3, libc++, libexpat, libflac, libid3tag, libogg, libopus, libsndfile, libsoundtouch, libsoxr, libuuid, libvorbis, libwavpack, libmpg123, opusfile, portaudio, portmidi, wxwidgets"
+NASUX_PKG_HOMEPAGE=https://www.audacityteam.org/
+NASUX_PKG_DESCRIPTION="An easy-to-use, multi-track audio editor and recorder"
+NASUX_PKG_LICENSE="GPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="3.7.8"
+NASUX_PKG_SRCURL="https://github.com/audacity/audacity/archive/refs/tags/Audacity-${NASUX_PKG_VERSION}.tar.gz"
+NASUX_PKG_SHA256=ed680774b9ac104949b962e0642155ad093ab5ade14ad5d8468c6cfae0f1d9ea
+NASUX_PKG_DEPENDS="ffmpeg, gdk-pixbuf, glib, gtk3, libc++, libexpat, libflac, libid3tag, libogg, libopus, libsndfile, libsoundtouch, libsoxr, libuuid, libvorbis, libwavpack, libmpg123, opusfile, portaudio, portmidi, wxwidgets"
 TERMUX_PKG_BUILD_DEPENDS="libjpeg-turbo, libjpeg-turbo-static, libmp3lame, libpng, rapidjson, zlib"
 TERMUX_PKG_HOSTBUILD=true
 TERMUX_PKG_UPDATE_VERSION_REGEXP="\d+.\d+.\d+(?!-)"
@@ -38,8 +38,8 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 "
 
 termux_step_host_build() {
-	termux_setup_cmake
-	termux_setup_ninja
+	nasux_setup_cmake
+	nasux_setup_ninja
 
 	( # Running build in a subshell to avoid variable mess
 		# We must build the `image-compiler` for building.
@@ -91,7 +91,7 @@ termux_step_create_debscripts() {
 		#!$TERMUX_PREFIX/bin/sh
 		echo
 		echo "********"
-		echo "Audacity can not use microphone until you grant microphone access to Termux:API."
+		echo "Audacity can not use microphone until you grant microphone access to NasUX:API."
 		echo "********"
 		echo
 	EOF

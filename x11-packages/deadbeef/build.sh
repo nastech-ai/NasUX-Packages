@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE=https://deadbeef.sourceforge.io/
-TERMUX_PKG_DESCRIPTION="A modular cross-platform audio player"
-TERMUX_PKG_LICENSE="ZLIB, GPL-2.0, LGPL-2.1, BSD 3-Clause, MIT"
-TERMUX_PKG_LICENSE_FILE="COPYING"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="1.10.3"
-TERMUX_PKG_SRCURL=https://downloads.sourceforge.net/deadbeef/Builds/${TERMUX_PKG_VERSION}/linux/deadbeef-${TERMUX_PKG_VERSION}.tar.bz2
-TERMUX_PKG_SHA256=e34208abbd7c780b6138ef5c16f5f8cd900900faed6ff91ccf5a9571794d09db
+NASUX_PKG_HOMEPAGE=https://deadbeef.sourceforge.io/
+NASUX_PKG_DESCRIPTION="A modular cross-platform audio player"
+NASUX_PKG_LICENSE="ZLIB, GPL-2.0, LGPL-2.1, BSD 3-Clause, MIT"
+NASUX_PKG_LICENSE_FILE="COPYING"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="1.10.3"
+NASUX_PKG_SRCURL=https://downloads.sourceforge.net/deadbeef/Builds/${NASUX_PKG_VERSION}/linux/deadbeef-${NASUX_PKG_VERSION}.tar.bz2
+NASUX_PKG_SHA256=e34208abbd7c780b6138ef5c16f5f8cd900900faed6ff91ccf5a9571794d09db
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="atk, dbus, ffmpeg, gdk-pixbuf, glib, gtk3, harfbuzz, libblocksruntime, libc++, libcairo, libcurl, libdispatch, libflac, libiconv, libjansson, libmad, libogg, libsamplerate, libsndfile, libvorbis, libwavpack, libx11, libzip, libmpg123, opusfile, pango, pulseaudio, zlib"
+NASUX_PKG_DEPENDS="atk, dbus, ffmpeg, gdk-pixbuf, glib, gtk3, harfbuzz, libblocksruntime, libc++, libcairo, libcurl, libdispatch, libflac, libiconv, libjansson, libmad, libogg, libsamplerate, libsndfile, libvorbis, libwavpack, libx11, libzip, libmpg123, opusfile, pango, pulseaudio, zlib"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 ax_cv_c_flags__msse2=no
 --disable-ffap

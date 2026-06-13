@@ -1,15 +1,15 @@
-TERMUX_PKG_HOMEPAGE=https://desktop.telegram.org/
-TERMUX_PKG_DESCRIPTION="Telegram Desktop Client"
+NASUX_PKG_HOMEPAGE=https://desktop.telegram.org/
+NASUX_PKG_DESCRIPTION="Telegram Desktop Client"
 # LICENSE: Modified GPL-2.0
-TERMUX_PKG_LICENSE="custom"
-TERMUX_PKG_LICENSE_FILE="LICENSE, LEGAL"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="6.9.2"
-TERMUX_PKG_SRCURL="https://github.com/telegramdesktop/tdesktop/releases/download/v$TERMUX_PKG_VERSION/tdesktop-$TERMUX_PKG_VERSION-full.tar.gz"
-TERMUX_PKG_SHA256=c3aef3cbb8438b63e25d7992a1f27b7fad899cc4be58f87170007b68e3159d38
-TERMUX_PKG_DEPENDS="abseil-cpp, boost, ffmpeg, glib, hicolor-icon-theme, hunspell, kf6-kcoreaddons, libandroid-shmem, libc++, libdispatch, libdrm, libjxl, liblz4, libminizip, protobuf, librnnoise, libsigc++-3.0, libx11, libxcomposite, libxdamage, libxrandr, libxtst, openal-soft, opengl, openh264, openssl, pipewire, pulseaudio, qt6-qtbase, qt6-qtimageformats, qt6-shadertools, qt6-qtsvg, xxhash, zlib"
+NASUX_PKG_LICENSE="custom"
+NASUX_PKG_LICENSE_FILE="LICENSE, LEGAL"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="6.9.2"
+NASUX_PKG_SRCURL="https://github.com/telegramdesktop/tdesktop/releases/download/v$NASUX_PKG_VERSION/tdesktop-$NASUX_PKG_VERSION-full.tar.gz"
+NASUX_PKG_SHA256=c3aef3cbb8438b63e25d7992a1f27b7fad899cc4be58f87170007b68e3159d38
+NASUX_PKG_DEPENDS="abseil-cpp, boost, ffmpeg, glib, hicolor-icon-theme, hunspell, kf6-kcoreaddons, libandroid-shmem, libc++, libdispatch, libdrm, libjxl, liblz4, libminizip, protobuf, librnnoise, libsigc++-3.0, libx11, libxcomposite, libxdamage, libxrandr, libxtst, openal-soft, opengl, openh264, openssl, pipewire, pulseaudio, qt6-qtbase, qt6-qtimageformats, qt6-shadertools, qt6-qtsvg, xxhash, zlib"
 TERMUX_PKG_BUILD_DEPENDS="ada, aosp-libs, boost-headers, glib-cross, qt6-qtbase-cross-tools, qt6-shadertools-cross-tools"
-TERMUX_PKG_VERSIONED_GIR=false
+NASUX_PKG_VERSIONED_GIR=false
 TERMUX_PKG_AUTO_UPDATE=true
 
 # The API_KEY and API_HASH is taken from the snap build of telegram-desktop.
@@ -76,7 +76,7 @@ termux_step_post_get_source() {
 }
 
 __cppgir_build() {
-	termux_setup_cmake
+	nasux_setup_cmake
 
 	pushd $TERMUX_PKG_HOSTBUILD_DIR
 	git clone https://github.com/scipy/boost-headers-only
@@ -99,7 +99,7 @@ __cppgir_build() {
 }
 
 __libtd_host_build() {
-	termux_setup_cmake
+	nasux_setup_cmake
 
 	mkdir -p $TERMUX_PKG_TMPDIR/host-pkg-config
 	ln -sf /usr/bin/pkg-config $TERMUX_PKG_TMPDIR/host-pkg-config/
@@ -127,8 +127,8 @@ termux_step_host_build() {
 }
 
 __tg_owt_build() {
-	termux_setup_cmake
-	termux_setup_ninja
+	nasux_setup_cmake
+	nasux_setup_ninja
 
 	local _TG_OWT_BUILD_DIR="$TERMUX_PKG_BUILDDIR"/tg_owt-build
 	if [ -f "$_TG_OWT_BUILD_DIR"/.tg_owt-built ]; then
@@ -144,7 +144,7 @@ __tg_owt_build() {
 	local __old_conf_args="$TERMUX_PKG_EXTRA_CONFIGURE_ARGS"
 	TERMUX_PKG_SRCDIR="$TERMUX_PKG_SRCDIR"/tg_owt
 	TERMUX_PKG_BUILDDIR="$_TG_OWT_BUILD_DIR"
-	# Enabling TG_OWT_USE_PIPEWIRE will pick up `libgbm` which doesn't work on Termux
+	# Enabling TG_OWT_USE_PIPEWIRE will pick up `libgbm` which doesn't work on NasUX
 	TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DCMAKE_SYSTEM_NAME=Linux
 -DBUILD_SHARED_LIBS=OFF
@@ -172,8 +172,8 @@ __tg_owt_build() {
 }
 
 __libtd_build() {
-	termux_setup_cmake
-	termux_setup_ninja
+	nasux_setup_cmake
+	nasux_setup_ninja
 
 	local _LIBTD_BUILD_DIR="$TERMUX_PKG_BUILDDIR"/libtd-build
 	if [ -f "$_LIBTD_BUILD_DIR"/.libtd-built ]; then
@@ -231,15 +231,15 @@ termux_step_configure() {
 	__tg_owt_build
 	__libtd_build
 
-	termux_setup_cmake
-	termux_setup_ninja
-	termux_setup_protobuf
-	termux_setup_gir
-	termux_setup_glib_cross_pkg_config_wrapper
+	nasux_setup_cmake
+	nasux_setup_ninja
+	nasux_setup_protobuf
+	nasux_setup_gir
+	nasux_setup_glib_cross_pkg_config_wrapper
 
 	TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" -DPREBUILT_CPPGIR=$TERMUX_PKG_HOSTBUILD_DIR/cppgir-host-build/prefix/bin/cppgir"
 	if [ "$TERMUX_ON_DEVICE_BUILD" = false ]; then
-		termux_setup_proot
+		nasux_setup_proot
 
 		CPPFLAGS+=" -DG_VA_COPY_AS_ARRAY=0"
 		TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" -DPROTOBUF_PROTOC_EXECUTABLE=$(command -v protoc)"
@@ -250,7 +250,7 @@ termux_step_configure() {
 		for _type in emoji lang style; do
 			cat <<-EOF > $TERMUX_PKG_TMPDIR/bin/codegen_$_type
 				#!$(command -v sh)
-				exec $(command -v termux-proot-run) $TERMUX_PKG_BUILDDIR/Telegram/codegen/codegen/$_type/codegen_$_type "\$@"
+				exec $(command -v nasux-proot-run) $TERMUX_PKG_BUILDDIR/Telegram/codegen/codegen/$_type/codegen_$_type "\$@"
 			EOF
 			chmod +x $TERMUX_PKG_TMPDIR/bin/codegen_$_type
 		done

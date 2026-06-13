@@ -1,11 +1,11 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/termux/x11-packages
-TERMUX_PKG_DESCRIPTION="A metapackage that installs all parts of the XFCE desktop environment"
-TERMUX_PKG_LICENSE="Public Domain"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="4.20"
+NASUX_PKG_HOMEPAGE=https://github.com/nasux/x11-packages
+NASUX_PKG_DESCRIPTION="A metapackage that installs all parts of the XFCE desktop environment"
+NASUX_PKG_LICENSE="Public Domain"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="4.20"
 TERMUX_PKG_AUTO_UPDATE=false
 TERMUX_PKG_SKIP_SRC_EXTRACT=true
-TERMUX_PKG_DEPENDS="thunar, xfce4-panel, xfce4-session, xfce4-settings, xfconf, xfwm4, xfce4-notifyd, xfce4-power-manager, xfce4-terminal"
+NASUX_PKG_DEPENDS="thunar, xfce4-panel, xfce4-session, xfce4-settings, xfconf, xfwm4, xfce4-notifyd, xfce4-power-manager, xfce4-terminal"
 TERMUX_PKG_CONFLICTS="xfce"
 TERMUX_PKG_REPLACES="xfce"
 TERMUX_PKG_PROVIDES="xfce"

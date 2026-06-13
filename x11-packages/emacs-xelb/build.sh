@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/emacs-exwm/xelb
-TERMUX_PKG_DESCRIPTION="X protocol Emacs Lisp Binding"
-TERMUX_PKG_LICENSE="GPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="0.19"
-TERMUX_PKG_SRCURL="https://github.com/emacs-exwm/xelb/archive/refs/tags/$TERMUX_PKG_VERSION.tar.gz"
-TERMUX_PKG_SHA256=b518d4b74f41eaa104d389f77d9fe90eb1b99031d6afd7ba5a9dfd5dd49af112
-TERMUX_PKG_DEPENDS="emacs-x"
+NASUX_PKG_HOMEPAGE=https://github.com/emacs-exwm/xelb
+NASUX_PKG_DESCRIPTION="X protocol Emacs Lisp Binding"
+NASUX_PKG_LICENSE="GPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="0.19"
+NASUX_PKG_SRCURL="https://github.com/emacs-exwm/xelb/archive/refs/tags/$NASUX_PKG_VERSION.tar.gz"
+NASUX_PKG_SHA256=b518d4b74f41eaa104d389f77d9fe90eb1b99031d6afd7ba5a9dfd5dd49af112
+NASUX_PKG_DEPENDS="emacs-x"
 TERMUX_PKG_BUILD_DEPENDS="xcb-proto"
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_HOSTBUILD=true
 
 termux_step_host_build() {

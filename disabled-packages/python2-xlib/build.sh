@@ -1,14 +1,14 @@
 # x11-packages
-TERMUX_PKG_HOMEPAGE=https://github.com/python-xlib/python-xlib
-TERMUX_PKG_DESCRIPTION="A fully functional X client library for Python programs"
-TERMUX_PKG_LICENSE="LGPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=0.24
+NASUX_PKG_HOMEPAGE=https://github.com/python-xlib/python-xlib
+NASUX_PKG_DESCRIPTION="A fully functional X client library for Python programs"
+NASUX_PKG_LICENSE="LGPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=0.24
 TERMUX_PKG_REVISION=23
-TERMUX_PKG_SRCURL=https://github.com/python-xlib/python-xlib/releases/download/${TERMUX_PKG_VERSION}/python-xlib-${TERMUX_PKG_VERSION}.tar.bz2
-TERMUX_PKG_SHA256=7ecf32b18b59be2c06848410bae848792ead119ac31084f487730581b3ab598c
-TERMUX_PKG_DEPENDS="libx11, python2, python2-six"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_SRCURL=https://github.com/python-xlib/python-xlib/releases/download/${NASUX_PKG_VERSION}/python-xlib-${NASUX_PKG_VERSION}.tar.bz2
+NASUX_PKG_SHA256=7ecf32b18b59be2c06848410bae848792ead119ac31084f487730581b3ab598c
+NASUX_PKG_DEPENDS="libx11, python2, python2-six"
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_PLATFORM_INDEPENDENT=true
 
 termux_step_make() {

@@ -40,16 +40,16 @@ for arch in "aarch64" "arm" "i686" "x86_64"; do
 				# We are erroneously adding a revision for packages with version containing a dash when generating the apt packages in our build scripts.
 				# So reproduce the same bug here
 				# Source: scripts/build/termux_extract_dep_info.sh
-				#	if [[ "$TERMUX_PKG_REVISION" != "0" || "$TERMUX_PKG_VERSION" != "${TERMUX_PKG_VERSION/-/}" ]]; then
+				#	if [[ "$TERMUX_PKG_REVISION" != "0" || "$NASUX_PKG_VERSION" != "${NASUX_PKG_VERSION/-/}" ]]; then
 				#		VER_DEBIAN+="-$TERMUX_PKG_REVISION"
 				# fi
-				if [[ "$TERMUX_PKG_REVISION" != 0 || "$TERMUX_PKG_VERSION" != "${TERMUX_PKG_VERSION/-/}" ]]; then
-					APT_VERSION="$TERMUX_PKG_VERSION-$TERMUX_PKG_REVISION"
+				if [[ "$TERMUX_PKG_REVISION" != 0 || "$NASUX_PKG_VERSION" != "${NASUX_PKG_VERSION/-/}" ]]; then
+					APT_VERSION="$NASUX_PKG_VERSION-$TERMUX_PKG_REVISION"
 				else
-					APT_VERSION="$TERMUX_PKG_VERSION"
+					APT_VERSION="$NASUX_PKG_VERSION"
 				fi
 
-				IFS="," read -r -a EXCLUDED_ARCHES <<< "${TERMUX_PKG_EXCLUDED_ARCHES:-}"
+				IFS="," read -r -a EXCLUDED_ARCHES <<< "${NASUX_PKG_EXCLUDED_ARCHES:-}"
 				excluded=false
 				for excluded_arch in "${EXCLUDED_ARCHES[@]}"; do
 					if [[ "$excluded_arch" == *"$arch"* ]]; then

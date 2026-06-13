@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""NasTech Branding Bot — auto-fix Termux branding in nastech-ai/NasUX-Packages."""
+"""NasTech Branding Bot — auto-fix NasUX branding in nastech-ai/NasUX-Packages."""
 import os
 import re
 
@@ -24,45 +24,45 @@ EXCLUDE_SUBSTRINGS = [
 # Auto-fix rules: (regex_pattern, replacement_string, human_label)
 FIXES = [
     (
-        r"github\.repository\s*==\s*['\"]termux/termux-packages['\"]",
+        r"github\.repository\s*==\s*['\"]nastech-ai/NasUX-Packages['\"]",
         "github.repository == 'nastech-ai/NasUX-Packages'",
         "repo guard condition",
     ),
-    (r"Termux Github Actions", "NasTech Bot",                        "bot git name"),
-    (r"contact@termux\.dev",   "nastech-bot@users.noreply.github.com","bot git email"),
-    (r"secrets\.TERMUXBOT2_TOKEN", "secrets.NASTECH_BOT_TOKEN",      "bot secret name"),
-    (r"https://termux\.dev/donate",
+    (r"NasUX Github Actions", "NasTech Bot",                        "bot git name"),
+    (r"contact@nasux\.dev",   "nastech-bot@users.noreply.github.com","bot git email"),
+    (r"secrets\.NASTECH_BOT_TOKEN", "secrets.NASTECH_BOT_TOKEN",      "bot secret name"),
+    (r"https://nasux\.dev/donate",
      "https://github.com/sponsors/nastech-ai",                        "funding URL"),
     (
-        r"Bootstrap archives for Termux application",
+        r"Bootstrap archives for NasUX application",
         "Bootstrap archives for NasUX application",
         "bootstrap release title",
     ),
-    (r"ghcr\.io/termux/package-builder",
+    (r"ghcr\.io/nasux/package-builder",
      "ghcr.io/nastech-ai/nasux-package-builder",                      "GHCR image name"),
-    (r"tag termux/package-builder",
+    (r"tag nasux/package-builder",
      "tag nastech-ai/nasux-package-builder",                           "Docker tag command"),
     (
-        r"users/termux/packages/container/package-builder",
+        r"users/nasux/packages/container/package-builder",
         "users/nastech-ai/packages/container/nasux-package-builder",
         "GHCR API path",
     ),
     (
-        'TERMUX_PKG_MAINTAINER="@termux"',
-        'TERMUX_PKG_MAINTAINER="@nastech-ai"',
+        'NASUX_PKG_MAINTAINER="@nastech-ai"',
+        'NASUX_PKG_MAINTAINER="@nastech-ai"',
         "sample maintainer",
     ),
 ]
 
 # Violations that need manual review — cannot safely auto-fix
 MANUAL_PATTERNS = [
-    (r"@termux\.dev",                                    "Termux email domain"),
-    (r"termux\.dev(?!/donate)",                          "termux.dev URL"),
-    (r"discord\.gg/HXpF69X",                            "Termux Discord invite"),
-    (r"t\.me/termux",                                    "Termux Telegram"),
-    (r"github\.com/termux/termux-packages/discussions",  "Termux discussions link"),
-    (r"--assignee\s+['\"]?thunder-coding['\"]?",         "Termux assignee"),
-    (r"username:\s*grimler",                             "Termux Docker Hub username"),
+    (r"@nasux\.dev",                                    "NasUX email domain"),
+    (r"nasux\.dev(?!/donate)",                          "nasux.dev URL"),
+    (r"discord\.gg/HXpF69X",                            "NasUX Discord invite"),
+    (r"t\.me/nasux",                                    "NasUX Telegram"),
+    (r"github\.com/nastech-ai/NasUX-Packages/discussions",  "NasUX discussions link"),
+    (r"--assignee\s+['\"]?thunder-coding['\"]?",         "NasUX assignee"),
+    (r"username:\s*grimler",                             "NasUX Docker Hub username"),
 ]
 
 

@@ -1,18 +1,18 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/linuxmint/cinnamon
-TERMUX_PKG_DESCRIPTION="Cinnamon shell"
-TERMUX_PKG_LICENSE="GPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="6.6.8"
-TERMUX_PKG_SRCURL="https://github.com/linuxmint/cinnamon/archive/refs/tags/${TERMUX_PKG_VERSION}.tar.gz"
-TERMUX_PKG_SHA256=adbc892191a4f4e24346100deaeca12cea0d2c8e07061ec86fe963633b278b64
+NASUX_PKG_HOMEPAGE=https://github.com/linuxmint/cinnamon
+NASUX_PKG_DESCRIPTION="Cinnamon shell"
+NASUX_PKG_LICENSE="GPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="6.6.8"
+NASUX_PKG_SRCURL="https://github.com/linuxmint/cinnamon/archive/refs/tags/${NASUX_PKG_VERSION}.tar.gz"
+NASUX_PKG_SHA256=adbc892191a4f4e24346100deaeca12cea0d2c8e07061ec86fe963633b278b64
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_UPDATE_VERSION_REGEXP="\d+\.\d+\.\d+(?!-)"
-TERMUX_PKG_DEPENDS="atk, cinnamon-control-center, cinnamon-menus, cinnamon-session, cinnamon-settings-daemon, cjs, clutter, clutter-gtk, cogl, dbus, gcr, gdk-pixbuf, gettext, glib, gnome-backgrounds, gobject-introspection, gsound, gtk3, ibus, libadapta, libx11, libxml2, mint-themes, mint-y-icon-theme, muffin, nemo, opengl, pango, python-pillow, python-pip, python-xapp, sassc, xapp"
+NASUX_PKG_DEPENDS="atk, cinnamon-control-center, cinnamon-menus, cinnamon-session, cinnamon-settings-daemon, cjs, clutter, clutter-gtk, cogl, dbus, gcr, gdk-pixbuf, gettext, glib, gnome-backgrounds, gobject-introspection, gsound, gtk3, ibus, libadapta, libx11, libxml2, mint-themes, mint-y-icon-theme, muffin, nemo, opengl, pango, python-pillow, python-pip, python-xapp, sassc, xapp"
 TERMUX_PKG_BUILD_DEPENDS="g-ir-scanner, glib-cross, intltool, python-libsass"
 TERMUX_PKG_PYTHON_RUNTIME_DEPS="pytz, tinycss2, requests"
 TERMUX_PKG_SUGGESTS="gnome-terminal, gnome-screenshot"
 TERMUX_PKG_PYTHON_CROSS_BUILD_DEPS="pysass"
-TERMUX_PKG_VERSIONED_GIR=false
+NASUX_PKG_VERSIONED_GIR=false
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -Ddocs=false
 -Dbuild_recorder=false
@@ -30,8 +30,8 @@ termux_step_post_get_source() {
 }
 
 termux_step_pre_configure() {
-	termux_setup_gir
-	termux_setup_glib_cross_pkg_config_wrapper
+	nasux_setup_gir
+	nasux_setup_glib_cross_pkg_config_wrapper
 
 	export TERMUX_MESON_ENABLE_SOVERSION=1
 
@@ -43,7 +43,7 @@ termux_step_pre_configure() {
 }
 
 termux_step_post_make_install() {
-	# disabling this sections because they will not work in termux
+	# disabling this sections because they will not work in nasux
 	mv $TERMUX_PREFIX/share/cinnamon/cinnamon-settings/modules/cs_user.py $TERMUX_PREFIX//share/cinnamon/cinnamon-settings/modules/cs_user.py.bak
 	rm -rf $TERMUX_PREFIX/share/cinnamon/applets/user@cinnamon.org
 	rm -rf $TERMUX_PREFIX/share/cinnamon/applets/network@cinnamon.org

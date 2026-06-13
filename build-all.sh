@@ -3,10 +3,10 @@
 
 set -e -u -o pipefail
 
-TERMUX_SCRIPTDIR=$(cd "$(realpath "$(dirname "$0")")"; pwd)
+NASUX_SCRIPTDIR=$(cd "$(realpath "$(dirname "$0")")"; pwd)
 
 # Store pid of current process in a file for docker__run_docker_exec_trap
-source "$TERMUX_SCRIPTDIR/scripts/utils/docker/docker.sh"; docker__create_docker_exec_pid_file
+source "$NASUX_SCRIPTDIR/scripts/utils/docker/docker.sh"; docker__create_docker_exec_pid_file
 
 if [ "$(uname -o)" = "Android" ] || [ -e "/system/bin/app_process" ]; then
 	echo "On-device execution of this script is not supported."
@@ -15,8 +15,8 @@ fi
 
 # Read settings from .termuxrc if existing
 test -f "$HOME"/.termuxrc && . "$HOME"/.termuxrc
-: ${TERMUX_TOPDIR:="$HOME/.termux-build"}
-: ${TERMUX_ARCH:="aarch64"}
+: ${TERMUX_TOPDIR:="$HOME/.nasux-build"}
+: ${NASUX_ARCH:="aarch64"}
 : ${TERMUX_FORMAT:="debian"}
 : ${TERMUX_DEBUG_BUILD:=""}
 : ${TERMUX_INSTALL_DEPS:="-s"}
@@ -35,7 +35,7 @@ _show_usage() {
 
 while getopts :a:hdio:f: option; do
 case "$option" in
-	a) TERMUX_ARCH="$OPTARG";;
+	a) NASUX_ARCH="$OPTARG";;
 	d) TERMUX_DEBUG_BUILD='-d';;
 	i) TERMUX_INSTALL_DEPS='-i';;
 	o) TERMUX_OUTPUT_DIR="$(realpath -m "$OPTARG")";;
@@ -47,9 +47,9 @@ done
 shift $((OPTIND-1))
 if [ "$#" -ne 0 ]; then _show_usage; fi
 
-case "$TERMUX_ARCH" in
+case "$NASUX_ARCH" in
 	all|aarch64|arm|i686|x86_64);;
-	*) echo "ERROR: Invalid arch '$TERMUX_ARCH'" 1>&2; exit 1;;
+	*) echo "ERROR: Invalid arch '$NASUX_ARCH'" 1>&2; exit 1;;
 esac
 
 case "$TERMUX_FORMAT" in
@@ -58,7 +58,7 @@ case "$TERMUX_FORMAT" in
 esac
 
 BUILDSCRIPT=$(dirname "$0")/build-package.sh
-BUILDALL_DIR=$TERMUX_TOPDIR/_buildall-$TERMUX_ARCH
+BUILDALL_DIR=$TERMUX_TOPDIR/_buildall-$NASUX_ARCH
 BUILDORDER_FILE=$BUILDALL_DIR/buildorder.txt
 BUILDSTATUS_FILE=$BUILDALL_DIR/buildstatus.txt
 
@@ -66,7 +66,7 @@ if [ -e "$BUILDORDER_FILE" ]; then
 	echo "Using existing buildorder file: $BUILDORDER_FILE"
 else
 	mkdir -p "$BUILDALL_DIR"
-	"$TERMUX_SCRIPTDIR/scripts/buildorder.py" > "$BUILDORDER_FILE"
+	"$NASUX_SCRIPTDIR/scripts/buildorder.py" > "$BUILDORDER_FILE"
 fi
 if [ -e "$BUILDSTATUS_FILE" ]; then
 	echo "Continuing build-all from: $BUILDSTATUS_FILE"
@@ -84,12 +84,12 @@ while read -r PKG PKG_DIR; do
 
 	# Start building
 	if [ -n "${TERMUX_DEBUG_BUILD}" ]; then
-		echo "\"$BUILDSCRIPT\" -a \"$TERMUX_ARCH\" $TERMUX_DEBUG_BUILD --format \"$TERMUX_FORMAT\" --library $(test "${PKG_DIR%/*}" = "gpkg" && echo "glibc" || echo "bionic") ${TERMUX_OUTPUT_DIR+-o $TERMUX_OUTPUT_DIR} $TERMUX_INSTALL_DEPS \"$PKG_DIR\""
+		echo "\"$BUILDSCRIPT\" -a \"$NASUX_ARCH\" $TERMUX_DEBUG_BUILD --format \"$TERMUX_FORMAT\" --library $(test "${PKG_DIR%/*}" = "gpkg" && echo "glibc" || echo "bionic") ${TERMUX_OUTPUT_DIR+-o $TERMUX_OUTPUT_DIR} $TERMUX_INSTALL_DEPS \"$PKG_DIR\""
 	fi
 
 	echo -n "Building $PKG... "
 	BUILD_START=$(date "+%s")
-	"$BUILDSCRIPT" -a "$TERMUX_ARCH" $TERMUX_DEBUG_BUILD --format "$TERMUX_FORMAT" \
+	"$BUILDSCRIPT" -a "$NASUX_ARCH" $TERMUX_DEBUG_BUILD --format "$TERMUX_FORMAT" \
 		--library $(test "${PKG_DIR%/*}" = "gpkg" && echo "glibc" || echo "bionic") \
 		${TERMUX_OUTPUT_DIR+-o $TERMUX_OUTPUT_DIR} $TERMUX_INSTALL_DEPS "$PKG_DIR" \
 		&> "$BUILDALL_DIR"/"${PKG}".out

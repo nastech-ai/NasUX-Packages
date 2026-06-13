@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE=https://www.gtkmm.org/
-TERMUX_PKG_DESCRIPTION="The C++ API for GTK"
-TERMUX_PKG_LICENSE="LGPL-2.1"
-TERMUX_PKG_MAINTAINER="@termux"
+NASUX_PKG_HOMEPAGE=https://www.gtkmm.org/
+NASUX_PKG_DESCRIPTION="The C++ API for GTK"
+NASUX_PKG_LICENSE="LGPL-2.1"
+NASUX_PKG_MAINTAINER="@nastech-ai"
 _MAJOR_VERSION=2.24
-TERMUX_PKG_VERSION=${_MAJOR_VERSION}.5
+NASUX_PKG_VERSION=${_MAJOR_VERSION}.5
 TERMUX_PKG_REVISION=3
-TERMUX_PKG_SRCURL=https://download.gnome.org/sources/gtkmm/${_MAJOR_VERSION}/gtkmm-${TERMUX_PKG_VERSION}.tar.xz
-TERMUX_PKG_SHA256=0680a53b7bf90b4e4bf444d1d89e6df41c777e0bacc96e9c09fc4dd2f5fe6b72
-TERMUX_PKG_DEPENDS="gdk-pixbuf, glib, gtk2, libatkmm-1.6, libc++, libcairomm-1.0, libglibmm-2.4, libpangomm-1.4, libsigc++-2.0"
+NASUX_PKG_SRCURL=https://download.gnome.org/sources/gtkmm/${_MAJOR_VERSION}/gtkmm-${NASUX_PKG_VERSION}.tar.xz
+NASUX_PKG_SHA256=0680a53b7bf90b4e4bf444d1d89e6df41c777e0bacc96e9c09fc4dd2f5fe6b72
+NASUX_PKG_DEPENDS="gdk-pixbuf, glib, gtk2, libatkmm-1.6, libc++, libcairomm-1.0, libglibmm-2.4, libpangomm-1.4, libsigc++-2.0"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --disable-documentation
 "

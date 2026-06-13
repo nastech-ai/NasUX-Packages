@@ -1,11 +1,11 @@
-TERMUX_PKG_HOMEPAGE=https://www.qbittorrent.org/
-TERMUX_PKG_DESCRIPTION="A Qt6 based BitTorrent client"
-TERMUX_PKG_LICENSE="GPL-2.0, GPL-3.0"
-TERMUX_PKG_MAINTAINER="Joshua Kahn <tom@termux.dev>"
-TERMUX_PKG_VERSION="5.2.1"
-TERMUX_PKG_SRCURL="https://github.com/qbittorrent/qBittorrent/archive/refs/tags/release-${TERMUX_PKG_VERSION}.tar.gz"
-TERMUX_PKG_SHA256=6288bfeeca1931ff1e1ca04d0e5f872e0d0b9d5df583ed41289cb9275ccac208
-TERMUX_PKG_DEPENDS="libc++, libtorrent-rasterbar, openssl, qt6-qtbase, zlib"
+NASUX_PKG_HOMEPAGE=https://www.qbittorrent.org/
+NASUX_PKG_DESCRIPTION="A Qt6 based BitTorrent client"
+NASUX_PKG_LICENSE="GPL-2.0, GPL-3.0"
+NASUX_PKG_MAINTAINER="Joshua Kahn <tom@nasux.dev>"
+NASUX_PKG_VERSION="5.2.1"
+NASUX_PKG_SRCURL="https://github.com/qbittorrent/qBittorrent/archive/refs/tags/release-${NASUX_PKG_VERSION}.tar.gz"
+NASUX_PKG_SHA256=6288bfeeca1931ff1e1ca04d0e5f872e0d0b9d5df583ed41289cb9275ccac208
+NASUX_PKG_DEPENDS="libc++, libtorrent-rasterbar, openssl, qt6-qtbase, zlib"
 TERMUX_PKG_BUILD_DEPENDS="qt6-qtsvg, qt6-qttools, boost"
 TERMUX_PKG_RECOMMENDS="python"
 TERMUX_PKG_SUGGESTS="jackett"
@@ -20,7 +20,7 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS='
 
 # based on the secondary `-shared` build in `libncnn`
 termux_step_post_make_install() {
-	echo -e "termux - building qbittorrent-nox for arch ${TERMUX_ARCH}..."
+	echo -e "nasux - building qbittorrent-nox for arch ${NASUX_ARCH}..."
 	TERMUX_PKG_EXTRA_CONFIGURE_ARGS+='-DGUI=OFF'
 	termux_step_configure
 	termux_step_make

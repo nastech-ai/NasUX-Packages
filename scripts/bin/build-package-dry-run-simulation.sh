@@ -2,11 +2,11 @@
 
 set -e -u
 
-# This script is in '$TERMUX_SCRIPTDIR/scripts/bin/'.
-TERMUX_SCRIPTDIR=$(cd "$(realpath "$(dirname "$0")")"; cd ../..; pwd)
+# This script is in '$NASUX_SCRIPTDIR/scripts/bin/'.
+NASUX_SCRIPTDIR=$(cd "$(realpath "$(dirname "$0")")"; cd ../..; pwd)
 DRY_RUN_SCRIPT_NAME=$(basename "$0")
 BUILDSCRIPT_NAME="build-package.sh"
-TERMUX_ARCH="aarch64"
+NASUX_ARCH="aarch64"
 TERMUX_DEBUG_BUILD="false"
 TERMUX_PACKAGES_DIRECTORIES="
 packages
@@ -29,7 +29,7 @@ while (($# >= 1)); do
 				echo "$DRY_RUN_SCRIPT_NAME: Argument to '-a' should not be empty."
 				exit 1
 			fi
-			TERMUX_ARCH="$1"
+			NASUX_ARCH="$1"
 			;;
 		-d) TERMUX_DEBUG_BUILD="true" ;;
 		-*) ;;
@@ -43,8 +43,8 @@ for ((i=0; i<${#PACKAGE_LIST[@]}; i++)); do
 	TERMUX_PKG_NAME=$(basename "${PACKAGE_LIST[i]}")
 	TERMUX_PKG_BUILDER_DIR=
 	for package_directory in $TERMUX_PACKAGES_DIRECTORIES; do
-		if [ -d "${TERMUX_SCRIPTDIR}/${package_directory}/${TERMUX_PKG_NAME}" ]; then
-			TERMUX_PKG_BUILDER_DIR="${TERMUX_SCRIPTDIR}/$package_directory/$TERMUX_PKG_NAME"
+		if [ -d "${NASUX_SCRIPTDIR}/${package_directory}/${TERMUX_PKG_NAME}" ]; then
+			TERMUX_PKG_BUILDER_DIR="${NASUX_SCRIPTDIR}/$package_directory/$TERMUX_PKG_NAME"
 			break
 		fi
 	done
@@ -55,9 +55,9 @@ for ((i=0; i<${#PACKAGE_LIST[@]}; i++)); do
 	TERMUX_PKG_BUILDER_SCRIPT="$TERMUX_PKG_BUILDER_DIR/build.sh"
 
 	# Please keep synchronized with the logic of lines 2-50 of 'scripts/build/termux_step_start_build.sh'.
-	if [ "${TERMUX_ARCH}" != "all" ] && \
-		grep -qE "^TERMUX_PKG_EXCLUDED_ARCHES=.*${TERMUX_ARCH}" "$TERMUX_PKG_BUILDER_SCRIPT"; then
-		echo "$DRY_RUN_SCRIPT_NAME: Skipping building $TERMUX_PKG_NAME for arch $TERMUX_ARCH"
+	if [ "${NASUX_ARCH}" != "all" ] && \
+		grep -qE "^NASUX_PKG_EXCLUDED_ARCHES=.*${NASUX_ARCH}" "$TERMUX_PKG_BUILDER_SCRIPT"; then
+		echo "$DRY_RUN_SCRIPT_NAME: Skipping building $TERMUX_PKG_NAME for arch $NASUX_ARCH"
 		continue
 	fi
 

@@ -1,12 +1,12 @@
-TERMUX_PKG_HOMEPAGE="https://apps.kde.org/ark"
-TERMUX_PKG_DESCRIPTION="KDE Archiving Tool"
-TERMUX_PKG_LICENSE="GPL-2.0-or-later"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="26.04.2"
-TERMUX_PKG_SRCURL="https://download.kde.org/stable/release-service/${TERMUX_PKG_VERSION}/src/ark-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=b81c4055486c99f4f21ff228bf12485bc73e8e6b0064edee1043a11ad5d1e555
+NASUX_PKG_HOMEPAGE="https://apps.kde.org/ark"
+NASUX_PKG_DESCRIPTION="KDE Archiving Tool"
+NASUX_PKG_LICENSE="GPL-2.0-or-later"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="26.04.2"
+NASUX_PKG_SRCURL="https://download.kde.org/stable/release-service/${NASUX_PKG_VERSION}/src/ark-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=b81c4055486c99f4f21ff228bf12485bc73e8e6b0064edee1043a11ad5d1e555
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="7zip, arj, kf6-breeze-icons, kf6-kcolorscheme, kf6-kcompletion, kf6-kconfig, kf6-kconfigwidgets, kf6-kcoreaddons, kf6-kcrash, kf6-kdbusaddons, kf6-kfilemetadata, kf6-ki18n, kf6-kio, kf6-kjobwidgets, kf6-kparts, kf6-kpty, kf6-kservice, kf6-kwidgetsaddons, kf6-kwindowsystem, kf6-kxmlgui, libarchive, libc++, libzip, lrzip, lzop, qt6-qtbase, unrar, zlib"
+NASUX_PKG_DEPENDS="7zip, arj, kf6-breeze-icons, kf6-kcolorscheme, kf6-kcompletion, kf6-kconfig, kf6-kconfigwidgets, kf6-kcoreaddons, kf6-kcrash, kf6-kdbusaddons, kf6-kfilemetadata, kf6-ki18n, kf6-kio, kf6-kjobwidgets, kf6-kparts, kf6-kpty, kf6-kservice, kf6-kwidgetsaddons, kf6-kwindowsystem, kf6-kxmlgui, libarchive, libc++, libzip, lrzip, lzop, qt6-qtbase, unrar, zlib"
 TERMUX_PKG_BUILD_DEPENDS="extra-cmake-modules, kf6-kdoctools"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DCMAKE_SYSTEM_NAME=Linux
@@ -23,7 +23,7 @@ termux_step_pre_configure() {
 	# completely ruins the performance of right-clicking
 	# in dolphin file browser when ark and dolphin are both installed at the same time
 	local libarchive_has_lzo=false
-	local libarchive_build_sh="$TERMUX_SCRIPTDIR/packages/libarchive/build.sh"
+	local libarchive_build_sh="$NASUX_SCRIPTDIR/packages/libarchive/build.sh"
 	local libarchive_has_lzo_str
 	for libarchive_has_lzo_str in ENABLE_LZO={1,ON,YES,TRUE,Y} with-lzo; do
 		if grep -q "$libarchive_has_lzo_str" "$libarchive_build_sh"; then

@@ -2,7 +2,7 @@
 
 PACKAGES=""
 # Tier 1: requirements for the core build scripts in scripts/build/.
-PACKAGES+=" clang"				# Required for termux-elf-cleaner and C/C++ packages.
+PACKAGES+=" clang"				# Required for nasux-elf-cleaner and C/C++ packages.
 PACKAGES+=" file"				# Used in termux_step_massage().
 PACKAGES+=" gnupg"				# Used in termux_get_repo_files() and build-package.sh.
 PACKAGES+=" lzip"				# Used by tar to extract *.tar.lz source archives.
@@ -56,18 +56,18 @@ PYTHON_PACKAGES+=" itstool"			# necessary to build orca and some other packages
 PYTHON_PACKAGES+=" pygments"			# necessary to build mesa (dependency of mako that _must_ be kept `--upgrade`d)
 PYTHON_PACKAGES+=" mako"			# necessary to build mesa
 PYTHON_PACKAGES+=" pyyaml"			# necessary to build mesa
-PYTHON_PACKAGES+=" setuptools"			# necessary to build mesa (explicitly 'system'-wide unlike the setuptools in termux_setup_python_pip)
+PYTHON_PACKAGES+=" setuptools"			# necessary to build mesa (explicitly 'system'-wide unlike the setuptools in nasux_setup_python_pip)
 # More 'system-wide' python packages should be added here if working towards the goal
-# of setup-termux.sh for on-device building having closer behavior
+# of setup-nasux.sh for on-device building having closer behavior
 # to setup-ubuntu.sh for cross-compilation. If adding packages here, please add a comment
 # for each one naming at least one of its reverse build dependencies, for which least one
 # error during on-device building is solved by installing the dependency through pip.
 #PYTHON_PACKAGES+=" "
 
 # Definition of a package manager
-export TERMUX_SCRIPTDIR=$(dirname "$(realpath "$0")")/../
+export NASUX_SCRIPTDIR=$(dirname "$(realpath "$0")")/../
 . $(dirname "$(realpath "$0")")/properties.sh
-source "$TERMUX_PREFIX/bin/termux-setup-package-manager" || true
+source "$TERMUX_PREFIX/bin/nasux-setup-package-manager" || true
 
 if [ "$TERMUX_APP_PACKAGE_MANAGER" = "apt" ]; then
 	apt update
@@ -82,6 +82,6 @@ fi
 
 # Should not be installed inside venv because on Ubuntu cross-builder image, these
 # particular python packages are installed system-wide,
-# so should be installed Termux-wide for on-device building to be reasonably accurate
+# so should be installed NasUX-wide for on-device building to be reasonably accurate
 # compared with the behavior of the Ubuntu cross-builder image.
 pip install --upgrade $PYTHON_PACKAGES

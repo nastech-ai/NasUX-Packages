@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/awesomeWM/awesome
-TERMUX_PKG_DESCRIPTION="A highly configurable, next generation framework window manager for X"
-TERMUX_PKG_LICENSE="GPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
+NASUX_PKG_HOMEPAGE=https://github.com/awesomeWM/awesome
+NASUX_PKG_DESCRIPTION="A highly configurable, next generation framework window manager for X"
+NASUX_PKG_LICENSE="GPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
 # Latest release version 4.3 does not support Lua 5.4.
 _COMMIT=fa805ab465821c54094126b71a92acf2eba17674
-TERMUX_PKG_VERSION="2026.03.31"
-TERMUX_PKG_SRCURL=git+https://github.com/awesomeWM/awesome
-TERMUX_PKG_SHA256=ed61955ed9bdf1d216b881543572c32c83a15f419d9410d5c6b4ed3df3392383
+NASUX_PKG_VERSION="2026.03.31"
+NASUX_PKG_SRCURL=git+https://github.com/awesomeWM/awesome
+NASUX_PKG_SHA256=ed61955ed9bdf1d216b881543572c32c83a15f419d9410d5c6b4ed3df3392383
 TERMUX_PKG_GIT_BRANCH=master
-TERMUX_PKG_DEPENDS="dbus, gdk-pixbuf, glib, libcairo, lua54, libx11, libxcb, libxdg-basedir, libxkbcommon, lua-lgi, pango, startup-notification, xcb-util, xcb-util-cursor, xcb-util-keysyms, xcb-util-wm, xcb-util-xrm"
+NASUX_PKG_DEPENDS="dbus, gdk-pixbuf, glib, libcairo, lua54, libx11, libxcb, libxdg-basedir, libxkbcommon, lua-lgi, pango, startup-notification, xcb-util, xcb-util-cursor, xcb-util-keysyms, xcb-util-wm, xcb-util-xrm"
 TERMUX_PKG_BUILD_DEPENDS="imagemagick"
 TERMUX_PKG_BREAKS="awesome-luajit"
 TERMUX_PKG_CONFLICTS="awesome-luajit"
@@ -25,14 +25,14 @@ termux_step_post_get_source() {
 	git checkout $_COMMIT
 
 	local version="$(git log -1 --format=%cs | sed 's/-/./g')"
-	if [ "$version" != "$TERMUX_PKG_VERSION" ]; then
-		echo -n "ERROR: The specified version \"$TERMUX_PKG_VERSION\""
+	if [ "$version" != "$NASUX_PKG_VERSION" ]; then
+		echo -n "ERROR: The specified version \"$NASUX_PKG_VERSION\""
 		echo " is different from what is expected to be: \"$version\""
 		return 1
 	fi
 
 	local s=$(find . -type f ! -path '*/.git/*' -print0 | xargs -0 sha256sum | LC_ALL=C sort | sha256sum)
-	if [[ "${s}" != "${TERMUX_PKG_SHA256}  "* ]]; then
+	if [[ "${s}" != "${NASUX_PKG_SHA256}  "* ]]; then
 		termux_error_exit "Checksum mismatch for source files."
 	fi
 
@@ -137,11 +137,11 @@ termux_step_host_build() {
 
 	_load_ubuntu_packages
 
-	termux_setup_cmake
-	termux_setup_ninja
-	# XXX: termux_setup_meson is not expected to be called in host build
+	nasux_setup_cmake
+	nasux_setup_ninja
+	# XXX: nasux_setup_meson is not expected to be called in host build
 	AR=;CC=;CFLAGS=;CPPFLAGS=;CXX=;CXXFLAGS=;LD=;LDFLAGS=;PKG_CONFIG=;STRIP=
-	termux_setup_meson
+	nasux_setup_meson
 	unset AR CC CFLAGS CPPFLAGS CXX CXXFLAGS LD LDFLAGS PKG_CONFIG STRIP
 
 	export PKG_CONFIG_PATH="${HOSTBUILD_ROOTFS}/usr/lib/x86_64-linux-gnu/pkgconfig"
@@ -149,7 +149,7 @@ termux_step_host_build() {
 	CFLAGS+=" -I/usr/include/xcb"
 
 	LUA_LGI="$TERMUX_PKG_HOSTBUILD_DIR/lua-lgi"
-	(. "$TERMUX_SCRIPTDIR/packages/lua-lgi/build.sh"; TERMUX_PKG_SRCDIR="$LUA_LGI" termux_step_get_source)
+	(. "$NASUX_SCRIPTDIR/packages/lua-lgi/build.sh"; TERMUX_PKG_SRCDIR="$LUA_LGI" termux_step_get_source)
 	$TERMUX_MESON setup \
 		"$LUA_LGI" \
 		"$LUA_LGI/build" \

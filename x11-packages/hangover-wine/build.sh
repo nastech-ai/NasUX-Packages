@@ -1,24 +1,24 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/AndreRH/hangover
-TERMUX_PKG_DESCRIPTION="A compatibility layer for running Windows programs (Hangover fork)"
-TERMUX_PKG_LICENSE="LGPL-2.1"
-TERMUX_PKG_LICENSE_FILE="LICENSE, LICENSE.OLD, COPYING.LIB"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="11.9"
-TERMUX_PKG_SRCURL=(
-	"https://github.com/AndreRH/wine/archive/refs/tags/hangover-${TERMUX_PKG_VERSION/\~/-}.tar.gz"
-	"https://github.com/AndreRH/hangover/releases/download/hangover-${TERMUX_PKG_VERSION/\~/-}/hangover_${TERMUX_PKG_VERSION/\~/-}_ubuntu2204_jammy_arm64.tar"
+NASUX_PKG_HOMEPAGE=https://github.com/AndreRH/hangover
+NASUX_PKG_DESCRIPTION="A compatibility layer for running Windows programs (Hangover fork)"
+NASUX_PKG_LICENSE="LGPL-2.1"
+NASUX_PKG_LICENSE_FILE="LICENSE, LICENSE.OLD, COPYING.LIB"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="11.9"
+NASUX_PKG_SRCURL=(
+	"https://github.com/AndreRH/wine/archive/refs/tags/hangover-${NASUX_PKG_VERSION/\~/-}.tar.gz"
+	"https://github.com/AndreRH/hangover/releases/download/hangover-${NASUX_PKG_VERSION/\~/-}/hangover_${NASUX_PKG_VERSION/\~/-}_ubuntu2204_jammy_arm64.tar"
 )
-TERMUX_PKG_SHA256=(
+NASUX_PKG_SHA256=(
 	1260e4a0a0b9c5915c3833046cdc5c779c34cad5770aeeb0c2cd3dc1ac3cb09d
 	0b30ff23ba61462d0c3f7df853d88b7ac764e813fd34d07f3568241e23e69739
 )
-TERMUX_PKG_DEPENDS="fontconfig, freetype, krb5, libandroid-spawn, libc++, libgmp, libgnutls, libxcb, libxcomposite, libxcursor, libxfixes, libxrender, opengl, pulseaudio, sdl2, vulkan-loader, xorg-xrandr"
+NASUX_PKG_DEPENDS="fontconfig, freetype, krb5, libandroid-spawn, libc++, libgmp, libgnutls, libxcb, libxcomposite, libxcursor, libxfixes, libxrender, opengl, pulseaudio, sdl2, vulkan-loader, xorg-xrandr"
 TERMUX_PKG_BUILD_DEPENDS="libandroid-spawn-static, vulkan-loader-generic"
 TERMUX_PKG_ANTI_BUILD_DEPENDS="vulkan-loader"
 TERMUX_PKG_NO_STATICSPLIT=true
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_UPDATE_TAG_TYPE="newest-tag"
-TERMUX_PKG_EXCLUDED_ARCHES="arm, i686, x86_64"
+NASUX_PKG_EXCLUDED_ARCHES="arm, i686, x86_64"
 
 TERMUX_PKG_HOSTBUILD=true
 TERMUX_PKG_EXTRA_HOSTBUILD_CONFIGURE_ARGS="
@@ -130,7 +130,7 @@ termux_step_pre_configure() {
 
 	LDFLAGS+=" -landroid-spawn"
 
-	# https://github.com/termux-user-repository/tur/commit/9388bf3599bba33d7bd052cab0679fe9cd5917d2#commitcomment-176464300
+	# https://github.com/nasux-user-repository/tur/commit/9388bf3599bba33d7bd052cab0679fe9cd5917d2#commitcomment-176464300
 	LDFLAGS+=" -Wl,--rosegment"
 }
 
@@ -156,7 +156,7 @@ termux_step_post_make_install() {
 	for _type in wowbox64 libwow64fex libarm64ecfex; do
 		mkdir -p $_type
 		cd $_type
-		ar -x "$TERMUX_PKG_SRCDIR"/hangover-${_type}_${TERMUX_PKG_VERSION/\~/-}_arm64.deb
+		ar -x "$TERMUX_PKG_SRCDIR"/hangover-${_type}_${NASUX_PKG_VERSION/\~/-}_arm64.deb
 		tar xf data.tar.xz
 		install -Dm644 usr/lib/wine/aarch64-windows/$_type.dll \
 			"$TERMUX_PREFIX"/opt/hangover-wine/lib/wine/aarch64-windows/$_type.dll
@@ -168,6 +168,6 @@ termux_step_post_make_install() {
 	# Install LICENSE file for hangover
 	mkdir -p "$TERMUX_PREFIX"/share/doc/hangover
 	rm -f "$TERMUX_PREFIX"/share/doc/hangover/copyright
-	curl -L https://raw.githubusercontent.com/AndreRH/hangover/refs/tags/hangover-${TERMUX_PKG_VERSION/\~/-}/LICENSE \
+	curl -L https://raw.githubusercontent.com/AndreRH/hangover/refs/tags/hangover-${NASUX_PKG_VERSION/\~/-}/LICENSE \
 		-o "$TERMUX_PREFIX"/share/doc/hangover/copyright
 }

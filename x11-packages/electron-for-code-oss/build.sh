@@ -1,15 +1,15 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/electron/electron
-TERMUX_PKG_DESCRIPTION="Build cross-platform desktop apps with JavaScript, HTML, and CSS"
-TERMUX_PKG_LICENSE="MIT, BSD 3-Clause"
-TERMUX_PKG_MAINTAINER="@licy183"
+NASUX_PKG_HOMEPAGE=https://github.com/electron/electron
+NASUX_PKG_DESCRIPTION="Build cross-platform desktop apps with JavaScript, HTML, and CSS"
+NASUX_PKG_LICENSE="MIT, BSD 3-Clause"
+NASUX_PKG_MAINTAINER="@licy183"
 _CHROMIUM_VERSION=142.0.7444.265
-TERMUX_PKG_VERSION=39.8.8
-TERMUX_PKG_SRCURL=git+https://github.com/electron/electron
-TERMUX_PKG_DEPENDS="atk, cups, dbus, fontconfig, gtk3, krb5, libc++, libevdev, libxkbcommon, libminizip, libnss, libx11, mesa, openssl, pango, pulseaudio, zlib"
+NASUX_PKG_VERSION=39.8.8
+NASUX_PKG_SRCURL=git+https://github.com/electron/electron
+NASUX_PKG_DEPENDS="atk, cups, dbus, fontconfig, gtk3, krb5, libc++, libevdev, libxkbcommon, libminizip, libnss, libx11, mesa, openssl, pango, pulseaudio, zlib"
 TERMUX_PKG_BUILD_DEPENDS="electron-host-tools-for-code-oss, libnotify, libffi-static"
 # Chromium doesn't support i686 on Linux.
-TERMUX_PKG_EXCLUDED_ARCHES="i686"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_EXCLUDED_ARCHES="i686"
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_ON_DEVICE_BUILD_NOT_SUPPORTED=true
 
 __tur_setup_depot_tools() {
@@ -28,14 +28,14 @@ termux_step_get_source() {
 	__tur_setup_depot_tools
 
 	# Install nodejs
-	termux_setup_nodejs
+	nasux_setup_nodejs
 
 	# Get source
 	rm -rf "$TERMUX_PKG_CACHEDIR/tmp-checkout"
 	mkdir -p "$TERMUX_PKG_CACHEDIR/tmp-checkout"
 	pushd "$TERMUX_PKG_CACHEDIR/tmp-checkout"
 	gclient config --name "src/electron" --unmanaged https://github.com/electron/electron
-	gclient sync --with_branch_heads --with_tags --no-history --revision v$TERMUX_PKG_VERSION
+	gclient sync --with_branch_heads --with_tags --no-history --revision v$NASUX_PKG_VERSION
 	popd
 
 	# Solve error like `.git/packed-refs is dirty`
@@ -78,15 +78,15 @@ termux_step_post_get_source() {
 	cp -Rf $TERMUX_PKG_BUILDER_DIR/third_party_override/swiftshader/* $TERMUX_PKG_SRCDIR/third_party/swiftshader/
 
 	# Install version file
-	echo "$TERMUX_PKG_VERSION" > $TERMUX_PKG_SRCDIR/electron/ELECTRON_VERSION
+	echo "$NASUX_PKG_VERSION" > $TERMUX_PKG_SRCDIR/electron/ELECTRON_VERSION
 }
 
 termux_step_configure() {
 	cd $TERMUX_PKG_SRCDIR
-	termux_setup_ninja
+	nasux_setup_ninja
 	__tur_setup_depot_tools
 
-	# Remove termux's dummy pkg-config
+	# Remove nasux's dummy pkg-config
 	local _target_pkg_config=$(command -v pkg-config)
 	local _host_pkg_config="$(cat $_target_pkg_config | grep exec | awk '{print $2}')"
 	rm -rf $TERMUX_PKG_CACHEDIR/host-pkg-config-bin
@@ -106,8 +106,8 @@ termux_step_configure() {
 	build/linux/sysroot_scripts/install-sysroot.py --sysroots-json-path=electron/script/sysroots.json --arch=i386
 	local _i386_sysroot_path="$(pwd)/build/linux/$(ls build/linux | grep 'i386-sysroot')"
 
-	local CARGO_TARGET_NAME="${TERMUX_ARCH}-linux-android"
-	if [[ "${TERMUX_ARCH}" == "arm" ]]; then
+	local CARGO_TARGET_NAME="${NASUX_ARCH}-linux-android"
+	if [[ "${NASUX_ARCH}" == "arm" ]]; then
 		CARGO_TARGET_NAME="armv7-linux-androideabi"
 	fi
 
@@ -115,7 +115,7 @@ termux_step_configure() {
 	if [ ! -f "third_party/node/linux/node-linux-x64/bin/node" ]; then
 		./third_party/node/update_node_binaries
 	fi
-	termux_setup_nodejs
+	nasux_setup_nodejs
 	./third_party/node/update_npm_deps
 
 	# Dummy librt.so
@@ -132,7 +132,7 @@ termux_step_configure() {
 	ln -sfr $TERMUX_PREFIX/lib/libffi.a $TERMUX_PREFIX/lib/libffi_pic.a
 
 	# Merge sysroots
-	if [ ! -d "$TERMUX_PKG_CACHEDIR/sysroot-$TERMUX_ARCH" ]; then
+	if [ ! -d "$TERMUX_PKG_CACHEDIR/sysroot-$NASUX_ARCH" ]; then
 		rm -rf $TERMUX_PKG_TMPDIR/sysroot
 		mkdir -p $TERMUX_PKG_TMPDIR/sysroot
 		pushd $TERMUX_PKG_TMPDIR/sysroot
@@ -150,7 +150,7 @@ termux_step_configure() {
 		cp -Rf $TERMUX_PREFIX/bin/cups-config usr/bin/
 		chmod +x usr/bin/cups-config
 		popd
-		mv $TERMUX_PKG_TMPDIR/sysroot $TERMUX_PKG_CACHEDIR/sysroot-$TERMUX_ARCH
+		mv $TERMUX_PKG_TMPDIR/sysroot $TERMUX_PKG_CACHEDIR/sysroot-$NASUX_ARCH
 	fi
 
 	# Construct args
@@ -161,14 +161,14 @@ termux_step_configure() {
 	local _target_clang_base_path="$TERMUX_STANDALONE_TOOLCHAIN"
 	local _target_cc="$_target_clang_base_path/bin/clang"
 	local _target_clang_version=$($_target_cc --version | grep -m1 version | sed -E 's|.*\bclang version ([0-9]+).*|\1|')
-	local _target_cpu _target_sysroot="$TERMUX_PKG_CACHEDIR/sysroot-$TERMUX_ARCH"
+	local _target_cpu _target_sysroot="$TERMUX_PKG_CACHEDIR/sysroot-$NASUX_ARCH"
 	local _v8_toolchain_name _v8_current_cpu _v8_sysroot_path
-	if [ "$TERMUX_ARCH" = "aarch64" ]; then
+	if [ "$NASUX_ARCH" = "aarch64" ]; then
 		_target_cpu="arm64"
 		_v8_current_cpu="arm64"
 		_v8_sysroot_path="$_amd64_sysroot_path"
 		_v8_toolchain_name="host"
-	elif [ "$TERMUX_ARCH" = "arm" ]; then
+	elif [ "$NASUX_ARCH" = "arm" ]; then
 		# Install i386 rootfs and deps
 		build/linux/sysroot_scripts/install-sysroot.py --arch=i386
 		local _i386_sysroot_path="$(pwd)/build/linux/$(ls build/linux | grep 'i386-sysroot')"
@@ -176,7 +176,7 @@ termux_step_configure() {
 		_v8_current_cpu="x86"
 		_v8_sysroot_path="$_i386_sysroot_path"
 		_v8_toolchain_name="clang_x86_v8_arm"
-	elif [ "$TERMUX_ARCH" = "x86_64" ]; then
+	elif [ "$NASUX_ARCH" = "x86_64" ]; then
 		_target_cpu="x64"
 		_v8_current_cpu="x64"
 		_v8_sysroot_path="$_amd64_sysroot_path"
@@ -189,7 +189,7 @@ termux_step_configure() {
 
 	echo "
 import(\"//electron/build/args/release.gn\")
-override_electron_version = \"$TERMUX_PKG_VERSION\"
+override_electron_version = \"$NASUX_PKG_VERSION\"
 # Do not build with symbols
 symbol_level = 0
 # Use our custom toolchain
@@ -243,7 +243,7 @@ use_vaapi = false
 is_cfi = false
 use_cfi_icall = false
 use_thin_lto = false
-# OpenCL doesn't work out of box in Termux, use NNAPI instead
+# OpenCL doesn't work out of box in NasUX, use NNAPI instead
 build_tflite_with_opencl = false
 build_tflite_with_nnapi = true
 # Enable rust
@@ -258,7 +258,7 @@ use_jumbo_build = true
 prebuilt_js2c_binary = \"$TERMUX_PREFIX/opt/electron-host-tools-for-code-oss/$_v8_toolchain_name/node_js2c\"
 " >> $_common_args_file
 
-	if [ "$TERMUX_ARCH" = "arm" ]; then
+	if [ "$NASUX_ARCH" = "arm" ]; then
 		echo "arm_arch = \"armv7-a\"" >> $_common_args_file
 		echo "arm_float_abi = \"softfp\"" >> $_common_args_file
 	fi
@@ -350,7 +350,7 @@ termux_step_make_install() {
 	local _install_prefix=$TERMUX_PREFIX/lib/code-oss
 	mkdir -p $_install_prefix
 
-	echo "$TERMUX_PKG_VERSION" > $TERMUX_PKG_BUILDDIR/out/Release/version
+	echo "$NASUX_PKG_VERSION" > $TERMUX_PKG_BUILDDIR/out/Release/version
 
 	local normal_files=(
 		# Binary files

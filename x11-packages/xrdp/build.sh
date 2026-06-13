@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/neutrinolabs/xrdp
-TERMUX_PKG_DESCRIPTION="An open source remote desktop protocol (RDP) server"
-TERMUX_PKG_LICENSE="Apache-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="0.10.6"
-TERMUX_PKG_SRCURL=https://github.com/neutrinolabs/xrdp/releases/download/v${TERMUX_PKG_VERSION}/xrdp-${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=dfc21d5d603b642cf583987b36706b685bf05fd3aaaaacefb8f57c5f4a448677
+NASUX_PKG_HOMEPAGE=https://github.com/neutrinolabs/xrdp
+NASUX_PKG_DESCRIPTION="An open source remote desktop protocol (RDP) server"
+NASUX_PKG_LICENSE="Apache-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="0.10.6"
+NASUX_PKG_SRCURL=https://github.com/neutrinolabs/xrdp/releases/download/v${NASUX_PKG_VERSION}/xrdp-${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=dfc21d5d603b642cf583987b36706b685bf05fd3aaaaacefb8f57c5f4a448677
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="libandroid-shmem, libcrypt, libx11, libxfixes, libxrandr, openssl, procps, tigervnc"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_DEPENDS="libandroid-shmem, libcrypt, libx11, libxfixes, libxrandr, openssl, procps, tigervnc"
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --disable-pam
 --enable-static

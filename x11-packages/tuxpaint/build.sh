@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://tuxpaint.org/
-TERMUX_PKG_DESCRIPTION="A free, award-winning drawing program for children ages 3 to 12"
-TERMUX_PKG_LICENSE="GPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="0.9.35"
+NASUX_PKG_HOMEPAGE=https://tuxpaint.org/
+NASUX_PKG_DESCRIPTION="A free, award-winning drawing program for children ages 3 to 12"
+NASUX_PKG_LICENSE="GPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="0.9.35"
 TERMUX_PKG_REVISION=1
-TERMUX_PKG_SRCURL=https://downloads.sourceforge.net/tuxpaint/tuxpaint-${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=c1c18af91be77e94fdaab2c928204c4c39ba39ac5da2f441aaf2ecab6d8bd0ad
-TERMUX_PKG_DEPENDS="fontconfig, fribidi, glib, libandroid-wordexp, libcairo, libimagequant, libpaper, libpng, librsvg, pango, sdl2 | sdl2-compat, sdl2-gfx, sdl2-image, sdl2-mixer, sdl2-pango, sdl2-ttf, zlib"
+NASUX_PKG_SRCURL=https://downloads.sourceforge.net/tuxpaint/tuxpaint-${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=c1c18af91be77e94fdaab2c928204c4c39ba39ac5da2f441aaf2ecab6d8bd0ad
+NASUX_PKG_DEPENDS="fontconfig, fribidi, glib, libandroid-wordexp, libcairo, libimagequant, libpaper, libpng, librsvg, pango, sdl2 | sdl2-compat, sdl2-gfx, sdl2-image, sdl2-mixer, sdl2-pango, sdl2-ttf, zlib"
 TERMUX_PKG_ANTI_BUILD_DEPENDS="sdl2-compat"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_HOSTBUILD=true
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_MAKE_INSTALL_TARGET="install install-xdg"
@@ -17,9 +17,9 @@ termux_step_host_build() {
 	local _PREFIX_FOR_BUILD=$TERMUX_PKG_HOSTBUILD_DIR/prefix
 
 	# Need imagemagick that can handle SVG format.
-	local IMAGEMAGICK_BUILD_SH=$TERMUX_SCRIPTDIR/packages/imagemagick/build.sh
-	local IMAGEMAGICK_SRCURL=$(. $IMAGEMAGICK_BUILD_SH; echo $TERMUX_PKG_SRCURL)
-	local IMAGEMAGICK_SHA256=$(. $IMAGEMAGICK_BUILD_SH; echo $TERMUX_PKG_SHA256)
+	local IMAGEMAGICK_BUILD_SH=$NASUX_SCRIPTDIR/packages/imagemagick/build.sh
+	local IMAGEMAGICK_SRCURL=$(. $IMAGEMAGICK_BUILD_SH; echo $NASUX_PKG_SRCURL)
+	local IMAGEMAGICK_SHA256=$(. $IMAGEMAGICK_BUILD_SH; echo $NASUX_PKG_SHA256)
 	local IMAGEMAGICK_TARFILE=$TERMUX_PKG_CACHEDIR/$(basename $IMAGEMAGICK_SRCURL)
 	termux_download $IMAGEMAGICK_SRCURL $IMAGEMAGICK_TARFILE $IMAGEMAGICK_SHA256
 	mkdir -p imagemagick
@@ -34,7 +34,7 @@ termux_step_host_build() {
 
 termux_step_pre_configure() {
 	# this is a workaround for build-all.sh issue
-	TERMUX_PKG_DEPENDS+=", tuxpaint-data"
+	NASUX_PKG_DEPENDS+=", tuxpaint-data"
 
 	local _PREFIX_FOR_BUILD="$TERMUX_PKG_HOSTBUILD_DIR/prefix"
 	export PATH="$_PREFIX_FOR_BUILD/bin:$PATH"
@@ -49,7 +49,7 @@ termux_step_pre_configure() {
 }
 
 termux_step_post_configure() {
-	# https://github.com/termux/termux-packages/issues/12458
+	# https://github.com/nastech-ai/NasUX-Packages/issues/12458
 	mkdir -p trans
 }
 

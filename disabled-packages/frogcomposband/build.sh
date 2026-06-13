@@ -1,12 +1,12 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/sulkasormi/frogcomposband/
-TERMUX_PKG_DESCRIPTION="Open world Angband variant with many additions"
-TERMUX_PKG_LICENSE="custom"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_SRCURL=git+https://github.com/sulkasormi/frogcomposband
-TERMUX_PKG_VERSION=7.1.salmiak
+NASUX_PKG_HOMEPAGE=https://github.com/sulkasormi/frogcomposband/
+NASUX_PKG_DESCRIPTION="Open world Angband variant with many additions"
+NASUX_PKG_LICENSE="custom"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_SRCURL=git+https://github.com/sulkasormi/frogcomposband
+NASUX_PKG_VERSION=7.1.salmiak
 TERMUX_PKG_REVISION=3
-TERMUX_PKG_DEPENDS="ncurses"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_DEPENDS="ncurses"
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="--disable-x11 --bindir=$TERMUX_PREFIX/bin --sysconfdir=$TERMUX_PREFIX/share/frogcomposband"
 TERMUX_PKG_RM_AFTER_INSTALL="share/angband/xtra share/angband/icons"
 

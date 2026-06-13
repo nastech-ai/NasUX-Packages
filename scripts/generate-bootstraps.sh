@@ -5,7 +5,7 @@
 
 set -e
 
-export TERMUX_SCRIPTDIR=$(realpath "$(dirname "$(realpath "$0")")/../")
+export NASUX_SCRIPTDIR=$(realpath "$(dirname "$(realpath "$0")")/../")
 . $(dirname "$(realpath "$0")")/properties.sh
 BOOTSTRAP_TMPDIR=$(mktemp -d "${TMPDIR:-/tmp}/bootstrap-tmp.XXXXXXXX")
 trap 'rm -rf $BOOTSTRAP_TMPDIR' EXIT
@@ -15,17 +15,17 @@ trap 'rm -rf $BOOTSTRAP_TMPDIR' EXIT
 BOOTSTRAP_ANDROID10_COMPATIBLE=false
 
 # By default, bootstrap archives will be built for all architectures
-# supported by Termux application.
+# supported by NasUX application.
 # Override with option '--architectures'.
 TERMUX_ARCHITECTURES=("aarch64" "arm" "i686" "x86_64")
 
-# The supported termux package managers.
+# The supported nasux package managers.
 TERMUX_PACKAGE_MANAGERS=("apt" "pacman")
 
 # The repository base urls mapping for package managers.
 declare -A REPO_BASE_URLS=(
-	["apt"]="https://packages-cf.termux.dev/apt/termux-main"
-	["pacman"]="https://sync.termux-pacman.dev/main"
+	["apt"]="https://packages-cf.nasux.dev/apt/nasux-main"
+	["pacman"]="https://sync.nasux-pacman.dev/main"
 )
 
 # The package manager that will be installed in bootstrap.
@@ -245,12 +245,12 @@ pull_package() {
 	fi
 }
 
-# Add termux bootstrap second stage files
+# Add nasux bootstrap second stage files
 add_termux_bootstrap_second_stage_files() {
 
 	local package_arch="$1"
 
-	echo "[*] Adding termux bootstrap second stage files..."
+	echo "[*] Adding nasux bootstrap second stage files..."
 
 	mkdir -p "${BOOTSTRAP_ROOTFS}/${TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_DIR}"
 	sed -e "s|@TERMUX_PREFIX@|${TERMUX_PREFIX}|g" \
@@ -260,18 +260,18 @@ add_termux_bootstrap_second_stage_files() {
 		-e "s|@TERMUX_PACKAGE_ARCH@|${package_arch}|g" \
 		-e "s|@TERMUX_APP__NAME@|${TERMUX_APP__NAME}|g" \
 		-e "s|@TERMUX_ENV__S_TERMUX@|${TERMUX_ENV__S_TERMUX}|g" \
-		"$TERMUX_SCRIPTDIR/scripts/bootstrap/$TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUBFILE" \
+		"$NASUX_SCRIPTDIR/scripts/bootstrap/$TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUBFILE" \
 		> "${BOOTSTRAP_ROOTFS}/${TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_DIR}/$TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUBFILE"
 	chmod 700 "${BOOTSTRAP_ROOTFS}/${TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_DIR}/$TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUBFILE"
 
-	# TODO: Remove it when Termux app supports `pacman` bootstraps installation.
+	# TODO: Remove it when NasUX app supports `pacman` bootstraps installation.
 	sed -e "s|@TERMUX_PREFIX@|${TERMUX_PREFIX}|g" \
 		-e "s|@TERMUX__PREFIX__PROFILE_D_DIR@|${TERMUX__PREFIX__PROFILE_D_DIR}|g" \
 		-e "s|@TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_DIR@|${TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_DIR}|g" \
 		-e "s|@TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUBFILE@|${TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUBFILE}|g" \
-		"$TERMUX_SCRIPTDIR/scripts/bootstrap/01-termux-bootstrap-second-stage-fallback.sh" \
-		> "${BOOTSTRAP_ROOTFS}/${TERMUX__PREFIX__PROFILE_D_DIR}/01-termux-bootstrap-second-stage-fallback.sh"
-	chmod 600 "${BOOTSTRAP_ROOTFS}/${TERMUX__PREFIX__PROFILE_D_DIR}/01-termux-bootstrap-second-stage-fallback.sh"
+		"$NASUX_SCRIPTDIR/scripts/bootstrap/01-nasux-bootstrap-second-stage-fallback.sh" \
+		> "${BOOTSTRAP_ROOTFS}/${TERMUX__PREFIX__PROFILE_D_DIR}/01-nasux-bootstrap-second-stage-fallback.sh"
+	chmod 600 "${BOOTSTRAP_ROOTFS}/${TERMUX__PREFIX__PROFILE_D_DIR}/01-nasux-bootstrap-second-stage-fallback.sh"
 
 }
 
@@ -299,7 +299,7 @@ show_usage() {
 	echo
 	echo "Usage: generate-bootstraps.sh [options]"
 	echo
-	echo "Generate bootstrap archives for Termux application."
+	echo "Generate bootstrap archives for NasUX application."
 	echo
 	echo "Options:"
 	echo
@@ -450,7 +450,7 @@ for package_arch in "${TERMUX_ARCHITECTURES[@]}"; do
 	fi
 
 	# Core utilities.
-	pull_package bash # Used by `termux-bootstrap-second-stage.sh`
+	pull_package bash # Used by `nasux-bootstrap-second-stage.sh`
 	pull_package bzip2
 	if ! ${BOOTSTRAP_ANDROID10_COMPATIBLE}; then
 		pull_package command-not-found
@@ -470,10 +470,10 @@ for package_arch in "${TERMUX_ARCHITECTURES[@]}"; do
 	pull_package psmisc
 	pull_package sed
 	pull_package tar
-	pull_package termux-core
+	pull_package nasux-core
 	pull_package termux-exec
-	pull_package termux-keyring
-	pull_package termux-tools
+	pull_package nasux-keyring
+	pull_package nasux-tools
 	pull_package util-linux
 	pull_package xz-utils
 
@@ -496,7 +496,7 @@ for package_arch in "${TERMUX_ARCHITECTURES[@]}"; do
 	done
 	unset add_pkg
 
-	# Add termux bootstrap second stage files
+	# Add nasux bootstrap second stage files
 	add_termux_bootstrap_second_stage_files "$package_arch"
 
 	# Create bootstrap archive.

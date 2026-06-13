@@ -1,5 +1,5 @@
-TERMUX_SUBPKG_DESCRIPTION="A native debugger extension for code-oss based on LLDB"
-TERMUX_SUBPKG_INCLUDE="share/doc/code-oss-extension-codelldb"
+NASUX_SUBPKG_DESCRIPTION="A native debugger extension for code-oss based on LLDB"
+NASUX_SUBPKG_INCLUDE="share/doc/code-oss-extension-codelldb"
 TERMUX_SUBPKG_DEPENDS="code-oss, vsix-package-codelldb"
 # depends on vsix-package-codelldb,
 # which depends on codelldb,

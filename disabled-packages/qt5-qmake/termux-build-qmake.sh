@@ -1,18 +1,18 @@
 #!/data/data/com.termux/files/usr/bin/bash
 ##
 ##  A script for building qmake on device.
-##  Use in Termux only !
+##  Use in NasUX only !
 ##
 ##  Usage:
 ##
-##  ./termux-build-qmake.sh
+##  ./nasux-build-qmake.sh
 
 set -e
 
 TERMUX_PREFIX=/data/data/com.termux/files/usr
 
 if [ $(uname -o) != Android ]; then
-    echo "This script should be run in Termux !"
+    echo "This script should be run in NasUX !"
     exit 1
 fi
 
@@ -34,7 +34,7 @@ termux_step_configure () {
         -opensource \
         -confirm-license \
         -release \
-        -platform termux \
+        -platform nasux \
         -shared \
         -no-rpath \
         -no-use-gold-linker \
@@ -77,16 +77,16 @@ termux_step_configure () {
         -sql-sqlite
 }
 
-if [ ! -e "qtbase-everywhere-opensource-src-${TERMUX_PKG_VERSION}.tar.xz" ]; then
+if [ ! -e "qtbase-everywhere-opensource-src-${NASUX_PKG_VERSION}.tar.xz" ]; then
     echo "[*] Downloading Qt sources..."
-    curl -L --output "qtbase-everywhere-opensource-src-${TERMUX_PKG_VERSION}.tar.xz" "${TERMUX_PKG_SRCURL}"
+    curl -L --output "qtbase-everywhere-opensource-src-${NASUX_PKG_VERSION}.tar.xz" "${NASUX_PKG_SRCURL}"
 fi
 
 echo "[*] Unpacking Qt sources..."
-rm -rf "qtbase-everywhere-src-${TERMUX_PKG_VERSION}"
-tar xf "qtbase-everywhere-opensource-src-${TERMUX_PKG_VERSION}.tar.xz"
+rm -rf "qtbase-everywhere-src-${NASUX_PKG_VERSION}"
+tar xf "qtbase-everywhere-opensource-src-${NASUX_PKG_VERSION}.tar.xz"
 
-cd "qtbase-everywhere-src-${TERMUX_PKG_VERSION}" && {
+cd "qtbase-everywhere-src-${NASUX_PKG_VERSION}" && {
     ## Patch the source
     for i in `ls ../../qt5-qtbase/*.patch`; do
         patch -p1 -Ni "${i}"
@@ -103,12 +103,12 @@ cd "qtbase-everywhere-src-${TERMUX_PKG_VERSION}" && {
     cd qmake && {
         ## Bootstrap qmake.
         echo "[*] Bootstrapping qmake..."
-        ../bin/qmake -spec termux -o Makefile.qmake-aux qmake-aux.pro
+        ../bin/qmake -spec nasux -o Makefile.qmake-aux qmake-aux.pro
         make -f Makefile.qmake-aux
 
         ## Just verify.
         echo "[*] Verifying..."
-        ./qmake -spec termux -o Makefile.qmake-aux qmake-aux.pro
+        ./qmake -spec nasux -o Makefile.qmake-aux qmake-aux.pro
         make -f Makefile.qmake-aux
 
         cd -
@@ -118,4 +118,4 @@ cd "qtbase-everywhere-src-${TERMUX_PKG_VERSION}" && {
 }
 
 echo "[*] Done. Check file './qmake-$(uname -m)-linux-android'."
-cp "qtbase-everywhere-src-${TERMUX_PKG_VERSION}/qmake/qmake" "./qmake-$(uname -m)-linux-android"
+cp "qtbase-everywhere-src-${NASUX_PKG_VERSION}/qmake/qmake" "./qmake-$(uname -m)-linux-android"

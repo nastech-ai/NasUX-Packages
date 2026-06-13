@@ -1,12 +1,12 @@
-TERMUX_PKG_HOMEPAGE=https://www.qt.io/
-TERMUX_PKG_DESCRIPTION="A cross-platform application and UI framework"
-TERMUX_PKG_LICENSE="GPL-3.0-only"
-TERMUX_PKG_LICENSE_FILE="LICENSES/GPL-3.0-only.txt"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="6.11.1"
-TERMUX_PKG_SRCURL="https://download.qt.io/official_releases/qt/${TERMUX_PKG_VERSION%.*}/${TERMUX_PKG_VERSION}/submodules/qtbase-everywhere-src-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=d9594a31228aa23ad6b531719a29b45f0f3989fe6c136d45767ea179f233c1ac
-TERMUX_PKG_DEPENDS="brotli, double-conversion, freetype, glib, harfbuzz, krb5, libandroid-posix-semaphore, libandroid-shmem, libc++, libdrm, libice, libicu, libjpeg-turbo, libpng, libsm, libsqlite, libuuid, libx11, libxcb, libxi, libxkbcommon, libwayland, opengl, openssl, pcre2, vulkan-loader, xcb-util-cursor, xcb-util-image, xcb-util-keysyms, xcb-util-renderutil, xcb-util-wm, xdg-utils, zlib, zstd"
+NASUX_PKG_HOMEPAGE=https://www.qt.io/
+NASUX_PKG_DESCRIPTION="A cross-platform application and UI framework"
+NASUX_PKG_LICENSE="GPL-3.0-only"
+NASUX_PKG_LICENSE_FILE="LICENSES/GPL-3.0-only.txt"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="6.11.1"
+NASUX_PKG_SRCURL="https://download.qt.io/official_releases/qt/${NASUX_PKG_VERSION%.*}/${NASUX_PKG_VERSION}/submodules/qtbase-everywhere-src-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=d9594a31228aa23ad6b531719a29b45f0f3989fe6c136d45767ea179f233c1ac
+NASUX_PKG_DEPENDS="brotli, double-conversion, freetype, glib, harfbuzz, krb5, libandroid-posix-semaphore, libandroid-shmem, libc++, libdrm, libice, libicu, libjpeg-turbo, libpng, libsm, libsqlite, libuuid, libx11, libxcb, libxi, libxkbcommon, libwayland, opengl, openssl, pcre2, vulkan-loader, xcb-util-cursor, xcb-util-image, xcb-util-keysyms, xcb-util-renderutil, xcb-util-wm, xdg-utils, zlib, zstd"
 # gtk3 dependency is a run-time dependency only for the gtk platformtheme subpackage
 TERMUX_PKG_BUILD_DEPENDS="binutils-cross, cups, gdk-pixbuf, gtk3, libwayland-protocols, pango, vulkan-headers, vulkan-loader-generic"
 # qt6-qtbase now contains include/qt6/QtWaylandClient/QWaylandClientExtension instead of qt6-qtwayland
@@ -69,8 +69,8 @@ opt/qt6/cross/lib/qt6/sanitizer-testrunner.py
 "
 
 termux_step_host_build() {
-	termux_setup_cmake
-	termux_setup_ninja
+	nasux_setup_cmake
+	nasux_setup_ninja
 
 	cmake \
 		-G Ninja \
@@ -117,8 +117,8 @@ termux_step_host_build() {
 }
 
 termux_step_pre_configure() {
-	termux_setup_cmake
-	termux_setup_ninja
+	nasux_setup_cmake
+	nasux_setup_ninja
 
 	LDFLAGS+=" -landroid-posix-semaphore -landroid-shmem"
 

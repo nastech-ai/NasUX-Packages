@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE="https://invent.kde.org/frameworks/kdoctools"
-TERMUX_PKG_DESCRIPTION="Documentation generation from docbook"
-TERMUX_PKG_LICENSE="LGPL-2.0-only, LGPL-3.0-only"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="6.27.0"
-TERMUX_PKG_SRCURL="https://download.kde.org/stable/frameworks/${TERMUX_PKG_VERSION%.*}/kdoctools-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=69026ef8607cb6257e4d1f0e46e451130ef7ba67994a83e4f9a6c46eefd5a3f3
+NASUX_PKG_HOMEPAGE="https://invent.kde.org/frameworks/kdoctools"
+NASUX_PKG_DESCRIPTION="Documentation generation from docbook"
+NASUX_PKG_LICENSE="LGPL-2.0-only, LGPL-3.0-only"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="6.27.0"
+NASUX_PKG_SRCURL="https://download.kde.org/stable/frameworks/${NASUX_PKG_VERSION%.*}/kdoctools-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=69026ef8607cb6257e4d1f0e46e451130ef7ba67994a83e4f9a6c46eefd5a3f3
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_HOSTBUILD=true
-TERMUX_PKG_DEPENDS="docbook-xsl, kf6-karchive, libc++, libxml2, libxslt, perl, qt6-qtbase"
+NASUX_PKG_DEPENDS="docbook-xsl, kf6-karchive, libc++, libxml2, libxslt, perl, qt6-qtbase"
 TERMUX_PKG_BUILD_DEPENDS="extra-cmake-modules, kf6-ki18n, qt6-qttools"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DKF_IGNORE_PLATFORM_CHECK=ON
@@ -24,8 +24,8 @@ termux_step_host_build() {
 
 	termux_download_ubuntu_packages libxslt1-dev
 
-	termux_setup_cmake
-	termux_setup_ninja
+	nasux_setup_cmake
+	nasux_setup_ninja
 
 	cmake -G Ninja \
 		-S "${TERMUX_PKG_SRCDIR}" \

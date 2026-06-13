@@ -1,11 +1,11 @@
-TERMUX_PKG_HOMEPAGE=https://lxqt.github.io
-TERMUX_PKG_DESCRIPTION="Library providing components to build desktop file managers"
-TERMUX_PKG_LICENSE="LGPL-2.1"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="2.4.0"
-TERMUX_PKG_SRCURL="https://github.com/lxqt/libfm-qt/releases/download/${TERMUX_PKG_VERSION}/libfm-qt-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=72766d7b41fd1aa06c0a7ef8be015205506ff75963b977e5307994555dcc023b
-TERMUX_PKG_DEPENDS="libc++, qt6-qtbase, glib, libxcb, libexif, lxqt-menu-data, menu-cache"
+NASUX_PKG_HOMEPAGE=https://lxqt.github.io
+NASUX_PKG_DESCRIPTION="Library providing components to build desktop file managers"
+NASUX_PKG_LICENSE="LGPL-2.1"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="2.4.0"
+NASUX_PKG_SRCURL="https://github.com/lxqt/libfm-qt/releases/download/${NASUX_PKG_VERSION}/libfm-qt-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=72766d7b41fd1aa06c0a7ef8be015205506ff75963b977e5307994555dcc023b
+NASUX_PKG_DEPENDS="libc++, qt6-qtbase, glib, libxcb, libexif, lxqt-menu-data, menu-cache"
 TERMUX_PKG_BUILD_DEPENDS="lxqt-build-tools, qt6-qttools"
 TERMUX_PKG_AUTO_UPDATE=true
 

@@ -1,8 +1,8 @@
-TERMUX_PKG_HOMEPAGE=https://www.vim.org
-TERMUX_PKG_DESCRIPTION="Vi IMproved - enhanced vi editor"
-TERMUX_PKG_LICENSE="VIM License"
-TERMUX_PKG_MAINTAINER="Joshua Kahn <tom@termux.dev>"
-TERMUX_PKG_DEPENDS="gdk-pixbuf, glib, gtk3, libcairo, libcanberra, libice, libiconv, libsm, libsodium, libx11, libxt, ncurses, pango"
+NASUX_PKG_HOMEPAGE=https://www.vim.org
+NASUX_PKG_DESCRIPTION="Vi IMproved - enhanced vi editor"
+NASUX_PKG_LICENSE="VIM License"
+NASUX_PKG_MAINTAINER="Joshua Kahn <tom@nasux.dev>"
+NASUX_PKG_DEPENDS="gdk-pixbuf, glib, gtk3, libcairo, libcanberra, libice, libiconv, libsm, libsodium, libx11, libxt, ncurses, pango"
 TERMUX_PKG_BUILD_DEPENDS="luajit, perl, python, ruby, tcl"
 TERMUX_PKG_SUGGESTS="luajit, perl, python, ruby, tcl"
 TERMUX_PKG_RECOMMENDS="diffutils, xxd"
@@ -10,10 +10,10 @@ TERMUX_PKG_CONFLICTS="vim"
 TERMUX_PKG_BREAKS="vim-python"
 TERMUX_PKG_REPLACES="vim-python"
 TERMUX_PKG_PROVIDES="vim-python"
-TERMUX_PKG_VERSION="9.2.0600"
-TERMUX_PKG_SRCURL="https://github.com/vim/vim/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz"
-TERMUX_PKG_SHA256=9bbfe0be244dbd57d2b0f9a3749e3504d215185376bbddfc3ad6420c113b4be1
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_VERSION="9.2.0600"
+NASUX_PKG_SRCURL="https://github.com/vim/vim/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz"
+NASUX_PKG_SHA256=9bbfe0be244dbd57d2b0f9a3749e3504d215185376bbddfc3ad6420c113b4be1
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_CONFFILES="share/vim/vimrc"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 vim_cv_getcwd_broken=no
@@ -28,7 +28,7 @@ ac_cv_small_wchar_t=no
 --enable-netbeans=no
 --with-tlib=ncursesw
 --enable-multibyte
---with-compiledby=Termux
+--with-compiledby=NasUX
 --enable-fail-if-missing=yes
 --enable-python3interp=dynamic
 --with-python3-config-dir=$TERMUX_PYTHON_HOME/config-${TERMUX_PYTHON_VERSION}-${TERMUX_HOST_PLATFORM}/
@@ -60,7 +60,7 @@ termux_pkg_auto_update() {
 	# This is necessary to suppress automatic interpretation
 	# of the value as octal when there is a leading 0.
 	latest_patch="10#${latest_tag##*.}"
-	current_patch="10#${TERMUX_PKG_VERSION##*.}"
+	current_patch="10#${NASUX_PKG_VERSION##*.}"
 
 	# Vim releases nearly every commit as a new tag.
 	# To avoid auto update spam, we only update Vim every 50th patch.
@@ -69,7 +69,7 @@ termux_pkg_auto_update() {
 	((  latest_patch -=  latest_patch % 50 ))
 
 	if (( current_patch == latest_patch )); then
-		echo "INFO: Skipping ${latest_tag#v}, no new 50th patch since $TERMUX_PKG_VERSION."
+		echo "INFO: Skipping ${latest_tag#v}, no new 50th patch since $NASUX_PKG_VERSION."
 		return
 	fi
 
@@ -93,9 +93,9 @@ termux_step_pre_configure() {
 	# Vim doesn't support cross-compilation for Perl, Ruby and Tcl
 	# out of the box, so we need to patch the configure script to make it work.
 	local perl_version ruby_major_version tcl_major_version
-	perl_version="$(. "$TERMUX_SCRIPTDIR/packages/perl/build.sh"; echo "${TERMUX_PKG_VERSION[0]}")"
-	ruby_major_version="$(. "$TERMUX_SCRIPTDIR/packages/ruby/build.sh"; echo "${TERMUX_PKG_VERSION%\.*}")"
-	tcl_major_version="$(. "$TERMUX_SCRIPTDIR/packages/tcl/build.sh"; echo "${TERMUX_PKG_VERSION%\.*}")"
+	perl_version="$(. "$NASUX_SCRIPTDIR/packages/perl/build.sh"; echo "${NASUX_PKG_VERSION[0]}")"
+	ruby_major_version="$(. "$NASUX_SCRIPTDIR/packages/ruby/build.sh"; echo "${NASUX_PKG_VERSION%\.*}")"
+	tcl_major_version="$(. "$NASUX_SCRIPTDIR/packages/tcl/build.sh"; echo "${NASUX_PKG_VERSION%\.*}")"
 
 	patch="$TERMUX_PKG_BUILDER_DIR/configure-perl-ruby-tcl-cross-compiling.diff"
 	echo "Applying patch: $(basename "$patch")"
@@ -103,7 +103,7 @@ termux_step_pre_configure() {
 		-e "s%\@PERL_VERSION\@%${perl_version}%g" \
 		-e "s%\@RUBY_MAJOR_VERSION\@%${ruby_major_version}%g" \
 		-e "s%\@TCL_MAJOR_VERSION\@%${tcl_major_version}%g" \
-		-e "s%\@PERL_PLATFORM\@%${TERMUX_ARCH}-android%g" \
+		-e "s%\@PERL_PLATFORM\@%${NASUX_ARCH}-android%g" \
 		-e "s%\@RUBY_PLATFORM\@%${TERMUX_HOST_PLATFORM}%g" \
 		-e "s%\@TERMUX_PREFIX\@%${TERMUX_PREFIX}%g" \
 		"$patch" | patch --silent -p1
@@ -114,7 +114,7 @@ termux_step_post_make_install() {
 	sed -e "s%\@TERMUX_PREFIX\@%${TERMUX_PREFIX}%g" "$TERMUX_PKG_BUILDER_DIR/vimrc" \
 		> "$TERMUX_PREFIX/share/vim/vimrc"
 
-	local _VIM_VERSION="${TERMUX_PKG_VERSION%.*}"
+	local _VIM_VERSION="${NASUX_PKG_VERSION%.*}"
 	_VIM_VERSION="${_VIM_VERSION/.}"
 
 	# Avoid overlap with the `xxd` subpackage of `vim` by removing it from vim-gtk

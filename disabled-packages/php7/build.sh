@@ -1,15 +1,15 @@
-TERMUX_PKG_HOMEPAGE=https://php.net
-TERMUX_PKG_DESCRIPTION="Server-side, HTML-embedded scripting language"
-TERMUX_PKG_LICENSE="PHP-3.0"
-TERMUX_PKG_MAINTAINER=""
-TERMUX_PKG_VERSION=7.4.33
-TERMUX_PKG_SRCURL=https://github.com/php/php-src/archive/php-${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=dfbb2111160589054768a37086bda650a0041c89878449d078684d70d6a0e411
+NASUX_PKG_HOMEPAGE=https://php.net
+NASUX_PKG_DESCRIPTION="Server-side, HTML-embedded scripting language"
+NASUX_PKG_LICENSE="PHP-3.0"
+NASUX_PKG_MAINTAINER=""
+NASUX_PKG_VERSION=7.4.33
+NASUX_PKG_SRCURL=https://github.com/php/php-src/archive/php-${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=dfbb2111160589054768a37086bda650a0041c89878449d078684d70d6a0e411
 # Build native php for phar to build (see pear-Makefile.frag.patch):
 TERMUX_PKG_HOSTBUILD=true
 # Build the native php without xml support as we only need phar:
 TERMUX_PKG_EXTRA_HOSTBUILD_CONFIGURE_ARGS="--disable-libxml --disable-dom --disable-simplexml --disable-xml --disable-xmlreader --disable-xmlwriter --without-pear --disable-sqlite3 --without-libxml --without-sqlite3 --without-pdo-sqlite"
-TERMUX_PKG_DEPENDS="libc++, freetype, libandroid-glob, libandroid-support, libbz2, libcrypt, libcurl, libgd, libgmp, libiconv, liblzma, libsqlite, libxml2, libxslt, libzip, oniguruma, openssl-1.1, pcre2, readline, zlib, libicu, libffi, tidy"
+NASUX_PKG_DEPENDS="libc++, freetype, libandroid-glob, libandroid-support, libbz2, libcrypt, libcurl, libgd, libgmp, libiconv, liblzma, libsqlite, libxml2, libxslt, libzip, oniguruma, openssl-1.1, pcre2, readline, zlib, libicu, libffi, tidy"
 TERMUX_PKG_CONFLICTS="php, php-mysql, php-dev"
 TERMUX_PKG_RM_AFTER_INSTALL="php/php/fpm"
 TERMUX_PKG_SERVICE_SCRIPT=("php-fpm" 'mkdir -p ~/.php\nif [ -f "$HOME/.php/php-fpm.conf" ]; then CONFIG="$HOME/.php/php-fpm.conf"; else CONFIG="$PREFIX/etc/php-fpm.conf"; fi\nexec php-fpm -F -y $CONFIG -c ~/.php/php.ini 2>&1')
@@ -66,7 +66,7 @@ termux_step_pre_configure() {
 
 	export PATH=$PATH:$TERMUX_PKG_HOSTBUILD_DIR/sapi/cli/
 	export NATIVE_PHP_EXECUTABLE=$TERMUX_PKG_HOSTBUILD_DIR/sapi/cli/php
-	if [ "$TERMUX_ARCH" = "aarch64" ]; then
+	if [ "$NASUX_ARCH" = "aarch64" ]; then
 		CFLAGS+=" -march=armv8-a+crc"
 		CXXFLAGS+=" -march=armv8-a+crc"
 	fi
@@ -75,7 +75,7 @@ termux_step_pre_configure() {
 
 	export EXTENSION_DIR=$TERMUX_PREFIX/lib/php
 
-	# Use a wrapper since bin/apxs has the Termux shebang:
+	# Use a wrapper since bin/apxs has the NasUX shebang:
 	echo "perl $TERMUX_PREFIX/bin/apxs \$@" > $TERMUX_PKG_TMPDIR/apxs-wrapper.sh
 	chmod +x $TERMUX_PKG_TMPDIR/apxs-wrapper.sh
 	cat $TERMUX_PKG_TMPDIR/apxs-wrapper.sh

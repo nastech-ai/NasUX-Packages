@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://www.qt.io/
-TERMUX_PKG_DESCRIPTION="Qt 5 QMake"
-TERMUX_PKG_LICENSE="LGPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=5.15.5
+NASUX_PKG_HOMEPAGE=https://www.qt.io/
+NASUX_PKG_DESCRIPTION="Qt 5 QMake"
+NASUX_PKG_LICENSE="LGPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=5.15.5
 TERMUX_PKG_REVISION=1
-TERMUX_PKG_SRCURL="https://download.qt.io/archive/qt/${TERMUX_PKG_VERSION%.*}/${TERMUX_PKG_VERSION}/submodules/qtbase-everywhere-opensource-src-${TERMUX_PKG_VERSION}.tar.xz"
-# TERMUX_PKG_SHA256 is not used in termux-build-qmake.sh.
-TERMUX_PKG_SHA256=SKIP_CHECKSUM
+NASUX_PKG_SRCURL="https://download.qt.io/archive/qt/${NASUX_PKG_VERSION%.*}/${NASUX_PKG_VERSION}/submodules/qtbase-everywhere-opensource-src-${NASUX_PKG_VERSION}.tar.xz"
+# NASUX_PKG_SHA256 is not used in nasux-build-qmake.sh.
+NASUX_PKG_SHA256=SKIP_CHECKSUM
 TERMUX_PKG_SKIP_SRC_EXTRACT=true
-TERMUX_PKG_DEPENDS="qt5-qtbase"
+NASUX_PKG_DEPENDS="qt5-qtbase"
 TERMUX_PKG_BREAKS="qt5-qtbase (<< 5.15.7)"
 TERMUX_PKG_REPLACES="qt5-qtbase (<< 5.15.7)"
 

@@ -1,18 +1,18 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/kcleal/gw
-TERMUX_PKG_DESCRIPTION="A browser for genomic sequencing data (.bam/.cram format)"
-TERMUX_PKG_LICENSE="MIT"
-TERMUX_PKG_MAINTAINER="clealk@cardiff.ac.uk"
-TERMUX_PKG_VERSION="1.2.6"
+NASUX_PKG_HOMEPAGE=https://github.com/kcleal/gw
+NASUX_PKG_DESCRIPTION="A browser for genomic sequencing data (.bam/.cram format)"
+NASUX_PKG_LICENSE="MIT"
+NASUX_PKG_MAINTAINER="clealk@cardiff.ac.uk"
+NASUX_PKG_VERSION="1.2.6"
 TERMUX_PKG_REVISION=1
-TERMUX_PKG_SRCURL=https://github.com/kcleal/gw/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=4ab7afc7c8785f956e9ee32c984a5f69c4671d3025d53493a5cd9e295701dad0
-TERMUX_PKG_DEPENDS="glfw, htslib, libc++, libjpeg-turbo, opengl, libcurl"
+NASUX_PKG_SRCURL=https://github.com/kcleal/gw/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=4ab7afc7c8785f956e9ee32c984a5f69c4671d3025d53493a5cd9e295701dad0
+NASUX_PKG_DEPENDS="glfw, htslib, libc++, libjpeg-turbo, opengl, libcurl"
 TERMUX_PKG_BUILD_DEPENDS="fontconfig, freetype, libicu, libuuid, mesa-dev, libcurl"
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 
 # htslib is not available for arm.
-TERMUX_PKG_EXCLUDED_ARCHES="arm"
+NASUX_PKG_EXCLUDED_ARCHES="arm"
 
 termux_step_pre_configure() {
 	LDFLAGS+=" -llog"
@@ -22,9 +22,9 @@ termux_step_pre_configure() {
 		-e '/\/usr\/local\/lib/d' \
 		./Makefile
 
-	if [ "$TERMUX_ARCH" = "aarch64" ]; then
+	if [ "$NASUX_ARCH" = "aarch64" ]; then
 		sed -i 's/Release-x64/Release-arm64/g' ./Makefile
-	elif [ "$TERMUX_ARCH" = "i686" ]; then
+	elif [ "$NASUX_ARCH" = "i686" ]; then
 		sed -i 's/Release-x64/Release-x86/g' ./Makefile
 	fi
 }
@@ -38,21 +38,21 @@ termux_step_make() {
 	local SKIA_CHECKSUM_X64="1546e41c0b2edc401639e1ed0dd32d9e8b30d478f1c4a5c345ee82f2a5e1b829"
 
 	mkdir -p lib/skia && cd lib/skia/
-	case "$TERMUX_ARCH" in
+	case "$NASUX_ARCH" in
 		aarch64)
-			termux_download "$SKIA_URL_AARCH64" "${TERMUX_PKG_CACHEDIR}/skia-${TERMUX_ARCH}.zip" "$SKIA_CHECKSUM_AARCH64"
+			termux_download "$SKIA_URL_AARCH64" "${TERMUX_PKG_CACHEDIR}/skia-${NASUX_ARCH}.zip" "$SKIA_CHECKSUM_AARCH64"
 			;;
 		i686)
-			termux_download "$SKIA_URL_X86" "${TERMUX_PKG_CACHEDIR}/skia-${TERMUX_ARCH}.zip" "$SKIA_CHECKSUM_X86"
+			termux_download "$SKIA_URL_X86" "${TERMUX_PKG_CACHEDIR}/skia-${NASUX_ARCH}.zip" "$SKIA_CHECKSUM_X86"
 			;;
 		x86_64)
-			termux_download "$SKIA_URL_X64" "${TERMUX_PKG_CACHEDIR}/skia-${TERMUX_ARCH}.zip" "$SKIA_CHECKSUM_X64"
+			termux_download "$SKIA_URL_X64" "${TERMUX_PKG_CACHEDIR}/skia-${NASUX_ARCH}.zip" "$SKIA_CHECKSUM_X64"
 			;;
 		*)
-			termux_error_exit "No architecture '$TERMUX_ARCH' defined for Skia download."
+			termux_error_exit "No architecture '$NASUX_ARCH' defined for Skia download."
 			;;
 	esac
-	unzip -o "${TERMUX_PKG_CACHEDIR}/skia-${TERMUX_ARCH}.zip"
+	unzip -o "${TERMUX_PKG_CACHEDIR}/skia-${NASUX_ARCH}.zip"
 	cd ../../
 
 	OLD_SKIA=1 make -j "$TERMUX_PKG_MAKE_PROCESSES"

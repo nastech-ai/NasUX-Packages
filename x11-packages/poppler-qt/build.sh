@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://poppler.freedesktop.org/
-TERMUX_PKG_DESCRIPTION="Poppler Qt wrapper"
-TERMUX_PKG_LICENSE="GPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
+NASUX_PKG_HOMEPAGE=https://poppler.freedesktop.org/
+NASUX_PKG_DESCRIPTION="Poppler Qt wrapper"
+NASUX_PKG_LICENSE="GPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
 # Please align the version with `poppler` package.
-TERMUX_PKG_VERSION="26.02.0"
-TERMUX_PKG_SRCURL="https://poppler.freedesktop.org/poppler-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=dded8621f7b2f695c91063aab1558691c8418374cd583501e89ed39487e7ab77
+NASUX_PKG_VERSION="26.02.0"
+NASUX_PKG_SRCURL="https://poppler.freedesktop.org/poppler-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=dded8621f7b2f695c91063aab1558691c8418374cd583501e89ed39487e7ab77
 # The package must be updated at the same time as poppler, auto updater script does not support that.
 TERMUX_PKG_AUTO_UPDATE=false
-TERMUX_PKG_DEPENDS="freetype, libc++, littlecms, poppler (>= ${TERMUX_PKG_VERSION}), qt6-qtbase"
+NASUX_PKG_DEPENDS="freetype, libc++, littlecms, poppler (>= ${NASUX_PKG_VERSION}), qt6-qtbase"
 TERMUX_PKG_BUILD_DEPENDS="boost, boost-headers, qt6-qtbase-cross-tools"
 #texlive needs the xpdf headers
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
@@ -33,7 +33,7 @@ termux_step_pre_configure() {
 	if ! test "${_POPPLER_SOVERSION}"; then
 		termux_error_exit "Please set _POPPLER_SOVERSION variable."
 	fi
-	local sover_main=$(. $TERMUX_SCRIPTDIR/packages/poppler/build.sh; echo $_POPPLER_SOVERSION)
+	local sover_main=$(. $NASUX_SCRIPTDIR/packages/poppler/build.sh; echo $_POPPLER_SOVERSION)
 	if [ "${sover_main}" != "${_POPPLER_SOVERSION}" ]; then
 		termux_error_exit "SOVERSION mismatch with \"poppler\" package."
 	fi

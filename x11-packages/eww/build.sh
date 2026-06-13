@@ -1,16 +1,16 @@
-TERMUX_PKG_HOMEPAGE=https://elkowar.github.io/eww/
-TERMUX_PKG_DESCRIPTION="ElKowars wacky widgets"
-TERMUX_PKG_LICENSE="MIT"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="0.6.0"
+NASUX_PKG_HOMEPAGE=https://elkowar.github.io/eww/
+NASUX_PKG_DESCRIPTION="ElKowars wacky widgets"
+NASUX_PKG_LICENSE="MIT"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="0.6.0"
 TERMUX_PKG_REVISION=2
-TERMUX_PKG_SRCURL=git+https://github.com/elkowar/eww
-TERMUX_PKG_DEPENDS="glib, gtk3, gtk-layer-shell, pango, gdk-pixbuf, libcairo, libdbusmenu-gtk3"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_SRCURL=git+https://github.com/elkowar/eww
+NASUX_PKG_DEPENDS="glib, gtk3, gtk-layer-shell, pango, gdk-pixbuf, libcairo, libdbusmenu-gtk3"
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_AUTO_UPDATE=true
 
 termux_step_pre_configure() {
-	termux_setup_rust
+	nasux_setup_rust
 
 	: "${CARGO_HOME:=$HOME/.cargo}"
 	export CARGO_HOME
@@ -38,7 +38,7 @@ termux_step_pre_configure() {
 }
 
 termux_step_make() {
-	termux_setup_rust
+	nasux_setup_rust
 	cargo build --jobs $TERMUX_PKG_MAKE_PROCESSES --target $CARGO_TARGET_NAME --release
 }
 

@@ -1,15 +1,15 @@
-TERMUX_PKG_HOMEPAGE=https://gitlab.com/vala-panel-project/vala-panel-appmenu
-TERMUX_PKG_DESCRIPTION="Global Menu for Vala Panel (metapackage)"
-TERMUX_PKG_LICENSE="LGPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="25.04"
+NASUX_PKG_HOMEPAGE=https://gitlab.com/vala-panel-project/vala-panel-appmenu
+NASUX_PKG_DESCRIPTION="Global Menu for Vala Panel (metapackage)"
+NASUX_PKG_LICENSE="LGPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="25.04"
 TERMUX_PKG_REVISION=2
-TERMUX_PKG_SRCURL=https://gitlab.com/vala-panel-project/vala-panel-appmenu/-/archive/${TERMUX_PKG_VERSION}/vala-panel-appmenu-${TERMUX_PKG_VERSION}.tar.bz2
-TERMUX_PKG_SHA256=ff270de372c41f18f64e8788629dd4cc9f116a89ee8947e3fc2657b19182e2dc
+NASUX_PKG_SRCURL=https://gitlab.com/vala-panel-project/vala-panel-appmenu/-/archive/${NASUX_PKG_VERSION}/vala-panel-appmenu-${NASUX_PKG_VERSION}.tar.bz2
+NASUX_PKG_SHA256=ff270de372c41f18f64e8788629dd4cc9f116a89ee8947e3fc2657b19182e2dc
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="glib"
+NASUX_PKG_DEPENDS="glib"
 TERMUX_PKG_BUILD_DEPENDS="g-ir-scanner, glib-cross, gtk3, valac"
-TERMUX_PKG_VERSIONED_GIR=false
+NASUX_PKG_VERSIONED_GIR=false
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -Dwm_backend=wnck
 -Dvalapanel=disabled
@@ -23,15 +23,15 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 "
 
 termux_step_pre_configure() {
-	termux_setup_gir
+	nasux_setup_gir
 
 	CPPFLAGS+=" -Dulong=u_long"
 	LDFLAGS+=" -lX11"
-	termux_setup_glib_cross_pkg_config_wrapper
+	nasux_setup_glib_cross_pkg_config_wrapper
 
 	if [[ "$TERMUX_ON_DEVICE_BUILD" == "false" ]]; then
 		# adjust valac wrapper created by the cross-compilation mode
-		# of termux_setup_gir, to avoid a specific error
+		# of nasux_setup_gir, to avoid a specific error
 		# that only happens to vala-panel-appmenu and
 		# only happens when cross-compiling it
 		# error: The name `Property' does not exist in the context of `Xfconf' (libxfconf-0)

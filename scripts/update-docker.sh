@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e -u
 
-CONTAINER=termux-package-builder
-IMAGE=ghcr.io/termux/package-builder
+CONTAINER=nasux-package-builder
+IMAGE=ghcr.io/nastech-ai/nasux-package-builder
 
 docker pull $IMAGE
 

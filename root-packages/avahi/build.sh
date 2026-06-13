@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://www.avahi.org/
-TERMUX_PKG_DESCRIPTION="A system for service discovery on a local network via mDNS/DNS-SD"
-TERMUX_PKG_LICENSE="LGPL-2.1"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=0.8
+NASUX_PKG_HOMEPAGE=https://www.avahi.org/
+NASUX_PKG_DESCRIPTION="A system for service discovery on a local network via mDNS/DNS-SD"
+NASUX_PKG_LICENSE="LGPL-2.1"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=0.8
 TERMUX_PKG_REVISION=11
-TERMUX_PKG_SRCURL=https://github.com/lathiat/avahi/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=c15e750ef7c6df595fb5f2ce10cac0fee2353649600e6919ad08ae8871e4945f
-TERMUX_PKG_DEPENDS="dbus, glib, libandroid-glob, libdaemon, libevent, libexpat, resolv-conf"
+NASUX_PKG_SRCURL=https://github.com/lathiat/avahi/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=c15e750ef7c6df595fb5f2ce10cac0fee2353649600e6919ad08ae8871e4945f
+NASUX_PKG_DEPENDS="dbus, glib, libandroid-glob, libdaemon, libevent, libexpat, resolv-conf"
 TERMUX_PKG_BUILD_DEPENDS="g-ir-scanner, glib-cross"
-TERMUX_PKG_VERSIONED_GIR=false
+NASUX_PKG_VERSIONED_GIR=false
 TERMUX_PKG_DISABLE_GIR=false
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --enable-compat-libdns_sd
@@ -25,7 +25,7 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 ac_cv_func_chroot=no
 "
 termux_step_pre_configure() {
-	termux_setup_gir
+	nasux_setup_gir
 
 	autoreconf -fi
 	LDFLAGS+=" -landroid-glob"

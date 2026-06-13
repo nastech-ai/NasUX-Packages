@@ -1,15 +1,15 @@
-TERMUX_PKG_HOMEPAGE=https://riverbankcomputing.com/software/qscintilla
-TERMUX_PKG_DESCRIPTION="Qt6 port of the Scintilla editing component"
-TERMUX_PKG_LICENSE="GPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="2.14.1"
-TERMUX_PKG_SRCURL="https://www.riverbankcomputing.com/static/Downloads/QScintilla/${TERMUX_PKG_VERSION}/QScintilla_src-${TERMUX_PKG_VERSION}.tar.gz"
-TERMUX_PKG_SHA256=dfe13c6acc9d85dfcba76ccc8061e71a223957a6c02f3c343b30a9d43a4cdd4d
+NASUX_PKG_HOMEPAGE=https://riverbankcomputing.com/software/qscintilla
+NASUX_PKG_DESCRIPTION="Qt6 port of the Scintilla editing component"
+NASUX_PKG_LICENSE="GPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="2.14.1"
+NASUX_PKG_SRCURL="https://www.riverbankcomputing.com/static/Downloads/QScintilla/${NASUX_PKG_VERSION}/QScintilla_src-${NASUX_PKG_VERSION}.tar.gz"
+NASUX_PKG_SHA256=dfe13c6acc9d85dfcba76ccc8061e71a223957a6c02f3c343b30a9d43a4cdd4d
 # qt6-qtbase pulls in opengl, but qscintilla-qt6 links directly to opengl libraries as well, so specify it for clarity
-TERMUX_PKG_DEPENDS="libc++, opengl, qt6-qtbase"
+NASUX_PKG_DEPENDS="libc++, opengl, qt6-qtbase"
 # qttools is only needed to build Qt Designer's plugins
 TERMUX_PKG_BUILD_DEPENDS="libglvnd-dev, qt6-qttools"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_NO_STATICSPLIT=true
 TERMUX_PKG_EXTRA_MAKE_ARGS="-C src"
 

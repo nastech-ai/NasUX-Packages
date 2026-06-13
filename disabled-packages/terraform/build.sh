@@ -1,15 +1,15 @@
-TERMUX_PKG_HOMEPAGE=https://www.terraform.io
-TERMUX_PKG_DESCRIPTION="A tool for building, changing, and versioning infrastructure safely and efficiently"
-TERMUX_PKG_LICENSE="MPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="1.4.4"
-TERMUX_PKG_SRCURL=https://github.com/hashicorp/terraform/archive/v${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=ab9e6d743c0a00be8c6c1a2723f39191e3cbd14517acbc3e6ff2baa753865074
+NASUX_PKG_HOMEPAGE=https://www.terraform.io
+NASUX_PKG_DESCRIPTION="A tool for building, changing, and versioning infrastructure safely and efficiently"
+NASUX_PKG_LICENSE="MPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="1.4.4"
+NASUX_PKG_SRCURL=https://github.com/hashicorp/terraform/archive/v${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=ab9e6d743c0a00be8c6c1a2723f39191e3cbd14517acbc3e6ff2baa753865074
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="git"
+NASUX_PKG_DEPENDS="git"
 
 termux_step_make() {
-	termux_setup_golang
+	nasux_setup_golang
 
 	export GOPATH="${TERMUX_PKG_BUILDDIR}"
 
@@ -37,7 +37,7 @@ termux_step_make() {
 	done
 
 	local GO_LDFLAGS="-X 'github.com/hashicorp/terraform/version.Prerelease='"
-	GO_LDFLAGS="${GO_LDFLAGS} -X 'github.com/hashicorp/terraform/version.Version=${TERMUX_PKG_VERSION}'"
+	GO_LDFLAGS="${GO_LDFLAGS} -X 'github.com/hashicorp/terraform/version.Version=${NASUX_PKG_VERSION}'"
 
 	go build -ldflags "${GO_LDFLAGS}" -o terraform .
 }

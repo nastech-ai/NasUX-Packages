@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/yshui/picom
-TERMUX_PKG_DESCRIPTION="A lightweight compositor for X11"
-TERMUX_PKG_LICENSE="MIT, MPL-2.0"
-TERMUX_PKG_LICENSE_FILE="COPYING, LICENSES/MIT, LICENSES/MPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="13"
-TERMUX_PKG_SRCURL=https://github.com/yshui/picom/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=db9791a54255742c924ef82a6a882042636d61de0fa61bc14c5e56279cf5791c
+NASUX_PKG_HOMEPAGE=https://github.com/yshui/picom
+NASUX_PKG_DESCRIPTION="A lightweight compositor for X11"
+NASUX_PKG_LICENSE="MIT, MPL-2.0"
+NASUX_PKG_LICENSE_FILE="COPYING, LICENSES/MIT, LICENSES/MPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="13"
+NASUX_PKG_SRCURL=https://github.com/yshui/picom/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=db9791a54255742c924ef82a6a882042636d61de0fa61bc14c5e56279cf5791c
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="dbus, libconfig, libepoxy, libev, libpixman, libx11, libxcb, opengl, pcre2, xcb-util-image, xcb-util-renderutil"
+NASUX_PKG_DEPENDS="dbus, libconfig, libepoxy, libev, libpixman, libx11, libxcb, opengl, pcre2, xcb-util-image, xcb-util-renderutil"
 TERMUX_PKG_BUILD_DEPENDS="uthash, xorgproto"
 TERMUX_PKG_CONFFILES="
 etc/xdg/picom.conf

@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE=https://openvpn.net/easyrsa.html
-TERMUX_PKG_DESCRIPTION="Simple shell based CA utility"
-TERMUX_PKG_LICENSE="GPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=3.0.1
-TERMUX_PKG_DEPENDS="openssl-tool"
-TERMUX_PKG_SRCURL=https://github.com/OpenVPN/easy-rsa/releases/download/$TERMUX_PKG_VERSION/EasyRSA-$TERMUX_PKG_VERSION.tgz
-TERMUX_PKG_SHA256=dbdaf5b9444b99e0c5221fd4bcf15384c62380c1b63cea23d42239414d7b2d4e
+NASUX_PKG_HOMEPAGE=https://openvpn.net/easyrsa.html
+NASUX_PKG_DESCRIPTION="Simple shell based CA utility"
+NASUX_PKG_LICENSE="GPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=3.0.1
+NASUX_PKG_DEPENDS="openssl-tool"
+NASUX_PKG_SRCURL=https://github.com/OpenVPN/easy-rsa/releases/download/$NASUX_PKG_VERSION/EasyRSA-$NASUX_PKG_VERSION.tgz
+NASUX_PKG_SHA256=dbdaf5b9444b99e0c5221fd4bcf15384c62380c1b63cea23d42239414d7b2d4e
 TERMUX_PKG_CONFFILES="etc/easy-rsa/openssl-1.0.cnf, etc/easy-rsa/vars"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 
 termux_step_make_install() {
     install -D -m0755 easyrsa "${TERMUX_PREFIX}"/bin/easyrsa

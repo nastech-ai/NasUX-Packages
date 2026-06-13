@@ -1,3 +1,3 @@
-TERMUX_SUBPKG_INCLUDE="share/inkscape/tutorials"
-TERMUX_SUBPKG_DESCRIPTION="Inkscape tutorials"
+NASUX_SUBPKG_INCLUDE="share/inkscape/tutorials"
+NASUX_SUBPKG_DESCRIPTION="Inkscape tutorials"
 TERMUX_SUBPKG_PLATFORM_INDEPENDENT=true

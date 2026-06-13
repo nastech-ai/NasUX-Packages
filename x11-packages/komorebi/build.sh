@@ -1,12 +1,12 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/cheesecakeufo/komorebi
-TERMUX_PKG_DESCRIPTION="Animated Wallpapers for Linux"
-TERMUX_PKG_LICENSE="GPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="2.1"
+NASUX_PKG_HOMEPAGE=https://github.com/cheesecakeufo/komorebi
+NASUX_PKG_DESCRIPTION="Animated Wallpapers for Linux"
+NASUX_PKG_LICENSE="GPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="2.1"
 TERMUX_PKG_REVISION=3
-TERMUX_PKG_SRCURL="https://github.com/cheesecakeufo/komorebi/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz"
-TERMUX_PKG_SHA256=66ee2fe21e16c3f9c18b824fa88a8b726812b1fdd81217cb53f7dad8d6dbae0f
-TERMUX_PKG_DEPENDS="clutter, clutter-gst, clutter-gtk, gdk-pixbuf, glib, gstreamer, gtk3, komorebi-data, libgee, webkit2gtk-4.1"
+NASUX_PKG_SRCURL="https://github.com/cheesecakeufo/komorebi/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz"
+NASUX_PKG_SHA256=66ee2fe21e16c3f9c18b824fa88a8b726812b1fdd81217cb53f7dad8d6dbae0f
+NASUX_PKG_DEPENDS="clutter, clutter-gst, clutter-gtk, gdk-pixbuf, glib, gstreamer, gtk3, komorebi-data, libgee, webkit2gtk-4.1"
 TERMUX_PKG_BUILD_DEPENDS="g-ir-scanner, valac"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DCMAKE_POLICY_VERSION_MINIMUM=3.5
@@ -19,5 +19,5 @@ termux_step_post_get_source() {
 }
 
 termux_step_pre_configure() {
-	termux_setup_gir
+	nasux_setup_gir
 }

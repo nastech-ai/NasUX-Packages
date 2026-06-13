@@ -1,6 +1,6 @@
-TERMUX_SUBPKG_DESCRIPTION="Tkinter support for Python 3"
+NASUX_SUBPKG_DESCRIPTION="Tkinter support for Python 3"
 TERMUX_SUBPKG_DEPENDS="tcl, tk"
-TERMUX_SUBPKG_INCLUDE="
+NASUX_SUBPKG_INCLUDE="
 bin/idle*
 lib/python${_MAJOR_VERSION}/idlelib
 lib/python${_MAJOR_VERSION}/tkinter

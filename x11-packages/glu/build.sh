@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE=https://cgit.freedesktop.org/mesa/glu/
-TERMUX_PKG_DESCRIPTION="Mesa OpenGL Utility library"
-TERMUX_PKG_LICENSE="custom"
-TERMUX_PKG_LICENSE_FILE="LICENSE"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=9.0.3
+NASUX_PKG_HOMEPAGE=https://cgit.freedesktop.org/mesa/glu/
+NASUX_PKG_DESCRIPTION="Mesa OpenGL Utility library"
+NASUX_PKG_LICENSE="custom"
+NASUX_PKG_LICENSE_FILE="LICENSE"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=9.0.3
 TERMUX_PKG_REVISION=1
-TERMUX_PKG_SRCURL=https://mesa.freedesktop.org/archive/glu/glu-$TERMUX_PKG_VERSION.tar.xz
-TERMUX_PKG_SHA256=bd43fe12f374b1192eb15fe20e45ff456b9bc26ab57f0eee919f96ca0f8a330f
-TERMUX_PKG_DEPENDS="libc++, opengl"
+NASUX_PKG_SRCURL=https://mesa.freedesktop.org/archive/glu/glu-$NASUX_PKG_VERSION.tar.xz
+NASUX_PKG_SHA256=bd43fe12f374b1192eb15fe20e45ff456b9bc26ab57f0eee919f96ca0f8a330f
+NASUX_PKG_DEPENDS="libc++, opengl"
 TERMUX_PKG_CONFLICTS="libglu"
 TERMUX_PKG_REPLACES="libglu"
 

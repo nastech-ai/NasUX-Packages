@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE=https://ibotpeaches.github.io/Apktool/
-TERMUX_PKG_DESCRIPTION="A tool for reverse engineering 3rd party, closed, binary Android apps"
-TERMUX_PKG_LICENSE="Apache-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=2.6.1
+NASUX_PKG_HOMEPAGE=https://ibotpeaches.github.io/Apktool/
+NASUX_PKG_DESCRIPTION="A tool for reverse engineering 3rd party, closed, binary Android apps"
+NASUX_PKG_LICENSE="Apache-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=2.6.1
 TERMUX_PKG_REVISION=1
-TERMUX_PKG_SRCURL=https://github.com/iBotPeaches/Apktool/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=8932e77d963b9e0e07227422d82ed4a355e8aa268bad1361e5cfaffa8e4d52ee
-TERMUX_PKG_DEPENDS="aapt, aapt2, openjdk-17"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_SRCURL=https://github.com/iBotPeaches/Apktool/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=8932e77d963b9e0e07227422d82ed4a355e8aa268bad1361e5cfaffa8e4d52ee
+NASUX_PKG_DEPENDS="aapt, aapt2, openjdk-17"
+NASUX_PKG_BUILD_IN_SRC=true
 
 termux_step_pre_configure() {
 	local prebuilt_dir="brut.apktool/apktool-lib/src/main/resources/prebuilt"

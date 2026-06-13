@@ -1,12 +1,12 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/lbeckman314/mdbook-latex
-TERMUX_PKG_DESCRIPTION="An mdbook backend for generating LaTeX and PDF documents"
-TERMUX_PKG_LICENSE="MPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=0.1.42
-TERMUX_PKG_SRCURL=https://github.com/lbeckman314/mdbook-latex/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=4b480a79e491a49653104de51d3ee409929093ffef04b2b2c707f09e7ce2e1f8
-TERMUX_PKG_DEPENDS="fontconfig, freetype, harfbuzz, libexpat, libgraphite, libicu, libpng, openssl-1.1, zlib"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_HOMEPAGE=https://github.com/lbeckman314/mdbook-latex
+NASUX_PKG_DESCRIPTION="An mdbook backend for generating LaTeX and PDF documents"
+NASUX_PKG_LICENSE="MPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=0.1.42
+NASUX_PKG_SRCURL=https://github.com/lbeckman314/mdbook-latex/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=4b480a79e491a49653104de51d3ee409929093ffef04b2b2c707f09e7ce2e1f8
+NASUX_PKG_DEPENDS="fontconfig, freetype, harfbuzz, libexpat, libgraphite, libicu, libpng, openssl-1.1, zlib"
+NASUX_PKG_BUILD_IN_SRC=true
 
 termux_step_pre_configure() {
 	# openssl-sys supports OpenSSL 3 in >= 0.9.69
@@ -19,7 +19,7 @@ termux_step_pre_configure() {
 	local env_host=$(printf $CARGO_TARGET_NAME | tr a-z A-Z | sed s/-/_/g)
 	export CARGO_TARGET_${env_host}_RUSTFLAGS+=" -C link-arg=-Wl,-rpath=$TERMUX_PREFIX/lib/openssl-1.1"
 
-	termux_setup_rust
+	nasux_setup_rust
 
 	: "${CARGO_HOME:=$HOME/.cargo}"
 	export CARGO_HOME

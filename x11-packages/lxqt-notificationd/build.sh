@@ -1,11 +1,11 @@
-TERMUX_PKG_HOMEPAGE=https://lxqt.github.io
-TERMUX_PKG_DESCRIPTION="The LXQt notification daemon"
-TERMUX_PKG_LICENSE="LGPL-2.1"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="2.4.0"
-TERMUX_PKG_SRCURL="https://github.com/lxqt/lxqt-notificationd/releases/download/${TERMUX_PKG_VERSION}/lxqt-notificationd-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=525a21feb622cb255f10b7ebd28b4af5afba9da4833560337f167ffe5f1d19d2
-TERMUX_PKG_DEPENDS="kf6-kwindowsystem, layer-shell-qt, libc++, liblxqt, libqtxdg, qt6-qtbase"
+NASUX_PKG_HOMEPAGE=https://lxqt.github.io
+NASUX_PKG_DESCRIPTION="The LXQt notification daemon"
+NASUX_PKG_LICENSE="LGPL-2.1"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="2.4.0"
+NASUX_PKG_SRCURL="https://github.com/lxqt/lxqt-notificationd/releases/download/${NASUX_PKG_VERSION}/lxqt-notificationd-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=525a21feb622cb255f10b7ebd28b4af5afba9da4833560337f167ffe5f1d19d2
+NASUX_PKG_DEPENDS="kf6-kwindowsystem, layer-shell-qt, libc++, liblxqt, libqtxdg, qt6-qtbase"
 TERMUX_PKG_BUILD_DEPENDS="lxqt-build-tools, qt6-qttools"
 TERMUX_PKG_AUTO_UPDATE=true
 

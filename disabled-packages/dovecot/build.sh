@@ -1,11 +1,11 @@
-TERMUX_PKG_HOMEPAGE=https://www.dovecot.org
-TERMUX_PKG_DESCRIPTION="Secure IMAP and POP3 email server"
-TERMUX_PKG_LICENSE="LGPL-2.1"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=2.2.31
-TERMUX_PKG_SRCURL=https://www.dovecot.org/releases/2.2/dovecot-$TERMUX_PKG_VERSION.tar.gz
-TERMUX_PKG_SHA256=034be40907748128d65088a4f59789b2f99ae7b33a88974eae0b6a68ece376a1
-TERMUX_PKG_DEPENDS="openssl, libcrypt"
+NASUX_PKG_HOMEPAGE=https://www.dovecot.org
+NASUX_PKG_DESCRIPTION="Secure IMAP and POP3 email server"
+NASUX_PKG_LICENSE="LGPL-2.1"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=2.2.31
+NASUX_PKG_SRCURL=https://www.dovecot.org/releases/2.2/dovecot-$NASUX_PKG_VERSION.tar.gz
+NASUX_PKG_SHA256=034be40907748128d65088a4f59789b2f99ae7b33a88974eae0b6a68ece376a1
+NASUX_PKG_DEPENDS="openssl, libcrypt"
 # turning on icu gives undefined reference to __cxa_call_unexpected
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --with-zlib
@@ -30,7 +30,7 @@ termux_step_pre_configure() {
 
 	for i in $(find $TERMUX_PKG_SRCDIR/src/director -type f); do sed 's|\bstruct user\b|struct usertest|g' -i $i; done
 
-	if [ "$TERMUX_ARCH" == "aarch64" ]; then
+	if [ "$NASUX_ARCH" == "aarch64" ]; then
 		TERMUX_PKG_EXTRA_CONFIGURE_ARGS+="lib_cv_va_val_copy=yes"
 	else
 		TERMUX_PKG_EXTRA_CONFIGURE_ARGS+="lib_cv_va_val_copy=no"

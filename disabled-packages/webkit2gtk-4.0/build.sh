@@ -1,13 +1,13 @@
 # x11-packages
 # This specific package is for webkit2gtk-4.0.
-TERMUX_PKG_HOMEPAGE=https://webkitgtk.org
-TERMUX_PKG_DESCRIPTION="A full-featured port of the WebKit rendering engine"
-TERMUX_PKG_LICENSE="LGPL-2.1"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=2.38.1
-TERMUX_PKG_SRCURL=https://webkitgtk.org/releases/webkitgtk-${TERMUX_PKG_VERSION}.tar.xz
-TERMUX_PKG_SHA256=02e195b3fb9e057743b3364ee7f1eec13f71614226849544c07c32a73b8f1848
-TERMUX_PKG_DEPENDS="atk, enchant, fontconfig, freetype, glib, gst-plugins-base, gst-plugins-good, gstreamer, gtk3, harfbuzz, harfbuzz-icu, libc++, libcairo, libgcrypt, libhyphen, libicu, libjpeg-turbo, libnotify, libpng, libsoup, libtasn1, libwebp, libxml2, libx11, libxcomposite, libxdamage, libxslt, libxt, littlecms, openjpeg, pango, woff2"
+NASUX_PKG_HOMEPAGE=https://webkitgtk.org
+NASUX_PKG_DESCRIPTION="A full-featured port of the WebKit rendering engine"
+NASUX_PKG_LICENSE="LGPL-2.1"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=2.38.1
+NASUX_PKG_SRCURL=https://webkitgtk.org/releases/webkitgtk-${NASUX_PKG_VERSION}.tar.xz
+NASUX_PKG_SHA256=02e195b3fb9e057743b3364ee7f1eec13f71614226849544c07c32a73b8f1848
+NASUX_PKG_DEPENDS="atk, enchant, fontconfig, freetype, glib, gst-plugins-base, gst-plugins-good, gstreamer, gtk3, harfbuzz, harfbuzz-icu, libc++, libcairo, libgcrypt, libhyphen, libicu, libjpeg-turbo, libnotify, libpng, libsoup, libtasn1, libwebp, libxml2, libx11, libxcomposite, libxdamage, libxslt, libxt, littlecms, openjpeg, pango, woff2"
 TERMUX_PKG_BUILD_DEPENDS="g-ir-scanner, xorgproto"
 #TERMUX_PKG_PROVIDES="webkit2gtk-4.0"
 TERMUX_PKG_BREAKS="webkit, webkitgtk"
@@ -36,7 +36,7 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 TERMUX_PKG_RM_AFTER_INSTALL="bin/WebKitWebDriver"
 
 termux_step_pre_configure() {
-	termux_setup_gir
+	nasux_setup_gir
 
 	CPPFLAGS+=" -DHAVE_MISSING_STD_FILESYSTEM_PATH_CONSTRUCTOR"
 	CPPFLAGS+=" -DCMS_NO_REGISTER_KEYWORD"

@@ -1,11 +1,11 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/ambrop72/badvpn
-TERMUX_PKG_DESCRIPTION="UDP gateway for BadVPN"
-TERMUX_PKG_LICENSE="BSD 3-Clause"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=1.999.130
+NASUX_PKG_HOMEPAGE=https://github.com/ambrop72/badvpn
+NASUX_PKG_DESCRIPTION="UDP gateway for BadVPN"
+NASUX_PKG_LICENSE="BSD 3-Clause"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=1.999.130
 TERMUX_PKG_REVISION=1
-TERMUX_PKG_SRCURL=https://github.com/ambrop72/badvpn/archive/refs/tags/${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=bfd4bbfebd7274bcec792558c9a2fd60e39cd92e04673825ade5d04154766109
+NASUX_PKG_SRCURL=https://github.com/ambrop72/badvpn/archive/refs/tags/${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=bfd4bbfebd7274bcec792558c9a2fd60e39cd92e04673825ade5d04154766109
 
 termux_step_configure() {
 	:

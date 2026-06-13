@@ -1,17 +1,17 @@
-TERMUX_PKG_HOMEPAGE=https://www.qt.io/
-TERMUX_PKG_DESCRIPTION="Qt 6 WebEngine Library"
-TERMUX_PKG_LICENSE="GPL-3.0"
-TERMUX_PKG_MAINTAINER="@licy183"
-TERMUX_PKG_VERSION="6.11.1"
-TERMUX_PKG_SRCURL="https://download.qt.io/official_releases/qt/${TERMUX_PKG_VERSION%.*}/${TERMUX_PKG_VERSION}/submodules/qtwebengine-everywhere-src-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=679c66ccc6c158fc215e9c58ef160331ecd29974232e345c05161889f8667083
-TERMUX_PKG_DEPENDS="dbus, fontconfig, libc++, libexpat, libjpeg-turbo, libminizip, libnspr, libnss, libopus, libpng, libsnappy, libvpx, libwebp, libx11, libxkbfile, mesa, pulseaudio, qt6-qtbase (>= ${TERMUX_PKG_VERSION}), qt6-qtdeclarative (>= ${TERMUX_PKG_VERSION}), qt6-qtwebchannel (>= ${TERMUX_PKG_VERSION}), zlib"
+NASUX_PKG_HOMEPAGE=https://www.qt.io/
+NASUX_PKG_DESCRIPTION="Qt 6 WebEngine Library"
+NASUX_PKG_LICENSE="GPL-3.0"
+NASUX_PKG_MAINTAINER="@licy183"
+NASUX_PKG_VERSION="6.11.1"
+NASUX_PKG_SRCURL="https://download.qt.io/official_releases/qt/${NASUX_PKG_VERSION%.*}/${NASUX_PKG_VERSION}/submodules/qtwebengine-everywhere-src-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=679c66ccc6c158fc215e9c58ef160331ecd29974232e345c05161889f8667083
+NASUX_PKG_DEPENDS="dbus, fontconfig, libc++, libexpat, libjpeg-turbo, libminizip, libnspr, libnss, libopus, libpng, libsnappy, libvpx, libwebp, libx11, libxkbfile, mesa, pulseaudio, qt6-qtbase (>= ${NASUX_PKG_VERSION}), qt6-qtdeclarative (>= ${NASUX_PKG_VERSION}), qt6-qtwebchannel (>= ${NASUX_PKG_VERSION}), zlib"
 TERMUX_PKG_BUILD_DEPENDS="qt6-qtbase-cross-tools, qt6-qtdeclarative-cross-tools"
 TERMUX_PKG_HOSTBUILD=true
 TERMUX_PKG_NO_STATICSPLIT=true
 TERMUX_PKG_ON_DEVICE_BUILD_NOT_SUPPORTED=true
 # Qt6-Webengine doesn't support cross-compile for i386.
-TERMUX_PKG_EXCLUDED_ARCHES="i686"
+NASUX_PKG_EXCLUDED_ARCHES="i686"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DCMAKE_MESSAGE_LOG_LEVEL=STATUS
 -DCMAKE_SYSTEM_NAME=Linux
@@ -33,8 +33,8 @@ termux_step_post_get_source() {
 }
 
 termux_step_host_build() {
-	termux_setup_cmake
-	termux_setup_ninja
+	nasux_setup_cmake
+	nasux_setup_ninja
 
 	mkdir -p host-gn-build
 	pushd host-gn-build
@@ -47,20 +47,20 @@ termux_step_host_build() {
 }
 
 termux_step_configure() {
-	termux_setup_cmake
-	termux_setup_ninja
-	termux_setup_nodejs
+	nasux_setup_cmake
+	nasux_setup_ninja
+	nasux_setup_nodejs
 
 	export PATH="$TERMUX_PKG_HOSTBUILD_DIR/host-gn-build/MinSizeRel:$PATH"
 
-	# Remove termux's dummy pkg-config
+	# Remove nasux's dummy pkg-config
 	rm -rf $TERMUX_PKG_CACHEDIR/host-pkg-config-bin
 	mkdir -p $TERMUX_PKG_CACHEDIR/host-pkg-config-bin
 	ln -s /usr/bin/pkg-config "$TERMUX_PKG_CACHEDIR"/host-pkg-config-bin/pkg-config
 	export PATH="$TERMUX_PKG_CACHEDIR/host-pkg-config-bin:$PATH"
 
 	# Create dummy sysroot
-	if [ ! -d "$TERMUX_PKG_CACHEDIR/sysroot-$TERMUX_ARCH" ]; then
+	if [ ! -d "$TERMUX_PKG_CACHEDIR/sysroot-$NASUX_ARCH" ]; then
 		rm -rf $TERMUX_PKG_TMPDIR/sysroot
 		mkdir -p $TERMUX_PKG_TMPDIR/sysroot
 		pushd $TERMUX_PKG_TMPDIR/sysroot
@@ -75,7 +75,7 @@ termux_step_configure() {
 		cp -Rf $TERMUX_PREFIX/lib/* usr/lib
 		ln -sf /data ./data
 		popd
-		mv $TERMUX_PKG_TMPDIR/sysroot $TERMUX_PKG_CACHEDIR/sysroot-$TERMUX_ARCH
+		mv $TERMUX_PKG_TMPDIR/sysroot $TERMUX_PKG_CACHEDIR/sysroot-$NASUX_ARCH
 	fi
 
 	# Dummy pthread, rt and resolve
@@ -84,7 +84,7 @@ termux_step_configure() {
 	echo '!<arch>' > "$TERMUX_PREFIX/lib/libpthread.a"
 	echo '!<arch>' > "$TERMUX_PREFIX/lib/libresolv.a"
 
-	TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" -DDUMMY_SYSROOT=$TERMUX_PKG_CACHEDIR/sysroot-$TERMUX_ARCH"
+	TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" -DDUMMY_SYSROOT=$TERMUX_PKG_CACHEDIR/sysroot-$NASUX_ARCH"
 
 	: ${NINJAFLAGS:=""}
 	export NINJAFLAGS

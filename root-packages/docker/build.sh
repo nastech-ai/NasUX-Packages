@@ -1,29 +1,29 @@
-TERMUX_PKG_HOMEPAGE=https://docker.com
-TERMUX_PKG_DESCRIPTION="Set of products that use OS-level virtualization to deliver software in packages called containers."
-TERMUX_PKG_LICENSE="Apache-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=1:24.0.6
+NASUX_PKG_HOMEPAGE=https://docker.com
+NASUX_PKG_DESCRIPTION="Set of products that use OS-level virtualization to deliver software in packages called containers."
+NASUX_PKG_LICENSE="Apache-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=1:24.0.6
 TERMUX_PKG_REVISION=4
 LIBNETWORK_COMMIT=67e0588f1ddfaf2faf4c8cae8b7ea2876434d91c
 DOCKER_GITCOMMIT=ed223bc
-TERMUX_PKG_SRCURL=(https://github.com/moby/moby/archive/refs/tags/v${TERMUX_PKG_VERSION:2}.tar.gz
-                   https://github.com/docker/cli/archive/refs/tags/v${TERMUX_PKG_VERSION:2}.tar.gz
+NASUX_PKG_SRCURL=(https://github.com/moby/moby/archive/refs/tags/v${NASUX_PKG_VERSION:2}.tar.gz
+                   https://github.com/docker/cli/archive/refs/tags/v${NASUX_PKG_VERSION:2}.tar.gz
                    https://github.com/moby/libnetwork/archive/${LIBNETWORK_COMMIT}.tar.gz)
-TERMUX_PKG_DEPENDS="containerd, libdevmapper, resolv-conf"
-TERMUX_PKG_SHA256=(29a8ee54e9ea008b40eebca42dec8b67ab257eb8ac175f67e79c110e4187d7d2
+NASUX_PKG_DEPENDS="containerd, libdevmapper, resolv-conf"
+NASUX_PKG_SHA256=(29a8ee54e9ea008b40eebca42dec8b67ab257eb8ac175f67e79c110e4187d7d2
                    c1a4a580ced3633e489c5c9869a20198415da44df7023fdc200d425cdf5fa652
                    4ab6f6c97db834c2eedc053d06c4d32d268f33051b8148098b4a0e8eee51e97b)
 TERMUX_PKG_CONFFILES="etc/docker/daemon.json"
 TERMUX_PKG_SERVICE_SCRIPT=("dockerd" "exec su -c \"PATH=\$PATH $TERMUX_PREFIX/bin/dockerd 2>&1\"")
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_SKIP_SRC_EXTRACT=true
 
 termux_step_get_source() {
-	local PKG_SRCURL=(${TERMUX_PKG_SRCURL[@]})
-	local PKG_SHA256=(${TERMUX_PKG_SHA256[@]})
+	local PKG_SRCURL=(${NASUX_PKG_SRCURL[@]})
+	local PKG_SHA256=(${NASUX_PKG_SHA256[@]})
 
 	if [ ${#PKG_SRCURL[@]} != ${#PKG_SHA256[@]} ]; then
-		termux_error_exit "length of TERMUX_PKG_SRCURL isn't equal to length of TERMUX_PKG_SHA256."
+		termux_error_exit "length of NASUX_PKG_SRCURL isn't equal to length of NASUX_PKG_SHA256."
 	fi
 
 	# download and extract packages into its own folder inside $TERMUX_PKG_SRCDIR
@@ -36,7 +36,7 @@ termux_step_get_source() {
 		tar xf "$file" -C "$TERMUX_PKG_SRCDIR"
 	done
 
-	# delete trailing -$TERMUX_PKG_VERSION from folder name
+	# delete trailing -$NASUX_PKG_VERSION from folder name
 	# so patches become portable across different versions
 	cd "$TERMUX_PKG_SRCDIR"
 	for folder in $(ls); do
@@ -48,7 +48,7 @@ termux_step_get_source() {
 
 termux_step_pre_configure() {
 	# setup go build environment
-	termux_setup_golang
+	nasux_setup_golang
 	export GO111MODULE=auto
 }
 
@@ -98,7 +98,7 @@ termux_step_make() {
 	cd "${GOPATH}/src/github.com/docker/cli"
 
 	# issue the build command
-	export VERSION=v${TERMUX_PKG_VERSION}-ce
+	export VERSION=v${NASUX_PKG_VERSION}-ce
 	export DISABLE_WARN_OUTSIDE_CONTAINER=1
 	export LDFLAGS="-L ${TERMUX_PREFIX}/lib -r ${TERMUX_PREFIX}/lib"
 	make -j ${TERMUX_PKG_MAKE_PROCESSES} dynbinary

@@ -1,12 +1,12 @@
-TERMUX_PKG_HOMEPAGE=https://www.gnome.org/
-TERMUX_PKG_DESCRIPTION="Allows you to load glade interface files in a program at runtime"
-TERMUX_PKG_LICENSE="LGPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=2.6.4
+NASUX_PKG_HOMEPAGE=https://www.gnome.org/
+NASUX_PKG_DESCRIPTION="Allows you to load glade interface files in a program at runtime"
+NASUX_PKG_LICENSE="LGPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=2.6.4
 TERMUX_PKG_REVISION=24
-TERMUX_PKG_SRCURL=https://download.gnome.org/sources/libglade/2.6/libglade-${TERMUX_PKG_VERSION}.tar.bz2
-TERMUX_PKG_SHA256=64361e7647839d36ed8336d992fd210d3e8139882269bed47dc4674980165dec
-TERMUX_PKG_DEPENDS="atk, fontconfig, freetype, gdk-pixbuf, glib, gtk2, libcairo, libxml2, pango"
+NASUX_PKG_SRCURL=https://download.gnome.org/sources/libglade/2.6/libglade-${NASUX_PKG_VERSION}.tar.bz2
+NASUX_PKG_SHA256=64361e7647839d36ed8336d992fd210d3e8139882269bed47dc4674980165dec
+NASUX_PKG_DEPENDS="atk, fontconfig, freetype, gdk-pixbuf, glib, gtk2, libcairo, libxml2, pango"
 TERMUX_PKG_RM_AFTER_INSTALL="share/gtk-doc"
 
 # For libglade-convert.

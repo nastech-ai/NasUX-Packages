@@ -1,5 +1,5 @@
-TERMUX_SUBPKG_DESCRIPTION="Python bindings and CLI tools for Frida"
-TERMUX_SUBPKG_INCLUDE="
+NASUX_SUBPKG_DESCRIPTION="Python bindings and CLI tools for Frida"
+NASUX_SUBPKG_INCLUDE="
 bin/frida
 bin/frida-apk
 bin/frida-create

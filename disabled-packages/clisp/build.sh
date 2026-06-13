@@ -1,11 +1,11 @@
-TERMUX_PKG_HOMEPAGE=http://www.clisp.org/
-TERMUX_PKG_DESCRIPTION="GNU CLISP - an ANSI Common Lisp Implementation"
-TERMUX_PKG_LICENSE="GPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=2.49
-TERMUX_PKG_SRCURL=http://downloads.sourceforge.net/project/clisp/clisp/${TERMUX_PKG_VERSION}/clisp-${TERMUX_PKG_VERSION}.tar.bz2
-TERMUX_PKG_SHA256="8132ff353afaa70e6b19367a25ae3d5a43627279c25647c220641fed00f8e890"
-TERMUX_PKG_DEPENDS="readline, libandroid-support"
+NASUX_PKG_HOMEPAGE=http://www.clisp.org/
+NASUX_PKG_DESCRIPTION="GNU CLISP - an ANSI Common Lisp Implementation"
+NASUX_PKG_LICENSE="GPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=2.49
+NASUX_PKG_SRCURL=http://downloads.sourceforge.net/project/clisp/clisp/${NASUX_PKG_VERSION}/clisp-${NASUX_PKG_VERSION}.tar.bz2
+NASUX_PKG_SHA256="8132ff353afaa70e6b19367a25ae3d5a43627279c25647c220641fed00f8e890"
+NASUX_PKG_DEPENDS="readline, libandroid-support"
 TERMUX_PKG_MAKE_PROCESSES=1
 
 termux_step_configure() {

@@ -1,17 +1,17 @@
-TERMUX_PKG_HOMEPAGE="https://invent.kde.org/frameworks/kcalendarcore"
-TERMUX_PKG_DESCRIPTION="Library for Interfacing with Calendars"
-TERMUX_PKG_LICENSE="BSD 3-Clause, LGPL-2.0-or-later, LGPL-3.0-or-later"
-TERMUX_PKG_LICENSE_FILE="
+NASUX_PKG_HOMEPAGE="https://invent.kde.org/frameworks/kcalendarcore"
+NASUX_PKG_DESCRIPTION="Library for Interfacing with Calendars"
+NASUX_PKG_LICENSE="BSD 3-Clause, LGPL-2.0-or-later, LGPL-3.0-or-later"
+NASUX_PKG_LICENSE_FILE="
 LICENSES/BSD-3-Clause.txt
 LICENSES/LGPL-2.0-or-later.txt
 LICENSES/LGPL-3.0-or-later.txt
 "
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="6.27.0"
-TERMUX_PKG_SRCURL="https://download.kde.org/stable/frameworks/${TERMUX_PKG_VERSION%.*}/kcalendarcore-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=4228869722c5bb5325b7c5b10555e6b747bde0e36cbd43519d8681fe3b383173
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="6.27.0"
+NASUX_PKG_SRCURL="https://download.kde.org/stable/frameworks/${NASUX_PKG_VERSION%.*}/kcalendarcore-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=4228869722c5bb5325b7c5b10555e6b747bde0e36cbd43519d8681fe3b383173
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="libc++, libical, qt6-qtbase, qt6-qtdeclarative"
+NASUX_PKG_DEPENDS="libc++, libical, qt6-qtbase, qt6-qtdeclarative"
 TERMUX_PKG_BUILD_DEPENDS="extra-cmake-modules, qt6-qttools"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DBUILD_PYTHON_BINDINGS=OFF

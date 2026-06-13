@@ -1,16 +1,16 @@
-TERMUX_PKG_HOMEPAGE="https://github.com/kubernetes/minikube"
-TERMUX_PKG_DESCRIPTION="minikube implements a local Kubernetes cluster."
-TERMUX_PKG_LICENSE="Apache-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="1.38.1"
-TERMUX_PKG_SRCURL="https://github.com/kubernetes/minikube/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz"
-TERMUX_PKG_SHA256=f3401ff708235441d12ee47f5e8b5e7f55e7944585ae2a9bdb4b8cb629838f7c
+NASUX_PKG_HOMEPAGE="https://github.com/kubernetes/minikube"
+NASUX_PKG_DESCRIPTION="minikube implements a local Kubernetes cluster."
+NASUX_PKG_LICENSE="Apache-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="1.38.1"
+NASUX_PKG_SRCURL="https://github.com/kubernetes/minikube/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz"
+NASUX_PKG_SHA256=f3401ff708235441d12ee47f5e8b5e7f55e7944585ae2a9bdb4b8cb629838f7c
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="docker, kubectl"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_DEPENDS="docker, kubectl"
+NASUX_PKG_BUILD_IN_SRC=true
 
 termux_step_pre_configure() {
-	termux_setup_golang
+	nasux_setup_golang
 
 	go mod init || :
 	go mod tidy

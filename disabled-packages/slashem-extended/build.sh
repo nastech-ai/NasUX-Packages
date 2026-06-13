@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE=https://nethackwiki.com/wiki/Slash%27EM_Extended
-TERMUX_PKG_DESCRIPTION="A variant of SLASH'EM (a variant of NetHack)"
-TERMUX_PKG_LICENSE="Nethack"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=2.7.0
+NASUX_PKG_HOMEPAGE=https://nethackwiki.com/wiki/Slash%27EM_Extended
+NASUX_PKG_DESCRIPTION="A variant of SLASH'EM (a variant of NetHack)"
+NASUX_PKG_LICENSE="Nethack"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=2.7.0
 TERMUX_PKG_REVISION=1
-TERMUX_PKG_SRCURL=https://github.com/SLASHEM-Extended/SLASHEM-Extended/archive/refs/tags/slex-${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=54d301bcb8d79d92030a30195f091e694f843d4656061dbce85730fc12023dee
-TERMUX_PKG_DEPENDS="ncurses"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_SRCURL=https://github.com/SLASHEM-Extended/SLASHEM-Extended/archive/refs/tags/slex-${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=54d301bcb8d79d92030a30195f091e694f843d4656061dbce85730fc12023dee
+NASUX_PKG_DEPENDS="ncurses"
+NASUX_PKG_BUILD_IN_SRC=true
 
 termux_step_configure() {
 	for s in dgn lev; do
@@ -20,8 +20,8 @@ termux_step_configure() {
 
 termux_step_make() {
 	CFLAGS+=" -fcommon -DMAILPATH=\\\"/dev/null\\\""
-	export CFLAGS_FOR_BUILD="-m${TERMUX_ARCH_BITS} -O2 -fcommon"
-	export LDFLAGS_FOR_BUILD="-m${TERMUX_ARCH_BITS}"
+	export CFLAGS_FOR_BUILD="-m${NASUX_ARCH_BITS} -O2 -fcommon"
+	export LDFLAGS_FOR_BUILD="-m${NASUX_ARCH_BITS}"
 	make -f sys/unix/GNUmakefile
 }
 

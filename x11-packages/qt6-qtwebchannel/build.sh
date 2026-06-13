@@ -1,12 +1,12 @@
-TERMUX_PKG_HOMEPAGE=https://www.qt.io/
-TERMUX_PKG_DESCRIPTION="Qt 6 WebChannel Library"
-TERMUX_PKG_LICENSE="LGPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="6.11.1"
-TERMUX_PKG_SRCURL="https://download.qt.io/archive/qt/${TERMUX_PKG_VERSION%.*}/${TERMUX_PKG_VERSION}/submodules/qtwebchannel-everywhere-src-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=69fbb50b71d6e6596c2d6863ee9a9c984a4d01378ee2b7b4163bb467a0158d82
-TERMUX_PKG_DEPENDS="libc++, qt6-qtbase (>= ${TERMUX_PKG_VERSION}), qt6-qtdeclarative (>= ${TERMUX_PKG_VERSION}), qt6-qtwebsockets (>= ${TERMUX_PKG_VERSION})"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_HOMEPAGE=https://www.qt.io/
+NASUX_PKG_DESCRIPTION="Qt 6 WebChannel Library"
+NASUX_PKG_LICENSE="LGPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="6.11.1"
+NASUX_PKG_SRCURL="https://download.qt.io/archive/qt/${NASUX_PKG_VERSION%.*}/${NASUX_PKG_VERSION}/submodules/qtwebchannel-everywhere-src-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=69fbb50b71d6e6596c2d6863ee9a9c984a4d01378ee2b7b4163bb467a0158d82
+NASUX_PKG_DEPENDS="libc++, qt6-qtbase (>= ${NASUX_PKG_VERSION}), qt6-qtdeclarative (>= ${NASUX_PKG_VERSION}), qt6-qtwebsockets (>= ${NASUX_PKG_VERSION})"
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_NO_STATICSPLIT=true
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DCMAKE_SYSTEM_NAME=Linux

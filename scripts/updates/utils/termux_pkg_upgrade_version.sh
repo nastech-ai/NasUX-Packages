@@ -26,9 +26,9 @@ termux_pkg_upgrade_version() {
 	local LATEST_VERSION SKIP_VERSION_CHECK EPOCH
 	LATEST_VERSION="$(sort -rV <<< "$1")" # Ensure its sorted in descending version order.
 	SKIP_VERSION_CHECK="${2:-}"
-	EPOCH="${TERMUX_PKG_VERSION%%:*}" # If there is no epoch, this will be the full version.
+	EPOCH="${NASUX_PKG_VERSION%%:*}" # If there is no epoch, this will be the full version.
 	# Check if it isn't the full version and add ':'.
-	if [[ "${EPOCH}" != "${TERMUX_PKG_VERSION}" ]]; then
+	if [[ "${EPOCH}" != "${NASUX_PKG_VERSION}" ]]; then
 		EPOCH="${EPOCH}:"
 	else
 		EPOCH=""
@@ -83,7 +83,7 @@ termux_pkg_upgrade_version() {
 
 	if [[ "${SKIP_VERSION_CHECK}" != "--skip-version-check" ]]; then
 		if ! termux_pkg_is_update_needed \
-			"${TERMUX_PKG_VERSION#*:}" "${LATEST_VERSION}"; then
+			"${NASUX_PKG_VERSION#*:}" "${LATEST_VERSION}"; then
 			echo "INFO: No update needed. Already at version '${LATEST_VERSION}'."
 			return 0
 		fi
@@ -101,14 +101,14 @@ termux_pkg_upgrade_version() {
 	echo "INFO: package being updated to ${LATEST_VERSION}."
 
 	sed \
-		-e "s/^\(TERMUX_PKG_VERSION=\)\(.*\)\$/\1\"${EPOCH}${LATEST_VERSION}\"/g" \
+		-e "s/^\(NASUX_PKG_VERSION=\)\(.*\)\$/\1\"${EPOCH}${LATEST_VERSION}\"/g" \
 		-e "/TERMUX_PKG_REVISION=/d" \
 		-i "${TERMUX_PKG_BUILDER_DIR}/build.sh"
 
 	# Update checksum
-	if [[ "${TERMUX_PKG_SHA256[*]}" != "SKIP_CHECKSUM" && "${TERMUX_PKG_SRCURL:0:4}" != "git+" ]]; then
-		echo n | "${TERMUX_SCRIPTDIR}/scripts/bin/update-checksum" "${TERMUX_PKG_NAME}" || {
-			git checkout -- "${TERMUX_SCRIPTDIR}"
+	if [[ "${NASUX_PKG_SHA256[*]}" != "SKIP_CHECKSUM" && "${NASUX_PKG_SRCURL:0:4}" != "git+" ]]; then
+		echo n | "${NASUX_SCRIPTDIR}/scripts/bin/update-checksum" "${TERMUX_PKG_NAME}" || {
+			git checkout -- "${NASUX_SCRIPTDIR}"
 			git pull --rebase --autostash
 			termux_error_exit "failed to update checksum."
 		}
@@ -116,10 +116,10 @@ termux_pkg_upgrade_version() {
 
 	echo "INFO: Trying to build package."
 
-	for repo_path in $(jq --raw-output 'del(.pkg_format) | keys | .[]' "${TERMUX_SCRIPTDIR}/repo.json"); do
-		_buildsh_path="${TERMUX_SCRIPTDIR}/${repo_path}/${TERMUX_PKG_NAME}/build.sh"
-		repo="$(jq --raw-output ".\"${repo_path}\".name" "${TERMUX_SCRIPTDIR}/repo.json")"
-		repo="${repo#"termux-"}"
+	for repo_path in $(jq --raw-output 'del(.pkg_format) | keys | .[]' "${NASUX_SCRIPTDIR}/repo.json"); do
+		_buildsh_path="${NASUX_SCRIPTDIR}/${repo_path}/${TERMUX_PKG_NAME}/build.sh"
+		repo="$(jq --raw-output ".\"${repo_path}\".name" "${NASUX_SCRIPTDIR}/repo.json")"
+		repo="${repo#"nasux-"}"
 
 		if [[ -f "${_buildsh_path}" ]]; then
 			echo "INFO: Package ${TERMUX_PKG_NAME} exists in ${repo} repo."
@@ -135,24 +135,24 @@ termux_pkg_upgrade_version() {
 			big_package=true
 			break
 		fi
-	done < "${TERMUX_SCRIPTDIR}/scripts/big-pkgs.list"
+	done < "${NASUX_SCRIPTDIR}/scripts/big-pkgs.list"
 
-	_termux_should_cleanup "${big_package}" && "${TERMUX_SCRIPTDIR}/scripts/run-docker.sh" ./clean.sh
+	_termux_should_cleanup "${big_package}" && "${NASUX_SCRIPTDIR}/scripts/run-docker.sh" ./clean.sh
 
-	if ! "${TERMUX_SCRIPTDIR}/scripts/run-docker.sh" -d ./build-package.sh -C -a "${TERMUX_ARCH}" -i "${TERMUX_PKG_NAME}"; then
-		_termux_should_cleanup "${big_package}" && "${TERMUX_SCRIPTDIR}/scripts/run-docker.sh" ./clean.sh
-		git checkout -- "${TERMUX_SCRIPTDIR}"
+	if ! "${NASUX_SCRIPTDIR}/scripts/run-docker.sh" -d ./build-package.sh -C -a "${NASUX_ARCH}" -i "${TERMUX_PKG_NAME}"; then
+		_termux_should_cleanup "${big_package}" && "${NASUX_SCRIPTDIR}/scripts/run-docker.sh" ./clean.sh
+		git checkout -- "${NASUX_SCRIPTDIR}"
 		termux_error_exit "failed to build."
 	fi
 
-	_termux_should_cleanup "${big_package}" && "${TERMUX_SCRIPTDIR}/scripts/run-docker.sh" ./clean.sh
+	_termux_should_cleanup "${big_package}" && "${NASUX_SCRIPTDIR}/scripts/run-docker.sh" ./clean.sh
 
 	if [[ "${GIT_COMMIT_PACKAGES}" == "true" ]]; then
 		echo "INFO: Committing package."
 		stderr="$(
 			git add \
 				"${TERMUX_PKG_BUILDER_DIR}" \
-				"${TERMUX_SCRIPTDIR}/scripts/build/setup/" \
+				"${NASUX_SCRIPTDIR}/scripts/build/setup/" \
 				2>&1 >/dev/null
 			git commit \
 				-m "bump(${repo}/${TERMUX_PKG_NAME}): ${LATEST_VERSION}" \

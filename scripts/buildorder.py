@@ -5,7 +5,7 @@ import json, os, re, sys
 
 from itertools import filterfalse
 
-termux_arch = os.getenv('TERMUX_ARCH') or 'aarch64'
+termux_arch = os.getenv('NASUX_ARCH') or 'aarch64'
 termux_global_library = os.getenv('TERMUX_GLOBAL_LIBRARY') or 'false'
 termux_pkg_library = os.getenv('TERMUX_PACKAGE_LIBRARY') or 'bionic'
 
@@ -50,12 +50,12 @@ def parse_build_file_dependencies_with_vars(path, vars):
                 for dependency_value in re.split(',|\\|', dependencies_string):
                     # Replace parenthesis to ignore version qualifiers as in "gcc (>= 5.0)":
                     dependency_value = re.sub(r'\(.*?\)', '', dependency_value).strip()
-                    arch = os.getenv('TERMUX_ARCH')
+                    arch = os.getenv('NASUX_ARCH')
                     if arch is None:
                         arch = 'aarch64'
                     if arch == "x86_64":
                         arch = "x86-64"
-                    dependency_value = re.sub(r'\${TERMUX_ARCH/_/-}', arch, dependency_value)
+                    dependency_value = re.sub(r'\${NASUX_ARCH/_/-}', arch, dependency_value)
 
                     dependencies.append(dependency_value)
 
@@ -63,7 +63,7 @@ def parse_build_file_dependencies_with_vars(path, vars):
 
 def parse_build_file_dependencies(path):
     "Extract the dependencies of a build.sh or *.subpackage.sh file."
-    return parse_build_file_dependencies_with_vars(path, ('TERMUX_PKG_DEPENDS', 'TERMUX_PKG_BUILD_DEPENDS', 'TERMUX_SUBPKG_DEPENDS', 'TERMUX_PKG_DEVPACKAGE_DEPENDS'))
+    return parse_build_file_dependencies_with_vars(path, ('NASUX_PKG_DEPENDS', 'TERMUX_PKG_BUILD_DEPENDS', 'TERMUX_SUBPKG_DEPENDS', 'TERMUX_PKG_DEVPACKAGE_DEPENDS'))
 
 def parse_build_file_antidependencies(path):
     "Extract the antidependencies of a build.sh file."
@@ -75,7 +75,7 @@ def parse_build_file_excluded_arches(path):
 
     with open(path, encoding="utf-8") as build_script:
         for line in build_script:
-            if line.startswith(('TERMUX_PKG_EXCLUDED_ARCHES', 'TERMUX_SUBPKG_EXCLUDED_ARCHES')):
+            if line.startswith(('NASUX_PKG_EXCLUDED_ARCHES', 'TERMUX_SUBPKG_EXCLUDED_ARCHES')):
                 arches_string = remove_nl_and_quotes(line.split('ARCHES=')[1])
                 for arches_value in re.split(',', arches_string):
                     arches.append(arches_value.strip())

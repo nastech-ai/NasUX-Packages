@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://ardour.org/
-TERMUX_PKG_DESCRIPTION="A professional digital workstation for working with audio and MIDI"
-TERMUX_PKG_LICENSE="GPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="8.12"
+NASUX_PKG_HOMEPAGE=https://ardour.org/
+NASUX_PKG_DESCRIPTION="A professional digital workstation for working with audio and MIDI"
+NASUX_PKG_LICENSE="GPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="8.12"
 TERMUX_PKG_REVISION=7
-TERMUX_PKG_SRCURL=git+https://github.com/Ardour/ardour
-TERMUX_PKG_GIT_BRANCH="$TERMUX_PKG_VERSION"
-TERMUX_PKG_DEPENDS="aubio, fftw, fontconfig, gdk-pixbuf, glib, gtk2, gtkmm2, libandroid-execinfo, libarchive, libatkmm-1.6, libc++, libcairo, libcairomm-1.0, libcurl, libglibmm-2.4, liblo, liblrdf, libpangomm-1.4, libsamplerate, libsigc++-2.0, libsndfile, libusb, libwebsockets, libx11, libxml2, lilv, pango, pulseaudio, rubberband, suil, taglib, vamp-plugin-sdk"
+NASUX_PKG_SRCURL=git+https://github.com/Ardour/ardour
+TERMUX_PKG_GIT_BRANCH="$NASUX_PKG_VERSION"
+NASUX_PKG_DEPENDS="aubio, fftw, fontconfig, gdk-pixbuf, glib, gtk2, gtkmm2, libandroid-execinfo, libarchive, libatkmm-1.6, libc++, libcairo, libcairomm-1.0, libcurl, libglibmm-2.4, liblo, liblrdf, libpangomm-1.4, libsamplerate, libsigc++-2.0, libsndfile, libusb, libwebsockets, libx11, libxml2, lilv, pango, pulseaudio, rubberband, suil, taglib, vamp-plugin-sdk"
 TERMUX_PKG_BUILD_DEPENDS="boost, boost-headers"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --with-backends=dummy,pulseaudio
@@ -23,7 +23,7 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 
 termux_step_pre_configure() {
 	# this is a workaround for build-all.sh issue
-	TERMUX_PKG_DEPENDS+=", ardour-data"
+	NASUX_PKG_DEPENDS+=", ardour-data"
 
 	LDFLAGS+=" -landroid-execinfo"
 }

@@ -1,3 +1,3 @@
-TERMUX_SUBPKG_DESCRIPTION="Platform-independent data for tuxpaint"
+NASUX_SUBPKG_DESCRIPTION="Platform-independent data for tuxpaint"
 TERMUX_SUBPKG_PLATFORM_INDEPENDENT=true
-TERMUX_SUBPKG_INCLUDE="share/tuxpaint/"
+NASUX_SUBPKG_INCLUDE="share/tuxpaint/"

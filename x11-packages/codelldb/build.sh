@@ -1,20 +1,20 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/vadimcn/codelldb
-TERMUX_PKG_DESCRIPTION="A native debugger extension for VSCode based on LLDB"
-TERMUX_PKG_LICENSE="MIT"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="1.12.2"
-TERMUX_PKG_SRCURL="https://github.com/vadimcn/codelldb/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz"
-TERMUX_PKG_SHA256=34e2aae22f5b5e4b03f854159d9a35f1c5527e0eb11b817e7d5e8bd513bb05e5
+NASUX_PKG_HOMEPAGE=https://github.com/vadimcn/codelldb
+NASUX_PKG_DESCRIPTION="A native debugger extension for VSCode based on LLDB"
+NASUX_PKG_LICENSE="MIT"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="1.12.2"
+NASUX_PKG_SRCURL="https://github.com/vadimcn/codelldb/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz"
+NASUX_PKG_SHA256=34e2aae22f5b5e4b03f854159d9a35f1c5527e0eb11b817e7d5e8bd513bb05e5
 TERMUX_PKG_AUTO_UPDATE=true
 # codelldb does not work properly on 32-bit Android
-TERMUX_PKG_EXCLUDED_ARCHES="arm, i686"
-TERMUX_PKG_DEPENDS="lldb"
+NASUX_PKG_EXCLUDED_ARCHES="arm, i686"
+NASUX_PKG_DEPENDS="lldb"
 TERMUX_PKG_CMAKE_BUILD="Unix Makefiles"
 TERMUX_PKG_EXTRA_MAKE_ARGS="vsix_full"
 
 termux_step_pre_configure() {
-	termux_setup_nodejs
-	termux_setup_rust
+	nasux_setup_nodejs
+	nasux_setup_rust
 
 	# codelldb is a project that uses CMake in a slightly nonstandard way
 	# (there is a place where the CMake build directory is hardcoded to
@@ -34,10 +34,10 @@ termux_step_pre_configure() {
 		-e "s%\@TERMUX_PYTHON_HOME\@%${TERMUX_PYTHON_HOME}%g" \
 		"$patch" | patch --silent -p1 -d"$TERMUX_PKG_SRCDIR"
 
-	case $TERMUX_ARCH in
+	case $NASUX_ARCH in
 		"aarch64") VSIX_ARCH="arm64";;
 		"x86_64") VSIX_ARCH="x64";;
-		*) termux_error_exit "${TERMUX_ARCH} is not a supported architecture."
+		*) termux_error_exit "${NASUX_ARCH} is not a supported architecture."
 	esac
 
 	: "${CARGO_HOME:=$HOME/.cargo}"

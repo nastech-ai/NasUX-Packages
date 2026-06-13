@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# setup CGCT - Cross Gnu Compilers for Termux
-# compile glibc-based binaries for Termux
+# setup CGCT - Cross Gnu Compilers for NasUX
+# compile glibc-based binaries for NasUX
 
 . $(dirname "$(realpath "$0")")/properties.sh
 . $(dirname "$(realpath "$0")")/build/termux_download.sh
@@ -8,7 +8,7 @@
 set -e -u
 
 ARCH="x86_64"
-REPO_URL="https://sync.termux-pacman.dev/cgct/${ARCH}"
+REPO_URL="https://sync.nasux-pacman.dev/cgct/${ARCH}"
 
 if [ "$ARCH" != "$(uname -m)" ]; then
 	echo "Error: the requested CGCT is not supported on your architecture"
@@ -16,8 +16,8 @@ if [ "$ARCH" != "$(uname -m)" ]; then
 fi
 
 declare -A CGCT=(
-	["cbt"]="2.45.1-0" # Cross Binutils for Termux
-	["cgt"]="15.2.0-0" # Cross GCCs for Termux
+	["cbt"]="2.45.1-0" # Cross Binutils for NasUX
+	["cgt"]="15.2.0-0" # Cross GCCs for NasUX
 	["glibc-cgct"]="2.42-0" # Glibc for CGCT
  	["cgct-headers"]="6.18.6-0" # Headers for CGCT
 )

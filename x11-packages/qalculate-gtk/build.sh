@@ -1,9 +1,9 @@
-TERMUX_PKG_HOMEPAGE=https://qalculate.github.io/
-TERMUX_PKG_DESCRIPTION="A multi-purpose cross-platform desktop calculator"
-TERMUX_PKG_LICENSE="GPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="5.11.0"
-TERMUX_PKG_SRCURL=https://github.com/Qalculate/qalculate-gtk/releases/download/v${TERMUX_PKG_VERSION}/qalculate-gtk-${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=529854fc5a3bd62a1a0e814879c576668b238604c5b2cb2c422979aeac355927
+NASUX_PKG_HOMEPAGE=https://qalculate.github.io/
+NASUX_PKG_DESCRIPTION="A multi-purpose cross-platform desktop calculator"
+NASUX_PKG_LICENSE="GPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="5.11.0"
+NASUX_PKG_SRCURL=https://github.com/Qalculate/qalculate-gtk/releases/download/v${NASUX_PKG_VERSION}/qalculate-gtk-${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=529854fc5a3bd62a1a0e814879c576668b238604c5b2cb2c422979aeac355927
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="gdk-pixbuf, glib, gtk3, libc++, libcairo, pango, qalc"
+NASUX_PKG_DEPENDS="gdk-pixbuf, glib, gtk3, libc++, libcairo, pango, qalc"

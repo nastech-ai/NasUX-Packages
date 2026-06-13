@@ -1,18 +1,18 @@
-TERMUX_PKG_HOMEPAGE=https://alacritty.org/
-TERMUX_PKG_DESCRIPTION="A fast, cross-platform, OpenGL terminal emulator"
-TERMUX_PKG_LICENSE="Apache-2.0, MIT"
-TERMUX_PKG_MAINTAINER="Joshua Kahn <tom@termux.dev>"
-TERMUX_PKG_VERSION="0.17.0"
-TERMUX_PKG_SRCURL="https://github.com/alacritty/alacritty/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz"
-TERMUX_PKG_SHA256=38d6527d346cda5c6049332a1f3338a89ea66cd7981b54d4c3ce801b392496f8
-TERMUX_PKG_DEPENDS="fontconfig, freetype, libxcursor, libxi, libxrandr"
+NASUX_PKG_HOMEPAGE=https://alacritty.org/
+NASUX_PKG_DESCRIPTION="A fast, cross-platform, OpenGL terminal emulator"
+NASUX_PKG_LICENSE="Apache-2.0, MIT"
+NASUX_PKG_MAINTAINER="Joshua Kahn <tom@nasux.dev>"
+NASUX_PKG_VERSION="0.17.0"
+NASUX_PKG_SRCURL="https://github.com/alacritty/alacritty/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz"
+NASUX_PKG_SHA256=38d6527d346cda5c6049332a1f3338a89ea66cd7981b54d4c3ce801b392496f8
+NASUX_PKG_DEPENDS="fontconfig, freetype, libxcursor, libxi, libxrandr"
 TERMUX_PKG_BUILD_DEPENDS="libxcb, libxkbcommon, ncurses"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_AUTO_UPDATE=true
 
 termux_step_configure() {
-	termux_setup_cmake
-	termux_setup_rust
+	nasux_setup_cmake
+	nasux_setup_rust
 	cargo clean
 	cargo vendor
 

@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://www.frida.re/
-TERMUX_PKG_DESCRIPTION="Dynamic instrumentation toolkit for developers, reverse-engineers, and security researchers"
-TERMUX_PKG_LICENSE="wxWindows"
-TERMUX_PKG_MAINTAINER="Henrik Grimler @Grimler91"
+NASUX_PKG_HOMEPAGE=https://www.frida.re/
+NASUX_PKG_DESCRIPTION="Dynamic instrumentation toolkit for developers, reverse-engineers, and security researchers"
+NASUX_PKG_LICENSE="wxWindows"
+NASUX_PKG_MAINTAINER="Henrik Grimler @Grimler91"
 _MAJOR_VERSION=17
 _MINOR_VERSION=2
 _MICRO_VERSION=14
-TERMUX_PKG_VERSION=${_MAJOR_VERSION}.${_MINOR_VERSION}.${_MICRO_VERSION}
+NASUX_PKG_VERSION=${_MAJOR_VERSION}.${_MINOR_VERSION}.${_MICRO_VERSION}
 TERMUX_PKG_REVISION=3
-TERMUX_PKG_GIT_BRANCH=$TERMUX_PKG_VERSION
-TERMUX_PKG_SRCURL=git+https://github.com/frida/frida
+TERMUX_PKG_GIT_BRANCH=$NASUX_PKG_VERSION
+NASUX_PKG_SRCURL=git+https://github.com/frida/frida
 TERMUX_PKG_AUTO_UPDATE=false
 TERMUX_PKG_NO_STATICSPLIT=true
 TERMUX_PKG_CONFFILES="var/service/frida-server/run var/service/frida-server/down"
@@ -24,12 +24,12 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 "
 
 termux_step_host_build() {
-	termux_setup_nodejs
+	nasux_setup_nodejs
 
 	# make and save frida-resource-compiler and quickcompile in
 	# hostbuild step, otherwise the ones that are compiled in
 	# termux_step_make segfaults when compiled with ld.lld from
-	# termux's toolchain
+	# nasux's toolchain
 	cp -a $TERMUX_PKG_SRCDIR/subprojects/frida-core $TERMUX_PKG_HOSTBUILD_DIR/
 	make -C frida-core
 
@@ -41,11 +41,11 @@ termux_step_host_build() {
 }
 
 termux_step_pre_configure() {
-	termux_setup_meson
-	termux_setup_nodejs
+	nasux_setup_meson
+	nasux_setup_nodejs
 	# This is needed specifically as frida looks for same version of python on the host
 	# We are specifically not using crossenv as it could cause other unwanted troubles which we would like to keep away from
-	termux_setup_build_python
+	nasux_setup_build_python
 	python3 -m venv .venv
 	export PATH="$PWD/.venv/bin:$PATH"
 	pip install 'setuptools==80.9.0' 'wheel==0.46.1'
@@ -74,12 +74,12 @@ termux_step_pre_configure() {
 		"$TERMUX_PKG_TMPDIR/"
 	export PKG_CONFIG_PATH="$TERMUX_PKG_TMPDIR"
 
-	if [[ $TERMUX_ARCH == "aarch64" ]]; then
+	if [[ $NASUX_ARCH == "aarch64" ]]; then
 		FRIDA_ARCH=arm64
-	elif [[ $TERMUX_ARCH == "i686" ]]; then
+	elif [[ $NASUX_ARCH == "i686" ]]; then
 		FRIDA_ARCH=x86
 	else
-		FRIDA_ARCH=${TERMUX_ARCH}
+		FRIDA_ARCH=${NASUX_ARCH}
 	fi
 	TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" --host=android-${FRIDA_ARCH}"
 
@@ -136,8 +136,8 @@ termux_step_post_configure() {
 		$TERMUX_PKG_BUILDDIR/subprojects/glib \
 		--$(test "${TERMUX_PKG_MESON_NATIVE}" = "true" && echo "native-file" || echo "cross-file") $TERMUX_MESON_CROSSFILE \
 		--prefix $TERMUX_PREFIX \
-		--libdir $(test "${TERMUX_ARCH}" = "${TERMUX_REAL_ARCH}" && echo "lib" || echo "lib32") \
-		--includedir $(test "${TERMUX_ARCH}" = "${TERMUX_REAL_ARCH}" && echo "include" || echo "include32") \
+		--libdir $(test "${NASUX_ARCH}" = "${TERMUX_REAL_ARCH}" && echo "lib" || echo "lib32") \
+		--includedir $(test "${NASUX_ARCH}" = "${TERMUX_REAL_ARCH}" && echo "include" || echo "include32") \
 		--buildtype ${_meson_buildtype} \
 		${_meson_stripflag} \
 		$_GLIB_EXTRA_CONFIGURE_ARGS
@@ -152,7 +152,7 @@ termux_step_post_configure() {
 }
 
 termux_step_post_make_install () {
-	# Setup termux-services scripts
+	# Setup nasux-services scripts
 	mkdir -p $TERMUX_PREFIX/var/service/frida-server/log
 	{
 		echo "#!$TERMUX_PREFIX/bin/sh"
@@ -168,7 +168,7 @@ termux_step_post_make_install () {
 	} > $TERMUX_PREFIX/var/service/frida-server/finish
 	chmod u+x $TERMUX_PREFIX/var/service/frida-server/run $TERMUX_PREFIX/var/service/frida-server/finish
 
-	ln -sf $TERMUX_PREFIX/share/termux-services/svlogger $TERMUX_PREFIX/var/service/frida-server/log/run
+	ln -sf $TERMUX_PREFIX/share/nasux-services/svlogger $TERMUX_PREFIX/var/service/frida-server/log/run
 
 	touch $TERMUX_PREFIX/var/service/frida-server/down
 }

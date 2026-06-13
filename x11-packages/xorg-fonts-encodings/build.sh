@@ -1,11 +1,11 @@
-TERMUX_PKG_HOMEPAGE=https://xorg.freedesktop.org/
-TERMUX_PKG_DESCRIPTION="X.org font encoding files"
-TERMUX_PKG_LICENSE="Public Domain"
-TERMUX_PKG_LICENSE_FILE="COPYING"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="1.1.0"
-TERMUX_PKG_SRCURL=https://xorg.freedesktop.org/releases/individual/font/encodings-${TERMUX_PKG_VERSION}.tar.xz
-TERMUX_PKG_SHA256=9ff13c621756cfa12e95f32ba48a5b23839e8f577d0048beda66c67dab4de975
+NASUX_PKG_HOMEPAGE=https://xorg.freedesktop.org/
+NASUX_PKG_DESCRIPTION="X.org font encoding files"
+NASUX_PKG_LICENSE="Public Domain"
+NASUX_PKG_LICENSE_FILE="COPYING"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="1.1.0"
+NASUX_PKG_SRCURL=https://xorg.freedesktop.org/releases/individual/font/encodings-${NASUX_PKG_VERSION}.tar.xz
+NASUX_PKG_SHA256=9ff13c621756cfa12e95f32ba48a5b23839e8f577d0048beda66c67dab4de975
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_PLATFORM_INDEPENDENT=true
 

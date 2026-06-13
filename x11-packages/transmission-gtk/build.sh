@@ -1,16 +1,16 @@
-TERMUX_PKG_HOMEPAGE=https://transmissionbt.com/
-TERMUX_PKG_DESCRIPTION="Easy, lean and powerful BitTorrent client (gtk3)"
+NASUX_PKG_HOMEPAGE=https://transmissionbt.com/
+NASUX_PKG_DESCRIPTION="Easy, lean and powerful BitTorrent client (gtk3)"
 # with OpenSSL linking exception:
-TERMUX_PKG_LICENSE="GPL-2.0, GPL-3.0"
-TERMUX_PKG_LICENSE_FILE="COPYING, licenses/gpl-2.0.txt, licenses/gpl-3.0.txt"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="4.1.2"
-TERMUX_PKG_SRCURL=git+https://github.com/transmission/transmission
+NASUX_PKG_LICENSE="GPL-2.0, GPL-3.0"
+NASUX_PKG_LICENSE_FILE="COPYING, licenses/gpl-2.0.txt, licenses/gpl-3.0.txt"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="4.1.2"
+NASUX_PKG_SRCURL=git+https://github.com/transmission/transmission
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_UPDATE_TAG_TYPE="latest-release-tag"
 TERMUX_PKG_UPDATE_VERSION_REGEXP="\d+\.\d+\.\d+"
-TERMUX_PKG_GIT_BRANCH=$TERMUX_PKG_VERSION
-TERMUX_PKG_DEPENDS="glib, gtk3, gtkmm3, libatkmm-1.6, libc++, libcairomm-1.0, libcurl, libevent, libglibmm-2.4, libpangomm-1.4, libpsl, libsigc++-2.0, miniupnpc, natpmpc, openssl"
+TERMUX_PKG_GIT_BRANCH=$NASUX_PKG_VERSION
+NASUX_PKG_DEPENDS="glib, gtk3, gtkmm3, libatkmm-1.6, libc++, libcairomm-1.0, libcurl, libevent, libglibmm-2.4, libpangomm-1.4, libpsl, libsigc++-2.0, miniupnpc, natpmpc, openssl"
 TERMUX_PKG_CONFLICTS="transmission"
 TERMUX_PKG_REPLACES="transmission"
 TERMUX_PKG_SUGGESTS="jackett"

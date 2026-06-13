@@ -1,16 +1,16 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/patchedsoul/news-flash
-TERMUX_PKG_DESCRIPTION="A modern feed reader designed for the GNOME desktop"
-TERMUX_PKG_LICENSE="GPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=1.0.2
+NASUX_PKG_HOMEPAGE=https://github.com/patchedsoul/news-flash
+NASUX_PKG_DESCRIPTION="A modern feed reader designed for the GNOME desktop"
+NASUX_PKG_LICENSE="GPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=1.0.2
 TERMUX_PKG_REVISION=3
-TERMUX_PKG_SRCURL=https://github.com/patchedsoul/news-flash/archive/refs/tags/${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=bc4ce6aa7cd26409d5d9a7ffa539214c9907c7b263eb88f46d8bbab7546fd323
+NASUX_PKG_SRCURL=https://github.com/patchedsoul/news-flash/archive/refs/tags/${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=bc4ce6aa7cd26409d5d9a7ffa539214c9907c7b263eb88f46d8bbab7546fd323
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_UPDATE_TAG_TYPE="newest-tag"
-TERMUX_PKG_DEPENDS="gdk-pixbuf, glib, gtk3, libcairo, libhandy-0.0, libsqlite, libxml2, openssl-1.1, pango, webkit2gtk-4.1"
+NASUX_PKG_DEPENDS="gdk-pixbuf, glib, gtk3, libcairo, libhandy-0.0, libsqlite, libxml2, openssl-1.1, pango, webkit2gtk-4.1"
 TERMUX_PKG_BUILD_DEPENDS="libsoup"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 
 termux_step_pre_configure() {
 	CPPFLAGS="-I$TERMUX_PREFIX/include/openssl-1.1 $CPPFLAGS"
@@ -18,7 +18,7 @@ termux_step_pre_configure() {
 	export CARGO_TARGET_${env_host}_RUSTFLAGS+=" -C link-arg=-Wl,-rpath=$TERMUX_PREFIX/lib/openssl-1.1"
 
 	TERMUX_RUST_VERSION=1.52.1
-	termux_setup_rust
+	nasux_setup_rust
 	: "${CARGO_HOME:=$HOME/.cargo}"
 	export CARGO_HOME
 
@@ -63,7 +63,7 @@ termux_step_pre_configure() {
 termux_step_configure() {
 	sed src/config.rs.in \
 		-e 's|@APP_ID@|"com.gitlab.newsflash"|g' \
-		-e 's|@VERSION@|"'"$TERMUX_PKG_VERSION"'"|g' \
+		-e 's|@VERSION@|"'"$NASUX_PKG_VERSION"'"|g' \
 		-e 's|@PROFILE@|""|g' \
 		> src/config.rs
 }

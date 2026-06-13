@@ -1,15 +1,15 @@
-TERMUX_PKG_HOMEPAGE=https://www.riverbankcomputing.com/software/pyqtwebengine/
-TERMUX_PKG_DESCRIPTION="Python Bindings for the Qt WebEngine Framework"
-TERMUX_PKG_LICENSE="GPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="5.15.7"
+NASUX_PKG_HOMEPAGE=https://www.riverbankcomputing.com/software/pyqtwebengine/
+NASUX_PKG_DESCRIPTION="Python Bindings for the Qt WebEngine Framework"
+NASUX_PKG_LICENSE="GPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="5.15.7"
 TERMUX_PKG_REVISION=2
-TERMUX_PKG_SRCURL=https://files.pythonhosted.org/packages/source/P/PyQtWebEngine/PyQtWebEngine-${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=f121ac6e4a2f96ac289619bcfc37f64e68362f24a346553f5d6c42efa4228a4d
-TERMUX_PKG_DEPENDS="libc++, pyqt5, python, python-pip, qt5-qtbase, qt5-qtwebengine"
+NASUX_PKG_SRCURL=https://files.pythonhosted.org/packages/source/P/PyQtWebEngine/PyQtWebEngine-${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=f121ac6e4a2f96ac289619bcfc37f64e68362f24a346553f5d6c42efa4228a4d
+NASUX_PKG_DEPENDS="libc++, pyqt5, python, python-pip, qt5-qtbase, qt5-qtwebengine"
 TERMUX_PKG_BUILD_DEPENDS="qt5-qtbase-cross-tools"
 TERMUX_PKG_PYTHON_COMMON_BUILD_DEPS="wheel, PyQt-builder"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_EXTRA_MAKE_ARGS="
 --verbose
 --scripts-dir=$TERMUX_PREFIX/bin

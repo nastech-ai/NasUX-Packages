@@ -1,17 +1,17 @@
-TERMUX_PKG_HOMEPAGE=https://ruffle.rs/
-TERMUX_PKG_DESCRIPTION="A Flash Player emulator written in Rust"
-TERMUX_PKG_LICENSE="MIT, Apache-2.0"
-TERMUX_PKG_LICENSE_FILE="LICENSE.md"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="0.2.0"
-TERMUX_PKG_SRCURL="https://github.com/ruffle-rs/ruffle/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz"
-TERMUX_PKG_SHA256=f14fa41476fcf509712a547f150f269caf1f410c11ce6a8d72641e233fd78f4c
-TERMUX_PKG_DEPENDS="alsa-lib, alsa-plugins, fontconfig, gtk3, openh264"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_HOMEPAGE=https://ruffle.rs/
+NASUX_PKG_DESCRIPTION="A Flash Player emulator written in Rust"
+NASUX_PKG_LICENSE="MIT, Apache-2.0"
+NASUX_PKG_LICENSE_FILE="LICENSE.md"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="0.2.0"
+NASUX_PKG_SRCURL="https://github.com/ruffle-rs/ruffle/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz"
+NASUX_PKG_SHA256=f14fa41476fcf509712a547f150f269caf1f410c11ce6a8d72641e233fd78f4c
+NASUX_PKG_DEPENDS="alsa-lib, alsa-plugins, fontconfig, gtk3, openh264"
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_AUTO_UPDATE=true
 
 termux_step_pre_configure() {
-	termux_setup_rust
+	nasux_setup_rust
 
 	cargo vendor
 	find ./vendor \
@@ -71,7 +71,7 @@ termux_step_pre_configure() {
 }
 
 termux_step_make() {
-	termux_setup_rust
+	nasux_setup_rust
 
 	cargo build \
 		--package ruffle_desktop \

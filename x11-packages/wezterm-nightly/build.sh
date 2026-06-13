@@ -1,15 +1,15 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/wez/wezterm
-TERMUX_PKG_DESCRIPTION="GPU-accelerated cross-platform terminal emulator and multiplexer (development branch)"
-TERMUX_PKG_LICENSE="MIT"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="20260604"
-TERMUX_PKG_SRCURL=git+https://github.com/wezterm/wezterm
+NASUX_PKG_HOMEPAGE=https://github.com/wez/wezterm
+NASUX_PKG_DESCRIPTION="GPU-accelerated cross-platform terminal emulator and multiplexer (development branch)"
+NASUX_PKG_LICENSE="MIT"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="20260604"
+NASUX_PKG_SRCURL=git+https://github.com/wezterm/wezterm
 TERMUX_PKG_GIT_BRANCH=main
-TERMUX_PKG_DEPENDS="fontconfig, freetype, glib, harfbuzz, hicolor-icon-theme, libpng, libssh2, libx11, libxcb, libxkbcommon, openssl, ttf-jetbrains-mono, xdg-utils, xcb-util, xcb-util-image, zlib"
+NASUX_PKG_DEPENDS="fontconfig, freetype, glib, harfbuzz, hicolor-icon-theme, libpng, libssh2, libx11, libxcb, libxkbcommon, openssl, ttf-jetbrains-mono, xdg-utils, xcb-util, xcb-util-image, zlib"
 TERMUX_PKG_RECOMMENDS="ncurses, ttf-nerd-fonts-symbols"
 TERMUX_PKG_BREAKS="wezterm"
 TERMUX_PKG_CONFLICTS="wezterm"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_AUTO_UPDATE=true
 
 termux_pkg_auto_update() {
@@ -29,7 +29,7 @@ termux_pkg_auto_update() {
 	# When was `wezterm` last autoupdated? (Unix epoch timestamp)
 	last_autoupdate="$(
 		git log \
-		--author="Termux Github Actions <contact@termux.dev>" \
+		--author="NasUX Github Actions <nastech-bot@users.noreply.github.com>" \
 		-n1 \
 		--pretty=format:%at \
 		-- "$TERMUX_PKG_BUILDER_DIR/build.sh"
@@ -51,13 +51,13 @@ termux_pkg_auto_update() {
 	)"
 
 	if [[ -z "${latest_commit_date}" ]]; then
-		termux_error_exit "Unable to get latest commit date from ${TERMUX_PKG_SRCURL}"
+		termux_error_exit "Unable to get latest commit date from ${NASUX_PKG_SRCURL}"
 	fi
 	termux_pkg_upgrade_version "${latest_commit_date}"
 }
 
 termux_step_pre_configure() {
-	termux_setup_rust
+	nasux_setup_rust
 
 	sed -i 's/"vendored-fonts", //' wezterm-gui/Cargo.toml
 
@@ -100,7 +100,7 @@ termux_step_pre_configure() {
 		-e 's|\\"linux\\"|\\"android\\"|g' \
 		-e 's|"linux"|"android"|g'
 
-	local patch="$TERMUX_PKG_BUILDER_DIR/libssh-rs-sys-termux.diff"
+	local patch="$TERMUX_PKG_BUILDER_DIR/libssh-rs-sys-nasux.diff"
 	local dir="vendor/libssh-rs-sys"
 	echo "Applying patch: $patch"
 	patch -p1 -d "$dir" < "${patch}"

@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE="https://apps.kde.org/angelfish"
-TERMUX_PKG_DESCRIPTION="Web browser for Plasma Mobile"
-TERMUX_PKG_LICENSE="GPL-2.0-or-later, LGPL-2.0-or-later"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="26.04.2"
-TERMUX_PKG_SRCURL="https://download.kde.org/stable/release-service/${TERMUX_PKG_VERSION}/src/angelfish-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=7e91b722277c390954bd6dc39e095cf3ea319a922f473011e765b9cebb213d03
+NASUX_PKG_HOMEPAGE="https://apps.kde.org/angelfish"
+NASUX_PKG_DESCRIPTION="Web browser for Plasma Mobile"
+NASUX_PKG_LICENSE="GPL-2.0-or-later, LGPL-2.0-or-later"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="26.04.2"
+NASUX_PKG_SRCURL="https://download.kde.org/stable/release-service/${NASUX_PKG_VERSION}/src/angelfish-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=7e91b722277c390954bd6dc39e095cf3ea319a922f473011e765b9cebb213d03
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="futuresql, kf6-kconfig, kf6-kcoreaddons, kf6-kcrash, kf6-kdbusaddons, kf6-ki18n, kf6-kirigami, kf6-knotifications, kf6-kwindowsystem, kf6-purpose, kf6-qqc2-desktop-style, kirigami-addons, libc++, qcoro, qt6-qt5compat, qt6-qtbase, qt6-qtdeclarative, qt6-qtwebengine"
+NASUX_PKG_DEPENDS="futuresql, kf6-kconfig, kf6-kcoreaddons, kf6-kcrash, kf6-kdbusaddons, kf6-ki18n, kf6-kirigami, kf6-knotifications, kf6-kwindowsystem, kf6-purpose, kf6-qqc2-desktop-style, kirigami-addons, libc++, qcoro, qt6-qt5compat, qt6-qtbase, qt6-qtdeclarative, qt6-qtwebengine"
 TERMUX_PKG_BUILD_DEPENDS="corrosion, extra-cmake-modules, qcoro-static"
-TERMUX_PKG_EXCLUDED_ARCHES="i686"
+NASUX_PKG_EXCLUDED_ARCHES="i686"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DCMAKE_SYSTEM_NAME=Linux
 -DKDE_INSTALL_QMLDIR=lib/qt6/qml
@@ -17,9 +17,9 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 "
 
 termux_step_pre_configure() {
-	termux_setup_rust
+	nasux_setup_rust
 
-	[[ "${TERMUX_ARCH}" == "arm" ]] && TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" -DCMAKE_ANDROID_ARM_MODE=ON"
+	[[ "${NASUX_ARCH}" == "arm" ]] && TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" -DCMAKE_ANDROID_ARM_MODE=ON"
 
 	TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" -DRust_CARGO_TARGET=$CARGO_TARGET_NAME"
 

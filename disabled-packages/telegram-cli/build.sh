@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/vysheng/tg
-TERMUX_PKG_DESCRIPTION="Telegram messenger CLI"
-TERMUX_PKG_LICENSE="GPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=1:1.4.1
+NASUX_PKG_HOMEPAGE=https://github.com/vysheng/tg
+NASUX_PKG_DESCRIPTION="Telegram messenger CLI"
+NASUX_PKG_LICENSE="GPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=1:1.4.1
 TERMUX_PKG_REVISION=8
-TERMUX_PKG_DEPENDS="libconfig, libevent, libjansson, openssl, readline, zlib"
+NASUX_PKG_DEPENDS="libconfig, libevent, libjansson, openssl, readline, zlib"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="--disable-liblua"
-TERMUX_PKG_BUILD_IN_SRC=true
-TERMUX_PKG_SHA256=45b98f71f5f3421f85ead36b6690585a1a9efe7bc31f3dcd15d485a312f99b26
+NASUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_SHA256=45b98f71f5f3421f85ead36b6690585a1a9efe7bc31f3dcd15d485a312f99b26
 TERMUX_PKG_AUTO_UPDATE=false
 TERMUX_PKG_SKIP_SRC_EXTRACT=true
 TERMUX_PKG_HOSTBUILD=true
@@ -24,7 +24,7 @@ termux_step_get_source() {
 
 termux_step_post_get_source() {
 	local s=$(find . -type f ! -path '*/.git/*' -print0 | xargs -0 sha256sum | LC_ALL=C sort | sha256sum)
-	if [[ "${s}" != "${TERMUX_PKG_SHA256}  "* ]]; then
+	if [[ "${s}" != "${NASUX_PKG_SHA256}  "* ]]; then
 		termux_error_exit "Checksum mismatch for source files."
 	fi
 }

@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE=https://www.qt.io/
-TERMUX_PKG_DESCRIPTION="Qt Development Tools (Linguist, Assistant, Designer, etc.)"
-TERMUX_PKG_LICENSE="LGPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="5.15.18"
-TERMUX_PKG_SRCURL="https://download.qt.io/archive/qt/${TERMUX_PKG_VERSION%.*}/${TERMUX_PKG_VERSION}/submodules/qttools-everywhere-opensource-src-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=931e0969d9f9d8f233e5e9bf9db0cea9ce9914d49982f1795fe6191010113568
-TERMUX_PKG_DEPENDS="libc++, qt5-qtbase, qt5-qtdeclarative"
+NASUX_PKG_HOMEPAGE=https://www.qt.io/
+NASUX_PKG_DESCRIPTION="Qt Development Tools (Linguist, Assistant, Designer, etc.)"
+NASUX_PKG_LICENSE="LGPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="5.15.18"
+NASUX_PKG_SRCURL="https://download.qt.io/archive/qt/${NASUX_PKG_VERSION%.*}/${NASUX_PKG_VERSION}/submodules/qttools-everywhere-opensource-src-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=931e0969d9f9d8f233e5e9bf9db0cea9ce9914d49982f1795fe6191010113568
+NASUX_PKG_DEPENDS="libc++, qt5-qtbase, qt5-qtdeclarative"
 TERMUX_PKG_BUILD_DEPENDS="qt5-qtbase-cross-tools, qt5-qtdeclarative-cross-tools"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_NO_STATICSPLIT=true
 
 # Ignore the bootstrap library that is touched by the hijack
@@ -40,7 +40,7 @@ termux_step_pre_configure () {
 
 termux_step_configure () {
 	"${TERMUX_PREFIX}/opt/qt/cross/bin/qmake" \
-		-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/termux-cross"
+		-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/nasux-cross"
 }
 
 termux_step_post_make_install() {
@@ -55,7 +55,7 @@ termux_step_post_make_install() {
 	for i in makeqpf pixeltool qev qtattributionsscanner; do
 		cd "${TERMUX_PKG_SRCDIR}/src/${i}" && {
 			"${TERMUX_PREFIX}/opt/qt/cross/bin/qmake" \
-				-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/termux-cross"
+				-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/nasux-cross"
 
 			make -j "${TERMUX_PKG_MAKE_PROCESSES}"
 			install -Dm700 "../../bin/${i}" "${TERMUX_PREFIX}/bin/${i}"
@@ -77,7 +77,7 @@ termux_step_post_make_install() {
 	# qdistancefieldgenerator (it has a different directory name but supports make install)
 	cd "${TERMUX_PKG_SRCDIR}/src/distancefieldgenerator" && {
 		"${TERMUX_PREFIX}/opt/qt/cross/bin/qmake" \
-			-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/termux-cross"
+			-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/nasux-cross"
 
 		make -j "${TERMUX_PKG_MAKE_PROCESSES}"
 		make install
@@ -97,7 +97,7 @@ termux_step_post_make_install() {
 	# Build and install linguist program
 	cd "${TERMUX_PKG_SRCDIR}/src/linguist/linguist" && {
 		"${TERMUX_PREFIX}/opt/qt/cross/bin/qmake" \
-			-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/termux-cross"
+			-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/nasux-cross"
 		make -j "${TERMUX_PKG_MAKE_PROCESSES}"
 		make install
 	}
@@ -122,7 +122,7 @@ termux_step_post_make_install() {
 	for i in qcollectiongenerator qhelpgenerator assistant; do
 		cd "${TERMUX_PKG_SRCDIR}/src/assistant/${i}" && {
 			"${TERMUX_PREFIX}/opt/qt/cross/bin/qmake" \
-				-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/termux-cross"
+				-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/nasux-cross"
 
 			make -j "${TERMUX_PKG_MAKE_PROCESSES}"
 			install -Dm700 "../../../bin/${i}" "${TERMUX_PREFIX}/bin/${i}"
@@ -149,7 +149,7 @@ termux_step_post_make_install() {
 	for i in lib components designer plugins; do
 		cd "${TERMUX_PKG_SRCDIR}/src/designer/src/${i}" && {
 			"${TERMUX_PREFIX}/opt/qt/cross/bin/qmake" \
-				-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/termux-cross"
+				-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/nasux-cross"
 
 			make -j "${TERMUX_PKG_MAKE_PROCESSES}"
 			make install
@@ -188,7 +188,7 @@ termux_step_post_make_install() {
 	cd "${TERMUX_PKG_SRCDIR}/src/qtattributionsscanner" && {
 		make clean
 		"${TERMUX_PREFIX}/opt/qt/cross/bin/qmake" \
-			-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/termux-host"
+			-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/nasux-host"
 		make -j "${TERMUX_PKG_MAKE_PROCESSES}"
 		install -Dm700 \
 			"../../bin/qtattributionsscanner" \
@@ -199,7 +199,7 @@ termux_step_post_make_install() {
 		cd "${TERMUX_PKG_SRCDIR}/src/linguist/${i}" && {
 			make clean
 			"${TERMUX_PREFIX}/opt/qt/cross/bin/qmake" \
-				-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/termux-host"
+				-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/nasux-host"
 			make -j "${TERMUX_PKG_MAKE_PROCESSES}"
 			install -Dm700 "../../../bin/${i}" "${TERMUX_PREFIX}/opt/qt/cross/bin/${i}"
 		}
@@ -226,7 +226,7 @@ termux_step_post_make_install() {
 
 termux_step_create_debscripts() {
 	# Some clean-up is happening via `postinst`
-	# Because we're using this package in both host (Ubuntu glibc) and device (Termux)
+	# Because we're using this package in both host (Ubuntu glibc) and device (NasUX)
 	cp -f "${TERMUX_PKG_BUILDER_DIR}/postinst" ./
 	sed -i "s|@TERMUX_PREFIX@|$TERMUX_PREFIX|g" ./postinst
 }

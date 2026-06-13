@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/libfuse/libfuse
-TERMUX_PKG_DESCRIPTION="FUSE (Filesystem in Userspace) is an interface for userspace programs to export a filesystem to the Linux kernel"
-TERMUX_PKG_LICENSE="LGPL-2.1, GPL-2.0"
-TERMUX_PKG_MAINTAINER="Henrik Grimler @Grimler91"
-TERMUX_PKG_VERSION=2.9.9
+NASUX_PKG_HOMEPAGE=https://github.com/libfuse/libfuse
+NASUX_PKG_DESCRIPTION="FUSE (Filesystem in Userspace) is an interface for userspace programs to export a filesystem to the Linux kernel"
+NASUX_PKG_LICENSE="LGPL-2.1, GPL-2.0"
+NASUX_PKG_MAINTAINER="Henrik Grimler @Grimler91"
+NASUX_PKG_VERSION=2.9.9
 TERMUX_PKG_REVISION=2
-TERMUX_PKG_SRCURL=https://github.com/libfuse/libfuse/archive/refs/tags/fuse-${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=e57a24721177c3b3dd71cb9239ca46b4dee283db9388d48f7ccd256184982194
+NASUX_PKG_SRCURL=https://github.com/libfuse/libfuse/archive/refs/tags/fuse-${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=e57a24721177c3b3dd71cb9239ca46b4dee283db9388d48f7ccd256184982194
 #that package is a snapshot, it does not need to be updated.
 TERMUX_PKG_AUTO_UPDATE=false
-TERMUX_PKG_DEPENDS="libiconv"
+NASUX_PKG_DEPENDS="libiconv"
 
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --disable-example

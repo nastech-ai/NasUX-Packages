@@ -1,20 +1,20 @@
-TERMUX_PKG_HOMEPAGE=https://linuxcontainers.org/
-TERMUX_PKG_DESCRIPTION="Linux Containers"
-TERMUX_PKG_LICENSE="LGPL-2.1"
-TERMUX_PKG_MAINTAINER="@termux"
+NASUX_PKG_HOMEPAGE=https://linuxcontainers.org/
+NASUX_PKG_DESCRIPTION="Linux Containers"
+NASUX_PKG_LICENSE="LGPL-2.1"
+NASUX_PKG_MAINTAINER="@nastech-ai"
 # v3.1.0 is the last version confirmed to work.
 # Do not update it unless you tested it on your device.
-TERMUX_PKG_VERSION=1:3.1.0
+NASUX_PKG_VERSION=1:3.1.0
 TERMUX_PKG_REVISION=4
-TERMUX_PKG_SRCURL="https://linuxcontainers.org/downloads/lxc/lxc-${TERMUX_PKG_VERSION:2}.tar.gz"
-TERMUX_PKG_SHA256=4d8772c25baeaea2c37a954902b88c05d1454c91c887cb6a0997258cfac3fdc5
+NASUX_PKG_SRCURL="https://linuxcontainers.org/downloads/lxc/lxc-${NASUX_PKG_VERSION:2}.tar.gz"
+NASUX_PKG_SHA256=4d8772c25baeaea2c37a954902b88c05d1454c91c887cb6a0997258cfac3fdc5
 TERMUX_PKG_AUTO_UPDATE=false
-TERMUX_PKG_DEPENDS="gnupg, libcap, libseccomp, rsync, wget"
+NASUX_PKG_DEPENDS="gnupg, libcap, libseccomp, rsync, wget"
 TERMUX_PKG_BREAKS="lxc-dev"
 TERMUX_PKG_REPLACES="lxc-dev"
 
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
---with-distro=termux
+--with-distro=nasux
 --with-runtime-path=$TERMUX_PREFIX/var/run
 --disable-apparmor
 --disable-selinux

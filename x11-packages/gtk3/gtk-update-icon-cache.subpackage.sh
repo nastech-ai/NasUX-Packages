@@ -1,4 +1,4 @@
-TERMUX_SUBPKG_INCLUDE="
+NASUX_SUBPKG_INCLUDE="
 bin/gtk-update-icon-cache
 share/man/man1/gtk-update-icon-cache.1.gz
 share/libalpm/hooks/gtk-update-icon-cache.hook
@@ -6,7 +6,7 @@ share/libalpm/scripts/gtk-update-icon-cache
 "
 
 TERMUX_SUBPKG_DEPENDS="gdk-pixbuf, glib"
-TERMUX_SUBPKG_DESCRIPTION="GTK+ icon cache updater"
+NASUX_SUBPKG_DESCRIPTION="GTK+ icon cache updater"
 TERMUX_SUBPKG_BREAKS="gtk3 (<< 3.24.41)"
 TERMUX_SUBPKG_REPLACES="gtk3 (<< 3.24.41)"
 

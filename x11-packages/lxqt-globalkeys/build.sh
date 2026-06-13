@@ -1,11 +1,11 @@
-TERMUX_PKG_HOMEPAGE=https://lxqt.github.io
-TERMUX_PKG_DESCRIPTION="Tools to set global keyboard shortcuts in LXQt sessions"
-TERMUX_PKG_LICENSE="LGPL-2.1"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="2.4.0"
-TERMUX_PKG_SRCURL="https://github.com/lxqt/lxqt-globalkeys/releases/download/${TERMUX_PKG_VERSION}/lxqt-globalkeys-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=6f7fb82337bd06823f698df5a1e631059e99e544bfa9a1d7c5b67fd01ff9319a
-TERMUX_PKG_DEPENDS="libc++, liblxqt, libx11, qt6-qtbase"
+NASUX_PKG_HOMEPAGE=https://lxqt.github.io
+NASUX_PKG_DESCRIPTION="Tools to set global keyboard shortcuts in LXQt sessions"
+NASUX_PKG_LICENSE="LGPL-2.1"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="2.4.0"
+NASUX_PKG_SRCURL="https://github.com/lxqt/lxqt-globalkeys/releases/download/${NASUX_PKG_VERSION}/lxqt-globalkeys-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=6f7fb82337bd06823f698df5a1e631059e99e544bfa9a1d7c5b67fd01ff9319a
+NASUX_PKG_DEPENDS="libc++, liblxqt, libx11, qt6-qtbase"
 TERMUX_PKG_BUILD_DEPENDS="lxqt-build-tools, qt6-qttools"
 TERMUX_PKG_AUTO_UPDATE=true
 

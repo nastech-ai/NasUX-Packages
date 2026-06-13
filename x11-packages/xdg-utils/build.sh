@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://www.freedesktop.org/wiki/Software/xdg-utils/
-TERMUX_PKG_DESCRIPTION="A set of simple scripts that provide basic desktop integration functions for any Free Desktop"
-TERMUX_PKG_LICENSE="MIT"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="1.2.1"
+NASUX_PKG_HOMEPAGE=https://www.freedesktop.org/wiki/Software/xdg-utils/
+NASUX_PKG_DESCRIPTION="A set of simple scripts that provide basic desktop integration functions for any Free Desktop"
+NASUX_PKG_LICENSE="MIT"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="1.2.1"
 TERMUX_PKG_REVISION=1
-TERMUX_PKG_SRCURL=https://gitlab.freedesktop.org/xdg/xdg-utils/-/archive/v${TERMUX_PKG_VERSION}/xdg-utils-v${TERMUX_PKG_VERSION}.tar.bz2
-TERMUX_PKG_SHA256=93d510dccf328378f012fe195b4574c2fac1cd65a74d0852d6eaa72e5a2065a7
+NASUX_PKG_SRCURL=https://gitlab.freedesktop.org/xdg/xdg-utils/-/archive/v${NASUX_PKG_VERSION}/xdg-utils-v${NASUX_PKG_VERSION}.tar.bz2
+NASUX_PKG_SHA256=93d510dccf328378f012fe195b4574c2fac1cd65a74d0852d6eaa72e5a2065a7
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="desktop-file-utils, file, make, perl, shared-mime-info, which, xorg-xprop"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_DEPENDS="desktop-file-utils, file, make, perl, shared-mime-info, which, xorg-xprop"
+NASUX_PKG_BUILD_IN_SRC=true
 
 TERMUX_PKG_RM_AFTER_INSTALL="
 bin/xdg-screensaver
@@ -24,7 +24,7 @@ termux_step_pre_configure() {
 }
 
 termux_step_post_make_install() {
-	# `bin/xdg-open` conflicts with termux-tools.
+	# `bin/xdg-open` conflicts with nasux-tools.
 	mv $TERMUX_PREFIX/bin/{,xdg-utils-}xdg-open
 	mv $TERMUX_PREFIX/share/man/man1/{,xdg-utils-}xdg-open.1
 }

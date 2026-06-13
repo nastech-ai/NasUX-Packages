@@ -1,12 +1,12 @@
-TERMUX_PKG_HOMEPAGE=https://kid3.kde.org/
-TERMUX_PKG_DESCRIPTION="Efficient ID3 tag editor"
-TERMUX_PKG_LICENSE="GPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="3.10.0"
-TERMUX_PKG_SRCURL=https://downloads.sourceforge.net/kid3/kid3-${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=e6c21e40bbd9336d15e81b4ff8c4f730bcdfd6f7f000b903ad352d78388558d5
+NASUX_PKG_HOMEPAGE=https://kid3.kde.org/
+NASUX_PKG_DESCRIPTION="Efficient ID3 tag editor"
+NASUX_PKG_LICENSE="GPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="3.10.0"
+NASUX_PKG_SRCURL=https://downloads.sourceforge.net/kid3/kid3-${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=e6c21e40bbd9336d15e81b4ff8c4f730bcdfd6f7f000b903ad352d78388558d5
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="libchromaprint, ffmpeg, id3lib, libc++, libflac, libogg, libvorbis, qt6-qtbase, qt6-qtdeclarative, qt6-qtmultimedia, readline, taglib"
+NASUX_PKG_DEPENDS="libchromaprint, ffmpeg, id3lib, libc++, libflac, libogg, libvorbis, qt6-qtbase, qt6-qtdeclarative, qt6-qtmultimedia, readline, taglib"
 TERMUX_PKG_BUILD_DEPENDS="docbook-xsl, qt6-qtbase-cross-tools, qt6-qtdeclarative-cross-tools, qt6-qttools-cross-tools"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DANDROID_NO_TERMUX=OFF
@@ -24,7 +24,7 @@ termux_step_post_get_source() {
 }
 
 termux_step_pre_configure() {
-	local DOCBOOK_XSL_VER=$(bash -c ". $TERMUX_SCRIPTDIR/packages/docbook-xsl/build.sh; echo \$TERMUX_PKG_VERSION")
+	local DOCBOOK_XSL_VER=$(bash -c ". $NASUX_SCRIPTDIR/packages/docbook-xsl/build.sh; echo \$NASUX_PKG_VERSION")
 	TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" -DWITH_DOCBOOKDIR=$TERMUX_PREFIX/share/xml/docbook/xsl-stylesheets-${DOCBOOK_XSL_VER}"
 
 	LDFLAGS+=" -Wl,-rpath=$TERMUX_PREFIX/lib/kid3"

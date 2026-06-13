@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE="https://invent.kde.org/frameworks/karchive"
-TERMUX_PKG_DESCRIPTION="Qt addon providing access to numerous types of archives (KDE)"
-TERMUX_PKG_LICENSE="LGPL-2.1"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="6.27.0"
-TERMUX_PKG_SRCURL="https://download.kde.org/stable/frameworks/${TERMUX_PKG_VERSION%.*}/karchive-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=434edf78df8f4c9f25000d107ad1520d7ac14db580a202047bf19cbf77376522
+NASUX_PKG_HOMEPAGE="https://invent.kde.org/frameworks/karchive"
+NASUX_PKG_DESCRIPTION="Qt addon providing access to numerous types of archives (KDE)"
+NASUX_PKG_LICENSE="LGPL-2.1"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="6.27.0"
+NASUX_PKG_SRCURL="https://download.kde.org/stable/frameworks/${NASUX_PKG_VERSION%.*}/karchive-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=434edf78df8f4c9f25000d107ad1520d7ac14db580a202047bf19cbf77376522
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_HOSTBUILD=true
-TERMUX_PKG_DEPENDS="libbz2, libc++, liblzma, qt6-qtbase, zlib, zstd"
-TERMUX_PKG_BUILD_DEPENDS="extra-cmake-modules (>= ${TERMUX_PKG_VERSION%.*}), qt6-qttools"
+NASUX_PKG_DEPENDS="libbz2, libc++, liblzma, qt6-qtbase, zlib, zstd"
+TERMUX_PKG_BUILD_DEPENDS="extra-cmake-modules (>= ${NASUX_PKG_VERSION%.*}), qt6-qttools"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DCMAKE_SYSTEM_NAME=Linux
 -DKDE_INSTALL_QMLDIR=lib/qt6/qml
@@ -20,8 +20,8 @@ termux_step_host_build() {
 		return
 	fi
 
-	termux_setup_cmake
-	termux_setup_ninja
+	nasux_setup_cmake
+	nasux_setup_ninja
 
 	cmake -G Ninja \
 		-S "${TERMUX_PKG_SRCDIR}" \

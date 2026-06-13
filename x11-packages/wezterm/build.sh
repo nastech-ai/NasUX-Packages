@@ -1,19 +1,19 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/wez/wezterm
-TERMUX_PKG_DESCRIPTION="GPU-accelerated cross-platform terminal emulator and multiplexer"
-TERMUX_PKG_LICENSE="MIT"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="20240203-110809-5046fc22"
-TERMUX_PKG_SRCURL="https://github.com/wezterm/wezterm/releases/download/$TERMUX_PKG_VERSION/wezterm-$TERMUX_PKG_VERSION-src.tar.gz"
-TERMUX_PKG_SHA256=df60b1081d402b5a9239cc4cef16fc699eab68bbbeac9c669cb5d991a6010b2c
-TERMUX_PKG_DEPENDS="fontconfig, freetype, glib, harfbuzz, hicolor-icon-theme, libpng, libssh2, libx11, libxcb, libxkbcommon, openssl, ttf-jetbrains-mono, xdg-utils, xcb-util, xcb-util-image, zlib"
+NASUX_PKG_HOMEPAGE=https://github.com/wez/wezterm
+NASUX_PKG_DESCRIPTION="GPU-accelerated cross-platform terminal emulator and multiplexer"
+NASUX_PKG_LICENSE="MIT"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="20240203-110809-5046fc22"
+NASUX_PKG_SRCURL="https://github.com/wezterm/wezterm/releases/download/$NASUX_PKG_VERSION/wezterm-$NASUX_PKG_VERSION-src.tar.gz"
+NASUX_PKG_SHA256=df60b1081d402b5a9239cc4cef16fc699eab68bbbeac9c669cb5d991a6010b2c
+NASUX_PKG_DEPENDS="fontconfig, freetype, glib, harfbuzz, hicolor-icon-theme, libpng, libssh2, libx11, libxcb, libxkbcommon, openssl, ttf-jetbrains-mono, xdg-utils, xcb-util, xcb-util-image, zlib"
 TERMUX_PKG_RECOMMENDS="ncurses, ttf-nerd-fonts-symbols"
 TERMUX_PKG_BREAKS="wezterm-nightly"
 TERMUX_PKG_CONFLICTS="wezterm-nightly"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_AUTO_UPDATE=true
 
 termux_step_pre_configure() {
-	termux_setup_rust
+	nasux_setup_rust
 
 	sed -i 's/"vendored-fonts", //' wezterm-gui/Cargo.toml
 
@@ -61,7 +61,7 @@ termux_step_pre_configure() {
 	echo "Applying patch: $patch"
 	patch -p1 -d "$dir" < "${patch}"
 
-	local patch="$TERMUX_PKG_BUILDER_DIR/libssh-rs-sys-termux.diff"
+	local patch="$TERMUX_PKG_BUILDER_DIR/libssh-rs-sys-nasux.diff"
 	local dir="vendor/libssh-rs-sys"
 	echo "Applying patch: $patch"
 	patch -p1 -d "$dir" < "${patch}"

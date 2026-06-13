@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://wiki.gnome.org/Projects/Libpeas
-TERMUX_PKG_DESCRIPTION="A gobject-based plugins engine"
-TERMUX_PKG_LICENSE="LGPL-2.1"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="1.38.1"
-TERMUX_PKG_SRCURL=https://download.gnome.org/sources/libpeas/${TERMUX_PKG_VERSION%.*}/libpeas-${TERMUX_PKG_VERSION}.tar.xz
-TERMUX_PKG_SHA256=e82fd328adcac1aba34b64136bdfcbbacf2b3258a8bc4e5f480a72502a611ae9
-TERMUX_PKG_DEPENDS="glib, gobject-introspection, gtk3"
+NASUX_PKG_HOMEPAGE=https://wiki.gnome.org/Projects/Libpeas
+NASUX_PKG_DESCRIPTION="A gobject-based plugins engine"
+NASUX_PKG_LICENSE="LGPL-2.1"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="1.38.1"
+NASUX_PKG_SRCURL=https://download.gnome.org/sources/libpeas/${NASUX_PKG_VERSION%.*}/libpeas-${NASUX_PKG_VERSION}.tar.xz
+NASUX_PKG_SHA256=e82fd328adcac1aba34b64136bdfcbbacf2b3258a8bc4e5f480a72502a611ae9
+NASUX_PKG_DEPENDS="glib, gobject-introspection, gtk3"
 TERMUX_PKG_BUILD_DEPENDS="g-ir-scanner, glib-cross"
 TERMUX_PKG_DISABLE_GIR=false
-TERMUX_PKG_VERSIONED_GIR=false
+NASUX_PKG_VERSIONED_GIR=false
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -Dlua51=false
 -Dpython3=false
@@ -18,8 +18,8 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 "
 
 termux_step_pre_configure() {
-	termux_setup_gir
-	termux_setup_glib_cross_pkg_config_wrapper
+	nasux_setup_gir
+	nasux_setup_glib_cross_pkg_config_wrapper
 
 	export TERMUX_MESON_ENABLE_SOVERSION=1
 }

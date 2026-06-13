@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/trentbuck/binutils-is-llvm
-TERMUX_PKG_DESCRIPTION="Use llvm as binutils"
-TERMUX_PKG_LICENSE="MIT"
-TERMUX_PKG_MAINTAINER="@termux"
+NASUX_PKG_HOMEPAGE=https://github.com/trentbuck/binutils-is-llvm
+NASUX_PKG_DESCRIPTION="Use llvm as binutils"
+NASUX_PKG_LICENSE="MIT"
+NASUX_PKG_MAINTAINER="@nastech-ai"
 # The version number is different from the original one.
-TERMUX_PKG_VERSION=0.3
+NASUX_PKG_VERSION=0.3
 TERMUX_PKG_REVISION=4
 TERMUX_PKG_AUTO_UPDATE=false
 TERMUX_PKG_SKIP_SRC_EXTRACT=true
-TERMUX_PKG_DEPENDS="lld, llvm"
+NASUX_PKG_DEPENDS="lld, llvm"
 TERMUX_PKG_CONFLICTS="binutils"
 
 termux_step_make_install() {

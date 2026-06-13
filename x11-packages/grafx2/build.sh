@@ -1,15 +1,15 @@
-TERMUX_PKG_HOMEPAGE=https://gitlab.com/GrafX2/grafX2
-TERMUX_PKG_DESCRIPTION="The Ultimate 256-color bitmap paint program"
-TERMUX_PKG_LICENSE="GPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
+NASUX_PKG_HOMEPAGE=https://gitlab.com/GrafX2/grafX2
+NASUX_PKG_DESCRIPTION="The Ultimate 256-color bitmap paint program"
+NASUX_PKG_LICENSE="GPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
 _COMMIT=e6ee44e579defed0ad8a005bed475fd8ea433788
 _COMMIT_DATE=20260424
-TERMUX_PKG_VERSION="2.9-p${_COMMIT_DATE}"
-TERMUX_PKG_SRCURL=git+https://gitlab.com/GrafX2/grafX2.git
+NASUX_PKG_VERSION="2.9-p${_COMMIT_DATE}"
+NASUX_PKG_SRCURL=git+https://gitlab.com/GrafX2/grafX2.git
 TERMUX_PKG_GIT_BRANCH=master
-TERMUX_PKG_SHA256=12b4688adef4a048da0cecc16809b8b2d7e4b771a065a030f053cb4e2b4d88b9
-TERMUX_PKG_DEPENDS="freetype, lua51, sdl2 | sdl2-compat, sdl2-image, sdl2-ttf, libiconv"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_SHA256=12b4688adef4a048da0cecc16809b8b2d7e4b771a065a030f053cb4e2b4d88b9
+NASUX_PKG_DEPENDS="freetype, lua51, sdl2 | sdl2-compat, sdl2-image, sdl2-ttf, libiconv"
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_HOSTBUILD=true
 
 termux_step_host_build() {
@@ -22,15 +22,15 @@ termux_step_post_get_source() {
 	git checkout "$_COMMIT"
 
 	local pdate="p$(git log -1 --format=%cs | sed 's/-//g')"
-	if [[ "$TERMUX_PKG_VERSION" != *"${pdate}" ]]; then
-		echo -n "ERROR: The version string \"$TERMUX_PKG_VERSION\" is"
+	if [[ "$NASUX_PKG_VERSION" != *"${pdate}" ]]; then
+		echo -n "ERROR: The version string \"$NASUX_PKG_VERSION\" is"
 		echo -n " different from what is expected to be; should end"
 		echo " with \"${pdate}\"."
 		return 1
 	fi
 
 	local s=$(find . -type f ! -path '*/.git/*' -print0 | xargs -0 sha256sum | LC_ALL=C sort | sha256sum)
-	if [[ "${s}" != "${TERMUX_PKG_SHA256}  "* ]]; then
+	if [[ "${s}" != "${NASUX_PKG_SHA256}  "* ]]; then
 		termux_error_exit "Checksum mismatch for source files. Expected: ${s}"
 	fi
 }

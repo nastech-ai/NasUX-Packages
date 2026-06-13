@@ -2,13 +2,13 @@
 # clean.sh - clean everything.
 set -e -u
 
-TERMUX_SCRIPTDIR=$(cd "$(realpath "$(dirname "$0")")"; pwd)
+NASUX_SCRIPTDIR=$(cd "$(realpath "$(dirname "$0")")"; pwd)
 
 # Store pid of current process in a file for docker__run_docker_exec_trap
-. "$TERMUX_SCRIPTDIR/scripts/utils/docker/docker.sh"; docker__create_docker_exec_pid_file
+. "$NASUX_SCRIPTDIR/scripts/utils/docker/docker.sh"; docker__create_docker_exec_pid_file
 
 # Get variable CGCT_DIR
-. "$TERMUX_SCRIPTDIR/scripts/properties.sh"
+. "$NASUX_SCRIPTDIR/scripts/properties.sh"
 
 # Checking if script is running on Android with 2 different methods.
 # Needed for safety to prevent execution of potentially dangerous
@@ -26,12 +26,12 @@ fi
 
 # Read settings from .termuxrc if existing
 test -f "$HOME/.termuxrc" && . "$HOME/.termuxrc"
-: "${TERMUX_TOPDIR:="$HOME/.termux-build"}"
+: "${TERMUX_TOPDIR:="$HOME/.nasux-build"}"
 : "${TMPDIR:=/tmp}"
 export TMPDIR
 
 # Lock file. Same as used in build-package.sh.
-TERMUX_BUILD_LOCK_FILE="${TMPDIR}/.termux-build.lck"
+TERMUX_BUILD_LOCK_FILE="${TMPDIR}/.nasux-build.lck"
 if [ ! -e "$TERMUX_BUILD_LOCK_FILE" ]; then
 	touch "$TERMUX_BUILD_LOCK_FILE"
 fi
@@ -46,7 +46,7 @@ fi
 		chmod +w -R "$TERMUX_TOPDIR" || true
 	fi
 
-	# For on-device build cleanup Termux app data directory shouldn't be erased.
+	# For on-device build cleanup NasUX app data directory shouldn't be erased.
 	if [[ "$TERMUX_ON_DEVICE_BUILD" == "false" ]]; then
 		for variable_name in TERMUX__PREFIX TERMUX_APP__DATA_DIR CGCT_DIR; do
 			variable_value="${!variable_name:-}"
@@ -76,7 +76,7 @@ fi
 			fi
 
 			# If deletion directory is under rootfs `/` or not accessible
-			# by current user, like the `builder` user in Termux docker
+			# by current user, like the `builder` user in NasUX docker
 			# cannot access root owned directories.
 			if [[ ! -r "$deletion_dir" ]] || [[ ! -w "$deletion_dir" ]] || [[ ! -x "$deletion_dir" ]]; then
 				echo "The deletion directory '$deletion_dir' for TERMUX__PREFIX is not readable, writable or searchable while running 'clean.sh'." 1>&2

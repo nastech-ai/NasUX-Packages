@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/dreamer/scrot
-TERMUX_PKG_DESCRIPTION="Simple command-line screenshot utility for X"
+NASUX_PKG_HOMEPAGE=https://github.com/dreamer/scrot
+NASUX_PKG_DESCRIPTION="Simple command-line screenshot utility for X"
 # License: MIT-feh
-TERMUX_PKG_LICENSE="custom"
-TERMUX_PKG_LICENSE_FILE="COPYING"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="2.0.0"
-TERMUX_PKG_SRCURL=https://github.com/resurrecting-open-source-projects/scrot/releases/download/${TERMUX_PKG_VERSION}/scrot-${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=1b4b3acadfe07bf89234838675d1d23508a9a6810cb64584f1d9610103d6cdfa
+NASUX_PKG_LICENSE="custom"
+NASUX_PKG_LICENSE_FILE="COPYING"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="2.0.0"
+NASUX_PKG_SRCURL=https://github.com/resurrecting-open-source-projects/scrot/releases/download/${NASUX_PKG_VERSION}/scrot-${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=1b4b3acadfe07bf89234838675d1d23508a9a6810cb64584f1d9610103d6cdfa
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="imlib2, libx11, libxcomposite, libxfixes, libxrandr"
+NASUX_PKG_DEPENDS="imlib2, libx11, libxcomposite, libxfixes, libxrandr"
 
 termux_step_pre_configure() {
 	local _inc="$TERMUX_PKG_SRCDIR/_getsubopt/include"

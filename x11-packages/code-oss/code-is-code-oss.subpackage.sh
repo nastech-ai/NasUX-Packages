@@ -1,7 +1,7 @@
-TERMUX_SUBPKG_DESCRIPTION="Symlinks code/vscode to code-oss"
+NASUX_SUBPKG_DESCRIPTION="Symlinks code/vscode to code-oss"
 TERMUX_SUBPKG_BREAKS="code"
 TERMUX_SUBPKG_CONFLICTS="code"
-TERMUX_SUBPKG_INCLUDE="
+NASUX_SUBPKG_INCLUDE="
 bin/code
 bin/vscode
 share/bash-completion/completions/code

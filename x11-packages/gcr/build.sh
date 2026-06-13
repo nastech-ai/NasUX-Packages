@@ -1,15 +1,15 @@
-TERMUX_PKG_HOMEPAGE=https://gitlab.gnome.org/GNOME/gcr
-TERMUX_PKG_DESCRIPTION="A library for displaying certificates and crypto UI, accessing key stores"
-TERMUX_PKG_LICENSE="LGPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
+NASUX_PKG_HOMEPAGE=https://gitlab.gnome.org/GNOME/gcr
+NASUX_PKG_DESCRIPTION="A library for displaying certificates and crypto UI, accessing key stores"
+NASUX_PKG_LICENSE="LGPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
 # This specific package is for libgcr-3.
-TERMUX_PKG_VERSION="3.41.2"
-TERMUX_PKG_SRCURL=https://download.gnome.org/sources/gcr/${TERMUX_PKG_VERSION%.*}/gcr-${TERMUX_PKG_VERSION}.tar.xz
-TERMUX_PKG_SHA256=bad10f3c553a0e1854649ab59c5b2434da22ca1a54ae6138f1f53961567e1ab7
-TERMUX_PKG_DEPENDS="gdk-pixbuf, glib, gtk3, libcairo, libgcrypt, p11-kit, pango"
+NASUX_PKG_VERSION="3.41.2"
+NASUX_PKG_SRCURL=https://download.gnome.org/sources/gcr/${NASUX_PKG_VERSION%.*}/gcr-${NASUX_PKG_VERSION}.tar.xz
+NASUX_PKG_SHA256=bad10f3c553a0e1854649ab59c5b2434da22ca1a54ae6138f1f53961567e1ab7
+NASUX_PKG_DEPENDS="gdk-pixbuf, glib, gtk3, libcairo, libgcrypt, p11-kit, pango"
 TERMUX_PKG_BUILD_DEPENDS="g-ir-scanner, glib-cross, gnupg, valac"
 TERMUX_PKG_RECOMMENDS="gnupg"
-TERMUX_PKG_VERSIONED_GIR=false
+NASUX_PKG_VERSIONED_GIR=false
 TERMUX_PKG_DISABLE_GIR=false
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -Dintrospection=true
@@ -21,7 +21,7 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 "
 
 termux_step_pre_configure() {
-	termux_setup_gir
+	nasux_setup_gir
 
 	local bin_dir=$TERMUX_PKG_BUILDDIR/_dummy/bin
 	mkdir -p $bin_dir
@@ -36,7 +36,7 @@ termux_step_pre_configure() {
 	done
 	popd
 	export PATH+=":$bin_dir"
-	termux_setup_glib_cross_pkg_config_wrapper
+	nasux_setup_glib_cross_pkg_config_wrapper
 }
 
 termux_step_post_massage() {

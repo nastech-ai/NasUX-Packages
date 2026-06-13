@@ -13,17 +13,17 @@ fi
 
 
 ###
-# Variables for validation of Termux properties variables.
+# Variables for validation of NasUX properties variables.
 # Validation is done to ensure packages are not compiled for invalid
-# values that are not supported, and values are as per Termux file
+# values that are not supported, and values are as per NasUX file
 # path limits.
 #
-# Additionally, the Termux packages build system is an unsafe mess of
+# Additionally, the NasUX packages build system is an unsafe mess of
 # unquoted variables in shell scripts, and so validation is necessary
 # for important variables, especially specific path variables against
 # `TERMUX_REGEX__SAFE_*_PATH` regexes to reduce any potential damage.
 #
-# - https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#file-path-limits
+# - https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#file-path-limits
 ###
 
 ##
@@ -68,7 +68,7 @@ unset __TERMUX_BUILD_PROPS__VARIABLES_VALIDATOR_ACTIONS_MAP; declare -A __TERMUX
 unset __TERMUX_BUILD_PROPS__VARIABLES_VALIDATOR_ACTIONS_VARIABLE_NAMES; declare -a __TERMUX_BUILD_PROPS__VARIABLES_VALIDATOR_ACTIONS_VARIABLE_NAMES=()
 
 ##
-# Whether to validate max lengths of Termux paths. Set to `false` to skip validation.
+# Whether to validate max lengths of NasUX paths. Set to `false` to skip validation.
 ##
 __TERMUX_BUILD_PROPS__VALIDATE_PATHS_MAX_LEN="true"
 
@@ -111,7 +111,7 @@ __termux_build_props__add_variables_validator_actions() {
 
 
 ####
-# Variables for validating Termux variables.
+# Variables for validating NasUX variables.
 ####
 
 ##
@@ -175,14 +175,14 @@ TERMUX_REGEX__SINGLE_OR_DOUBLE_DOT_CONTAINING_PATH='((^\./)|(^\.\./)|(/\.$)|(/\.
 
 
 ##
-# Regex that matches invalid Termux rootfs paths.
+# Regex that matches invalid NasUX rootfs paths.
 #
-# The Termux rootfs or prefix paths must not be equal to or be under
-# specific Filesystem Hierarchy Standard paths or paths used by Termux
-# docker image/host OS for its own files, as Termux packages files
-# must be kept separate from the build host. The Termux app data/prefix
+# The NasUX rootfs or prefix paths must not be equal to or be under
+# specific Filesystem Hierarchy Standard paths or paths used by NasUX
+# docker image/host OS for its own files, as NasUX packages files
+# must be kept separate from the build host. The NasUX app data/prefix
 # directories are also wiped by `clean.sh` when not running on-device,
-# which wouldn't be possible if Termux and host directories are shared.
+# which wouldn't be possible if NasUX and host directories are shared.
 #
 # The invalid paths list does not include the `/data` and `/mnt/expand`
 # paths under which private app data directories are assigned to
@@ -191,12 +191,12 @@ TERMUX_REGEX__SINGLE_OR_DOUBLE_DOT_CONTAINING_PATH='((^\./)|(^\.\./)|(/\.$)|(/\.
 #
 # - https://refspecs.linuxfoundation.org/FHS_3.0/fhs-3.0.html
 # - https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard
-# - https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#termux-private-app-data-directory
+# - https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#nasux-private-app-data-directory
 ##
 TERMUX_REGEX__INVALID_TERMUX_ROOTFS_PATHS='^((/bin(/.*)?)|(/boot(/.*)?)|(/dev(/.*)?)|(/etc(/.*)?)|(/home)|(/lib(/.*)?)|(/lib[^/]+(/.*)?)|(/media)|(/mnt)|(/opt)|(/proc(/.*)?)|(/root)|(/run(/.*)?)|(/sbin(/.*)?)|(/srv(/.*)?)|(/sys(/.*)?)|(/tmp(/.*)?)|(/usr)|(/usr/local)|(((/usr/)|(/usr/local/))((bin)|(games)|(include)|(lib)|(libexec)|(lib[^/]+)|(sbin)|(share)|(src)|(X11R6))(/.*)?)|(/var(/.*)?)|(/bin.usr-is-merged)|(/lib.usr-is-merged)|(/sbin.usr-is-merged)|(/.dockerinit)|(/.dockerenv))$'
 
 ##
-# Regex that matches invalid Termux home paths.
+# Regex that matches invalid NasUX home paths.
 #
 # Same reasoning as `TERMUX_REGEX__INVALID_TERMUX_ROOTFS_PATHS`,
 # and invalid paths are the same as well except that `/home` is
@@ -207,7 +207,7 @@ TERMUX_REGEX__INVALID_TERMUX_ROOTFS_PATHS='^((/bin(/.*)?)|(/boot(/.*)?)|(/dev(/.
 TERMUX_REGEX__INVALID_TERMUX_HOME_PATHS='^((/)|(/bin(/.*)?)|(/boot(/.*)?)|(/dev(/.*)?)|(/etc(/.*)?)|(/lib(/.*)?)|(/lib[^/]+(/.*)?)|(/media)|(/mnt)|(/opt)|(/proc(/.*)?)|(/root)|(/run(/.*)?)|(/sbin(/.*)?)|(/srv(/.*)?)|(/sys(/.*)?)|(/tmp(/.*)?)|(/usr(/.*)?)|(/var(/.*)?)|(/bin.usr-is-merged)|(/lib.usr-is-merged)|(/sbin.usr-is-merged)|(/.dockerinit)|(/.dockerenv))$'
 
 ##
-# Regex that matches invalid Termux prefix paths.
+# Regex that matches invalid NasUX prefix paths.
 #
 # Same reasoning as `TERMUX_REGEX__INVALID_TERMUX_ROOTFS_PATHS`,
 # and invalid paths are the same as well except that `/` is not
@@ -233,7 +233,7 @@ TERMUX_REGEX__UNSIGNED_INT='^[0-9]+$'
 # by this regex and it must be checked with `TERMUX__NAME_MAX`, as
 # `bash` `=~` regex conditional does not support lookaround.
 #
-# Unlike Android, the Termux app package name max length is not `255`
+# Unlike Android, the NasUX app package name max length is not `255`
 # as its limited by `TERMUX__APPS_DIR___MAX_LEN` and `TERMUX__ROOTFS_DIR___MAX_LEN`.
 #
 # - https://developer.android.com/build/configure-app-module#set-application-id
@@ -256,7 +256,7 @@ TERMUX_REGEX__APP_PACKAGE_NAME="^[a-zA-Z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)+
 #  to be installed on a removable/portable volume/sd card being used as
 #  adoptable storage.
 #
-# - https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#termux-private-app-data-directory
+# - https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#nasux-private-app-data-directory
 ##
 TERMUX_REGEX__APP_DATA_DIR_PATH='^(((/data/data)|(/data/user/[0-9]+)|(/mnt/expand/[^/]+/user/[0-9]+))/[^/]+)$'
 
@@ -265,11 +265,11 @@ TERMUX_REGEX__APP_DATA_DIR_PATH='^(((/data/data)|(/data/user/[0-9]+)|(/mnt/expan
 
 
 ###
-# Variables for the Termux build tools.
+# Variables for the NasUX build tools.
 ###
 
 ##
-# The path to the `termux-packages` repo root directory.
+# The path to the `nasux-packages` repo root directory.
 ##
 TERMUX_PKGS__BUILD__REPO_ROOT_DIR="${TERMUX_PKGS__BUILD__REPO_ROOT_DIR:-}"
 
@@ -295,14 +295,14 @@ __termux_build_props__set_termux_builder__repo_root_dir() {
 }
 __termux_build_props__set_termux_builder__repo_root_dir "/.." || exit $?
 unset __termux_build_props__set_termux_builder__repo_root_dir
-TERMUX_SCRIPTDIR="${TERMUX_SCRIPTDIR:-TERMUX_PKGS__BUILD__REPO_ROOT_DIR}" # Deprecated alternative variable for `TERMUX_PKGS__BUILD__REPO_ROOT_DIR`
+NASUX_SCRIPTDIR="${NASUX_SCRIPTDIR:-TERMUX_PKGS__BUILD__REPO_ROOT_DIR}" # Deprecated alternative variable for `TERMUX_PKGS__BUILD__REPO_ROOT_DIR`
 
 
 
 TERMUX_SDK_REVISION=9123335
 TERMUX_ANDROID_BUILD_TOOLS_VERSION=33.0.1
 # when changing the above:
-# change TERMUX_PKG_VERSION (and remove TERMUX_PKG_REVISION if necessary) in:
+# change NASUX_PKG_VERSION (and remove TERMUX_PKG_REVISION if necessary) in:
 #   apksigner, d8
 # and trigger rebuild of them
 : "${TERMUX_NDK_VERSION_NUM:="29"}"
@@ -331,12 +331,12 @@ fi
 
 
 ###
-# Variables for the Termux apps and packages for which to compile packages.
+# Variables for the NasUX apps and packages for which to compile packages.
 #
-# Variables defined in this file need to be in sync with `termux-app`
-# (`TermuxConstants` and `TermuxCoreConstants`), termux site and `termux-exec`.
-# - https://github.com/termux/termux-app/blob/master/termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java
-# - https://github.com/termux/termux-app/blob/master/termux-shared/src/main/java/com/termux/shared/termux/core/TermuxCoreConstants.java
+# Variables defined in this file need to be in sync with `nasux-app`
+# (`TermuxConstants` and `TermuxCoreConstants`), nasux site and `termux-exec`.
+# - https://github.com/nastech-ai/NasUX/blob/master/nasux-shared/src/main/java/com/nasux/shared/nasux/TermuxConstants.java
+# - https://github.com/nastech-ai/NasUX/blob/master/nasux-shared/src/main/java/com/nasux/shared/nasux/core/TermuxCoreConstants.java
 #
 # Following is a list of `TERMUX_` variables that are safe to modify when forking.
 # **DO NOT MODIFY ANY OTHER VARIABLE UNLESS YOU KNOW WHAT YOU ARE DOING.**
@@ -367,42 +367,42 @@ fi
 ###
 
 ##
-# Termux project name.
+# NasUX project name.
 #
-# Default value: `Termux`
+# Default value: `NasUX`
 ##
-TERMUX__NAME="Termux"
+TERMUX__NAME="NasUX"
 
 ##
 # The lower case value for `TERMUX__NAME`.
 #
-# Default value: `termux`
+# Default value: `nasux`
 ##
 TERMUX__LNAME="${TERMUX__NAME,,}"
 
 ##
 # The upper case value for `TERMUX__NAME`.
 #
-# Default value: `TERMUX`
+# Default value: `NASUX`
 ##
 TERMUX__UNAME="${TERMUX__NAME^^}"
 
 
 
 ##
-# Termux internal project name.
+# NasUX internal project name.
 #
 # This is used internally for paths, filenames, and other internal use
 # cases and must match the `TERMUX__INTERNAL_NAME_REGEX` regex and
 # have max length `TERMUX__INTERNAL_NAME___MAX_LEN`.
 #
-# **This must not be changed unless doing a full fork of Termux where
-# all Termux references are changed instead of just changing the
+# **This must not be changed unless doing a full fork of NasUX where
+# all NasUX references are changed instead of just changing the
 # `TERMUX__NAME`, `TERMUX_APP__PACKAGE_NAME` and urls.**
 #
-# Default value: `termux`
+# Default value: `nasux`
 ##
-TERMUX__INTERNAL_NAME="termux"
+TERMUX__INTERNAL_NAME="nasux"
 
 ##
 # The regex to validate `TERMUX__INTERNAL_NAME`.
@@ -422,7 +422,7 @@ TERMUX__INTERNAL_NAME_REGEX="^[a-z0-9][a-z0-9_-]+[a-z0-9]$"
 ##
 # The max length for the `TERMUX__INTERNAL_NAME`.
 #
-# Check https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#file-path-limits
+# Check https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#file-path-limits
 # for why the value `7` is chosen.
 #
 # Constant value: `7`
@@ -432,55 +432,55 @@ TERMUX__INTERNAL_NAME___MAX_LEN=7
 
 
 ##
-# Termux repositories host organization name.
+# NasUX repositories host organization name.
 #
-# Default value: `termux`
+# Default value: `nasux`
 ##
-TERMUX__REPOS_HOST_ORG_NAME="termux"
+TERMUX__REPOS_HOST_ORG_NAME="nasux"
 
 ##
-# Termux repositories host organization url.
+# NasUX repositories host organization url.
 #
-# Default value: `https://github.com/termux`
+# Default value: `https://github.com/nasux`
 ##
 TERMUX__REPOS_HOST_ORG_URL="https://github.com/$TERMUX__REPOS_HOST_ORG_NAME"
 
 
 
 ##
-# Termux app package name used for `TERMUX_APP__DATA_DIR` and
+# NasUX app package name used for `TERMUX_APP__DATA_DIR` and
 # `TERMUX_APP__*_(ACTIVITY|RECEIVER|SERVICE)__*` variables.
 #
 # Ideally package name should be `<= 21` characters and max `33`
 # characters. If package name has not yet been chosen, then it would
 # be best to keep it to `<= 10` characters. Check
-# https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#file-path-limits
+# https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#file-path-limits
 # for why.
 #
 # **See Also:**
 # - `TERMUX_APP__NAMESPACE`.
 # - https://developer.android.com/build/configure-app-module#set-application-id
-# - https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#termux-private-app-data-directory
+# - https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#nasux-private-app-data-directory
 #
-# Default value: `com.termux`
+# Default value: `com.nasux`
 ##
-TERMUX_APP__PACKAGE_NAME="com.termux"
+TERMUX_APP__PACKAGE_NAME="com.nasux"
 TERMUX_APP_PACKAGE="$TERMUX_APP__PACKAGE_NAME" # Deprecated alternative variable for `TERMUX_APP__PACKAGE_NAME`
 
 __termux_build_props__add_variables_validator_actions "TERMUX_APP__PACKAGE_NAME" "app_package_name"
 
 ##
-# Termux app data directory path that is expected to be assigned by
-# Android to the Termux app with `TERMUX_APP__PACKAGE_NAME` for all
-# its app data, that will contain the Termux project directory
-# (`TERMUX__PROJECT_DIR`), and optionally the Termux rootfs directory
+# NasUX app data directory path that is expected to be assigned by
+# Android to the NasUX app with `TERMUX_APP__PACKAGE_NAME` for all
+# its app data, that will contain the NasUX project directory
+# (`TERMUX__PROJECT_DIR`), and optionally the NasUX rootfs directory
 # (`TERMUX__ROOTFS`).
 #
 # The path must match `TERMUX_REGEX__APP_DATA_DIR_PATH`.
 #
 # The directory set will be deleted by `clean.sh` if `TERMUX__PREFIX`
 # is under `TERMUX_APP__DATA_DIR` and not running on-device, so make
-# sure a safe path is set if running `clean.sh` in Termux docker or
+# sure a safe path is set if running `clean.sh` in NasUX docker or
 # host OS build environment.
 #
 # Default value: `/data/data/com.termux`
@@ -492,7 +492,7 @@ __termux_build_props__add_variables_validator_actions "TERMUX_APP__DATA_DIR" "sa
 # The max length for the `TERMUX_APP__DATA_DIR` including the null '\0'
 # terminator.
 #
-# Check https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#file-path-limits
+# Check https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#file-path-limits
 # for why the value `69` is chosen.
 #
 # Constant value: `69`
@@ -504,34 +504,34 @@ TERMUX_APP__DATA_DIR___MAX_LEN=69
 
 
 ##
-# Termux subdirectory path for `TERMUX__PROJECT_DIR`.
+# NasUX subdirectory path for `TERMUX__PROJECT_DIR`.
 #
-# Default value: `termux`
+# Default value: `nasux`
 ##
 TERMUX__PROJECT_SUBDIR="$TERMUX__INTERNAL_NAME"
 __termux_build_props__add_variables_validator_actions "TERMUX__PROJECT_SUBDIR" "safe_relative_path"
 
 ##
-# Termux project directory path under `TERMUX_APP__DATA_DIR`.
+# NasUX project directory path under `TERMUX_APP__DATA_DIR`.
 #
-# This is an exclusive directory for all Termux files that includes
-# Termux core directory (`TERMUX__CORE_DIR`), Termux apps directory
-# (`TERMUX__APPS_DIR`), and optionally the Termux rootfs directory
+# This is an exclusive directory for all NasUX files that includes
+# NasUX core directory (`TERMUX__CORE_DIR`), NasUX apps directory
+# (`TERMUX__APPS_DIR`), and optionally the NasUX rootfs directory
 # (`TERMUX__ROOTFS`).
 #
-# Currently, the default Termux rootfs directory is not under it and
+# Currently, the default NasUX rootfs directory is not under it and
 # is at the `/files`  subdirectory but there are plans to move it to
-# `termux/rootfs/II` in future where `II` refers to rootfs id starting
+# `nasux/rootfs/II` in future where `II` refers to rootfs id starting
 # at `0` for multi-rootfs support.
 #
-# An exclusive directory is required so that all Termux files exist
-# under a single directory, especially for when Termux is provided as
-# a library, so that Termux files do not interfere with other files
-# of Termux app forks or apps that may use the Termux library.
+# An exclusive directory is required so that all NasUX files exist
+# under a single directory, especially for when NasUX is provided as
+# a library, so that NasUX files do not interfere with other files
+# of NasUX app forks or apps that may use the NasUX library.
 #
-# - https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#termux-project-directory
+# - https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#nasux-project-directory
 #
-# Default value: `/data/data/com.termux/termux`
+# Default value: `/data/data/com.termux/nasux`
 ##
 TERMUX__PROJECT_DIR="$TERMUX_APP__DATA_DIR/$TERMUX__PROJECT_SUBDIR"
 __termux_build_props__add_variables_validator_actions "TERMUX__PROJECT_DIR" "safe_absolute_path"
@@ -541,21 +541,21 @@ __termux_build_props__add_variables_validator_actions "TERMUX__PROJECT_DIR" "saf
 
 
 ##
-# Termux subdirectory path for `TERMUX__CORE_DIR`.
+# NasUX subdirectory path for `TERMUX__CORE_DIR`.
 #
 # Constant value: `core`
 ##
 TERMUX__CORE_SUBDIR="core"
 
 ##
-# Termux core directory path under `TERMUX__PROJECT_DIR`.
+# NasUX core directory path under `TERMUX__PROJECT_DIR`.
 #
-# This contains Termux core files for the Termux app, like user settings and configs for the app,
+# This contains NasUX core files for the NasUX app, like user settings and configs for the app,
 # which and are independent of any specific rootfs.
 #
-# - https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#termux-core-directory
+# - https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#nasux-core-directory
 #
-# Default value: `/data/data/com.termux/termux/core`
+# Default value: `/data/data/com.termux/nasux/core`
 ##
 TERMUX__CORE_DIR="$TERMUX__PROJECT_DIR/$TERMUX__CORE_SUBDIR"
 __termux_build_props__add_variables_validator_actions "TERMUX__CORE_DIR" "safe_absolute_path"
@@ -566,23 +566,23 @@ __termux_build_props__add_variables_validator_actions "TERMUX__CORE_DIR" "safe_a
 
 
 ##
-# Termux subdirectory path for `TERMUX__APPS_DIR`.
+# NasUX subdirectory path for `TERMUX__APPS_DIR`.
 #
 # Constant value: `app`
 ##
 TERMUX__APPS_SUBDIR="app"
 
 ##
-# Termux apps directory path under `TERMUX__PROJECT_DIR`.
+# NasUX apps directory path under `TERMUX__PROJECT_DIR`.
 #
-# This contains app specific files for the Termux app, its plugin
+# This contains app specific files for the NasUX app, its plugin
 # apps, and third party apps, like used for app APIs and
 # filesystem/pathname socket files of servers created by the apps.
 # - https://man7.org/linux/man-pages/man7/unix.7.html
 #
-# - https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#termux-apps-directory
+# - https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#nasux-apps-directory
 #
-# Default value: `/data/data/com.termux/termux/app`
+# Default value: `/data/data/com.termux/nasux/app`
 ##
 TERMUX__APPS_DIR="$TERMUX__PROJECT_DIR/$TERMUX__APPS_SUBDIR"
 __termux_build_props__add_variables_validator_actions "TERMUX__APPS_DIR" "safe_absolute_path"
@@ -591,7 +591,7 @@ __termux_build_props__add_variables_validator_actions "TERMUX__APPS_DIR" "safe_a
 # The max length for the `TERMUX__APPS_DIR` including the null '\0'
 # terminator.
 #
-# Check https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#file-path-limits
+# Check https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#file-path-limits
 # for why the value `84` is chosen.
 #
 # Constant value: `84`
@@ -599,10 +599,10 @@ __termux_build_props__add_variables_validator_actions "TERMUX__APPS_DIR" "safe_a
 TERMUX__APPS_DIR___MAX_LEN=84
 
 ##
-# The max length for the Termux apps api socket server parent directory
+# The max length for the NasUX apps api socket server parent directory
 # including the null '\0' terminator.
 #
-# Check https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#file-path-limits
+# Check https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#file-path-limits
 # for why the value `98` is chosen.
 #
 # Constant value: `98`
@@ -612,16 +612,16 @@ TERMUX__APPS_API_SOCKET__SERVER_PARENT_DIR___MAX_LEN=98
 
 
 ##
-# Termux subdirectory path for `TERMUX__APPS_DIR_BY_IDENTIFIER`.
+# NasUX subdirectory path for `TERMUX__APPS_DIR_BY_IDENTIFIER`.
 #
 # Constant value: `i`
 ##
 TERMUX__APPS_DIR_BY_IDENTIFIER_SUBDIR="i"
 
 ##
-# Termux apps directory path by app identifier under `TERMUX__APPS_DIR`.
+# NasUX apps directory path by app identifier under `TERMUX__APPS_DIR`.
 #
-# Default value: `/data/data/com.termux/termux/app/i`
+# Default value: `/data/data/com.termux/nasux/app/i`
 ##
 TERMUX__APPS_DIR_BY_IDENTIFIER="$TERMUX__APPS_DIR/$TERMUX__APPS_DIR_BY_IDENTIFIER_SUBDIR"
 
@@ -646,7 +646,7 @@ TERMUX__APPS_APP_IDENTIFIER_REGEX="^[a-zA-Z0-9]{3,}([._-][a-zA-Z0-9]+)*$"
 # `TERMUX__APPS_DIR_BY_IDENTIFIER` excluding the null '\0' terminator
 # that represents an app identifier.
 #
-# Check https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#file-path-limits
+# Check https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#file-path-limits
 # for why the value `10` is chosen.
 #
 # Constant value: `10`
@@ -658,17 +658,17 @@ TERMUX__APPS_APP_IDENTIFIER___MAX_LEN=10
 
 
 ##
-# Termux subdirectory path for `TERMUX__APPS_DIR_BY_UID`.
+# NasUX subdirectory path for `TERMUX__APPS_DIR_BY_UID`.
 #
 # Constant value: `u`
 ##
 TERMUX__APPS_DIR_BY_UID_SUBDIR="u"
 
 ##
-# Termux apps directory path by app uid (user_id + app_id) under
+# NasUX apps directory path by app uid (user_id + app_id) under
 # `TERMUX__APPS_DIR`.
 #
-# Default value: `/data/data/com.termux/termux/app/u`
+# Default value: `/data/data/com.termux/nasux/app/u`
 ##
 TERMUX__APPS_DIR_BY_UID="$TERMUX__APPS_DIR/$TERMUX__APPS_DIR_BY_UID_SUBDIR"
 
@@ -689,7 +689,7 @@ TERMUX__APPS_APP_UID_REGEX="^[1-9][0-9]{4,8}$"
 # `TERMUX__APPS_DIR_BY_UID` excluding the null '\0' terminator that
 # represents an app uid.
 #
-# Check https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#file-path-limits
+# Check https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#file-path-limits
 # for why the value `9` is chosen.
 #
 # Constant value: `9`
@@ -701,28 +701,28 @@ TERMUX__APPS_APP_UID___MAX_LEN=9
 
 
 ##
-# Termux apps info environment subfile path under an app directory of
+# NasUX apps info environment subfile path under an app directory of
 # `TERMUX__APPS_DIR_BY_IDENTIFIER`.
 #
-# Default value: `termux-apps-info.env`
+# Default value: `nasux-apps-info.env`
 ##
 TERMUX_CORE__APPS_INFO_ENV_SUBFILE="$TERMUX__INTERNAL_NAME-apps-info.env"
 
 ##
-# Termux apps info json subfile path under an app directory of
+# NasUX apps info json subfile path under an app directory of
 # `TERMUX__APPS_DIR_BY_IDENTIFIER`.
 #
-# Default value: `termux-apps-info.json`
+# Default value: `nasux-apps-info.json`
 ##
 TERMUX_CORE__APPS_INFO_JSON_SUBFILE="$TERMUX__INTERNAL_NAME-apps-info.json"
 
 
 
 ##
-# `termux-am-socket` server subfile path under an app directory of
+# `nasux-am-socket` server subfile path under an app directory of
 # `TERMUX__APPS_DIR_BY_IDENTIFIER`.
 #
-# Default value: `termux-am`
+# Default value: `nasux-am`
 ##
 TERMUX_AM_SOCKET__SERVER_SOCKET_SUBFILE="$TERMUX__INTERNAL_NAME-am"
 
@@ -731,7 +731,7 @@ TERMUX_AM_SOCKET__SERVER_SOCKET_SUBFILE="$TERMUX__INTERNAL_NAME-am"
 
 
 ##
-# Termux `TERMUX__ROOTFS` id.
+# NasUX `TERMUX__ROOTFS` id.
 #
 # Default value: `0`
 ##
@@ -739,7 +739,7 @@ TERMUX__ROOTFS_ID="0"
 __termux_build_props__add_variables_validator_actions "TERMUX__ROOTFS_ID" "unsigned_int"
 
 ##
-# Termux subdirectory path for `TERMUX__ROOTFS`.
+# NasUX subdirectory path for `TERMUX__ROOTFS`.
 #
 # Default value: `files`
 ##
@@ -752,31 +752,31 @@ __termux_build_props__add_variables_validator_actions "TERMUX__ROOTFS_SUBDIR" "a
 # design. Make sure to update `TERMUX__CACHE_SUBDIR` above as well.
 
 ##
-# Termux subdirectory path for parent directory of all Termux rootfses
+# NasUX subdirectory path for parent directory of all NasUX rootfses
 # including `TERMUX__ROOTFS`.
 #
-# Default value: `termux/rootfs`
+# Default value: `nasux/rootfs`
 ##
 #TERMUX__ROOTFSES_SUBDIR="$TERMUX__PROJECT_SUBDIR/rootfs"
 ###########
 
 ##
-# Termux subdirectory path for `TERMUX__ROOTFS`.
+# NasUX subdirectory path for `TERMUX__ROOTFS`.
 #
-# Default value: `termux/rootfs/0`
+# Default value: `nasux/rootfs/0`
 ##
 #TERMUX__ROOTFS_SUBDIR="$TERMUX__ROOTFSES_SUBDIR/$TERMUX__ROOTFS_ID"
 ###########
 
 
 ##
-# Termux rootfs directory path under `TERMUX_APP__DATA_DIR` that
-# contains the Linux environment rootfs provided by Termux.
+# NasUX rootfs directory path under `TERMUX_APP__DATA_DIR` that
+# contains the Linux environment rootfs provided by NasUX.
 #
-# - https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#termux-rootfs-directory
+# - https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#nasux-rootfs-directory
 # - https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03.html
 #
-# The Termux rootfs must not be set to path in
+# The NasUX rootfs must not be set to path in
 # `TERMUX_REGEX__INVALID_TERMUX_ROOTFS_PATHS`. It can exist outside
 # the `TERMUX_APP__DATA_DIR` if compiling packages for the Android
 # system or `adb` `shell` user.
@@ -788,7 +788,7 @@ TERMUX_BASE_DIR="$TERMUX__ROOTFS" # Deprecated alternative variable for `TERMUX_
 
 __termux_build_props__add_variables_validator_actions "TERMUX__ROOTFS" "safe_rootfs_or_absolute_path invalid_termux_rootfs_paths"
 
-# FIXME: Remove after updating Termux app and `termux-am-socket`
+# FIXME: Remove after updating NasUX app and `nasux-am-socket`
 # package sources and use `TERMUX__APPS_DIR`.
 TERMUX_APPS_DIR="$TERMUX__ROOTFS/apps"
 
@@ -796,7 +796,7 @@ TERMUX_APPS_DIR="$TERMUX__ROOTFS/apps"
 # The max length for the `TERMUX__ROOTFS` including the null '\0'
 # terminator.
 #
-# Check https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#file-path-limits
+# Check https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#file-path-limits
 # for why the value `86` is chosen.
 #
 # Constant value: `86`
@@ -808,11 +808,11 @@ TERMUX__ROOTFS_DIR___MAX_LEN=86
 
 
 ####
-# Variables for the Termux home.
+# Variables for the NasUX home.
 ####
 
 ##
-# Termux subdirectory path for `TERMUX__HOME`.
+# NasUX subdirectory path for `TERMUX__HOME`.
 #
 # Default value: `home`
 ##
@@ -820,16 +820,16 @@ TERMUX__HOME_SUBDIR="home"
 __termux_build_props__add_variables_validator_actions "TERMUX__HOME_SUBDIR" "safe_relative_path"
 
 ##
-# Termux home directory path under `TERMUX__ROOTFS` used for `$HOME`.
+# NasUX home directory path under `TERMUX__ROOTFS` used for `$HOME`.
 #
 # It serves the same purpose as the `/home` directory on Linux distros.
 #
-# - https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#termux-home-directory
+# - https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#nasux-home-directory
 # - https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s08.html
 #
 # Check `TERMUX__PREFIX` variable docs for rules that apply depending
 # on if `TERMUX__ROOTFS` is equal to Android/Linux rootfs `/` or not.
-# The Termux home must not be set to Android/Linux rootfs `/` or any
+# The NasUX home must not be set to Android/Linux rootfs `/` or any
 # other path in `TERMUX_REGEX__INVALID_TERMUX_HOME_PATHS`.
 #
 # Default value: `/data/data/com.termux/files/home`
@@ -841,22 +841,22 @@ __termux_build_props__add_variables_validator_actions "TERMUX__HOME" "safe_absol
 TERMUX_ANDROID_HOME="$TERMUX__HOME" # Deprecated alternative variable for `TERMUX__HOME`
 
 ##
-# Termux legacy project user config directory path under `TERMUX__HOME`.
+# NasUX legacy project user config directory path under `TERMUX__HOME`.
 #
-# Default value: `/data/data/com.termux/files/home/.termux`
+# Default value: `/data/data/com.termux/files/home/.nasux`
 ##
-TERMUX__LEGACY_PROJECT_USER_CONFIG_DIR="$TERMUX__HOME/.termux"
+TERMUX__LEGACY_PROJECT_USER_CONFIG_DIR="$TERMUX__HOME/.nasux"
 
 
 
 
 
 ####
-# Variables for the Termux prefix.
+# Variables for the NasUX prefix.
 ####
 
 ##
-# Termux subdirectory path for `TERMUX__PREFIX`.
+# NasUX subdirectory path for `TERMUX__PREFIX`.
 #
 # Default value: `usr`
 ##
@@ -864,17 +864,17 @@ TERMUX__PREFIX_SUBDIR="usr"
 __termux_build_props__add_variables_validator_actions "TERMUX__PREFIX_SUBDIR" "allow_unset_value safe_relative_path"
 
 ##
-# Termux prefix directory path under or equal to `TERMUX__ROOTFS`
-# where all Termux packages data is installed.
+# NasUX prefix directory path under or equal to `TERMUX__ROOTFS`
+# where all NasUX packages data is installed.
 #
 # It serves the same purpose as the `/usr` directory on Linux distros
 # and contains the `bin`, `etc`, `include`, `lib`, `libexec`, `opt`,
 # `share`, `tmp` and `var` sub directories.
 #
-# - https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#termux-prefix-directory
+# - https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#nasux-prefix-directory
 # - https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch04.html
 #
-# If `TERMUX__ROOTFS` is not equal to `/`, then by default Termux
+# If `TERMUX__ROOTFS` is not equal to `/`, then by default NasUX
 # uses `usr` merge format, like used by `debian`, as per
 # `__TERMUX_BUILD_PROPS__VALIDATE_TERMUX_PREFIX_USR_MERGE_FORMAT`
 # being enabled by default. In the `usr` merge format, all packages
@@ -884,16 +884,16 @@ __termux_build_props__add_variables_validator_actions "TERMUX__PREFIX_SUBDIR" "a
 # So if `usr` merge format is enabled, then DO NOT change the default
 # value of `TERMUX__PREFIX_SUBDIR` from `usr`.
 # The `$TERMUX__ROOTFS/usr-staging` directory is also used as a
-# temporary directory for extracting bootstrap zip by the Termux app,
+# temporary directory for extracting bootstrap zip by the NasUX app,
 # before its renamed to `$TERMUX__ROOTFS/usr`.
 # Additionally, `TERMUX__PREFIX` must not be equal to `TERMUX__HOME`
-# and they must not be under each other, as Termux app requires that
+# and they must not be under each other, as NasUX app requires that
 # prefix and home are separate directories as prefix gets wiped during
-# bootstrap installation or if `termux-reset` is run, and backup
+# bootstrap installation or if `nasux-reset` is run, and backup
 # scripts require the same. Package data also needs to be kept
 # separate from `home`, so it does not make sense for them to be
 # equal to or be under each other.
-# However, if a Termux app fork is using a modified bootstrap
+# However, if a NasUX app fork is using a modified bootstrap
 # installation that does not use the `usr` merge format, then
 # `__TERMUX_BUILD_PROPS__VALIDATE_TERMUX_PREFIX_USR_MERGE_FORMAT` can
 # be set to `false` and `TERMUX__PREFIX_SUBDIR` could optionally be
@@ -931,7 +931,7 @@ __termux_build_props__add_variables_validator_actions "TERMUX__PREFIX_SUBDIR" "a
 #
 # The directory set will be deleted by `clean.sh` if not running
 # on-device, so make sure a safe path is set if running `clean.sh` in
-# Termux docker or host OS build environment.
+# NasUX docker or host OS build environment.
 #
 # At runtime, `TERMUX__PREFIX` may be overridden and set to
 # `TERMUX__PREFIX_GLIBC` when compiling `glibc` packages by calling
@@ -939,8 +939,8 @@ __termux_build_props__add_variables_validator_actions "TERMUX__PREFIX_SUBDIR" "a
 # `termux_step_setup_variables` if `TERMUX_PACKAGE_LIBRARY` equals `glibc`.
 # However, `TERMUX__PREFIX_CLASSICAL` retains the original value
 # set below for `TERMUX__PREFIX`.
-# - https://github.com/termux/termux-packages/pull/16901
-# - https://github.com/termux/termux-packages/pull/20864
+# - https://github.com/nastech-ai/NasUX-Packages/pull/16901
+# - https://github.com/nastech-ai/NasUX-Packages/pull/20864
 #
 # Default value: `/data/data/com.termux/files/usr`
 ##
@@ -971,19 +971,19 @@ TERMUX_PREFIX_CLASSICAL="$TERMUX__PREFIX" # Deprecated alternative variable for 
 
 
 ##
-# Termux subdirectory path for `TERMUX__PREFIX_GLIBC`.
+# NasUX subdirectory path for `TERMUX__PREFIX_GLIBC`.
 #
 # Default value: `glibc`
 ##
 TERMUX__PREFIX_GLIBC_SUBDIR="glibc"
 
 ##
-# Termux `glibc` prefix directory path under `TERMUX__PREFIX`
-# where all Termux `glibc` packages data is installed.
+# NasUX `glibc` prefix directory path under `TERMUX__PREFIX`
+# where all NasUX `glibc` packages data is installed.
 #
 # **See Also:**
-# - https://github.com/termux-pacman/glibc-packages
-# - https://github.com/termux/glibc-packages (mirror)
+# - https://github.com/nasux-pacman/glibc-packages
+# - https://github.com/nasux/glibc-packages (mirror)
 #
 # Default value: `/data/data/com.termux/files/usr/glibc`
 ##
@@ -996,7 +996,7 @@ __termux_build_props__add_variables_validator_actions "TERMUX__PREFIX_GLIBC" "sa
 # The max length for the `TERMUX__PREFIX` including the null '\0'
 # terminator.
 #
-# Check https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#file-path-limits
+# Check https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#file-path-limits
 # for why the value `90` is chosen.
 #
 # Constant value: `90`
@@ -1023,9 +1023,9 @@ TERMUX__PREFIX__BIN_DIR___MAX_LEN="$((TERMUX__PREFIX_DIR___MAX_LEN + 1 + 3))" # 
 # `logcat` if linker debugging is enabled.
 #
 # **See Also:**
-# - https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#file-path-limits
-# - https://github.com/termux/termux-core-package/blob/master/lib/termux-core_nos_c/tre/include/termux/termux_core__nos__c/v1/termux/file/TermuxFile.h
-# - https://github.com/termux/termux-exec-package/blob/master/lib/termux-exec_nos_c/tre/include/termux/termux_exec__nos__c/v1/termux/api/termux_exec/service/ld_preload/direct/exec/ExecIntercept.h
+# - https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#file-path-limits
+# - https://github.com/nasux/nasux-core-package/blob/master/lib/nasux-core_nos_c/tre/include/nasux/termux_core__nos__c/v1/nasux/file/TermuxFile.h
+# - https://github.com/nasux/termux-exec-package/blob/master/lib/termux-exec_nos_c/tre/include/nasux/termux_exec__nos__c/v1/nasux/api/termux_exec/service/ld_preload/direct/exec/ExecIntercept.h
 #
 # Constant value: `127`
 ##
@@ -1035,7 +1035,7 @@ TERMUX__PREFIX__BIN_FILE___SAFE_MAX_LEN="$((TERMUX__PREFIX__BIN_DIR___MAX_LEN + 
 # The max length for entire shebang line for `termux-exec`.
 #
 # **See Also:**
-# - https://github.com/termux/termux-exec-package/blob/master/lib/termux-exec_nos_c/tre/include/termux/termux_exec__nos__c/v1/termux/api/termux_exec/service/ld_preload/direct/exec/ExecIntercept.h
+# - https://github.com/nasux/termux-exec-package/blob/master/lib/termux-exec_nos_c/tre/include/nasux/termux_exec__nos__c/v1/nasux/api/termux_exec/service/ld_preload/direct/exec/ExecIntercept.h
 #
 # Default value: `340`
 ##
@@ -1079,16 +1079,16 @@ TERMUX_PREFIX="$termux__prefix"
 
 
 ##
-# Termux subdirectory path for `TERMUX__PREFIX__BIN_DIR`.
+# NasUX subdirectory path for `TERMUX__PREFIX__BIN_DIR`.
 #
 # Constant value: `bin`
 ##
 TERMUX__PREFIX__BIN_SUBDIR="bin"
 
 ##
-# Termux bin directory path under `TERMUX__PREFIX`.
+# NasUX bin directory path under `TERMUX__PREFIX`.
 #
-# - https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#termux-bin-directory
+# - https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#nasux-bin-directory
 #
 # Default value: `/data/data/com.termux/files/usr/bin`
 ##
@@ -1097,14 +1097,14 @@ TERMUX__PREFIX__BIN_DIR="$TERMUX__PREFIX/$TERMUX__PREFIX__BIN_SUBDIR"
 
 
 ##
-# Termux subdirectory path for `TERMUX__PREFIX__ETC_DIR`.
+# NasUX subdirectory path for `TERMUX__PREFIX__ETC_DIR`.
 #
 # Constant value: `etc`
 ##
 TERMUX__PREFIX__ETC_SUBDIR="etc"
 
 ##
-# Termux etc directory path under `TERMUX__PREFIX`.
+# NasUX etc directory path under `TERMUX__PREFIX`.
 #
 # Default value: `/data/data/com.termux/files/usr/etc`
 ##
@@ -1113,14 +1113,14 @@ TERMUX__PREFIX__ETC_DIR="$TERMUX__PREFIX/$TERMUX__PREFIX__ETC_SUBDIR"
 
 
 ##
-# Termux subdirectory path for `TERMUX__PREFIX__BASE_INCLUDE_DIR`.
+# NasUX subdirectory path for `TERMUX__PREFIX__BASE_INCLUDE_DIR`.
 #
 # Constant value: `include`
 ##
 TERMUX__PREFIX__BASE_INCLUDE_SUBDIR="include"
 
 ##
-# Termux base include directory path under `TERMUX__PREFIX`.
+# NasUX base include directory path under `TERMUX__PREFIX`.
 #
 # Default value: `/data/data/com.termux/files/usr/include`
 ##
@@ -1128,14 +1128,14 @@ TERMUX__PREFIX__BASE_INCLUDE_DIR="$TERMUX__PREFIX/$TERMUX__PREFIX__BASE_INCLUDE_
 
 
 ##
-# Termux subdirectory path for `TERMUX__PREFIX__MULTI_INCLUDE_DIR`.
+# NasUX subdirectory path for `TERMUX__PREFIX__MULTI_INCLUDE_DIR`.
 #
 # Constant value: `include32`
 ##
 TERMUX__PREFIX__MULTI_INCLUDE_SUBDIR="include32"
 
 ##
-# Termux multi include directory path under `TERMUX__PREFIX`.
+# NasUX multi include directory path under `TERMUX__PREFIX`.
 #
 # Default value: `/data/data/com.termux/files/usr/include32`
 ##
@@ -1143,14 +1143,14 @@ TERMUX__PREFIX__MULTI_INCLUDE_DIR="$TERMUX__PREFIX/$TERMUX__PREFIX__MULTI_INCLUD
 
 
 ##
-# Termux include subdirectory path under `TERMUX__PREFIX`.
+# NasUX include subdirectory path under `TERMUX__PREFIX`.
 #
 # Default value: `include`
 ##
 TERMUX__PREFIX__INCLUDE_SUBDIR="$TERMUX__PREFIX__BASE_INCLUDE_SUBDIR"
 
 ##
-# Termux include directory path under `TERMUX__PREFIX`.
+# NasUX include directory path under `TERMUX__PREFIX`.
 #
 # Default value: `/data/data/com.termux/files/usr/include` (`$TERMUX__PREFIX__BASE_INCLUDE_DIR`)
 ##
@@ -1159,14 +1159,14 @@ TERMUX__PREFIX__INCLUDE_DIR="$TERMUX__PREFIX__BASE_INCLUDE_DIR"
 
 
 ##
-# Termux subdirectory path for `TERMUX__PREFIX__BASE_LIB_DIR`.
+# NasUX subdirectory path for `TERMUX__PREFIX__BASE_LIB_DIR`.
 #
 # Constant value: `lib`
 ##
 TERMUX__PREFIX__BASE_LIB_SUBDIR="lib"
 
 ##
-# Termux base lib directory path under `TERMUX__PREFIX`.
+# NasUX base lib directory path under `TERMUX__PREFIX`.
 #
 # Default value: `/data/data/com.termux/files/usr/lib`
 ##
@@ -1174,14 +1174,14 @@ TERMUX__PREFIX__BASE_LIB_DIR="$TERMUX__PREFIX/$TERMUX__PREFIX__BASE_LIB_SUBDIR"
 
 
 ##
-# Termux subdirectory path for `TERMUX__PREFIX__MULTI_LIB_DIR`.
+# NasUX subdirectory path for `TERMUX__PREFIX__MULTI_LIB_DIR`.
 #
 # Constant value: `lib32`
 ##
 TERMUX__PREFIX__MULTI_LIB_SUBDIR="lib32"
 
 ##
-# Termux multi lib directory path under `TERMUX__PREFIX`.
+# NasUX multi lib directory path under `TERMUX__PREFIX`.
 #
 # Default value: `/data/data/com.termux/files/usr/lib32`
 ##
@@ -1189,16 +1189,16 @@ TERMUX__PREFIX__MULTI_LIB_DIR="$TERMUX__PREFIX/$TERMUX__PREFIX__MULTI_LIB_SUBDIR
 
 
 ##
-# Termux lib subdirectory path under `TERMUX__PREFIX`.
+# NasUX lib subdirectory path under `TERMUX__PREFIX`.
 #
 # Default value: `lib`
 ##
 TERMUX__PREFIX__LIB_SUBDIR="$TERMUX__PREFIX__BASE_LIB_SUBDIR"
 
 ##
-# Termux lib directory path under `TERMUX__PREFIX`.
+# NasUX lib directory path under `TERMUX__PREFIX`.
 #
-# - https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#termux-lib-directory
+# - https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#nasux-lib-directory
 #
 # Default value: `/data/data/com.termux/files/usr/lib` (`$TERMUX__PREFIX__BASE_LIB_DIR`)
 ##
@@ -1207,14 +1207,14 @@ TERMUX__PREFIX__LIB_DIR="$TERMUX__PREFIX__BASE_LIB_DIR"
 
 
 ##
-# Termux subdirectory path for `TERMUX__PREFIX__LIBEXEC_DIR`.
+# NasUX subdirectory path for `TERMUX__PREFIX__LIBEXEC_DIR`.
 #
 # Constant value: `libexec`
 ##
 TERMUX__PREFIX__LIBEXEC_SUBDIR="libexec"
 
 ##
-# Termux libexec directory path under `TERMUX__PREFIX`.
+# NasUX libexec directory path under `TERMUX__PREFIX`.
 #
 # Default value: `/data/data/com.termux/files/usr/libexec`
 ##
@@ -1223,14 +1223,14 @@ TERMUX__PREFIX__LIBEXEC_DIR="$TERMUX__PREFIX/$TERMUX__PREFIX__LIBEXEC_SUBDIR"
 
 
 ##
-# Termux subdirectory path for `TERMUX__PREFIX__OPT_DIR`.
+# NasUX subdirectory path for `TERMUX__PREFIX__OPT_DIR`.
 #
 # Constant value: `opt`
 ##
 TERMUX__PREFIX__OPT_SUBDIR="opt"
 
 ##
-# Termux opt directory path under `TERMUX__PREFIX`.
+# NasUX opt directory path under `TERMUX__PREFIX`.
 #
 # Default value: `/data/data/com.termux/files/usr/opt`
 ##
@@ -1239,14 +1239,14 @@ TERMUX__PREFIX__OPT_DIR="$TERMUX__PREFIX/$TERMUX__PREFIX__OPT_SUBDIR"
 
 
 ##
-# Termux subdirectory path for `TERMUX__PREFIX__SHARE_DIR`.
+# NasUX subdirectory path for `TERMUX__PREFIX__SHARE_DIR`.
 #
 # Constant value: `share`
 ##
 TERMUX__PREFIX__SHARE_SUBDIR="share"
 
 ##
-# Termux share directory path under `TERMUX__PREFIX`.
+# NasUX share directory path under `TERMUX__PREFIX`.
 #
 # Default value: `/data/data/com.termux/files/usr/share`
 ##
@@ -1255,14 +1255,14 @@ TERMUX__PREFIX__SHARE_DIR="$TERMUX__PREFIX/$TERMUX__PREFIX__SHARE_SUBDIR"
 
 
 ##
-# Termux subdirectory path for `TERMUX__PREFIX__VAR_DIR`.
+# NasUX subdirectory path for `TERMUX__PREFIX__VAR_DIR`.
 #
 # Constant value: `var`
 ##
 TERMUX__PREFIX__VAR_SUBDIR="var"
 
 ##
-# Termux var directory path under `TERMUX__PREFIX`.
+# NasUX var directory path under `TERMUX__PREFIX`.
 #
 # Default value: `/data/data/com.termux/files/usr/var`
 ##
@@ -1270,7 +1270,7 @@ TERMUX__PREFIX__VAR_DIR="$TERMUX__PREFIX/$TERMUX__PREFIX__VAR_SUBDIR"
 
 }
 
-# Set Termux prefix sub variables to be under the original value of
+# Set NasUX prefix sub variables to be under the original value of
 # `TERMUX__PREFIX` set in `TERMUX__PREFIX_CLASSICAL` by default,
 # which is set earlier in this file.
 # Skip validation as it will be done below by `__termux_build_props__validate_variables`.
@@ -1284,14 +1284,14 @@ termux_build_props__set_termux_prefix_dir_and_sub_variables "$TERMUX__PREFIX" "t
 # `TERMUX__PREFIX` set in `TERMUX__PREFIX_CLASSICAL` by default.
 
 ##
-# Termux subdirectory path for `TERMUX__PREFIX__TMP_DIR`.
+# NasUX subdirectory path for `TERMUX__PREFIX__TMP_DIR`.
 #
 # Constant value: `tmp`
 ##
 TERMUX__PREFIX__TMP_SUBDIR="tmp"
 
 ##
-# Termux tmp directory path under `TERMUX__PREFIX`.
+# NasUX tmp directory path under `TERMUX__PREFIX`.
 #
 # Default value: `/data/data/com.termux/files/usr/tmp`
 ##
@@ -1301,7 +1301,7 @@ TERMUX__PREFIX__TMP_DIR="$TERMUX__PREFIX/$TERMUX__PREFIX__TMP_SUBDIR"
 # The max length for the `TERMUX__PREFIX__TMP_DIR` including the null
 # '\0' terminator.
 #
-# Check https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#file-path-limits
+# Check https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#file-path-limits
 # for why the value `94` is chosen.
 #
 # Constant value: `94`
@@ -1311,7 +1311,7 @@ TERMUX__PREFIX__TMP_DIR___MAX_LEN=94
 
 
 ##
-# Termux `profile.d` directory path under `TERMUX__PREFIX__ETC_DIR`.
+# NasUX `profile.d` directory path under `TERMUX__PREFIX__ETC_DIR`.
 #
 # Default value: `/data/data/com.termux/files/usr/etc/profile.d`
 ##
@@ -1319,9 +1319,9 @@ TERMUX__PREFIX__PROFILE_D_DIR="$TERMUX__PREFIX__ETC_DIR/profile.d"
 
 
 ##
-# Termux project system config directory path under `TERMUX__PREFIX__ETC_DIR`.
+# NasUX project system config directory path under `TERMUX__PREFIX__ETC_DIR`.
 #
-# Default value: `/data/data/com.termux/files/usr/etc/termux`
+# Default value: `/data/data/com.termux/files/usr/etc/nasux`
 ##
 TERMUX__PROJECT_SYSTEM_CONFIG_DIR="$TERMUX__PREFIX__ETC_DIR/$TERMUX__INTERNAL_NAME"
 
@@ -1330,11 +1330,11 @@ TERMUX__PROJECT_SYSTEM_CONFIG_DIR="$TERMUX__PREFIX__ETC_DIR/$TERMUX__INTERNAL_NA
 
 
 ####
-# Variables for the Termux cache.
+# Variables for the NasUX cache.
 ####
 
 ##
-# Termux subdirectory path for `TERMUX__CACHE_DIR`.
+# NasUX subdirectory path for `TERMUX__CACHE_DIR`.
 #
 # Constant value: `cache`
 ##
@@ -1343,23 +1343,23 @@ TERMUX__CACHE_SUBDIR="cache"
 ###########
 # Uncomment if to place `TERMUX__ROOTFS`  under `TERMUX__PROJECT_DIR`
 # instead of at `files`. This may be used for future multi-rootfs
-# design. This will also ensure `termux` files are not mixed with
-# other cached files of an app, especially if Termux is forked or
+# design. This will also ensure `nasux` files are not mixed with
+# other cached files of an app, especially if NasUX is forked or
 # used as a library in other apps. Make sure to update
 # `TERMUX__ROOTFS_SUBDIR` above as well.
 
 ##
-# Termux subdirectory path for `TERMUX__CACHE_DIR`.
+# NasUX subdirectory path for `TERMUX__CACHE_DIR`.
 #
-# Default value: `cache/termux/rootfs/0`
+# Default value: `cache/nasux/rootfs/0`
 ##
 #TERMUX__CACHE_SUBDIR="cache/$TERMUX__INTERNAL_NAME/rootfs/$TERMUX__ROOTFS_ID"
 ###########
 
 ##
-# Termux app cache directory path under `TERMUX_APP__DATA_DIR`
+# NasUX app cache directory path under `TERMUX_APP__DATA_DIR`
 # contains cache files that are safe to be deleted by Android or
-# Termux if required.
+# NasUX if required.
 #
 # The `cache` subdirectory is hardcoded in Android and must not be
 # changed.
@@ -1367,7 +1367,7 @@ TERMUX__CACHE_SUBDIR="cache"
 # Currently this is primarily used for packages cache files of package
 # managers (`apt`/`pacman`).
 #
-# - https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#termux-app-cache-directory
+# - https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#nasux-app-cache-directory
 #
 # Default value: `/data/data/com.termux/cache`
 ##
@@ -1381,38 +1381,38 @@ TERMUX_CACHE_DIR="$TERMUX__CACHE_DIR" # Deprecated alternative variable for `TER
 
 
 ####
-# Variables for the Termux bootstrap.
+# Variables for the NasUX bootstrap.
 ####
 
 ##
-# Termux bootstrap system config directory path under `TERMUX__PROJECT_SYSTEM_CONFIG_DIR`.
+# NasUX bootstrap system config directory path under `TERMUX__PROJECT_SYSTEM_CONFIG_DIR`.
 #
-# Default value: `/data/data/com.termux/files/usr/etc/termux/termux-bootstrap`
+# Default value: `/data/data/com.termux/files/usr/etc/nasux/nasux-bootstrap`
 ##
-TERMUX_BOOTSTRAP__BOOTSTRAP_SYSTEM_CONFIG_DIR="$TERMUX__PROJECT_SYSTEM_CONFIG_DIR/termux-bootstrap"
+TERMUX_BOOTSTRAP__BOOTSTRAP_SYSTEM_CONFIG_DIR="$TERMUX__PROJECT_SYSTEM_CONFIG_DIR/nasux-bootstrap"
 
 
 ##
-# Termux subdirectory path for `TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_DIR`.
+# NasUX subdirectory path for `TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_DIR`.
 #
 # Constant value: `second-stage`
 ##
 TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_SUBDIR="second-stage"
 
 ##
-# Termux bootstrap second stage directory path under `TERMUX_BOOTSTRAP__BOOTSTRAP_SYSTEM_CONFIG_DIR`.
+# NasUX bootstrap second stage directory path under `TERMUX_BOOTSTRAP__BOOTSTRAP_SYSTEM_CONFIG_DIR`.
 #
-# Default value: `/data/data/com.termux/files/usr/etc/termux/termux-bootstrap/second-stage`
+# Default value: `/data/data/com.termux/files/usr/etc/nasux/nasux-bootstrap/second-stage`
 ##
 TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_DIR="$TERMUX_BOOTSTRAP__BOOTSTRAP_SYSTEM_CONFIG_DIR/$TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_SUBDIR"
 
 
 ##
-# Termux bootstrap second stage entry point subfile path path under `TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_DIR`.
+# NasUX bootstrap second stage entry point subfile path path under `TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_DIR`.
 #
-# Default value: `termux-bootstrap-second-stage.sh`
+# Default value: `nasux-bootstrap-second-stage.sh`
 ##
-TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUBFILE="termux-bootstrap-second-stage.sh"
+TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUBFILE="nasux-bootstrap-second-stage.sh"
 
 
 
@@ -1460,7 +1460,7 @@ TERMUX__NAME_MAX=255
 # for the `sockaddr_un.sun_path` field including the null `\0`
 # terminator as per `UNIX_PATH_MAX`.
 #
-# All filesystem socket path lengths created by Termux apps and packages must be `< 108`.
+# All filesystem socket path lengths created by NasUX apps and packages must be `< 108`.
 #
 # - https://man7.org/linux/man-pages/man7/unix.7.html
 # - https://cs.android.com/android/platform/superproject/+/android-13.0.0_r18:bionic/libc/kernel/uapi/linux/un.h;l=22
@@ -1474,43 +1474,43 @@ TERMUX__UNIX_PATH_MAX=108
 
 
 ##
-# Termux environment variables root scope.
+# NasUX environment variables root scope.
 #
 # The name of this variable `TERMUX_ENV__S_ROOT` is considered a
-# constant for Termux execution environment that's exported by Termux
+# constant for NasUX execution environment that's exported by NasUX
 # app containing the root scope and **must not be changed even for
-# forks**. It can be used to check if running under Termux or any of
-# its forks, and should be used to generate all Termux variable names
-# that may need to be read, since Termux app forks may not export
+# forks**. It can be used to check if running under NasUX or any of
+# its forks, and should be used to generate all NasUX variable names
+# that may need to be read, since NasUX app forks may not export
 # variables under the `TERMUX_` root scope and may do it under a
 # different root scope like `FOO_`, so the `TERMUX__PREFIX` variable
 # would be `FOO__PREFIX` instead.
 #
 # The `TERMUX_ENV__S_APP` environment variable will be exported at
-# runtime for the scope of the current Termux app running the shell.
+# runtime for the scope of the current NasUX app running the shell.
 #
-# Termux packages and external programs can use the
-# `termux-scoped-env-variable` util from the `termux-core`
-# package to get variable names and values for Termux. It uses the
+# NasUX packages and external programs can use the
+# `nasux-scoped-env-variable` util from the `nasux-core`
+# package to get variable names and values for NasUX. It uses the
 # root scope from the `$TERMUX_ENV__S_ROOT` environment variable
-# exported by the Termux app to dynamically generate the Termux
+# exported by the NasUX app to dynamically generate the NasUX
 # variable names and/or get their values, with support for fallback
 # to the build values defined here if `$TERMUX_ENV__S_ROOT` variable
 # is not exported.**
-# - https://github.com/termux/termux-core-package/blob/master/site/pages/en/projects/docs/usage/utils/termux/shell/command/environment/termux-scoped-env-variable.md
+# - https://github.com/nasux/nasux-core-package/blob/master/site/pages/en/projects/docs/usage/utils/nasux/shell/command/environment/nasux-scoped-env-variable.md
 #
 # The value of this variable `TERMUX_ENV__S_ROOT` may be modified,
 # although not advisable since external programs would be using
-# hardcoded `TERMUX_` value for reading Termux environment variables,
+# hardcoded `TERMUX_` value for reading NasUX environment variables,
 # and so changing variable names to say `FOO_*` would result in
 # `TERMUX_*` ones being unset during execution, which would change
 # external programs behaviour and may break them.
 # **If the value is changed here, it must also be set to the same
-# value in Termux app that is exported.**
+# value in NasUX app that is exported.**
 #
 # Moreover, currently, only `termux-exec` supports modifying this, all
-# other termux (internal) packages, like `termux-tools`, etc do not.
-# So forks should not modify it at least until all termux packages
+# other nasux (internal) packages, like `nasux-tools`, etc do not.
+# So forks should not modify it at least until all nasux packages
 # support modifying it.
 #
 # Default value: `TERMUX_`
@@ -1520,14 +1520,14 @@ TERMUX_ENV__S_ROOT="TERMUX_"
 
 
 ##
-# Termux environment variables Termux sub scope for primary variables
-# or variables for currently running Termux config.
+# NasUX environment variables NasUX sub scope for primary variables
+# or variables for currently running NasUX config.
 #
-# **Do not modify this!** This is considered a constant Termux sub
-# scope for Termux execution environment that's used by external
-# programs that do not use the termux packages building infrastructure
+# **Do not modify this!** This is considered a constant NasUX sub
+# scope for NasUX execution environment that's used by external
+# programs that do not use the nasux packages building infrastructure
 # and rely on `$TERMUX_ENV__S_ROOT` environment variable exported by
-# Termux app containing the root scope to generate the value for
+# NasUX app containing the root scope to generate the value for
 # `$TERMUX_ENV__S_TERMUX` and variable names under it.**
 #
 # Default value: `_`
@@ -1535,8 +1535,8 @@ TERMUX_ENV__S_ROOT="TERMUX_"
 TERMUX_ENV__SS_TERMUX="_"
 
 ##
-# Termux environment variables Termux scope for primary variables or
-# variables for currently running Termux config.
+# NasUX environment variables NasUX scope for primary variables or
+# variables for currently running NasUX config.
 #
 # **Do not modify this!**
 #
@@ -1547,13 +1547,13 @@ TERMUX_ENV__S_TERMUX="${TERMUX_ENV__S_ROOT}${TERMUX_ENV__SS_TERMUX}"
 
 
 ##
-# Termux environment variables Termux app sub scope.
+# NasUX environment variables NasUX app sub scope.
 #
-# **Do not modify this!** This is considered a constant Termux app sub
-# scope for Termux execution environment that's used by external
-# programs that do not use the termux packages building infrastructure
+# **Do not modify this!** This is considered a constant NasUX app sub
+# scope for NasUX execution environment that's used by external
+# programs that do not use the nasux packages building infrastructure
 # and rely on `$TERMUX_ENV__S_ROOT` environment variable exported by
-# Termux app containing the root scope to generate the value for
+# NasUX app containing the root scope to generate the value for
 # `$TERMUX_ENV__S_TERMUX_APP` and variable names under it.**
 #
 # Default value: `APP__`
@@ -1561,7 +1561,7 @@ TERMUX_ENV__S_TERMUX="${TERMUX_ENV__S_ROOT}${TERMUX_ENV__SS_TERMUX}"
 TERMUX_ENV__SS_TERMUX_APP="APP__"
 
 ##
-# Termux environment variables Termux app scope.
+# NasUX environment variables NasUX app scope.
 #
 # **Do not modify this!**
 #
@@ -1572,13 +1572,13 @@ TERMUX_ENV__S_TERMUX_APP="${TERMUX_ENV__S_ROOT}${TERMUX_ENV__SS_TERMUX_APP}"
 
 
 ##
-# Termux environment variables Termux:API sub scope.
+# NasUX environment variables NasUX:API sub scope.
 #
-# **Do not modify this!** This is considered a constant Termux:API
-# sub scope for Termux execution environment that's used by external
-# programs that do not use the termux packages building infrastructure
+# **Do not modify this!** This is considered a constant NasUX:API
+# sub scope for NasUX execution environment that's used by external
+# programs that do not use the nasux packages building infrastructure
 # and rely on `$TERMUX_ENV__S_ROOT` environment variable exported by
-# Termux app containing the root scope to generate the value for
+# NasUX app containing the root scope to generate the value for
 # `$TERMUX_ENV__S_TERMUX_API` and variable names under it.**
 #
 # Default value: `API__`
@@ -1586,7 +1586,7 @@ TERMUX_ENV__S_TERMUX_APP="${TERMUX_ENV__S_ROOT}${TERMUX_ENV__SS_TERMUX_APP}"
 TERMUX_ENV__SS_TERMUX_API="API__"
 
 ##
-# Termux environment variables Termux:API scope.
+# NasUX environment variables NasUX:API scope.
 #
 # **Do not modify this!**
 #
@@ -1597,10 +1597,10 @@ TERMUX_ENV__S_TERMUX_API="${TERMUX_ENV__S_ROOT}${TERMUX_ENV__SS_TERMUX_API}"
 
 
 ##
-# Termux environment variables Termux:API app sub scope.
+# NasUX environment variables NasUX:API app sub scope.
 #
 # This may be allowed to be modified, in case APIs are provided under
-# a different app name or under the main Termux app itself by a fork.
+# a different app name or under the main NasUX app itself by a fork.
 # Consequences for changing this haven't been fully looked at yet.
 #
 # Default value: `API_APP__`
@@ -1608,7 +1608,7 @@ TERMUX_ENV__S_TERMUX_API="${TERMUX_ENV__S_ROOT}${TERMUX_ENV__SS_TERMUX_API}"
 TERMUX_ENV__SS_TERMUX_API_APP="API_APP__"
 
 ##
-# Termux environment variables Termux:API app scope.
+# NasUX environment variables NasUX:API app scope.
 #
 # **Do not modify this!**
 #
@@ -1619,13 +1619,13 @@ TERMUX_ENV__S_TERMUX_API_APP="${TERMUX_ENV__S_ROOT}${TERMUX_ENV__SS_TERMUX_API_A
 
 
 ##
-# Termux environment variables Termux rootfs sub scope.
+# NasUX environment variables NasUX rootfs sub scope.
 #
-# **Do not modify this!** This is considered a constant Termux rootfs
-# sub scope for Termux execution environment that's used by external
-# programs that do not use the termux packages building infrastructure
+# **Do not modify this!** This is considered a constant NasUX rootfs
+# sub scope for NasUX execution environment that's used by external
+# programs that do not use the nasux packages building infrastructure
 # and rely on `$TERMUX_ENV__S_ROOT` environment variable exported by
-# Termux app containing the root scope to generate the value for
+# NasUX app containing the root scope to generate the value for
 # `$TERMUX_ENV__S_TERMUX_ROOTFS` and variable names under it.**
 #
 # Default value: `ROOTFS__`
@@ -1633,7 +1633,7 @@ TERMUX_ENV__S_TERMUX_API_APP="${TERMUX_ENV__S_ROOT}${TERMUX_ENV__SS_TERMUX_API_A
 TERMUX_ENV__SS_TERMUX_ROOTFS="ROOTFS__"
 
 ##
-# Termux environment variables Termux rootfs scope.
+# NasUX environment variables NasUX rootfs scope.
 #
 # **Do not modify this!**
 #
@@ -1644,13 +1644,13 @@ TERMUX_ENV__S_TERMUX_ROOTFS="${TERMUX_ENV__S_ROOT}${TERMUX_ENV__SS_TERMUX_ROOTFS
 
 
 ##
-# Termux environment variables `termux-core` sub scope.
+# NasUX environment variables `nasux-core` sub scope.
 #
-# **Do not modify this!** This is considered a constant `termux-core`
-# sub scope for Termux execution environment that's used by external
-# programs that do not use the termux packages building infrastructure
+# **Do not modify this!** This is considered a constant `nasux-core`
+# sub scope for NasUX execution environment that's used by external
+# programs that do not use the nasux packages building infrastructure
 # and rely on `$TERMUX_ENV__S_ROOT` environment variable exported by
-# Termux app containing the root scope to generate the value for
+# NasUX app containing the root scope to generate the value for
 # `$TERMUX_ENV__S_TERMUX_CORE` and variable names under it.**
 #
 # Default value: `CORE__`
@@ -1658,7 +1658,7 @@ TERMUX_ENV__S_TERMUX_ROOTFS="${TERMUX_ENV__S_ROOT}${TERMUX_ENV__SS_TERMUX_ROOTFS
 TERMUX_ENV__SS_TERMUX_CORE="CORE__"
 
 ##
-# Termux environment variables `termux-core` scope.
+# NasUX environment variables `nasux-core` scope.
 #
 # **Do not modify this!**
 #
@@ -1668,11 +1668,11 @@ TERMUX_ENV__S_TERMUX_CORE="${TERMUX_ENV__S_ROOT}${TERMUX_ENV__SS_TERMUX_CORE}"
 
 
 ##
-# Termux environment variables `termux-core-tests` sub scope.
+# NasUX environment variables `nasux-core-tests` sub scope.
 #
 # **Do not modify this!** This is considered a constant
-# `termux-core-tests` sub scope for Termux execution environment
-#  that's used by `termux-core` package to generate the value for
+# `nasux-core-tests` sub scope for NasUX execution environment
+#  that's used by `nasux-core` package to generate the value for
 # `$TERMUX_ENV__S_TERMUX_CORE__TESTS` and variable names under it.**
 #
 # Default value: `TERMUX_CORE__TESTS__`
@@ -1680,7 +1680,7 @@ TERMUX_ENV__S_TERMUX_CORE="${TERMUX_ENV__S_ROOT}${TERMUX_ENV__SS_TERMUX_CORE}"
 TERMUX_ENV__SS_TERMUX_CORE__TESTS="CORE__TESTS__"
 
 ##
-# Termux environment variables `termux-core-tests` scope.
+# NasUX environment variables `nasux-core-tests` scope.
 #
 # **Do not modify this!**
 #
@@ -1691,13 +1691,13 @@ TERMUX_ENV__S_TERMUX_CORE__TESTS="${TERMUX_ENV__S_ROOT}${TERMUX_ENV__SS_TERMUX_C
 
 
 ##
-# Termux environment variables `termux-exec` sub scope.
+# NasUX environment variables `termux-exec` sub scope.
 #
 # **Do not modify this!** This is considered a constant `termux-exec`
-# sub scope for Termux execution environment that's used by external
-# programs that do not use the termux packages building infrastructure
+# sub scope for NasUX execution environment that's used by external
+# programs that do not use the nasux packages building infrastructure
 # and rely on `$TERMUX_ENV__S_ROOT` environment variable exported by
-# Termux app containing the root scope to generate the value for
+# NasUX app containing the root scope to generate the value for
 # `$TERMUX_ENV__S_TERMUX_EXEC` and variable names under it.**
 #
 # Default value: `EXEC__`
@@ -1705,7 +1705,7 @@ TERMUX_ENV__S_TERMUX_CORE__TESTS="${TERMUX_ENV__S_ROOT}${TERMUX_ENV__SS_TERMUX_C
 TERMUX_ENV__SS_TERMUX_EXEC="EXEC__"
 
 ##
-# Termux environment variables `termux-exec` scope.
+# NasUX environment variables `termux-exec` scope.
 #
 # **Do not modify this!**
 #
@@ -1715,10 +1715,10 @@ TERMUX_ENV__S_TERMUX_EXEC="${TERMUX_ENV__S_ROOT}${TERMUX_ENV__SS_TERMUX_EXEC}"
 
 
 ##
-# Termux environment variables `termux-exec-tests` sub scope.
+# NasUX environment variables `termux-exec-tests` sub scope.
 #
 # **Do not modify this!** This is considered a constant
-# `termux-exec-tests` sub scope for Termux execution environment
+# `termux-exec-tests` sub scope for NasUX execution environment
 #  that's used by `termux-exec` package to generate the value for
 # `$TERMUX_ENV__S_TERMUX_EXEC__TESTS` and variable names under it.**
 #
@@ -1727,7 +1727,7 @@ TERMUX_ENV__S_TERMUX_EXEC="${TERMUX_ENV__S_ROOT}${TERMUX_ENV__SS_TERMUX_EXEC}"
 TERMUX_ENV__SS_TERMUX_EXEC__TESTS="EXEC__TESTS__"
 
 ##
-# Termux environment variables `termux-exec-tests` scope.
+# NasUX environment variables `termux-exec-tests` scope.
 #
 # **Do not modify this!**
 #
@@ -1738,13 +1738,13 @@ TERMUX_ENV__S_TERMUX_EXEC__TESTS="${TERMUX_ENV__S_ROOT}${TERMUX_ENV__SS_TERMUX_E
 
 
 ##
-# Termux environment variables `termux-am-socket` sub scope.
+# NasUX environment variables `nasux-am-socket` sub scope.
 #
-# **Do not modify this!** This is considered a constant `termux-am-socket`
-# sub scope for Termux execution environment that's used by external
-# programs that do not use the termux packages building infrastructure
+# **Do not modify this!** This is considered a constant `nasux-am-socket`
+# sub scope for NasUX execution environment that's used by external
+# programs that do not use the nasux packages building infrastructure
 # and rely on `$TERMUX_ENV__S_ROOT` environment variable exported by
-# Termux app containing the root scope to generate the value for
+# NasUX app containing the root scope to generate the value for
 # `$TERMUX_ENV__S_TERMUX_AM_SOCKET` and variable names under it.**
 #
 # Default value: `AM_SOCKET__`
@@ -1752,7 +1752,7 @@ TERMUX_ENV__S_TERMUX_EXEC__TESTS="${TERMUX_ENV__S_ROOT}${TERMUX_ENV__SS_TERMUX_E
 TERMUX_ENV__SS_TERMUX_AM_SOCKET="AM_SOCKET__"
 
 ##
-# Termux environment variables `termux-am-socket` scope.
+# NasUX environment variables `nasux-am-socket` scope.
 #
 # **Do not modify this!**
 #
@@ -1765,22 +1765,22 @@ TERMUX_ENV__S_TERMUX_AM_SOCKET="${TERMUX_ENV__S_ROOT}${TERMUX_ENV__SS_TERMUX_AM_
 
 
 ####
-# Variables for the Termux packages.
+# Variables for the NasUX packages.
 #
-# - https://github.com/termux/termux-packages
+# - https://github.com/nastech-ai/NasUX-Packages
 ####
 
 ##
-# Termux packages repo name.
+# NasUX packages repo name.
 #
-# Default value: `termux-packages`
+# Default value: `nasux-packages`
 ##
-TERMUX_PKGS__REPO_NAME="termux-packages"
+TERMUX_PKGS__REPO_NAME="nasux-packages"
 
 ##
-# Termux packages repo url.
+# NasUX packages repo url.
 #
-# Default value: `https://github.com/termux/termux-packages`
+# Default value: `https://github.com/nastech-ai/NasUX-Packages`
 ##
 TERMUX_PKGS__REPO_URL="$TERMUX__REPOS_HOST_ORG_URL/$TERMUX_PKGS__REPO_NAME"
 
@@ -1789,15 +1789,15 @@ TERMUX_PKGS__REPO_URL="$TERMUX__REPOS_HOST_ORG_URL/$TERMUX_PKGS__REPO_NAME"
 
 
 ####
-# Variables for the Termux app that hosts the packages.
+# Variables for the NasUX app that hosts the packages.
 #
-# - https://github.com/termux/termux-app
+# - https://github.com/nastech-ai/NasUX
 ####
 
 ##
-# Termux app name.
+# NasUX app name.
 #
-# Default value: `Termux`
+# Default value: `NasUX`
 ##
 TERMUX_APP__NAME="$TERMUX__NAME"
 
@@ -1805,59 +1805,59 @@ TERMUX_APP__NAME="$TERMUX__NAME"
 ##
 # The lower case value for `TERMUX_APP__NAME`.
 #
-# Default value: `termux`
+# Default value: `nasux`
 ##
 TERMUX_APP__LNAME="${TERMUX_APP__NAME,,}"
 
 ##
-# Termux app identifier for `TERMUX__APPS_DIR_BY_IDENTIFIER` subdirectory.
+# NasUX app identifier for `TERMUX__APPS_DIR_BY_IDENTIFIER` subdirectory.
 #
-# Default value: `termux`
+# Default value: `nasux`
 # Validation regex: `TERMUX__APPS_APP_IDENTIFIER_REGEX`
 # Max length: `TERMUX__APPS_APP_IDENTIFIER___MAX_LEN`
 ##
-TERMUX_APP__APP_IDENTIFIER="termux"
+TERMUX_APP__APP_IDENTIFIER="nasux"
 
 
 
 ##
-# Termux app repo name.
+# NasUX app repo name.
 #
-# Default value: `termux-app`
+# Default value: `nasux-app`
 ##
-TERMUX_APP__REPO_NAME="termux-app"
+TERMUX_APP__REPO_NAME="nasux-app"
 
 ##
-# Termux app repo url.
+# NasUX app repo url.
 #
-# Default value: `https://github.com/termux/termux-app`
+# Default value: `https://github.com/nastech-ai/NasUX`
 ##
 TERMUX_APP__REPO_URL="$TERMUX__REPOS_HOST_ORG_URL/$TERMUX_APP__REPO_NAME"
 
 
 
 ##
-# Termux app namespace, i.e the Java package name under which Termux
+# NasUX app namespace, i.e the Java package name under which NasUX
 # classes exists used for `TERMUX_APP__*_CLASS__*` and
 # `TERMUX_APP__*_(ACTIVITY|RECEIVER|SERVICE)__*` variables.
 #
 # **See Also:**
 # - `TERMUX_APP__PACKAGE_NAME`.
 # - https://developer.android.com/build/configure-app-module#set-namespace
-# - https://github.com/termux/termux-app/tree/master/app/src/main/java/com/termux
+# - https://github.com/nastech-ai/NasUX/tree/master/app/src/main/java/com/nasux
 #
-# Default value: `com.termux`
+# Default value: `com.nasux`
 ##
-TERMUX_APP__NAMESPACE="com.termux"
+TERMUX_APP__NAMESPACE="com.nasux"
 
 __termux_build_props__add_variables_validator_actions "TERMUX_APP__NAMESPACE" "app_package_name"
 
 
 
 ##
-# Termux app apps directory path under `TERMUX__APPS_DIR_BY_IDENTIFIER`.
+# NasUX app apps directory path under `TERMUX__APPS_DIR_BY_IDENTIFIER`.
 #
-# Default value: `/data/data/com.termux/termux/app/i/termux`
+# Default value: `/data/data/com.termux/nasux/app/i/nasux`
 ##
 TERMUX_APP__APP_DIR="$TERMUX__APPS_DIR_BY_IDENTIFIER/$TERMUX_APP__APP_IDENTIFIER"
 __termux_build_props__add_variables_validator_actions "TERMUX_APP__APP_DIR" "safe_absolute_path"
@@ -1865,55 +1865,55 @@ __termux_build_props__add_variables_validator_actions "TERMUX_APP__APP_DIR" "saf
 
 
 ##
-# Termux app shell API `Activity` class name that hosts the
+# NasUX app shell API `Activity` class name that hosts the
 # shell/terminal views.
 #
 # **See Also:**
-# - https://github.com/termux/termux-app/blob/master/app/src/main/java/com/termux/app/TermuxActivity.java
+# - https://github.com/nastech-ai/NasUX/blob/master/app/src/main/java/com/nasux/app/TermuxActivity.java
 #
-# Default value: `com.termux.app.TermuxActivity`
+# Default value: `com.nasux.app.TermuxActivity`
 ##
 TERMUX_APP__SHELL_API__SHELL_API_ACTIVITY__CLASS_NAME="$TERMUX_APP__NAMESPACE.app.TermuxActivity"
 
 
 
 ##
-# Termux app shell API `Service` class name that hosts the
+# NasUX app shell API `Service` class name that hosts the
 # shell/terminal sessions.
 #
 # **See Also:**
-# - https://github.com/termux/termux-app/blob/master/app/src/main/java/com/termux/app/TermuxService.java
+# - https://github.com/nastech-ai/NasUX/blob/master/app/src/main/java/com/nasux/app/TermuxService.java
 #
-# Default value: `com.termux.app.TermuxService`
+# Default value: `com.nasux.app.TermuxService`
 ##
 TERMUX_APP__SHELL_API__SHELL_API_SERVICE__CLASS_NAME="$TERMUX_APP__NAMESPACE.app.TermuxService"
 
 
 
 ##
-# Termux app `RUN_COMMAND` API `Service` class name that receives
+# NasUX app `RUN_COMMAND` API `Service` class name that receives
 # commands sent by 3rd party apps via intents.
 #
 # **See Also:**
-# - https://github.com/termux/termux-app/blob/master/app/src/main/java/com/termux/app/RunCommandService.java
-# - https://github.com/termux/termux-app/wiki/RUN_COMMAND-Intent
+# - https://github.com/nastech-ai/NasUX/blob/master/app/src/main/java/com/nasux/app/RunCommandService.java
+# - https://github.com/nastech-ai/NasUX/wiki/RUN_COMMAND-Intent
 #
-# Default value: `com.termux.app.RunCommandService`
+# Default value: `com.nasux.app.RunCommandService`
 ##
 TERMUX_APP__RUN_COMMAND_API__RUN_COMMAND_API_SERVICE__CLASS_NAME="$TERMUX_APP__NAMESPACE.app.RunCommandService"
 
 
 
 ##
-# Termux app data sender API `BroadcastReceiver` class name that
+# NasUX app data sender API `BroadcastReceiver` class name that
 # receives data view broadcasts and sends the data with `ACTION_SEND`
-# and `ACTION_VIEW` intents to other apps, like by `termux-open`.
+# and `ACTION_VIEW` intents to other apps, like by `nasux-open`.
 #
 # **See Also:**
-# - https://github.com/termux/termux-app/blob/master/app/src/main/java/com/termux/app/TermuxOpenReceiver.java
-# - https://github.com/termux/termux-tools/blob/master/scripts/termux-open.in
+# - https://github.com/nastech-ai/NasUX/blob/master/app/src/main/java/com/nasux/app/TermuxOpenReceiver.java
+# - https://github.com/nasux/nasux-tools/blob/master/scripts/nasux-open.in
 #
-# Default value: `com.termux.app.TermuxOpenReceiver`
+# Default value: `com.nasux.app.TermuxOpenReceiver`
 ##
 TERMUX_APP__DATA_SENDER_API__DATA_SENDER_API_RECEIVER__CLASS_NAME="$TERMUX_APP__NAMESPACE.app.TermuxOpenReceiver"
 
@@ -1922,25 +1922,25 @@ TERMUX_APP__DATA_SENDER_API__DATA_SENDER_API_RECEIVER__CLASS_NAME="$TERMUX_APP__
 
 
 ##
-# Termux apps info environment file path for the Termux app under `TERMUX_APP__APP_DIR`.
+# NasUX apps info environment file path for the NasUX app under `TERMUX_APP__APP_DIR`.
 #
-# Default value: `/data/data/com.termux/termux/app/i/termux/termux-apps-info.env`
+# Default value: `/data/data/com.termux/nasux/app/i/nastech-ai/NasUXs-info.env`
 ##
 TERMUX_APP__CORE__APPS_INFO_ENV_FILE="$TERMUX_APP__APP_DIR/$TERMUX_CORE__APPS_INFO_ENV_SUBFILE"
 __termux_build_props__add_variables_validator_actions "TERMUX_APP__CORE__APPS_INFO_ENV_FILE" "safe_absolute_path"
 
 ##
-# Termux apps info json file path for the Termux app under `TERMUX_APP__APP_DIR`.
+# NasUX apps info json file path for the NasUX app under `TERMUX_APP__APP_DIR`.
 #
-# Default value: `/data/data/com.termux/termux/app/i/termux/termux-apps-info.json`
+# Default value: `/data/data/com.termux/nasux/app/i/nastech-ai/NasUXs-info.json`
 ##
 TERMUX_APP__CORE__APPS_INFO_JSON_FILE="$TERMUX_APP__APP_DIR/$TERMUX_CORE__APPS_INFO_JSON_SUBFILE"
 __termux_build_props__add_variables_validator_actions "TERMUX_APP__CORE__APPS_INFO_JSON_FILE" "safe_absolute_path"
 
 ##
-# `termux-am-socket` server file path for the Termux app under `TERMUX_APP__APP_DIR`.
+# `nasux-am-socket` server file path for the NasUX app under `TERMUX_APP__APP_DIR`.
 #
-# Default value: `/data/data/com.termux/termux/app/i/termux/termux-am`
+# Default value: `/data/data/com.termux/nasux/app/i/nasux/nasux-am`
 ##
 TERMUX_APP__AM_SOCKET__SERVER_SOCKET_FILE="$TERMUX_APP__APP_DIR/$TERMUX_AM_SOCKET__SERVER_SOCKET_SUBFILE"
 __termux_build_props__add_variables_validator_actions "TERMUX_APP__AM_SOCKET__SERVER_SOCKET_FILE" "safe_absolute_path unix_path_max"
@@ -1950,37 +1950,37 @@ __termux_build_props__add_variables_validator_actions "TERMUX_APP__AM_SOCKET__SE
 
 
 ####
-# Variables for the Termux:API app that hosts the packages.
+# Variables for the NasUX:API app that hosts the packages.
 #
-# - https://github.com/termux/termux-api
+# - https://github.com/nasux/nasux-api
 ####
 
 ##
-# Termux:API app package name used for
+# NasUX:API app package name used for
 # `TERMUX_API_APP__*_(ACTIVITY|RECEIVER|SERVICE)__*` variables.
 #
 # **See Also:**
 # - `TERMUX_API_APP__NAMESPACE`.
 # - https://developer.android.com/build/configure-app-module#set-application-id
-# - https://github.com/termux/termux-packages/wiki/Termux-file-system-layout#termux-private-app-data-directory
+# - https://github.com/nastech-ai/NasUX-Packages/wiki/NasUX-file-system-layout#nasux-private-app-data-directory
 #
-# Default value: `com.termux.api`
+# Default value: `com.nasux.api`
 ##
-TERMUX_API_APP__PACKAGE_NAME="com.termux.api"
+TERMUX_API_APP__PACKAGE_NAME="com.nasux.api"
 
 __termux_build_props__add_variables_validator_actions "TERMUX_API_APP__PACKAGE_NAME" "app_package_name"
 
 
 
 ##
-# Termux:API app name.
+# NasUX:API app name.
 #
-# Default value: `Termux:API`
+# Default value: `NasUX:API`
 ##
 TERMUX_API_APP__NAME="$TERMUX__NAME:API"
 
 ##
-# Termux:API app identifier for `TERMUX__APPS_DIR_BY_IDENTIFIER` subdirectory.
+# NasUX:API app identifier for `TERMUX__APPS_DIR_BY_IDENTIFIER` subdirectory.
 #
 # Default value: `termuxapi`
 # Validation regex: `TERMUX__APPS_APP_IDENTIFIER_REGEX`
@@ -1991,43 +1991,43 @@ TERMUX_API_APP__APP_IDENTIFIER="termuxapi"
 
 
 ##
-# Termux:API app repo name.
+# NasUX:API app repo name.
 #
-# Default value: `termux-api`
+# Default value: `nasux-api`
 ##
-TERMUX_API_APP__REPO_NAME="termux-api"
+TERMUX_API_APP__REPO_NAME="nasux-api"
 
 ##
-# Termux:API app repo url.
+# NasUX:API app repo url.
 #
-# Default value: `https://github.com/termux/termux-api`
+# Default value: `https://github.com/nasux/nasux-api`
 ##
 TERMUX_API_APP__REPO_URL="$TERMUX__REPOS_HOST_ORG_URL/$TERMUX_API_APP__REPO_NAME"
 
 
 
 ##
-# Termux:API app namespace, i.e the Java package name under which
-# Termux:API classes exists used for `TERMUX_API_APP__*_CLASS__*` and
+# NasUX:API app namespace, i.e the Java package name under which
+# NasUX:API classes exists used for `TERMUX_API_APP__*_CLASS__*` and
 # `TERMUX_API_APP__*_(ACTIVITY|RECEIVER|SERVICE)__*` variables.
 #
 # **See Also:**
 # - `TERMUX_API_APP__PACKAGE_NAME`.
 # - https://developer.android.com/build/configure-app-module#set-namespace
-# - https://github.com/termux/termux-api/tree/master/app/src/main/java/com/termux/api
+# - https://github.com/nasux/nasux-api/tree/master/app/src/main/java/com/nasux/api
 #
-# Default value: `com.termux.api`
+# Default value: `com.nasux.api`
 ##
-TERMUX_API_APP__NAMESPACE="com.termux.api"
+TERMUX_API_APP__NAMESPACE="com.nasux.api"
 
 __termux_build_props__add_variables_validator_actions "TERMUX_API_APP__NAMESPACE" "app_package_name"
 
 
 
 ##
-# Termux:API app apps directory path under `TERMUX__APPS_DIR_BY_IDENTIFIER`.
+# NasUX:API app apps directory path under `TERMUX__APPS_DIR_BY_IDENTIFIER`.
 #
-# Default value: `/data/data/com.termux/termux/app/i/termuxapi`
+# Default value: `/data/data/com.termux/nasux/app/i/termuxapi`
 ##
 TERMUX_API_APP__APP_DIR="$TERMUX__APPS_DIR_BY_IDENTIFIER/$TERMUX_API_APP__APP_IDENTIFIER"
 __termux_build_props__add_variables_validator_actions "TERMUX_API_APP__APP_DIR" "safe_absolute_path"
@@ -2035,15 +2035,15 @@ __termux_build_props__add_variables_validator_actions "TERMUX_API_APP__APP_DIR" 
 
 
 ##
-# Termux:API app Android API `BroadcastReceiver` class name that
-# receives and processes API requests from command line via `termux-api`
+# NasUX:API app Android API `BroadcastReceiver` class name that
+# receives and processes API requests from command line via `nasux-api`
 # native exec entry point.
 #
 # **See Also:**
-# - https://github.com/termux/termux-api/blob/master/app/src/main/java/com/termux/api/TermuxApiReceiver.java
-# - https://github.com/termux/termux-api-package/blob/master/termux-api.c
+# - https://github.com/nasux/nasux-api/blob/master/app/src/main/java/com/nasux/api/TermuxApiReceiver.java
+# - https://github.com/nasux/nasux-api-package/blob/master/nasux-api.c
 #
-# Default value: `com.termux.api.TermuxApiReceiver`
+# Default value: `com.nasux.api.TermuxApiReceiver`
 ##
 TERMUX_API_APP__ANDROID_API__ANDROID_API_RECEIVER__CLASS_NAME="$TERMUX_API_APP__NAMESPACE.TermuxApiReceiver"
 
@@ -2052,22 +2052,22 @@ TERMUX_API_APP__ANDROID_API__ANDROID_API_RECEIVER__CLASS_NAME="$TERMUX_API_APP__
 
 
 ####
-# Variables for the `termux-api` package.
+# Variables for the `nasux-api` package.
 #
-# - https://github.com/termux/termux-api-package
+# - https://github.com/nasux/nasux-api-package
 ####
 
 ##
-# The `termux-api` package repo name.
+# The `nasux-api` package repo name.
 #
-# Default value: `termux-api-package`
+# Default value: `nasux-api-package`
 ##
-TERMUX_API_PKG__REPO_NAME="termux-api-package"
+TERMUX_API_PKG__REPO_NAME="nasux-api-package"
 
 ##
-# The `termux-api` package repo url.
+# The `nasux-api` package repo url.
 #
-# Default value: `https://github.com/termux/termux-api-package`
+# Default value: `https://github.com/nasux/nasux-api-package`
 ##
 TERMUX_API_PKG__REPO_URL="$TERMUX__REPOS_HOST_ORG_URL/$TERMUX_API_PKG__REPO_NAME"
 
@@ -2081,22 +2081,22 @@ TERMUX_API_PKG__REPO_URL="$TERMUX__REPOS_HOST_ORG_URL/$TERMUX_API_PKG__REPO_NAME
 
 
 ####
-# Variables for the `termux-core` package.
+# Variables for the `nasux-core` package.
 #
-# - https://github.com/termux/termux-core-package
+# - https://github.com/nasux/nasux-core-package
 ####
 
 ##
-# The `termux-core` package repo name.
+# The `nasux-core` package repo name.
 #
-# Default value: `termux-core-package`
+# Default value: `nasux-core-package`
 ##
-TERMUX_CORE_PKG__REPO_NAME="termux-core-package"
+TERMUX_CORE_PKG__REPO_NAME="nasux-core-package"
 
 ##
-# The `termux-core` package repo url.
+# The `nasux-core` package repo url.
 #
-# Default value: `https://github.com/termux/termux-core-package`
+# Default value: `https://github.com/nasux/nasux-core-package`
 ##
 TERMUX_CORE_PKG__REPO_URL="$TERMUX__REPOS_HOST_ORG_URL/$TERMUX_CORE_PKG__REPO_NAME"
 
@@ -2105,29 +2105,29 @@ TERMUX_CORE_PKG__REPO_URL="$TERMUX__REPOS_HOST_ORG_URL/$TERMUX_CORE_PKG__REPO_NA
 
 
 ####
-# Variables for the `termux-am` package.
+# Variables for the `nasux-am` package.
 #
-# - https://github.com/termux/TermuxAm
+# - https://github.com/nasux/TermuxAm
 ####
 
 ##
-# The `termux-am` package repo name.
+# The `nasux-am` package repo name.
 #
 # Default value: `TermuxAm`
 ##
 TERMUX_AM_PKG__REPO_NAME="TermuxAm"
 
 ##
-# The `termux-am` package repo url.
+# The `nasux-am` package repo url.
 #
-# Default value: `https://github.com/termux/TermuxAm`
+# Default value: `https://github.com/nasux/TermuxAm`
 ##
 TERMUX_AM_PKG__REPO_URL="$TERMUX__REPOS_HOST_ORG_URL/$TERMUX_AM_PKG__REPO_NAME"
 
 
 
 ##
-# TermuxAm namespace, i.e the Java package name under which Termux
+# TermuxAm namespace, i.e the Java package name under which NasUX
 # classes exists used for `TERMUX_AM__*_CLASS__*` variables.
 #
 # This must not be changed unless the classes in the `TermuxAm` repo
@@ -2135,11 +2135,11 @@ TERMUX_AM_PKG__REPO_URL="$TERMUX__REPOS_HOST_ORG_URL/$TERMUX_AM_PKG__REPO_NAME"
 #
 # **See Also:**
 # - https://developer.android.com/build/configure-app-module#set-namespace
-# - https://github.com/termux/TermuxAm/tree/master/app/src/main/java/com/termux/termuxam
+# - https://github.com/nasux/TermuxAm/tree/master/app/src/main/java/com/nasux/termuxam
 #
-# Constant value: `com.termux.termuxam`
+# Constant value: `com.nasux.termuxam`
 ##
-TERMUX_AM_APP__NAMESPACE="com.termux.termuxam"
+TERMUX_AM_APP__NAMESPACE="com.nasux.termuxam"
 
 __termux_build_props__add_variables_validator_actions "TERMUX_AM_APP__NAMESPACE" "app_package_name"
 
@@ -2149,11 +2149,11 @@ __termux_build_props__add_variables_validator_actions "TERMUX_AM_APP__NAMESPACE"
 # TermuxAm main class that is passed as `start-class-name` to
 # `/system/bin/app_process` when running `am.apk` set in `$CLASSPATH`.
 #
-# - https://github.com/termux/TermuxAm/blob/master/app/src/main/java/com/termux/termuxam/Am.java
-# - https://github.com/termux/TermuxAm/blob/v0.8.0/am-libexec-packaged#L30
+# - https://github.com/nasux/TermuxAm/blob/master/app/src/main/java/com/nasux/termuxam/Am.java
+# - https://github.com/nasux/TermuxAm/blob/v0.8.0/am-libexec-packaged#L30
 # - https://cs.android.com/android/platform/superproject/+/android-14.0.0_r1:frameworks/base/cmds/app_process/app_main.cpp;l=31
 #
-# Default value: `com.termux.termuxam.Am`
+# Default value: `com.nasux.termuxam.Am`
 ##
 TERMUX_AM_APP__AM_CLASS__CLASS_NAME="$TERMUX_AM_APP__NAMESPACE.Am"
 
@@ -2162,12 +2162,12 @@ TERMUX_AM_APP__AM_CLASS__CLASS_NAME="$TERMUX_AM_APP__NAMESPACE.Am"
 
 
 ###
-# Variables for the Termux package repositories.
+# Variables for the NasUX package repositories.
 ###
 
 # The core variable values for which the packages hosted on the
 # package repos defined in `repo.json` are compiled for.
-# If a custom repo is not being hosted, and official Termux repos are
+# If a custom repo is not being hosted, and official NasUX repos are
 # still defined in `repo.json`, then DO NOT change these values. If a
 # custom repo is being hosted whose variable values equal
 # `TERMUX_APP__PACKAGE_NAME`, `TERMUX_APP__DATA_DIR`,
@@ -2180,10 +2180,10 @@ TERMUX_AM_APP__AM_CLASS__CLASS_NAME="$TERMUX_AM_APP__NAMESPACE.Am"
 # and are compiled locally.
 # FIXME: Checking for all variables will be added later in repo
 # changes pull, currently only `TERMUX_REPO_APP__PACKAGE_NAME` is checked.
-TERMUX_REPO_APP__PACKAGE_NAME="com.termux"
+TERMUX_REPO_APP__PACKAGE_NAME="com.nasux"
 TERMUX_REPO_APP__DATA_DIR="/data/data/com.termux"
-TERMUX_REPO__CORE_DIR="/data/data/com.termux/termux/core"
-TERMUX_REPO__APPS_DIR="/data/data/com.termux/termux/app"
+TERMUX_REPO__CORE_DIR="/data/data/com.termux/nasux/core"
+TERMUX_REPO__APPS_DIR="/data/data/com.termux/nasux/app"
 TERMUX_REPO__ROOTFS="/data/data/com.termux/files"
 TERMUX_REPO__HOME="/data/data/com.termux/files/home"
 TERMUX_REPO__PREFIX="/data/data/com.termux/files/usr"
@@ -2191,14 +2191,14 @@ TERMUX_REPO__PREFIX="/data/data/com.termux/files/usr"
 
 
 ####
-# Variables loaded from `repo.json` file for Termux package repositories.
+# Variables loaded from `repo.json` file for NasUX package repositories.
 ####
 
 TERMUX_REPO_URL=()
 TERMUX_REPO_DISTRIBUTION=()
 TERMUX_REPO_COMPONENT=()
 
-# FIXME: Move `repo.json` file to under `scripts/` directory and COPY it to `/tmp/termux-packages` in `Dockerfile`.
+# FIXME: Move `repo.json` file to under `scripts/` directory and COPY it to `/tmp/nasux-packages` in `Dockerfile`.
 if [[ ! -f "$TERMUX_PKGS__BUILD__REPO_ROOT_DIR/repo.json" ]]; then
     if [[ "${TERMUX_PKGS__BUILD__IS_DOCKER_BUILD:-}" != "true" ]]; then
         echo "The 'repo.json' file not found at the '$TERMUX_PKGS__BUILD__REPO_ROOT_DIR/repo.json' path." 1>&2
@@ -2238,7 +2238,7 @@ export CGCT_DIR="/data/data/com.termux/cgct"
 __termux_build_props__add_variables_validator_actions "CGCT_DIR" "safe_absolute_path invalid_termux_prefix_paths"
 
 # Allow to override setup.
-for f in "${HOME}/.config/termux/termuxrc.sh" "${HOME}/.termux/termuxrc.sh" "${HOME}/.termuxrc"; do
+for f in "${HOME}/.config/nasux/termuxrc.sh" "${HOME}/.nasux/termuxrc.sh" "${HOME}/.termuxrc"; do
     if [ -f "$f" ]; then
         echo "Using builder configuration from '$f'..."
         # shellcheck source=/dev/null
@@ -2253,7 +2253,7 @@ unset f
 
 
 ###
-# Run Termux properties variable values validation.
+# Run NasUX properties variable values validation.
 ###
 
 # Uncomment to print `TERMUX_` variables set
@@ -2292,7 +2292,7 @@ or \`/mnt/expand/<volume_uuid>/user/<user_id>/<package_name>\` formats." 1>&2
 
     for variable_name in "${__TERMUX_BUILD_PROPS__VARIABLES_VALIDATOR_ACTIONS_VARIABLE_NAMES[@]}"; do
         if [[ ! "$variable_name" =~ ^[a-zA-Z_][a-zA-Z0-9_]*$ ]]; then
-            echo "The variable_name '$variable_name' in Termux properties variables validator actions is not a valid shell variable name." 1>&2
+            echo "The variable_name '$variable_name' in NasUX properties variables validator actions is not a valid shell variable name." 1>&2
             return 1
         fi
 
@@ -2308,14 +2308,14 @@ or \`/mnt/expand/<volume_uuid>/user/<user_id>/<package_name>\` formats." 1>&2
 
             # If not defined.
             if [[ "$is_value_defined" = "0" ]]; then
-                echo "The variable_name '$variable_name' in Termux properties variables validator actions is not defined." 1>&2
+                echo "The variable_name '$variable_name' in NasUX properties variables validator actions is not defined." 1>&2
                 return 1
             fi
 
             # If defined but unset.
             [[ " ${validator_actions[*]} " == *" allow_unset_value "* ]] && continue
 
-            echo "The Termux properties variable value for variable name '$variable_name' is not set." 1>&2
+            echo "The NasUX properties variable value for variable name '$variable_name' is not set." 1>&2
             return 1
         fi
 
@@ -2432,7 +2432,7 @@ including the null \`\0\` terminator." 1>&2
                     fi
                     ;;
                 *)
-                    echo "The Termux properties variables validator action '$validator_action' for \
+                    echo "The NasUX properties variables validator action '$validator_action' for \
 variable name '$variable_name' is invalid." 1>&2
                     return 1
                     ;;

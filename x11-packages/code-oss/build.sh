@@ -1,19 +1,19 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/microsoft/vscode
-TERMUX_PKG_DESCRIPTION="Visual Studio Code - OSS"
-TERMUX_PKG_LICENSE="MIT"
-TERMUX_PKG_MAINTAINER="@licy183"
-TERMUX_PKG_VERSION="1.122.1"
-TERMUX_PKG_SRCURL=git+https://github.com/microsoft/vscode
-TERMUX_PKG_GIT_BRANCH="$TERMUX_PKG_VERSION"
-TERMUX_PKG_DEPENDS="electron-for-code-oss, libx11, libxkbfile, libsecret, ripgrep"
+NASUX_PKG_HOMEPAGE=https://github.com/microsoft/vscode
+NASUX_PKG_DESCRIPTION="Visual Studio Code - OSS"
+NASUX_PKG_LICENSE="MIT"
+NASUX_PKG_MAINTAINER="@licy183"
+NASUX_PKG_VERSION="1.122.1"
+NASUX_PKG_SRCURL=git+https://github.com/microsoft/vscode
+TERMUX_PKG_GIT_BRANCH="$NASUX_PKG_VERSION"
+NASUX_PKG_DEPENDS="electron-for-code-oss, libx11, libxkbfile, libsecret, ripgrep"
 TERMUX_PKG_BUILD_DEPENDS="electron-headers-for-code-oss"
 TERMUX_PKG_ANTI_BUILD_DEPENDS="electron-for-code-oss"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_NO_STATICSPLIT=true
 TERMUX_PKG_NO_STRIP=true
 TERMUX_PKG_HOSTBUILD=true
 # Chromium doesn't support i686 on Linux.
-TERMUX_PKG_EXCLUDED_ARCHES="i686"
+NASUX_PKG_EXCLUDED_ARCHES="i686"
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_UPDATE_TAG_TYPE="latest-release-tag"
 TERMUX_PKG_ON_DEVICE_BUILD_NOT_SUPPORTED=true
@@ -42,7 +42,7 @@ termux_step_post_get_source() {
 
 	# Check whether the prebuilt electron version matches the electron version from package.json
 	local _electron_verion="$(jq -r '.devDependencies.electron' $TERMUX_PKG_SRCDIR/package.json)"
-	local _header_version="$(. $TERMUX_SCRIPTDIR/x11-packages/electron-host-tools-for-code-oss/build.sh; echo $TERMUX_PKG_VERSION)"
+	local _header_version="$(. $NASUX_SCRIPTDIR/x11-packages/electron-host-tools-for-code-oss/build.sh; echo $NASUX_PKG_VERSION)"
 	if [ "$_electron_verion" != "$_header_version" ]; then
 		termux_error_exit "Version mismatch: version in package.json is $_electron_verion, prebuilt electron version $_header_version."
 	fi
@@ -77,17 +77,17 @@ termux_step_configure() {
 termux_step_make() {
 	unset PREFIX prefix
 
-	if [ $TERMUX_ARCH = "arm" ]; then
+	if [ $NASUX_ARCH = "arm" ]; then
 		export NPM_CONFIG_ARCH=arm
 		CODE_ARCH=armhf
-	elif [ $TERMUX_ARCH = "x86_64" ]; then
+	elif [ $NASUX_ARCH = "x86_64" ]; then
 		export NPM_CONFIG_ARCH=x64
 		CODE_ARCH=x64
-	elif [ $TERMUX_ARCH = "aarch64" ]; then
+	elif [ $NASUX_ARCH = "aarch64" ]; then
 		export NPM_CONFIG_ARCH=arm64
 		CODE_ARCH=arm64
 	else
-		termux_error_exit "Unsupported arch: $TERMUX_ARCH"
+		termux_error_exit "Unsupported arch: $NASUX_ARCH"
 	fi
 	export npm_config_arch=$NPM_CONFIG_ARCH
 	export npm_config_nodedir=$TERMUX_PREFIX/lib/code-oss/node_headers

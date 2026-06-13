@@ -1,15 +1,15 @@
-TERMUX_PKG_HOMEPAGE=https://sw.kovidgoyal.net/kitty/
-TERMUX_PKG_DESCRIPTION="Cross-platform, fast, feature-rich, GPU based terminal"
-TERMUX_PKG_LICENSE="GPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="0.47.3"
-TERMUX_PKG_SRCURL="https://github.com/kovidgoyal/kitty/releases/download/v${TERMUX_PKG_VERSION}/kitty-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=dc9e6579d70293789d8c883e49f30581ea65359a092aaa3330465837538c4d11
+NASUX_PKG_HOMEPAGE=https://sw.kovidgoyal.net/kitty/
+NASUX_PKG_DESCRIPTION="Cross-platform, fast, feature-rich, GPU based terminal"
+NASUX_PKG_LICENSE="GPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="0.47.3"
+NASUX_PKG_SRCURL="https://github.com/kovidgoyal/kitty/releases/download/v${NASUX_PKG_VERSION}/kitty-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=dc9e6579d70293789d8c883e49f30581ea65359a092aaa3330465837538c4d11
 # fontconfig is dlopen(3)ed:
-TERMUX_PKG_DEPENDS="dbus, fontconfig, harfbuzz, libpng, librsync, libx11, libxkbcommon, littlecms, ncurses, opengl, openssl, python, xxhash, zlib"
+NASUX_PKG_DEPENDS="dbus, fontconfig, harfbuzz, libpng, librsync, libx11, libxkbcommon, littlecms, ncurses, opengl, openssl, python, xxhash, zlib"
 TERMUX_PKG_BUILD_DEPENDS="libxcursor, libxi, libxinerama, libxrandr, simde, xorgproto"
 TERMUX_PKG_PYTHON_COMMON_BUILD_DEPS="wheel"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_HOSTBUILD=true
 TERMUX_PKG_RM_AFTER_INSTALL="
 share/doc/kitty/html
@@ -23,31 +23,31 @@ termux_step_host_build() {
 
 	# https://github.com/kovidgoyal/kitty/issues/6354
 
-	termux_setup_golang
-	termux_setup_ninja
+	nasux_setup_golang
+	nasux_setup_ninja
 
-	# XXX: termux_setup_meson is not expected to be called in host build
+	# XXX: nasux_setup_meson is not expected to be called in host build
 	AR=;CC=;CFLAGS=;CPPFLAGS=;CXX=;CXXFLAGS=;LD=;LDFLAGS=;PKG_CONFIG=;STRIP=
-	termux_setup_meson
+	nasux_setup_meson
 	unset AR CC CFLAGS CPPFLAGS CXX CXXFLAGS LD LDFLAGS PKG_CONFIG STRIP
 
 	local -A ver=(
-		[libx11]="$(. "${TERMUX_SCRIPTDIR}/packages/libx11/build.sh"; echo "${TERMUX_PKG_VERSION}")"
-		[libxcb]="$(. "${TERMUX_SCRIPTDIR}/packages/libxcb/build.sh"; echo "${TERMUX_PKG_VERSION}")"
-		[xcb_proto]="$(. "${TERMUX_SCRIPTDIR}/packages/xcb-proto/build.sh"; echo "${TERMUX_PKG_VERSION}")"
-		[libxkbcommon]="$(. "${TERMUX_SCRIPTDIR}/x11-packages/libxkbcommon/build.sh"; echo "${TERMUX_PKG_VERSION}")"
+		[libx11]="$(. "${NASUX_SCRIPTDIR}/packages/libx11/build.sh"; echo "${NASUX_PKG_VERSION}")"
+		[libxcb]="$(. "${NASUX_SCRIPTDIR}/packages/libxcb/build.sh"; echo "${NASUX_PKG_VERSION}")"
+		[xcb_proto]="$(. "${NASUX_SCRIPTDIR}/packages/xcb-proto/build.sh"; echo "${NASUX_PKG_VERSION}")"
+		[libxkbcommon]="$(. "${NASUX_SCRIPTDIR}/x11-packages/libxkbcommon/build.sh"; echo "${NASUX_PKG_VERSION}")"
 	)
 	local -A srcurl=(
-		[libx11]="$(. "${TERMUX_SCRIPTDIR}/packages/libx11/build.sh"; echo "${TERMUX_PKG_SRCURL}")"
-		[libxcb]="$(. "${TERMUX_SCRIPTDIR}/packages/libxcb/build.sh"; echo "${TERMUX_PKG_SRCURL}")"
-		[xcb_proto]="$(. "${TERMUX_SCRIPTDIR}/packages/xcb-proto/build.sh"; echo "${TERMUX_PKG_SRCURL}")"
-		[libxkbcommon]="$(. "${TERMUX_SCRIPTDIR}/x11-packages/libxkbcommon/build.sh"; echo "${TERMUX_PKG_SRCURL}")"
+		[libx11]="$(. "${NASUX_SCRIPTDIR}/packages/libx11/build.sh"; echo "${NASUX_PKG_SRCURL}")"
+		[libxcb]="$(. "${NASUX_SCRIPTDIR}/packages/libxcb/build.sh"; echo "${NASUX_PKG_SRCURL}")"
+		[xcb_proto]="$(. "${NASUX_SCRIPTDIR}/packages/xcb-proto/build.sh"; echo "${NASUX_PKG_SRCURL}")"
+		[libxkbcommon]="$(. "${NASUX_SCRIPTDIR}/x11-packages/libxkbcommon/build.sh"; echo "${NASUX_PKG_SRCURL}")"
 	)
 	local -A sha256=(
-		[libx11]="$(. "${TERMUX_SCRIPTDIR}/packages/libx11/build.sh"; echo "${TERMUX_PKG_SHA256}")"
-		[libxcb]="$(. "${TERMUX_SCRIPTDIR}/packages/libxcb/build.sh"; echo "${TERMUX_PKG_SHA256}")"
-		[xcb_proto]="$(. "${TERMUX_SCRIPTDIR}/packages/xcb-proto/build.sh"; echo "${TERMUX_PKG_SHA256}")"
-		[libxkbcommon]="$(. "${TERMUX_SCRIPTDIR}/x11-packages/libxkbcommon/build.sh"; echo "${TERMUX_PKG_SHA256}")"
+		[libx11]="$(. "${NASUX_SCRIPTDIR}/packages/libx11/build.sh"; echo "${NASUX_PKG_SHA256}")"
+		[libxcb]="$(. "${NASUX_SCRIPTDIR}/packages/libxcb/build.sh"; echo "${NASUX_PKG_SHA256}")"
+		[xcb_proto]="$(. "${NASUX_SCRIPTDIR}/packages/xcb-proto/build.sh"; echo "${NASUX_PKG_SHA256}")"
+		[libxkbcommon]="$(. "${NASUX_SCRIPTDIR}/x11-packages/libxkbcommon/build.sh"; echo "${NASUX_PKG_SHA256}")"
 	)
 
 	termux_download "${srcurl[libx11]}" "${TERMUX_PKG_CACHEDIR}/$(basename "${srcurl[libx11]}")" "${sha256[libx11]}"
@@ -101,7 +101,7 @@ termux_step_pre_configure() {
 		"$TERMUX_PKG_SRCDIR/fonts/SymbolsNerdFontMono-Regular.ttf" \
 		SKIP_CHECKSUM
 
-	termux_setup_golang
+	nasux_setup_golang
 	CFLAGS+=" $CPPFLAGS"
 
 	sed 's|@TERMUX_PREFIX@|'"${TERMUX_PREFIX}"'|g' \

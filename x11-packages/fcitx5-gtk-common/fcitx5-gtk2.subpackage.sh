@@ -1,5 +1,5 @@
-TERMUX_SUBPKG_DESCRIPTION="fcitx5 gtk2 immodule"
-TERMUX_SUBPKG_INCLUDE="lib/gtk-2.0"
+NASUX_SUBPKG_DESCRIPTION="fcitx5 gtk2 immodule"
+NASUX_SUBPKG_INCLUDE="lib/gtk-2.0"
 TERMUX_SUBPKG_DEPENDS="fcitx5, gtk2, libx11, libxkbcommon, pango"
 
 termux_step_create_subpkg_debscripts() {

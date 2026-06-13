@@ -9,18 +9,18 @@ termux_github_api_get_tag() {
 	tag_type="$TERMUX_PKG_UPDATE_TAG_TYPE"
 
 	# Example:
-	# https://github.com/vim/vim/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz
+	# https://github.com/vim/vim/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz
 	#        _="https:"
 	#        _=""
 	#        _="github.com"
 	#     user="vim"
 	#     repo="vim"
-	#        _="archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz"
-	IFS='/' read -r _ _ _ user repo _ <<< "${TERMUX_PKG_SRCURL}"
+	#        _="archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz"
+	IFS='/' read -r _ _ _ user repo _ <<< "${NASUX_PKG_SRCURL}"
 	project="${user}/${repo}"
 
 	if [[ -z "${tag_type}" ]]; then # If not set, then decide on the basis of url.
-		if [[ "${TERMUX_PKG_SRCURL:0:4}" == "git+" ]]; then
+		if [[ "${NASUX_PKG_SRCURL:0:4}" == "git+" ]]; then
 			tag_type="newest-tag" # Get newest tag.
 		elif [[ -n "$TERMUX_PKG_UPDATE_VERSION_REGEXP" ]]; then
 			tag_type="latest-regex" # Get the latest release tag.
@@ -33,7 +33,7 @@ termux_github_api_get_tag() {
 		-H "X-GitHub-Api-Version: 2022-11-28"
 		-H "Accept: application/vnd.github.v3+json"
 		-H "Authorization: token ${GITHUB_TOKEN}"
-		-A "Termux update checker 1.1 (github.com/termux/termux-packages)"
+		-A "NasUX update checker 1.1 (github.com/nastech-ai/NasUX-Packages)"
 		--silent
 		--location
 		--retry 10

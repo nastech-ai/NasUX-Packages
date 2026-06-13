@@ -1,18 +1,18 @@
-TERMUX_PKG_HOMEPAGE=https://bladelang.com/
-TERMUX_PKG_DESCRIPTION="A simple, fast, clean and dynamic language"
-TERMUX_PKG_LICENSE="custom"
-TERMUX_PKG_LICENSE_FILE="LICENSE"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="0.0.87"
-TERMUX_PKG_SRCURL=https://github.com/blade-lang/blade/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=7a438f126eed74077d6112b89c9d890a8cc0a3affbccde0b023ad43639fed4de
+NASUX_PKG_HOMEPAGE=https://bladelang.com/
+NASUX_PKG_DESCRIPTION="A simple, fast, clean and dynamic language"
+NASUX_PKG_LICENSE="custom"
+NASUX_PKG_LICENSE_FILE="LICENSE"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="0.0.87"
+NASUX_PKG_SRCURL=https://github.com/blade-lang/blade/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=7a438f126eed74077d6112b89c9d890a8cc0a3affbccde0b023ad43639fed4de
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_BUILD_DEPENDS="libgd, libcurl, openssl"
 TERMUX_PKG_HOSTBUILD=true
 
 termux_step_host_build() {
 	sed -i '/add_subdirectory(imagine)/d' $TERMUX_PKG_SRCDIR/packages/CMakeLists.txt
-	termux_setup_cmake
+	nasux_setup_cmake
 	cmake $TERMUX_PKG_SRCDIR
 	make -j $TERMUX_PKG_MAKE_PROCESSES
 	echo "add_subdirectory(imagine)" >> $TERMUX_PKG_SRCDIR/packages/CMakeLists.txt

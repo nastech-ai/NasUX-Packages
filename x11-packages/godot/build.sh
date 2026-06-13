@@ -1,16 +1,16 @@
-TERMUX_PKG_HOMEPAGE=https://godotengine.org
-TERMUX_PKG_DESCRIPTION="Advanced cross-platform 2D and 3D game engine"
-TERMUX_PKG_LICENSE="MIT"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="4.6.3"
-TERMUX_PKG_SRCURL="https://github.com/godotengine/godot/archive/refs/tags/$TERMUX_PKG_VERSION-stable.tar.gz"
-TERMUX_PKG_SHA256=fa22b5f974125057087c9ef725eae582dbc5e39385dc377e8d5dbc295b367e1c
-TERMUX_PKG_DEPENDS="brotli, ca-certificates, fontconfig, freetype, glu, libandroid-execinfo, libc++, libenet, libgraphite, libjpeg-turbo, libogg, libtheora, libvorbis, libvpx, libwebp, libwslay, libxcursor, libxi, libxinerama, libxkbcommon, libxrandr, mbedtls, miniupnpc, opengl, opusfile, pcre2, python, sdl3, speechd, zlib, zstd"
+NASUX_PKG_HOMEPAGE=https://godotengine.org
+NASUX_PKG_DESCRIPTION="Advanced cross-platform 2D and 3D game engine"
+NASUX_PKG_LICENSE="MIT"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="4.6.3"
+NASUX_PKG_SRCURL="https://github.com/godotengine/godot/archive/refs/tags/$NASUX_PKG_VERSION-stable.tar.gz"
+NASUX_PKG_SHA256=fa22b5f974125057087c9ef725eae582dbc5e39385dc377e8d5dbc295b367e1c
+NASUX_PKG_DEPENDS="brotli, ca-certificates, fontconfig, freetype, glu, libandroid-execinfo, libc++, libenet, libgraphite, libjpeg-turbo, libogg, libtheora, libvorbis, libvpx, libwebp, libwslay, libxcursor, libxi, libxinerama, libxkbcommon, libxrandr, mbedtls, miniupnpc, opengl, opusfile, pcre2, python, sdl3, speechd, zlib, zstd"
 TERMUX_PKG_BUILD_DEPENDS="pulseaudio, yasm"
 TERMUX_PKG_PYTHON_COMMON_BUILD_DEPS="scons"
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_UPDATE_VERSION_REGEXP='\d+\.\d+(\.\d+)?(?=-stable)'
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 
 termux_step_make() {
 	local to_unbundle="" system_libs=""
@@ -42,7 +42,7 @@ termux_step_make() {
 	echo "$system_libs"
 
 	local _ARCH
-	case $TERMUX_ARCH in
+	case $NASUX_ARCH in
 		aarch64) _ARCH=arm64;;
 		arm) _ARCH=arm32;;
 		x86_64) _ARCH=x86_64;;
@@ -54,12 +54,12 @@ termux_step_make() {
 		# godot has a lot of possible weird debug settings,
 		# so if TERMUX_DEBUG_BUILD=true, enable a sane set
 		# of two that seem appropriate and compatible with
-		# the typical termux package debugging workflow
+		# the typical nasux package debugging workflow
 		debug+="debug_symbols=yes "
 		debug+="optimize=debug "
 	fi
 
-	export BUILD_NAME=termux
+	export BUILD_NAME=nasux
 	scons -j$TERMUX_PKG_MAKE_PROCESSES \
 		use_static_cpp=no \
 		colored=yes \

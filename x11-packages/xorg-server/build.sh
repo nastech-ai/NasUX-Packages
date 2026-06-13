@@ -1,15 +1,15 @@
-TERMUX_PKG_HOMEPAGE=https://xorg.freedesktop.org/wiki/
-TERMUX_PKG_DESCRIPTION="Xorg server"
-TERMUX_PKG_LICENSE="MIT"
-TERMUX_PKG_MAINTAINER="@termux"
+NASUX_PKG_HOMEPAGE=https://xorg.freedesktop.org/wiki/
+NASUX_PKG_DESCRIPTION="Xorg server"
+NASUX_PKG_LICENSE="MIT"
+NASUX_PKG_MAINTAINER="@nastech-ai"
 # Keep version of `tigervnc` package aligned with this package, revbump tigervnc after modifying patches of this package
-TERMUX_PKG_VERSION="21.1.16"
+NASUX_PKG_VERSION="21.1.16"
 TERMUX_PKG_REVISION=3
-TERMUX_PKG_SRCURL=https://xorg.freedesktop.org/releases/individual/xserver/xorg-server-${TERMUX_PKG_VERSION}.tar.xz
-TERMUX_PKG_SHA256=b14a116d2d805debc5b5b2aac505a279e69b217dae2fae2dfcb62400471a9970
+NASUX_PKG_SRCURL=https://xorg.freedesktop.org/releases/individual/xserver/xorg-server-${NASUX_PKG_VERSION}.tar.xz
+NASUX_PKG_SHA256=b14a116d2d805debc5b5b2aac505a279e69b217dae2fae2dfcb62400471a9970
 # We can not update it automatically because tigervnc server version must be aligned with xorg-server.
 TERMUX_PKG_AUTO_UPDATE=false
-TERMUX_PKG_DEPENDS="libandroid-shmem, libdrm, libpciaccess, libpixman, libx11, libxau, libxcvt, libxfont2, libxinerama, libxkbfile, libxshmfence, opengl, openssl, xkeyboard-config, xorg-protocol-txt, xorg-xkbcomp"
+NASUX_PKG_DEPENDS="libandroid-shmem, libdrm, libpciaccess, libpixman, libx11, libxau, libxcvt, libxfont2, libxinerama, libxkbfile, libxshmfence, opengl, openssl, xkeyboard-config, xorg-protocol-txt, xorg-xkbcomp"
 TERMUX_PKG_BUILD_DEPENDS="mesa-dev"
 
 # Needed for Xephyr

@@ -1,12 +1,12 @@
-TERMUX_PKG_HOMEPAGE=https://www.mesa3d.org
-TERMUX_PKG_DESCRIPTION="OpenGL demonstration and test programs"
-TERMUX_PKG_LICENSE="MIT"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="9.0.0"
+NASUX_PKG_HOMEPAGE=https://www.mesa3d.org
+NASUX_PKG_DESCRIPTION="OpenGL demonstration and test programs"
+NASUX_PKG_LICENSE="MIT"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="9.0.0"
 TERMUX_PKG_REVISION=7
-TERMUX_PKG_SRCURL="https://mesa.freedesktop.org/archive/demos/mesa-demos-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=3046a3d26a7b051af7ebdd257a5f23bfeb160cad6ed952329cdff1e9f1ed496b
-TERMUX_PKG_DEPENDS="freeglut, glu, libx11, libxext, opengl"
+NASUX_PKG_SRCURL="https://mesa.freedesktop.org/archive/demos/mesa-demos-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=3046a3d26a7b051af7ebdd257a5f23bfeb160cad6ed952329cdff1e9f1ed496b
+NASUX_PKG_DEPENDS="freeglut, glu, libx11, libxext, opengl"
 # will overwrite poly from polyml
 TERMUX_PKG_ON_DEVICE_BUILD_NOT_SUPPORTED=true
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
@@ -22,7 +22,7 @@ termux_step_pre_configure() {
 
 termux_step_post_make_install() {
 	local _system_lib=/system/lib
-	if [ $TERMUX_ARCH_BITS = 64 ]; then
+	if [ $NASUX_ARCH_BITS = 64 ]; then
 		_system_lib+=64
 	fi
 	# Use LD_LIBRARY_PATH for eglinfo-system

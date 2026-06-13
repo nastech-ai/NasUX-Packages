@@ -1,19 +1,19 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/opencv/opencv-python
-TERMUX_PKG_DESCRIPTION="Python wrapper for Python bindings for OpenCV"
-TERMUX_PKG_LICENSE="Apache-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="92"
+NASUX_PKG_HOMEPAGE=https://github.com/opencv/opencv-python
+NASUX_PKG_DESCRIPTION="Python wrapper for Python bindings for OpenCV"
+NASUX_PKG_LICENSE="Apache-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="92"
 TERMUX_PKG_REVISION=1
-TERMUX_PKG_REPOLOGY_METADATA_VERSION="$(. "$TERMUX_SCRIPTDIR/x11-packages/opencv/build.sh"; echo "$TERMUX_PKG_VERSION").${TERMUX_PKG_VERSION}"
-TERMUX_PKG_SRCURL="https://github.com/opencv/opencv-python/archive/refs/tags/${TERMUX_PKG_VERSION}.tar.gz"
-TERMUX_PKG_SHA256=049293f56726a3ebb01bb7508b973e14e62752a4a0e067ac6af4e371d6aa30d3
-TERMUX_PKG_DEPENDS="opencv, opencv-python, python, python-pip"
+TERMUX_PKG_REPOLOGY_METADATA_VERSION="$(. "$NASUX_SCRIPTDIR/x11-packages/opencv/build.sh"; echo "$NASUX_PKG_VERSION").${NASUX_PKG_VERSION}"
+NASUX_PKG_SRCURL="https://github.com/opencv/opencv-python/archive/refs/tags/${NASUX_PKG_VERSION}.tar.gz"
+NASUX_PKG_SHA256=049293f56726a3ebb01bb7508b973e14e62752a4a0e067ac6af4e371d6aa30d3
+NASUX_PKG_DEPENDS="opencv, opencv-python, python, python-pip"
 TERMUX_PKG_PYTHON_COMMON_BUILD_DEPS="scikit-build"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_AUTO_UPDATE=true
 
 termux_step_pre_configure() {
-	termux_setup_cmake
+	nasux_setup_cmake
 
 	# prevent any downloading or compiling of opencv source code,
 	# but allow the normal installation of all other files
@@ -27,12 +27,12 @@ termux_step_pre_configure() {
 	echo "Applying patch: $(basename "$patch")"
 	test -f "$patch" && sed \
 		-e "s%\@TERMUX_PREFIX\@%${TERMUX_PREFIX}%g" \
-		-e "s%\@TERMUX_PKG_VERSION\@%${TERMUX_PKG_VERSION}%g" \
+		-e "s%\@NASUX_PKG_VERSION\@%${NASUX_PKG_VERSION}%g" \
 		"$patch" | patch --silent -p1
 }
 
 termux_step_post_make_install() {
-	# also provide the opencv-contrib-python variant because Termux opencv also has the extra modules,
+	# also provide the opencv-contrib-python variant because NasUX opencv also has the extra modules,
 	# but some python projects might attempt to import either 'opencv-python' or 'opencv-contrib-python'.
 	# which have different names
 	export ENABLE_CONTRIB=1

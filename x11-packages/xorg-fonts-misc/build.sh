@@ -1,24 +1,24 @@
-TERMUX_PKG_HOMEPAGE=https://xorg.freedesktop.org/
-TERMUX_PKG_DESCRIPTION="X.org misc fonts"
-TERMUX_PKG_LICENSE="custom"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="1.0.4"
+NASUX_PKG_HOMEPAGE=https://xorg.freedesktop.org/
+NASUX_PKG_DESCRIPTION="X.org misc fonts"
+NASUX_PKG_LICENSE="custom"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="1.0.4"
 # the ones with other versions just have to be like that because they don't have a version 1.0.4
-TERMUX_PKG_SRCURL=("https://xorg.freedesktop.org/releases/individual/font/font-arabic-misc-${TERMUX_PKG_VERSION}.tar.xz"
-					"https://xorg.freedesktop.org/releases/individual/font/font-cursor-misc-${TERMUX_PKG_VERSION}.tar.xz"
-					"https://xorg.freedesktop.org/releases/individual/font/font-daewoo-misc-${TERMUX_PKG_VERSION}.tar.xz"
-					"https://xorg.freedesktop.org/releases/individual/font/font-dec-misc-${TERMUX_PKG_VERSION}.tar.xz"
-					"https://xorg.freedesktop.org/releases/individual/font/font-isas-misc-${TERMUX_PKG_VERSION}.tar.xz"
-					"https://xorg.freedesktop.org/releases/individual/font/font-jis-misc-${TERMUX_PKG_VERSION}.tar.xz"
-					"https://xorg.freedesktop.org/releases/individual/font/font-micro-misc-${TERMUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SRCURL=("https://xorg.freedesktop.org/releases/individual/font/font-arabic-misc-${NASUX_PKG_VERSION}.tar.xz"
+					"https://xorg.freedesktop.org/releases/individual/font/font-cursor-misc-${NASUX_PKG_VERSION}.tar.xz"
+					"https://xorg.freedesktop.org/releases/individual/font/font-daewoo-misc-${NASUX_PKG_VERSION}.tar.xz"
+					"https://xorg.freedesktop.org/releases/individual/font/font-dec-misc-${NASUX_PKG_VERSION}.tar.xz"
+					"https://xorg.freedesktop.org/releases/individual/font/font-isas-misc-${NASUX_PKG_VERSION}.tar.xz"
+					"https://xorg.freedesktop.org/releases/individual/font/font-jis-misc-${NASUX_PKG_VERSION}.tar.xz"
+					"https://xorg.freedesktop.org/releases/individual/font/font-micro-misc-${NASUX_PKG_VERSION}.tar.xz"
 					"https://xorg.freedesktop.org/releases/individual/font/font-misc-ethiopic-1.0.5.tar.xz"
-					"https://xorg.freedesktop.org/releases/individual/font/font-misc-meltho-${TERMUX_PKG_VERSION}.tar.xz"
+					"https://xorg.freedesktop.org/releases/individual/font/font-misc-meltho-${NASUX_PKG_VERSION}.tar.xz"
 					"https://xorg.freedesktop.org/releases/individual/font/font-misc-misc-1.1.3.tar.xz"
-					"https://xorg.freedesktop.org/releases/individual/font/font-mutt-misc-${TERMUX_PKG_VERSION}.tar.xz"
+					"https://xorg.freedesktop.org/releases/individual/font/font-mutt-misc-${NASUX_PKG_VERSION}.tar.xz"
 					"https://xorg.freedesktop.org/releases/individual/font/font-schumacher-misc-1.1.3.tar.xz"
-					"https://xorg.freedesktop.org/releases/individual/font/font-sony-misc-${TERMUX_PKG_VERSION}.tar.xz"
-					"https://xorg.freedesktop.org/releases/individual/font/font-sun-misc-${TERMUX_PKG_VERSION}.tar.xz")
-TERMUX_PKG_SHA256=(46ffe61b52c78a1d2dca70ff20a9f2d84d69744639cab9a085c7a7ee17663467
+					"https://xorg.freedesktop.org/releases/individual/font/font-sony-misc-${NASUX_PKG_VERSION}.tar.xz"
+					"https://xorg.freedesktop.org/releases/individual/font/font-sun-misc-${NASUX_PKG_VERSION}.tar.xz")
+NASUX_PKG_SHA256=(46ffe61b52c78a1d2dca70ff20a9f2d84d69744639cab9a085c7a7ee17663467
 					25d9c9595013cb8ca08420509993a6434c917e53ca1fec3f63acd45a19d4f982
 					f63c8b3dc8f30098cb868b7db2c2c0c8b5b3fd2cefd044035697a43d4c7a4f31
 					82d968201d8ff8bec0e51dccd781bb4d4ebf17e11004944279bdc0201e161af7
@@ -32,40 +32,40 @@ TERMUX_PKG_SHA256=(46ffe61b52c78a1d2dca70ff20a9f2d84d69744639cab9a085c7a7ee17663
 					8b849f0cdb1e55a34cc3dd8b0fb37443fabbc224d5ba44085569581244a68070
 					e6b09f823fccb06e0bd0b2062283b6514153323bd8a7486e9c2e3f55ab84946b
 					dd84dd116d927affa4fa0fa29727b3ecfc0f064238817c0a1e552a0ac384db9f)
-TERMUX_PKG_LICENSE_FILE="
-font-arabic-misc-${TERMUX_PKG_VERSION}/COPYING
-font-cursor-misc-${TERMUX_PKG_VERSION}/COPYING
-font-daewoo-misc-${TERMUX_PKG_VERSION}/COPYING
-font-dec-misc-${TERMUX_PKG_VERSION}/COPYING
-font-isas-misc-${TERMUX_PKG_VERSION}/COPYING
-font-jis-misc-${TERMUX_PKG_VERSION}/COPYING
-font-micro-misc-${TERMUX_PKG_VERSION}/COPYING
+NASUX_PKG_LICENSE_FILE="
+font-arabic-misc-${NASUX_PKG_VERSION}/COPYING
+font-cursor-misc-${NASUX_PKG_VERSION}/COPYING
+font-daewoo-misc-${NASUX_PKG_VERSION}/COPYING
+font-dec-misc-${NASUX_PKG_VERSION}/COPYING
+font-isas-misc-${NASUX_PKG_VERSION}/COPYING
+font-jis-misc-${NASUX_PKG_VERSION}/COPYING
+font-micro-misc-${NASUX_PKG_VERSION}/COPYING
 font-misc-ethiopic-1.0.5/COPYING
-font-misc-meltho-${TERMUX_PKG_VERSION}/COPYING
+font-misc-meltho-${NASUX_PKG_VERSION}/COPYING
 font-misc-misc-1.1.3/COPYING
-font-mutt-misc-${TERMUX_PKG_VERSION}/COPYING
+font-mutt-misc-${NASUX_PKG_VERSION}/COPYING
 font-schumacher-misc-1.1.3/COPYING
-font-sony-misc-${TERMUX_PKG_VERSION}/COPYING
-font-sun-misc-${TERMUX_PKG_VERSION}/COPYING
+font-sony-misc-${NASUX_PKG_VERSION}/COPYING
+font-sun-misc-${NASUX_PKG_VERSION}/COPYING
 "
-TERMUX_PKG_DEPENDS="fontconfig-utils, xorg-font-util, xorg-fonts-alias, xorg-fonts-encodings, xorg-mkfontscale"
+NASUX_PKG_DEPENDS="fontconfig-utils, xorg-font-util, xorg-fonts-alias, xorg-fonts-encodings, xorg-mkfontscale"
 TERMUX_PKG_CONFLICTS="xorg-fonts-lite"
 TERMUX_PKG_PLATFORM_INDEPENDENT=true
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 
 termux_step_get_source() {
 	mkdir -p "$TERMUX_PKG_SRCDIR"
 	local i
 	for i in {0..13}; do
-		termux_download "${TERMUX_PKG_SRCURL[i]}" "$(basename "${TERMUX_PKG_SRCURL[i]}")" "${TERMUX_PKG_SHA256[i]}"
-		tar xf "$(basename "${TERMUX_PKG_SRCURL[i]}")" -C "${TERMUX_PKG_SRCDIR}"
+		termux_download "${NASUX_PKG_SRCURL[i]}" "$(basename "${NASUX_PKG_SRCURL[i]}")" "${NASUX_PKG_SHA256[i]}"
+		tar xf "$(basename "${NASUX_PKG_SRCURL[i]}")" -C "${TERMUX_PKG_SRCDIR}"
 	done
 }
 
 termux_step_make_install() {
 	local i
 	for i in {0..13}; do
-		local file=$(basename "${TERMUX_PKG_SRCURL[i]}")
+		local file=$(basename "${NASUX_PKG_SRCURL[i]}")
 		local dir="${TERMUX_PKG_SRCDIR}/${file%%.tar.*}"
 
 		pushd "${dir}"

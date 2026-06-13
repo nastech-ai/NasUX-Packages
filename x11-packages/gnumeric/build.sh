@@ -1,17 +1,17 @@
-TERMUX_PKG_HOMEPAGE=http://www.gnumeric.org/
-TERMUX_PKG_DESCRIPTION="The GNOME spreadsheet"
-TERMUX_PKG_LICENSE="GPL-2.0, GPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="1.12.61"
-TERMUX_PKG_SRCURL=https://download.gnome.org/sources/gnumeric/${TERMUX_PKG_VERSION%.*}/gnumeric-${TERMUX_PKG_VERSION}.tar.xz
-TERMUX_PKG_SHA256=2ac135d856572713c1a408b76b50a59f2a9769ed21f1213446b5af255df20a12
+NASUX_PKG_HOMEPAGE=http://www.gnumeric.org/
+NASUX_PKG_DESCRIPTION="The GNOME spreadsheet"
+NASUX_PKG_LICENSE="GPL-2.0, GPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="1.12.61"
+NASUX_PKG_SRCURL=https://download.gnome.org/sources/gnumeric/${NASUX_PKG_VERSION%.*}/gnumeric-${NASUX_PKG_VERSION}.tar.xz
+NASUX_PKG_SHA256=2ac135d856572713c1a408b76b50a59f2a9769ed21f1213446b5af255df20a12
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="atk, gdk-pixbuf, glib, goffice, gtk3, libcairo, libgsf, libxml2, pango, zlib"
+NASUX_PKG_DEPENDS="atk, gdk-pixbuf, glib, goffice, gtk3, libcairo, libgsf, libxml2, pango, zlib"
 TERMUX_PKG_BUILD_DEPENDS="g-ir-scanner"
 TERMUX_PKG_PYTHON_COMMON_BUILD_DEPS="wheel"
 TERMUX_PKG_RECOMMENDS="gnumeric-help"
 TERMUX_PKG_SUGGESTS="glpk"
-TERMUX_PKG_VERSIONED_GIR=false
+NASUX_PKG_VERSIONED_GIR=false
 TERMUX_PKG_DISABLE_GIR=false
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 PYTHON=python
@@ -27,7 +27,7 @@ lib/locale
 "
 
 termux_step_pre_configure() {
-	termux_setup_gir
+	nasux_setup_gir
 
 	echo "Applying plugins-python-loader-Makefile.in.diff"
 	sed "s|@PYTHON_VERSION@|${TERMUX_PYTHON_VERSION}|g" \

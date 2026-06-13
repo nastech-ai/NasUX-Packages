@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE=https://www.freshports.org/devel/libexecinfo
-TERMUX_PKG_DESCRIPTION="A quick-n-dirty BSD licensed clone of backtrace facility found in the GNU libc"
-TERMUX_PKG_LICENSE="BSD 2-Clause"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=1.1
-TERMUX_PKG_SRCURL=http://distcache.FreeBSD.org/ports-distfiles/libexecinfo-${TERMUX_PKG_VERSION}.tar.bz2
-TERMUX_PKG_SHA256=c9a21913e7fdac8ef6b33250b167aa1fc0a7b8a175145e26913a4c19d8a59b1f
+NASUX_PKG_HOMEPAGE=https://www.freshports.org/devel/libexecinfo
+NASUX_PKG_DESCRIPTION="A quick-n-dirty BSD licensed clone of backtrace facility found in the GNU libc"
+NASUX_PKG_LICENSE="BSD 2-Clause"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=1.1
+NASUX_PKG_SRCURL=http://distcache.FreeBSD.org/ports-distfiles/libexecinfo-${NASUX_PKG_VERSION}.tar.bz2
+NASUX_PKG_SHA256=c9a21913e7fdac8ef6b33250b167aa1fc0a7b8a175145e26913a4c19d8a59b1f
 
 # Apparently not working for these arches:
-TERMUX_PKG_EXCLUDED_ARCHES="i686, x86_64"
+NASUX_PKG_EXCLUDED_ARCHES="i686, x86_64"
 
 termux_step_post_get_source() {
 	cp $TERMUX_PKG_BUILDER_DIR/LICENSE ./

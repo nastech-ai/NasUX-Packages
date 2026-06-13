@@ -1,11 +1,11 @@
-TERMUX_PKG_HOMEPAGE=https://audacious-media-player.org
-TERMUX_PKG_DESCRIPTION="An advanced audio player"
-TERMUX_PKG_LICENSE="BSD 2-Clause"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="4.6.1"
-TERMUX_PKG_SRCURL="https://distfiles.audacious-media-player.org/audacious-${TERMUX_PKG_VERSION}.tar.bz2"
-TERMUX_PKG_SHA256=62a5a609267eca7f6e3ce52ef6f42d5618d2961e3b4ddc227c6a5859026965d9
-TERMUX_PKG_DEPENDS="libarchive, libc++, qt6-qtbase, qt6-qttools, qt6-qtsvg, qt6-qtdeclarative, dbus-glib"
+NASUX_PKG_HOMEPAGE=https://audacious-media-player.org
+NASUX_PKG_DESCRIPTION="An advanced audio player"
+NASUX_PKG_LICENSE="BSD 2-Clause"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="4.6.1"
+NASUX_PKG_SRCURL="https://distfiles.audacious-media-player.org/audacious-${NASUX_PKG_VERSION}.tar.bz2"
+NASUX_PKG_SHA256=62a5a609267eca7f6e3ce52ef6f42d5618d2961e3b4ddc227c6a5859026965d9
+NASUX_PKG_DEPENDS="libarchive, libc++, qt6-qtbase, qt6-qttools, qt6-qtsvg, qt6-qtdeclarative, dbus-glib"
 TERMUX_PKG_BUILD_DEPENDS="qt6-qtbase-cross-tools, qt6-qttools-cross-tools, qt6-qtsvg-cross-tools, qt6-qtdeclarative-cross-tools"
 TERMUX_PKG_RECOMMENDS="audacious-plugins"
 TERMUX_PKG_AUTO_UPDATE=true
@@ -21,7 +21,7 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 "
 
 termux_step_configure() {
-	termux_setup_meson
+	nasux_setup_meson
 
 	# This is how to cross-compile Qt6 packages that use the Meson build system
 	if [[ "$TERMUX_ON_DEVICE_BUILD" == "false" ]]; then

@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE=https://ffmpeg.org
-TERMUX_PKG_DESCRIPTION="FFplay media player"
-TERMUX_PKG_LICENSE="GPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
+NASUX_PKG_HOMEPAGE=https://ffmpeg.org
+NASUX_PKG_DESCRIPTION="FFplay media player"
+NASUX_PKG_LICENSE="GPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
 # Please align the version with `ffmpeg` package.
-TERMUX_PKG_VERSION="8.1.1"
+NASUX_PKG_VERSION="8.1.1"
 TERMUX_PKG_REVISION=1
-TERMUX_PKG_SRCURL="https://www.ffmpeg.org/releases/ffmpeg-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=b6863adde98898f42602017462871b5f6333e65aec803fdd7a6308639c52edf3
-TERMUX_PKG_DEPENDS="ffmpeg, libandroid-shmem, libmysofa, libx11, libxcb, libxext, libxv, pulseaudio, sdl2 | sdl2-compat"
+NASUX_PKG_SRCURL="https://www.ffmpeg.org/releases/ffmpeg-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=b6863adde98898f42602017462871b5f6333e65aec803fdd7a6308639c52edf3
+NASUX_PKG_DEPENDS="ffmpeg, libandroid-shmem, libmysofa, libx11, libxcb, libxext, libxv, pulseaudio, sdl2 | sdl2-compat"
 TERMUX_PKG_ANTI_BUILD_DEPENDS="sdl2-compat"
 
 termux_step_pre_configure() {
@@ -17,10 +17,10 @@ termux_step_pre_configure() {
 
 termux_step_configure() {
 	local _ARCH
-	case "$TERMUX_ARCH" in
+	case "$NASUX_ARCH" in
 		"arm") _ARCH=armeabi-v7a ;;
 		"i686") _ARCH=x86 ;;
-		*) _ARCH="$TERMUX_ARCH" ;;
+		*) _ARCH="$NASUX_ARCH" ;;
 	esac
 
 	"$TERMUX_PKG_SRCDIR/configure" \

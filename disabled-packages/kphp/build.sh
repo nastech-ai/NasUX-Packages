@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE=https://vkcom.github.io/kphp/
-TERMUX_PKG_DESCRIPTION="A PHP compiler"
-TERMUX_PKG_LICENSE="GPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
+NASUX_PKG_HOMEPAGE=https://vkcom.github.io/kphp/
+NASUX_PKG_DESCRIPTION="A PHP compiler"
+NASUX_PKG_LICENSE="GPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
 _COMMIT=b1b2cec0f0e1206e1c134830ebd1f28e21bbd330
-TERMUX_PKG_VERSION=2021.12.30
+NASUX_PKG_VERSION=2021.12.30
 TERMUX_PKG_REVISION=4
-TERMUX_PKG_SRCURL=git+https://github.com/VKCOM/kphp
+NASUX_PKG_SRCURL=git+https://github.com/VKCOM/kphp
 TERMUX_PKG_GIT_BRANCH=master
-TERMUX_PKG_DEPENDS="fmt, libandroid-execinfo, libc++, libcurl, libmsgpack-cxx, libre2, libuber-h3, libucontext, libyaml-cpp, openssl-1.1, pcre, zstd"
+NASUX_PKG_DEPENDS="fmt, libandroid-execinfo, libc++, libcurl, libmsgpack-cxx, libre2, libuber-h3, libucontext, libyaml-cpp, openssl-1.1, pcre, zstd"
 TERMUX_PKG_BUILD_DEPENDS="kphp-timelib"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DKPHP_TESTS=OFF
@@ -15,15 +15,15 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DOPENSSL_LIBRARIES=$TERMUX_PREFIX/lib/openssl-1.1
 -DOPENSSL_CRYPTO_LIBRARY=$TERMUX_PREFIX/lib/openssl-1.1/libcrypto.so.1.1
 -DOPENSSL_SSL_LIBRARY=$TERMUX_PREFIX/lib/openssl-1.1/libssl.so.1.1"
-TERMUX_PKG_EXCLUDED_ARCHES="arm, i686"
+NASUX_PKG_EXCLUDED_ARCHES="arm, i686"
 
 termux_step_post_get_source() {
 	git fetch --unshallow
 	git checkout $_COMMIT
 
 	local version="$(git log -1 --format=%cs | sed 's/-/./g')"
-	if [ "$version" != "$TERMUX_PKG_VERSION" ]; then
-		echo -n "ERROR: The specified version \"$TERMUX_PKG_VERSION\""
+	if [ "$version" != "$NASUX_PKG_VERSION" ]; then
+		echo -n "ERROR: The specified version \"$NASUX_PKG_VERSION\""
 		echo " is different from what is expected to be: \"$version\""
 		return 1
 	fi

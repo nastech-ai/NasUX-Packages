@@ -1,16 +1,16 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/Tencent/ncnn
-TERMUX_PKG_DESCRIPTION="A high-performance neural network inference framework optimized for the mobile platform"
-TERMUX_PKG_LICENSE="BSD 3-Clause"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="20250503"
+NASUX_PKG_HOMEPAGE=https://github.com/Tencent/ncnn
+NASUX_PKG_DESCRIPTION="A high-performance neural network inference framework optimized for the mobile platform"
+NASUX_PKG_LICENSE="BSD 3-Clause"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="20250503"
 TERMUX_PKG_REVISION=6
-TERMUX_PKG_SRCURL="https://github.com/Tencent/ncnn/releases/download/${TERMUX_PKG_VERSION}/ncnn-${TERMUX_PKG_VERSION}-full-source.zip"
-TERMUX_PKG_SHA256=b3190d1b6beae3aac30fa99f4d3fd89a2b47a010b888d2d2389189784743a690
+NASUX_PKG_SRCURL="https://github.com/Tencent/ncnn/releases/download/${NASUX_PKG_VERSION}/ncnn-${NASUX_PKG_VERSION}-full-source.zip"
+NASUX_PKG_SHA256=b3190d1b6beae3aac30fa99f4d3fd89a2b47a010b888d2d2389189784743a690
 TERMUX_PKG_AUTO_UPDATE=false
-TERMUX_PKG_DEPENDS="abseil-cpp, glslang, libc++, libandroid-stub, libprotobuf, python-pip, python-numpy, python-opencv-python, vulkan-loader"
+NASUX_PKG_DEPENDS="abseil-cpp, glslang, libc++, libandroid-stub, libprotobuf, python-pip, python-numpy, python-opencv-python, vulkan-loader"
 TERMUX_PKG_BUILD_DEPENDS="vulkan-headers, vulkan-loader-android"
 TERMUX_PKG_PYTHON_COMMON_BUILD_DEPS="wheel, pybind11"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DNCNN_AVX=OFF
 -DNCNN_BUILD_BENCHMARK=OFF
@@ -35,19 +35,19 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 # The original "termux_extract_src_archive" always strips the first components
 # but the source of libncnn is directly under the root directory of the zip file
 termux_extract_src_archive() {
-	local file="$TERMUX_PKG_CACHEDIR/$(basename "$TERMUX_PKG_SRCURL")"
+	local file="$TERMUX_PKG_CACHEDIR/$(basename "$NASUX_PKG_SRCURL")"
 	mkdir -p "$TERMUX_PKG_SRCDIR"
 	unzip -q "$file" -d "$TERMUX_PKG_SRCDIR"
 }
 
 termux_step_pre_configure() {
-	termux_setup_cmake
-	termux_setup_ninja
-	termux_setup_protobuf
+	nasux_setup_cmake
+	nasux_setup_ninja
+	nasux_setup_protobuf
 
 	CXXFLAGS+=" -std=c++17"
 	LDFLAGS+=" -fopenmp -static-openmp"
-	LDFLAGS+=" $("${TERMUX_SCRIPTDIR}/packages/libprotobuf/interface_link_libraries.sh")"
+	LDFLAGS+=" $("${NASUX_SCRIPTDIR}/packages/libprotobuf/interface_link_libraries.sh")"
 	LDFLAGS+=" -lutf8_range -lutf8_validity"
 	LDFLAGS+=" -landroid -ljnigraphics -llog"
 }

@@ -1,18 +1,18 @@
-TERMUX_PKG_HOMEPAGE=https://wkhtmltopdf.org/
-TERMUX_PKG_DESCRIPTION="wkhtmltopdf and wkhtmltoimage are command line tools to render HTML into PDF and various image formats using the QT Webkit rendering engine."
-TERMUX_PKG_LICENSE="LGPL-3.0"
-TERMUX_PKG_MAINTAINER="@Yisus7u7"
-TERMUX_PKG_VERSION=0.12.6
+NASUX_PKG_HOMEPAGE=https://wkhtmltopdf.org/
+NASUX_PKG_DESCRIPTION="wkhtmltopdf and wkhtmltoimage are command line tools to render HTML into PDF and various image formats using the QT Webkit rendering engine."
+NASUX_PKG_LICENSE="LGPL-3.0"
+NASUX_PKG_MAINTAINER="@Yisus7u7"
+NASUX_PKG_VERSION=0.12.6
 TERMUX_PKG_REVISION=2
-TERMUX_PKG_SRCURL=https://github.com/wkhtmltopdf/wkhtmltopdf/archive/refs/tags/${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=adcced78492e7366d940c66a1327a85d3ae8c45190f486f545fdaa84cac662f0
-TERMUX_PKG_DEPENDS="libc++, qt5-qtbase, qt5-qtsvg, qt5-qtwebkit, qt5-qtxmlpatterns"
+NASUX_PKG_SRCURL=https://github.com/wkhtmltopdf/wkhtmltopdf/archive/refs/tags/${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=adcced78492e7366d940c66a1327a85d3ae8c45190f486f545fdaa84cac662f0
+NASUX_PKG_DEPENDS="libc++, qt5-qtbase, qt5-qtsvg, qt5-qtwebkit, qt5-qtxmlpatterns"
 TERMUX_PKG_BUILD_DEPENDS="qt5-qtbase-cross-tools"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 
 termux_step_configure () {
 	"${TERMUX_PREFIX}/opt/qt/cross/bin/qmake" \
-		-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/termux-cross"
+		-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/nasux-cross"
 }
 
 termux_step_make_install () {

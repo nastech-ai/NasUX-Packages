@@ -1,15 +1,15 @@
-TERMUX_PKG_HOMEPAGE=https://wiki.gnome.org/Apps/Evince
-TERMUX_PKG_DESCRIPTION="document viewer for multiple document formats"
-TERMUX_PKG_LICENSE="GPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="48.4"
-TERMUX_PKG_SRCURL="https://download.gnome.org/sources/evince/${TERMUX_PKG_VERSION%%.*}/evince-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=f296c5c662886635d4cd597e8ac0afcde7982be4486533c2b7f095b268be8668
+NASUX_PKG_HOMEPAGE=https://wiki.gnome.org/Apps/Evince
+NASUX_PKG_DESCRIPTION="document viewer for multiple document formats"
+NASUX_PKG_LICENSE="GPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="48.4"
+NASUX_PKG_SRCURL="https://download.gnome.org/sources/evince/${NASUX_PKG_VERSION%%.*}/evince-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=f296c5c662886635d4cd597e8ac0afcde7982be4486533c2b7f095b268be8668
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="atk, djvulibre, gdk-pixbuf, glib, gnome-desktop3, gst-plugins-base, gst-plugins-good, gstreamer, gtk3, libarchive, libcairo, libgxps, libhandy, libsecret, libspectre, libtiff, libxml2, pango, poppler, poppler-data, texlive-bin"
+NASUX_PKG_DEPENDS="atk, djvulibre, gdk-pixbuf, glib, gnome-desktop3, gst-plugins-base, gst-plugins-good, gstreamer, gtk3, libarchive, libcairo, libgxps, libhandy, libsecret, libspectre, libtiff, libxml2, pango, poppler, poppler-data, texlive-bin"
 TERMUX_PKG_BUILD_DEPENDS="g-ir-scanner, glib-cross"
 TERMUX_PKG_RECOMMENDS="evince-help"
-TERMUX_PKG_VERSIONED_GIR=false
+NASUX_PKG_VERSIONED_GIR=false
 TERMUX_PKG_DISABLE_GIR=false
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -Dnautilus=false
@@ -20,6 +20,6 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 "
 
 termux_step_pre_configure() {
-	termux_setup_gir
-	termux_setup_glib_cross_pkg_config_wrapper
+	nasux_setup_gir
+	nasux_setup_glib_cross_pkg_config_wrapper
 }

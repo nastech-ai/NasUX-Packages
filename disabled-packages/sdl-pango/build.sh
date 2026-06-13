@@ -1,13 +1,13 @@
 # x11-packages
-TERMUX_PKG_HOMEPAGE=https://sdlpango.sourceforge.net/
-TERMUX_PKG_DESCRIPTION="Connects Pango to SDL"
-TERMUX_PKG_LICENSE="LGPL-2.1"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=0.1.2
+NASUX_PKG_HOMEPAGE=https://sdlpango.sourceforge.net/
+NASUX_PKG_DESCRIPTION="Connects Pango to SDL"
+NASUX_PKG_LICENSE="LGPL-2.1"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=0.1.2
 TERMUX_PKG_REVISION=1
-TERMUX_PKG_SRCURL=https://downloads.sourceforge.net/sdlpango/SDL_Pango-${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=7f75d3b97acf707c696ea126424906204ebfa07660162de925173cdd0257eba4
-TERMUX_PKG_DEPENDS="fontconfig, freetype, glib, harfbuzz, pango, sdl"
+NASUX_PKG_SRCURL=https://downloads.sourceforge.net/sdlpango/SDL_Pango-${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=7f75d3b97acf707c696ea126424906204ebfa07660162de925173cdd0257eba4
+NASUX_PKG_DEPENDS="fontconfig, freetype, glib, harfbuzz, pango, sdl"
 
 termux_step_post_get_source() {
 	termux_download \

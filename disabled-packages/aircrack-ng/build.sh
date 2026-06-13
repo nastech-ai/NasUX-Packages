@@ -1,13 +1,13 @@
 # root-packages
-TERMUX_PKG_HOMEPAGE="https://www.aircrack-ng.org/"
-TERMUX_PKG_DESCRIPTION="WiFi security auditing tools suite"
-TERMUX_PKG_LICENSE="GPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=3:1.7
+NASUX_PKG_HOMEPAGE="https://www.aircrack-ng.org/"
+NASUX_PKG_DESCRIPTION="WiFi security auditing tools suite"
+NASUX_PKG_LICENSE="GPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=3:1.7
 TERMUX_PKG_REVISION=1
-TERMUX_PKG_SRCURL=https://github.com/aircrack-ng/aircrack-ng/archive/refs/tags/${TERMUX_PKG_VERSION:2}.tar.gz
-TERMUX_PKG_SHA256=05a704e3c8f7792a17315080a21214a4448fd2452c1b0dd5226a3a55f90b58c3
-TERMUX_PKG_DEPENDS="libc++, libnl, libpcap, libsqlite, openssl, pcre, zlib, iw, ethtool"
+NASUX_PKG_SRCURL=https://github.com/aircrack-ng/aircrack-ng/archive/refs/tags/${NASUX_PKG_VERSION:2}.tar.gz
+NASUX_PKG_SHA256=05a704e3c8f7792a17315080a21214a4448fd2452c1b0dd5226a3a55f90b58c3
+NASUX_PKG_DEPENDS="libc++, libnl, libpcap, libsqlite, openssl, pcre, zlib, iw, ethtool"
 # static build gives errors:
 #   error: undefined reference to 'ac_crypto_engine_init'
 #   error: cannot find the library 'libaircrack-ce-wpa.la' or unhandled argument 'libaircrack-ce-wpa.la'

@@ -1,12 +1,12 @@
-TERMUX_PKG_HOMEPAGE=https://www.luanti.org
-TERMUX_PKG_DESCRIPTION="An open source voxel game engine."
-TERMUX_PKG_LICENSE="LGPL-2.1"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="1:5.16.1"
-TERMUX_PKG_SRCURL=https://github.com/luanti-org/luanti/archive/refs/tags/${TERMUX_PKG_VERSION:2}.tar.gz
-TERMUX_PKG_SHA256=57926752365a17d3bf64945ea04dc63cc446a8863037b043b97799af30126b6b
+NASUX_PKG_HOMEPAGE=https://www.luanti.org
+NASUX_PKG_DESCRIPTION="An open source voxel game engine."
+NASUX_PKG_LICENSE="LGPL-2.1"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="1:5.16.1"
+NASUX_PKG_SRCURL=https://github.com/luanti-org/luanti/archive/refs/tags/${NASUX_PKG_VERSION:2}.tar.gz
+NASUX_PKG_SHA256=57926752365a17d3bf64945ea04dc63cc446a8863037b043b97799af30126b6b
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="freetype, jsoncpp, libandroid-spawn, libc++, libcurl, libgmp, libjpeg-turbo, libiconv, luajit, libpng, libsqlite, libvorbis, luanti-common, openal-soft, opengl, sdl3, xdg-utils, zlib, zstd"
+NASUX_PKG_DEPENDS="freetype, jsoncpp, libandroid-spawn, libc++, libcurl, libgmp, libjpeg-turbo, libiconv, luajit, libpng, libsqlite, libvorbis, luanti-common, openal-soft, opengl, sdl3, xdg-utils, zlib, zstd"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DBUILD_SERVER=TRUE
 -DBUILD_BENCHMARKS=TRUE
@@ -31,6 +31,6 @@ termux_step_pre_configure() {
 	export LDFLAGS+=" -landroid-spawn"
 	# successful application-side workaround of
 	# https://github.com/kcat/openal-soft/issues/1111
-	# https://github.com/termux/termux-packages/issues/23148
+	# https://github.com/nastech-ai/NasUX-Packages/issues/23148
 	export LDFLAGS+=" -Wl,--no-as-needed,-lOpenSLES,--as-needed"
 }

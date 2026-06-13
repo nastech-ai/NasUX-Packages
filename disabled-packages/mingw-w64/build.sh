@@ -1,10 +1,10 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/termux/termux-packages
-TERMUX_PKG_DESCRIPTION="MinGW-w64 toolchain (metapackage)"
-TERMUX_PKG_LICENSE="Apache-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=0.1
+NASUX_PKG_HOMEPAGE=https://github.com/nastech-ai/NasUX-Packages
+NASUX_PKG_DESCRIPTION="MinGW-w64 toolchain (metapackage)"
+NASUX_PKG_LICENSE="Apache-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=0.1
 TERMUX_PKG_SKIP_SRC_EXTRACT=true
-TERMUX_PKG_DEPENDS="clang, mingw-w64-crt, mingw-w64-gcc-libs"
+NASUX_PKG_DEPENDS="clang, mingw-w64-crt, mingw-w64-gcc-libs"
 TERMUX_PKG_PLATFORM_INDEPENDENT=true
 
 termux_step_make_install() {

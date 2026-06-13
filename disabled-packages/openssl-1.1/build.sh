@@ -1,17 +1,17 @@
-TERMUX_PKG_HOMEPAGE=https://www.openssl.org/
-TERMUX_PKG_DESCRIPTION="Library implementing the SSL and TLS protocols as well as general purpose cryptography functions"
-TERMUX_PKG_LICENSE="custom"
-TERMUX_PKG_LICENSE_FILE="LICENSE"
-TERMUX_PKG_MAINTAINER="@termux"
+NASUX_PKG_HOMEPAGE=https://www.openssl.org/
+NASUX_PKG_DESCRIPTION="Library implementing the SSL and TLS protocols as well as general purpose cryptography functions"
+NASUX_PKG_LICENSE="custom"
+NASUX_PKG_LICENSE_FILE="LICENSE"
+NASUX_PKG_MAINTAINER="@nastech-ai"
 _VERSION=1.1.1w
-TERMUX_PKG_VERSION=1:${_VERSION}
-TERMUX_PKG_SRCURL=https://www.openssl.org/source/openssl-${_VERSION/\~/-}.tar.gz
-TERMUX_PKG_SHA256=cf3098950cb4d853ad95c0841f1f9c6d3dc102dccfcacd521d93925208b76ac8
+NASUX_PKG_VERSION=1:${_VERSION}
+NASUX_PKG_SRCURL=https://www.openssl.org/source/openssl-${_VERSION/\~/-}.tar.gz
+NASUX_PKG_SHA256=cf3098950cb4d853ad95c0841f1f9c6d3dc102dccfcacd521d93925208b76ac8
 TERMUX_PKG_AUTO_UPDATE=false
-TERMUX_PKG_DEPENDS="ca-certificates, zlib"
+NASUX_PKG_DEPENDS="ca-certificates, zlib"
 TERMUX_PKG_CONFFILES="etc/tls/openssl.cnf"
 TERMUX_PKG_RM_AFTER_INSTALL="bin/c_rehash etc/"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_CONFLICTS="libcurl (<< 7.61.0-1)"
 TERMUX_PKG_BREAKS="openssl (<< 1.1.1m)"
 TERMUX_PKG_REPLACES="openssl (<< 1.1.1m)"
@@ -31,10 +31,10 @@ termux_step_configure() {
 	CFLAGS+=" -DNO_SYSLOG"
 
 	perl -p -i -e "s@TERMUX_CFLAGS@$CFLAGS@g" Configure
-	test $TERMUX_ARCH = "arm" && TERMUX_OPENSSL_PLATFORM="android-arm"
-	test $TERMUX_ARCH = "aarch64" && TERMUX_OPENSSL_PLATFORM="android-arm64"
-	test $TERMUX_ARCH = "i686" && TERMUX_OPENSSL_PLATFORM="android-x86"
-	test $TERMUX_ARCH = "x86_64" && TERMUX_OPENSSL_PLATFORM="android-x86_64"
+	test $NASUX_ARCH = "arm" && TERMUX_OPENSSL_PLATFORM="android-arm"
+	test $NASUX_ARCH = "aarch64" && TERMUX_OPENSSL_PLATFORM="android-arm64"
+	test $NASUX_ARCH = "i686" && TERMUX_OPENSSL_PLATFORM="android-x86"
+	test $NASUX_ARCH = "x86_64" && TERMUX_OPENSSL_PLATFORM="android-x86_64"
 
 	install -m755 -d $TERMUX_PREFIX/lib/openssl-1.1
 

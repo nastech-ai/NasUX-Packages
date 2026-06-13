@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE=https://www.winehq.org/
-TERMUX_PKG_DESCRIPTION="A compatibility layer for running Windows programs"
-TERMUX_PKG_LICENSE="LGPL-2.1"
-TERMUX_PKG_LICENSE_FILE="LICENSE, LICENSE.OLD, COPYING.LIB"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="11.0"
+NASUX_PKG_HOMEPAGE=https://www.winehq.org/
+NASUX_PKG_DESCRIPTION="A compatibility layer for running Windows programs"
+NASUX_PKG_LICENSE="LGPL-2.1"
+NASUX_PKG_LICENSE_FILE="LICENSE, LICENSE.OLD, COPYING.LIB"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="11.0"
 TERMUX_PKG_REVISION=2
-TERMUX_PKG_SRCURL="https://dl.winehq.org/wine/source/${TERMUX_PKG_VERSION%%.*}.0/wine-$TERMUX_PKG_VERSION.tar.xz"
-TERMUX_PKG_SHA256=c07a6857933c1fc60dff5448d79f39c92481c1e9db5aa628db9d0358446e0701
-TERMUX_PKG_DEPENDS="fontconfig, freetype, krb5, libandroid-spawn, libc++, libgmp, libgnutls, libxcb, libxcomposite, libxcursor, libxfixes, libxrender, opengl, pulseaudio, sdl2 | sdl2-compat, vulkan-loader, xorg-xrandr"
+NASUX_PKG_SRCURL="https://dl.winehq.org/wine/source/${NASUX_PKG_VERSION%%.*}.0/wine-$NASUX_PKG_VERSION.tar.xz"
+NASUX_PKG_SHA256=c07a6857933c1fc60dff5448d79f39c92481c1e9db5aa628db9d0358446e0701
+NASUX_PKG_DEPENDS="fontconfig, freetype, krb5, libandroid-spawn, libc++, libgmp, libgnutls, libxcb, libxcomposite, libxcursor, libxfixes, libxrender, opengl, pulseaudio, sdl2 | sdl2-compat, vulkan-loader, xorg-xrandr"
 TERMUX_PKG_BUILD_DEPENDS="libandroid-spawn-static, vulkan-loader-generic"
 TERMUX_PKG_ANTI_BUILD_DEPENDS="sdl2-compat, vulkan-loader"
 TERMUX_PKG_NO_STATICSPLIT=true
@@ -72,16 +72,16 @@ enable_tools=yes
 "
 
 # Enable win64 on 64-bit arches.
-if [ "$TERMUX_ARCH_BITS" = 64 ]; then
+if [ "$NASUX_ARCH_BITS" = 64 ]; then
 	TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" --enable-win64"
 fi
 
 # Enable new WoW64 support on x86_64.
-if [ "$TERMUX_ARCH" = "x86_64" ]; then
+if [ "$NASUX_ARCH" = "x86_64" ]; then
 	TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" --enable-archs=i386,x86_64"
 fi
 
-TERMUX_PKG_EXCLUDED_ARCHES="arm"
+NASUX_PKG_EXCLUDED_ARCHES="arm"
 
 _setup_llvm_mingw_toolchain() {
 	# LLVM-mingw's version number must not be the same as the NDK's.
@@ -126,10 +126,10 @@ termux_step_pre_configure() {
 
 	LDFLAGS+=" -landroid-spawn"
 
-	# https://github.com/termux-user-repository/tur/commit/9388bf3599bba33d7bd052cab0679fe9cd5917d2#commitcomment-176464300
+	# https://github.com/nasux-user-repository/tur/commit/9388bf3599bba33d7bd052cab0679fe9cd5917d2#commitcomment-176464300
 	LDFLAGS+=" -Wl,--rosegment"
 
-	if [ "$TERMUX_ARCH" = "x86_64" ]; then
+	if [ "$NASUX_ARCH" = "x86_64" ]; then
 		mkdir -p "$TERMUX_PKG_TMPDIR/bin"
 		cat <<- EOF > "$TERMUX_PKG_TMPDIR/bin/x86_64-linux-android-clang"
 			#!/bin/bash

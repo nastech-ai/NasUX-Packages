@@ -1,18 +1,18 @@
-TERMUX_PKG_HOMEPAGE=https://openethereum.github.io
-TERMUX_PKG_DESCRIPTION="Lightweight Ethereum Client"
-TERMUX_PKG_LICENSE="GPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="3.3.5"
+NASUX_PKG_HOMEPAGE=https://openethereum.github.io
+NASUX_PKG_DESCRIPTION="Lightweight Ethereum Client"
+NASUX_PKG_LICENSE="GPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="3.3.5"
 TERMUX_PKG_REVISION=5
-TERMUX_PKG_SRCURL=https://github.com/openethereum/openethereum/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=e0e08f61b1c060d34c6a4dcec1eda3d4dae194fc9748e8051efbf12d1c884e14
+NASUX_PKG_SRCURL=https://github.com/openethereum/openethereum/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=e0e08f61b1c060d34c6a4dcec1eda3d4dae194fc9748e8051efbf12d1c884e14
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="libc++"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_DEPENDS="libc++"
+NASUX_PKG_BUILD_IN_SRC=true
 
 termux_step_configure() {
-	termux_setup_cmake
-	termux_setup_rust
+	nasux_setup_cmake
+	nasux_setup_rust
 	cargo clean
 	export NDK_HOME=$NDK
 	local env_host=$(printf $CARGO_TARGET_NAME | tr a-z A-Z | sed s/-/_/g)
@@ -23,13 +23,13 @@ termux_step_configure() {
 
 	CXXFLAGS+=" --target=$CCTERMUX_HOST_PLATFORM"
 	CFLAGS+=" --target=$CCTERMUX_HOST_PLATFORM"
-	CMAKE_SYSTEM_PROCESSOR="$TERMUX_ARCH"
+	CMAKE_SYSTEM_PROCESSOR="$NASUX_ARCH"
 
-	if [ $TERMUX_ARCH = "arm" ]; then
+	if [ $NASUX_ARCH = "arm" ]; then
 		CFLAGS="${CFLAGS/-mthumb/}"
 		export CFLAGS_${CARGO_TARGET_NAME//-/_}="${CFLAGS}"
 		CMAKE_SYSTEM_PROCESSOR="armv7-a"
-	elif [ "$TERMUX_ARCH" = "x86_64" ]; then
+	elif [ "$NASUX_ARCH" = "x86_64" ]; then
 		local libdir=target/$CARGO_TARGET_NAME/release/deps
 		mkdir -p $libdir
 		pushd $libdir

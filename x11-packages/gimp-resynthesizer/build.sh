@@ -1,18 +1,18 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/bootchk/resynthesizer
-TERMUX_PKG_DESCRIPTION="Suite of gimp plugins for texture synthesis"
-TERMUX_PKG_LICENSE="GPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="3.0.1"
-TERMUX_PKG_SRCURL="https://github.com/bootchk/resynthesizer/archive/refs/tags/v${TERMUX_PKG_VERSION%.*}.tar.gz"
-TERMUX_PKG_SHA256=d0f459e551d428e3cd3fec4c3ebfe448e6e2947d9b24553373308d6d41ddd580
-TERMUX_PKG_DEPENDS="gimp, python"
+NASUX_PKG_HOMEPAGE=https://github.com/bootchk/resynthesizer
+NASUX_PKG_DESCRIPTION="Suite of gimp plugins for texture synthesis"
+NASUX_PKG_LICENSE="GPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="3.0.1"
+NASUX_PKG_SRCURL="https://github.com/bootchk/resynthesizer/archive/refs/tags/v${NASUX_PKG_VERSION%.*}.tar.gz"
+NASUX_PKG_SHA256=d0f459e551d428e3cd3fec4c3ebfe448e6e2947d9b24553373308d6d41ddd580
+NASUX_PKG_DEPENDS="gimp, python"
 TERMUX_PKG_BUILD_DEPENDS="xorgproto"
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 
 termux_step_pre_configure() {
-	termux_setup_meson
-	termux_setup_cmake
+	nasux_setup_meson
+	nasux_setup_cmake
 }
 
 termux_step_configure() {

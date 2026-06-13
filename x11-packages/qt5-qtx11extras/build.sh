@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE=https://www.qt.io/
-TERMUX_PKG_DESCRIPTION="Qt X11 Extras enables the Qt programmer to write applications for the Linux/X11 platform"
-TERMUX_PKG_LICENSE="LGPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="5.15.18"
-TERMUX_PKG_SRCURL="https://download.qt.io/archive/qt/${TERMUX_PKG_VERSION%.*}/${TERMUX_PKG_VERSION}/submodules/qtx11extras-everywhere-opensource-src-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=31e72bea959f9093bbc41023ab67f9d23bcf62c1f557064caa48b4c2f7709917
-TERMUX_PKG_DEPENDS="qt5-qtbase"
+NASUX_PKG_HOMEPAGE=https://www.qt.io/
+NASUX_PKG_DESCRIPTION="Qt X11 Extras enables the Qt programmer to write applications for the Linux/X11 platform"
+NASUX_PKG_LICENSE="LGPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="5.15.18"
+NASUX_PKG_SRCURL="https://download.qt.io/archive/qt/${NASUX_PKG_VERSION%.*}/${NASUX_PKG_VERSION}/submodules/qtx11extras-everywhere-opensource-src-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=31e72bea959f9093bbc41023ab67f9d23bcf62c1f557064caa48b4c2f7709917
+NASUX_PKG_DEPENDS="qt5-qtbase"
 TERMUX_PKG_BUILD_DEPENDS="qt5-qtbase-cross-tools"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_NO_STATICSPLIT=true
 
 # Replacing the old qt5-base packages
@@ -15,7 +15,7 @@ TERMUX_PKG_REPLACES="qt5-x11extras"
 
 termux_step_configure () {
 	"${TERMUX_PREFIX}/opt/qt/cross/bin/qmake" \
-		-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/termux-cross"
+		-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/nasux-cross"
 }
 
 termux_step_make_install() {

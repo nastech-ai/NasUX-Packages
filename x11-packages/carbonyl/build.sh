@@ -1,31 +1,31 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/fathyb/carbonyl
-TERMUX_PKG_DESCRIPTION="Chromium based browser built to run in a terminal"
-TERMUX_PKG_LICENSE="BSD 3-Clause"
-TERMUX_PKG_LICENSE_FILE="license.md"
-TERMUX_PKG_MAINTAINER="@licy183"
+NASUX_PKG_HOMEPAGE=https://github.com/fathyb/carbonyl
+NASUX_PKG_DESCRIPTION="Chromium based browser built to run in a terminal"
+NASUX_PKG_LICENSE="BSD 3-Clause"
+NASUX_PKG_LICENSE_FILE="license.md"
+NASUX_PKG_MAINTAINER="@licy183"
 _CHROMIUM_VERSION=111.0.5563.146
-TERMUX_PKG_VERSION=0.0.3
+NASUX_PKG_VERSION=0.0.3
 TERMUX_PKG_REVISION=3
-TERMUX_PKG_SRCURL=(
-	https://github.com/fathyb/carbonyl/archive/refs/tags/v$TERMUX_PKG_VERSION.tar.gz
+NASUX_PKG_SRCURL=(
+	https://github.com/fathyb/carbonyl/archive/refs/tags/v$NASUX_PKG_VERSION.tar.gz
 	https://commondatastorage.googleapis.com/chromium-browser-official/chromium-$_CHROMIUM_VERSION.tar.xz
 )
-TERMUX_PKG_SHA256=(
+NASUX_PKG_SHA256=(
 	bf421b9498a084a7cf2238a574d37d31b498d3e271fdb3dcf466e7ed6c80013d
 	1e701fa31b55fa0633c307af8537b4dbf67e02d8cad1080c57d845ed8c48b5fe
 )
-TERMUX_PKG_DEPENDS="atk, cups, dbus, fontconfig, gtk3, krb5, libc++, libdrm, libevdev, libxkbcommon, libminizip, libnss, libwayland, libx11, mesa, openssl, pango, pulseaudio, zlib"
+NASUX_PKG_DEPENDS="atk, cups, dbus, fontconfig, gtk3, krb5, libc++, libdrm, libevdev, libxkbcommon, libminizip, libnss, libwayland, libx11, mesa, openssl, pango, pulseaudio, zlib"
 TERMUX_PKG_BUILD_DEPENDS="carbonyl-host-tools, libnotify, libffi-static"
 TERMUX_PKG_ON_DEVICE_BUILD_NOT_SUPPORTED=true
 # Chromium doesn't support i686 on Linux.
 # Carbonyl donesn't support arm.
-TERMUX_PKG_EXCLUDED_ARCHES="arm, i686"
+NASUX_PKG_EXCLUDED_ARCHES="arm, i686"
 
 SYSTEM_LIBRARIES="    libdrm  fontconfig"
-# TERMUX_PKG_DEPENDS="libdrm, fontconfig"
+# NASUX_PKG_DEPENDS="libdrm, fontconfig"
 
 termux_step_post_get_source() {
-	local _host_builder_dir="${TERMUX_SCRIPTDIR}/x11-packages/carbonyl-host-tools"
+	local _host_builder_dir="${NASUX_SCRIPTDIR}/x11-packages/carbonyl-host-tools"
 
 	# Move chromium source
 	mv chromium-$_CHROMIUM_VERSION chromium/src
@@ -74,11 +74,11 @@ termux_step_post_get_source() {
 
 termux_step_configure() {
 	cd $TERMUX_PKG_SRCDIR/chromium/src
-	termux_setup_ninja
-	termux_setup_gn
-	termux_setup_nodejs
+	nasux_setup_ninja
+	nasux_setup_gn
+	nasux_setup_nodejs
 
-	# Remove termux's dummy pkg-config
+	# Remove nasux's dummy pkg-config
 	local _target_pkg_config=$(command -v pkg-config)
 	local _host_pkg_config="$(cat $_target_pkg_config | grep exec | awk '{print $2}')"
 	rm -rf $TERMUX_PKG_TMPDIR/host-pkg-config-bin
@@ -134,19 +134,19 @@ termux_step_configure() {
 	local _host_toolchain="$TERMUX_PKG_CACHEDIR/custom-toolchain:host"
 	local _target_cpu _target_sysroot="$TERMUX_PKG_TMPDIR/sysroot"
 	local _v8_toolchain_name _v8_current_cpu _v8_sysroot_path
-	if [ "$TERMUX_ARCH" = "aarch64" ]; then
+	if [ "$NASUX_ARCH" = "aarch64" ]; then
 		_target_cpu="arm64"
 		_v8_current_cpu="arm64"
 		_v8_sysroot_path="$_amd64_sysroot_path"
 		_v8_toolchain_name="host"
-	elif [ "$TERMUX_ARCH" = "arm" ]; then
+	elif [ "$NASUX_ARCH" = "arm" ]; then
 		# Install i386 rootfs if necessary
 		build/linux/sysroot_scripts/install-sysroot.py --arch=i386
 		_target_cpu="arm"
 		_v8_current_cpu="x86"
 		_v8_sysroot_path="$_i386_sysroot_path"
 		_v8_toolchain_name="clang_x86_v8_arm"
-	elif [ "$TERMUX_ARCH" = "x86_64" ]; then
+	elif [ "$NASUX_ARCH" = "x86_64" ]; then
 		_target_cpu="x64"
 		_v8_current_cpu="x64"
 		_v8_sysroot_path="$_amd64_sysroot_path"
@@ -209,7 +209,7 @@ use_thin_lto=false
 use_jumbo_build = true
 " >> $_common_args_file
 
-	if [ "$TERMUX_ARCH" = "arm" ]; then
+	if [ "$NASUX_ARCH" = "arm" ]; then
 		echo "arm_arch = \"armv7-a\"" >> $_common_args_file
 		echo "arm_float_abi = \"softfp\"" >> $_common_args_file
 	fi
@@ -253,7 +253,7 @@ use_jumbo_build = true
 termux_step_make() {
 	cd $TERMUX_PKG_SRCDIR
 	# Build libcarbonyl
-	(termux_setup_rust
+	(nasux_setup_rust
 	cargo build --jobs $TERMUX_PKG_MAKE_PROCESSES --target $CARGO_TARGET_NAME --release)
 
 	cd $TERMUX_PKG_BUILDDIR
@@ -288,7 +288,7 @@ termux_step_make_install() {
 	mkdir -p $TERMUX_PREFIX/lib/$TERMUX_PKG_NAME
 
 	# Install the runtime library
-	termux_setup_rust
+	nasux_setup_rust
 	cp $TERMUX_PKG_SRCDIR/build/$CARGO_TARGET_NAME/release/*.so $TERMUX_PREFIX/lib/$TERMUX_PKG_NAME/
 
 	# Install chromium-related files

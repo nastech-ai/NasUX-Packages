@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://gitlab.gnome.org/World/gedit/libgedit-amtk
-TERMUX_PKG_DESCRIPTION="Actions, Menus and Toolbars Kit for GTK applications"
-TERMUX_PKG_LICENSE="LGPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="5.10.0"
-TERMUX_PKG_SRCURL=https://gitlab.gnome.org/World/gedit/libgedit-amtk/-/archive/${TERMUX_PKG_VERSION}/libgedit-amtk-${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=6c884bf4c9716110930c17f0103d01e1fa2fa5c5b705803b0d4ddf72ba6094f4
+NASUX_PKG_HOMEPAGE=https://gitlab.gnome.org/World/gedit/libgedit-amtk
+NASUX_PKG_DESCRIPTION="Actions, Menus and Toolbars Kit for GTK applications"
+NASUX_PKG_LICENSE="LGPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="5.10.0"
+NASUX_PKG_SRCURL=https://gitlab.gnome.org/World/gedit/libgedit-amtk/-/archive/${NASUX_PKG_VERSION}/libgedit-amtk-${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=6c884bf4c9716110930c17f0103d01e1fa2fa5c5b705803b0d4ddf72ba6094f4
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="glib, gtk3"
+NASUX_PKG_DEPENDS="glib, gtk3"
 TERMUX_PKG_BUILD_DEPENDS="g-ir-scanner, glib-cross"
-TERMUX_PKG_VERSIONED_GIR=false
+NASUX_PKG_VERSIONED_GIR=false
 TERMUX_PKG_DISABLE_GIR=false
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -Dgobject_introspection=true
@@ -17,8 +17,8 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 "
 
 termux_step_pre_configure() {
-	termux_setup_gir
-	termux_setup_glib_cross_pkg_config_wrapper
+	nasux_setup_gir
+	nasux_setup_glib_cross_pkg_config_wrapper
 
 	export TERMUX_MESON_ENABLE_SOVERSION=1
 }

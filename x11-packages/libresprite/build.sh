@@ -1,15 +1,15 @@
-TERMUX_PKG_HOMEPAGE=https://libresprite.github.io/
-TERMUX_PKG_DESCRIPTION="Free and open source program for creating and animating sprites"
-TERMUX_PKG_LICENSE="GPL-2.0-only"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="1.2"
-TERMUX_PKG_SRCURL="https://github.com/LibreSprite/LibreSprite/releases/download/v$TERMUX_PKG_VERSION/SOURCE.CODE.+.submodules.tar.gz"
-TERMUX_PKG_SHA256=38a2387694df9d5725244622d1c2e6cae8aced06b19c19cfbeab96afb13523c0
+NASUX_PKG_HOMEPAGE=https://libresprite.github.io/
+NASUX_PKG_DESCRIPTION="Free and open source program for creating and animating sprites"
+NASUX_PKG_LICENSE="GPL-2.0-only"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="1.2"
+NASUX_PKG_SRCURL="https://github.com/LibreSprite/LibreSprite/releases/download/v$NASUX_PKG_VERSION/SOURCE.CODE.+.submodules.tar.gz"
+NASUX_PKG_SHA256=38a2387694df9d5725244622d1c2e6cae8aced06b19c19cfbeab96afb13523c0
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_HOSTBUILD=true
 # Unlike most SDL2 programs, it appears to actually work only with the real sdl2, not sdl2-compat
 # error: "Failed loading SDL3 library.""
-TERMUX_PKG_DEPENDS="freetype, giflib, libarchive, libjpeg-turbo, libpixman, libpng, libtinyxml2, libwebp, libxi, sdl2, sdl2-image, xdg-utils, zlib"
+NASUX_PKG_DEPENDS="freetype, giflib, libarchive, libjpeg-turbo, libpixman, libpng, libtinyxml2, libwebp, libxi, sdl2, sdl2-image, xdg-utils, zlib"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 -DWITH_WEBP_SUPPORT=ON
@@ -19,7 +19,7 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 # The original "termux_extract_src_archive" always strips the first components
 # but the source of libresprite is directly under the root directory of the tar file
 termux_extract_src_archive() {
-	local file="$TERMUX_PKG_CACHEDIR/$(basename "$TERMUX_PKG_SRCURL")"
+	local file="$TERMUX_PKG_CACHEDIR/$(basename "$NASUX_PKG_SRCURL")"
 	mkdir -p "$TERMUX_PKG_SRCDIR"
 	tar -xf "$file" -C "$TERMUX_PKG_SRCDIR"
 }
@@ -29,8 +29,8 @@ termux_step_host_build() {
 		return
 	fi
 
-	termux_setup_cmake
-	termux_setup_ninja
+	nasux_setup_cmake
+	nasux_setup_ninja
 
 	termux_download_ubuntu_packages libtinyxml2-10 libtinyxml2-dev
 

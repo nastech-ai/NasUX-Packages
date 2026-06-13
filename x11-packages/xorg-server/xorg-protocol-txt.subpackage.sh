@@ -1,5 +1,5 @@
-TERMUX_SUBPKG_INCLUDE="lib/xorg/protocol.txt"
-TERMUX_SUBPKG_DESCRIPTION="X.Org protocol.txt file"
+NASUX_SUBPKG_INCLUDE="lib/xorg/protocol.txt"
+NASUX_SUBPKG_DESCRIPTION="X.Org protocol.txt file"
 TERMUX_SUBPKG_PLATFORM_INDEPENDENT=true
 TERMUX_SUBPKG_DEPEND_ON_PARENT=false
 TERMUX_SUBPKG_REPLACES="xorg-server-xvfb (<< 1.20.11-8)"

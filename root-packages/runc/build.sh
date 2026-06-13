@@ -1,10 +1,10 @@
-TERMUX_PKG_HOMEPAGE=https://www.opencontainers.org/
-TERMUX_PKG_DESCRIPTION="A tool for spawning and running containers according to the OCI specification"
-TERMUX_PKG_LICENSE="Apache-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="1.4.0"
-TERMUX_PKG_SRCURL="https://github.com/opencontainers/runc/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz"
-TERMUX_PKG_SHA256=94d566d8b017d6cdffc684560a4f069bb87f86534976c41d768711c85e194884
+NASUX_PKG_HOMEPAGE=https://www.opencontainers.org/
+NASUX_PKG_DESCRIPTION="A tool for spawning and running containers according to the OCI specification"
+NASUX_PKG_LICENSE="Apache-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="1.4.0"
+NASUX_PKG_SRCURL="https://github.com/opencontainers/runc/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz"
+NASUX_PKG_SHA256=94d566d8b017d6cdffc684560a4f069bb87f86534976c41d768711c85e194884
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_BUILD_DEPENDS="libseccomp-static"
 
@@ -14,7 +14,7 @@ termux_step_make() {
 
 	export CGO_LDFLAGS="-L$TERMUX_PKG_BUILDDIR"
 
-	termux_setup_golang
+	nasux_setup_golang
 
 	export GOPATH="${PWD}/go"
 

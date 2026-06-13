@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE="https://gnucash.org"
-TERMUX_PKG_DESCRIPTION="Personal and small-business financial-accounting software"
-TERMUX_PKG_LICENSE="GPL-2.0-or-later" # with OpenSSL linking exceptions
-TERMUX_PKG_LICENSE_FILE="LICENSE"     # specified for additional nuance.
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="5.15"
+NASUX_PKG_HOMEPAGE="https://gnucash.org"
+NASUX_PKG_DESCRIPTION="Personal and small-business financial-accounting software"
+NASUX_PKG_LICENSE="GPL-2.0-or-later" # with OpenSSL linking exceptions
+NASUX_PKG_LICENSE_FILE="LICENSE"     # specified for additional nuance.
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="5.15"
 TERMUX_PKG_REVISION=1
-TERMUX_PKG_SRCURL="https://github.com/Gnucash/gnucash/releases/download/${TERMUX_PKG_VERSION}/gnucash-${TERMUX_PKG_VERSION}.tar.bz2"
-TERMUX_PKG_SHA256=b0bd4af43b6bde3454227d4b398e9ec7a0dbd5143469c1373fc824c3caab0909
-TERMUX_PKG_DEPENDS="boost, gettext, guile, glib, gtk3, libicu, libsecret, libxml2, libxslt, perl, python, swig, webkit2gtk-4.1, xsltproc, zlib"
+NASUX_PKG_SRCURL="https://github.com/Gnucash/gnucash/releases/download/${NASUX_PKG_VERSION}/gnucash-${NASUX_PKG_VERSION}.tar.bz2"
+NASUX_PKG_SHA256=b0bd4af43b6bde3454227d4b398e9ec7a0dbd5143469c1373fc824c3caab0909
+NASUX_PKG_DEPENDS="boost, gettext, guile, glib, gtk3, libicu, libsecret, libxml2, libxslt, perl, python, swig, webkit2gtk-4.1, xsltproc, zlib"
 TERMUX_PKG_BUILD_DEPENDS="aosp-libs, boost-headers, googletest"
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
@@ -18,9 +18,9 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 "
 
 termux_step_pre_configure() {
-	termux_setup_gir
-	termux_setup_glib_cross_pkg_config_wrapper
-	termux_setup_python_pip
+	nasux_setup_gir
+	nasux_setup_glib_cross_pkg_config_wrapper
+	nasux_setup_python_pip
 
 	# gnc-autoclear.c:151:22: error: format string is not a string literal (potentially insecure)
 	CFLAGS+=" -Wno-format-security"
@@ -35,7 +35,7 @@ termux_step_pre_configure() {
 		return
 	fi
 
-	termux_setup_proot
+	nasux_setup_proot
 
 	export LD_LIBRARY_PATH="$TERMUX_PKG_BUILDDIR/lib:$TERMUX_PKG_BUILDDIR/lib/$TERMUX_PKG_NAME"
 	mkdir -p "$TERMUX_PKG_TMPDIR/bin"
@@ -44,7 +44,7 @@ termux_step_pre_configure() {
 		cat > "$TERMUX_PKG_TMPDIR/bin/$tool" <<-HERE
 			#!$(command -v bash)
 			LD_LIBRARY_PATH=$LD_LIBRARY_PATH
-			exec $(command -v termux-proot-run) env LD_PRELOAD= LD_LIBRARY_PATH=\$LD_LIBRARY_PATH GUILE_LOAD_PATH=\$GUILE_LOAD_PATH GUILE_LOAD_COMPILED_PATH=\$GUILE_LOAD_COMPILED_PATH $TERMUX_PREFIX/bin/$tool "\$@"
+			exec $(command -v nasux-proot-run) env LD_PRELOAD= LD_LIBRARY_PATH=\$LD_LIBRARY_PATH GUILE_LOAD_PATH=\$GUILE_LOAD_PATH GUILE_LOAD_COMPILED_PATH=\$GUILE_LOAD_COMPILED_PATH $TERMUX_PREFIX/bin/$tool "\$@"
 		HERE
 	done
 	chmod +x "$TERMUX_PKG_TMPDIR/bin"/*

@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE="https://invent.kde.org/frameworks/kcoreaddons"
-TERMUX_PKG_DESCRIPTION="Utilities for core application functionality and accessing the OS (KDE)"
-TERMUX_PKG_LICENSE="LGPL-2.1"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="6.27.0"
-TERMUX_PKG_SRCURL="https://download.kde.org/stable/frameworks/${TERMUX_PKG_VERSION%.*}/kcoreaddons-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=ad0d0147968dabdcf011425cf7764e71a0d0cfdc30e9e34b561ea5ba9a768001
+NASUX_PKG_HOMEPAGE="https://invent.kde.org/frameworks/kcoreaddons"
+NASUX_PKG_DESCRIPTION="Utilities for core application functionality and accessing the OS (KDE)"
+NASUX_PKG_LICENSE="LGPL-2.1"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="6.27.0"
+NASUX_PKG_SRCURL="https://download.kde.org/stable/frameworks/${NASUX_PKG_VERSION%.*}/kcoreaddons-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=ad0d0147968dabdcf011425cf7764e71a0d0cfdc30e9e34b561ea5ba9a768001
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_HOSTBUILD=true
-TERMUX_PKG_DEPENDS="libc++, qt6-qtbase, qt6-qtdeclarative, shared-mime-info"
-TERMUX_PKG_BUILD_DEPENDS="extra-cmake-modules (>= ${TERMUX_PKG_VERSION%.*}), qt6-qttools"
+NASUX_PKG_DEPENDS="libc++, qt6-qtbase, qt6-qtdeclarative, shared-mime-info"
+TERMUX_PKG_BUILD_DEPENDS="extra-cmake-modules (>= ${NASUX_PKG_VERSION%.*}), qt6-qttools"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DBUILD_PYTHON_BINDINGS=OFF
 -DCMAKE_SYSTEM_NAME=Linux
@@ -21,8 +21,8 @@ termux_step_host_build() {
 		return
 	fi
 
-	termux_setup_cmake
-	termux_setup_ninja
+	nasux_setup_cmake
+	nasux_setup_ninja
 
 	cmake -G Ninja \
 		-S "${TERMUX_PKG_SRCDIR}" \

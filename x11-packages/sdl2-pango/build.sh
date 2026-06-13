@@ -1,12 +1,12 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/markuskimius/SDL2_Pango
-TERMUX_PKG_DESCRIPTION="SDL2 library for internationalized text rendering"
-TERMUX_PKG_LICENSE="LGPL-2.1"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="2.1.5"
+NASUX_PKG_HOMEPAGE=https://github.com/markuskimius/SDL2_Pango
+NASUX_PKG_DESCRIPTION="SDL2 library for internationalized text rendering"
+NASUX_PKG_LICENSE="LGPL-2.1"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="2.1.5"
 TERMUX_PKG_REVISION=3
-TERMUX_PKG_SRCURL="https://github.com/markuskimius/SDL2_Pango/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz"
-TERMUX_PKG_SHA256=3b3fe6008445feb1fca61b17b9d950d688e49dcca60dbbf8667c0f980ddfc563
-TERMUX_PKG_DEPENDS="glib, pango, sdl2 | sdl2-compat"
+NASUX_PKG_SRCURL="https://github.com/markuskimius/SDL2_Pango/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz"
+NASUX_PKG_SHA256=3b3fe6008445feb1fca61b17b9d950d688e49dcca60dbbf8667c0f980ddfc563
+NASUX_PKG_DEPENDS="glib, pango, sdl2 | sdl2-compat"
 TERMUX_PKG_ANTI_BUILD_DEPENDS="sdl2-compat"
 
 termux_step_pre_configure() {

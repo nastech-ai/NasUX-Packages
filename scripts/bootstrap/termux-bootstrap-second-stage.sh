@@ -14,7 +14,7 @@ function log_error() { echo "[*]" "$@" 1>&2; }
 show_help() {
 
 	cat <<'HELP_EOF'
-@TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUBFILE@ runs the second stage of Termux
+@TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUBFILE@ runs the second stage of NasUX
 bootstrap installation.
 
 
@@ -27,8 +27,8 @@ Available command_options:
 
 
 
-The Termux app runs the bootstrap installion first stage by extracting
-the bootstrap packages manually to the Termux rootfs directory under
+The NasUX app runs the bootstrap installion first stage by extracting
+the bootstrap packages manually to the NasUX rootfs directory under
 private app data directory `/data/data/<package_name>` without using
 the package managers like (`apt`/`dpkg` or `pacman`) to install
 packages, as they are also part of the bootstrap.
@@ -67,7 +67,7 @@ the lock file manually and run `@TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_
 again.
 
 **See also:**
-- https://github.com/termux/termux-packages/wiki/For-maintainers#bootstraps
+- https://github.com/nastech-ai/NasUX-Packages/wiki/For-maintainers#bootstraps
 HELP_EOF
 
 }
@@ -106,7 +106,7 @@ run_bootstrap_second_stage() {
 	return_value=$?
 	if [ $return_value -ne 0 ]; then
 		if [ $return_value -eq 1 ] && [[ "$output" == *"File exists"* ]]; then
-			log "The termux bootstrap second stage has already been run before and cannot be run again."
+			log "The nasux bootstrap second stage has already been run before and cannot be run again."
 			log "If you still want to force run it again (not recommended), \
 like in case of previous failure and it must be re-run again for testing, \
 then delete the '@TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_DIR@/@TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUBFILE@.lock' \
@@ -114,7 +114,7 @@ file manually and run '@TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUB
 			return 0
 		else
 			log_error "$output"
-			log_error "Failed to create lock file for termux bootstrap second stage at \
+			log_error "Failed to create lock file for nasux bootstrap second stage at \
 '@TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_DIR@/@TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUBFILE@.lock'"
 			warn_if_process_killed "$return_value" "ln"
 			return $return_value
@@ -122,15 +122,15 @@ file manually and run '@TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUB
 	fi
 
 
-	log "Running termux bootstrap second stage"
+	log "Running nasux bootstrap second stage"
 	run_bootstrap_second_stage_inner
 	return_value=$?
 	if [ $return_value -ne 0 ]; then
-		log_error "Failed to run termux bootstrap second stage"
+		log_error "Failed to run nasux bootstrap second stage"
 		return $return_value
 	fi
 
-	log "The termux bootstrap second stage completed successfully"
+	log "The nasux bootstrap second stage completed successfully"
 
 
 	return 0
@@ -206,7 +206,7 @@ run_package_postinst_maintainer_scripts() {
 
 				# Execute permissions do not exist for maintainer
 				# scripts in bootstrap zips and since files are
-				# extracted manually by termux-app, they need to be
+				# extracted manually by nasux-app, they need to be
 				# assigned here, like `dpkg` does.
 				chmod u+x "$script_path" || return $?
 
@@ -233,7 +233,7 @@ run_package_postinst_maintainer_scripts() {
 					# - https://github.com/guillemj/dpkg/blob/1.22.6/src/common/force.c#L348
 					# - https://manpages.debian.org/unstable/dpkg/dpkg.1.en.html#DPKG_FORCE
 					# - https://wiki.debian.org/Teams/Dpkg/Spec/InstallBootstrap#Detached_chroot_handling
-					# Termux by default does not set `$DPKG_ROOT` and
+					# NasUX by default does not set `$DPKG_ROOT` and
 					# does not pass the `--force-script-chrootless`
 					# flag, so only current working directory is
 					# changed to the Android rootfs `/`.
@@ -241,10 +241,10 @@ run_package_postinst_maintainer_scripts() {
 					# without root access, so `$DPKG_ROOT` cannot be
 					# normally used without `--force-script-chrootless`
 					# flag.
-					# Note that Termux rootfs is under private app
+					# Note that NasUX rootfs is under private app
 					# data directory `/data/data/<package_name>,`
 					# which may cause problems for packages which try
-					# to use Android rootfs paths instead of Termux
+					# to use Android rootfs paths instead of NasUX
 					# rootfs paths.
 					cd / || exit $?
 
@@ -332,14 +332,14 @@ run_package_postinst_maintainer_scripts() {
 					# - https://man7.org/linux/man-pages/man2/chroot.2.html
 					# But since Android apps cannot run chroot
 					# without root access, chroot is disabled by
-					# Termux pacman package and only current working
+					# NasUX pacman package and only current working
 					# directory is changed to the Android rootfs `/`.
-					# Note that Termux rootfs is under private app
+					# Note that NasUX rootfs is under private app
 					# data directory `/data/data/<package_name>,`
 					# which may cause problems for packages which try
-					# to use Android rootfs paths instead of Termux
+					# to use Android rootfs paths instead of NasUX
 					# rootfs paths.
-					# - https://github.com/termux/termux-packages/blob/953b9f2aac0dc94f3b99b2df6af898e0a95d5460/packages/pacman/util.c.patch
+					# - https://github.com/nastech-ai/NasUX-Packages/blob/953b9f2aac0dc94f3b99b2df6af898e0a95d5460/packages/pacman/util.c.patch
 					cd "/" || exit $?
 
 					# Source the package `install` file and execute
@@ -398,8 +398,8 @@ ensure_running_with_termux_uid() {
 		log_error "$uid"
 		log_error "Failed to get uid of the user running the '@TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUBFILE@' script"
 		warn_if_process_killed "$return_value" "uid"
-		# This gets triggered if `adb install -r --abi arm64-v8a termux-app_v*_universal.apk`
-		# is used to install Termux on a `x86_64` Android AVD where `getprop ro.product.cpu.abilist`
+		# This gets triggered if `adb install -r --abi arm64-v8a nasux-app_v*_universal.apk`
+		# is used to install NasUX on a `x86_64` Android AVD where `getprop ro.product.cpu.abilist`
 		# returns `x86_64,arm64-v8a`, but only `x86_64` bootstrap zip should have been extracted
 		# to APK native lib directory and installed to rootfs.
 		# Commands do work if full path is executed in the shell, but some will fail with following
@@ -437,7 +437,7 @@ warn_if_process_killed() {
 	if [[ "$return_value" == "137" ]]; then
 		log_error "The '$command' command was apparently killed with SIGKILL (signal 9). \
 This may have been due to the security policies of the Android OS installed on your device.
-Check https://github.com/termux/termux-app/issues/4219 for more info."
+Check https://github.com/nastech-ai/NasUX/issues/4219 for more info."
 		return 0
 	fi
 

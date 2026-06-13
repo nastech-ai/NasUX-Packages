@@ -1,16 +1,16 @@
-TERMUX_PKG_HOMEPAGE=https://apps.kde.org/crowtranslate/
-TERMUX_PKG_DESCRIPTION="Application that allows you to translate and speak text"
-TERMUX_PKG_LICENSE="CC0-1.0, GPL-3.0-or-later, custom"
-TERMUX_PKG_LICENSE_FILE="
+NASUX_PKG_HOMEPAGE=https://apps.kde.org/crowtranslate/
+NASUX_PKG_DESCRIPTION="Application that allows you to translate and speak text"
+NASUX_PKG_LICENSE="CC0-1.0, GPL-3.0-or-later, custom"
+NASUX_PKG_LICENSE_FILE="
 LICENSES/CC0-1.0.txt
 LICENSES/GPL-3.0-or-later.txt
 LICENSES/CC-BY-SA-4.0.txt
 "
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="4.0.2"
-TERMUX_PKG_SRCURL="https://download.kde.org/stable/crow-translate/$TERMUX_PKG_VERSION/crow-translate-$TERMUX_PKG_VERSION.tar.gz"
-TERMUX_PKG_SHA256=e24b8e78b0bffa5dd02875e25126c371967f53729102c784e4e02d165feb3753
-TERMUX_PKG_DEPENDS="libc++, hicolor-icon-theme, kwayland, libx11, libxcb, onnxruntime, qt6-qtbase, qt6-qtmultimedia, qt6-qtscxml, qt6-qtspeech, tesseract"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="4.0.2"
+NASUX_PKG_SRCURL="https://download.kde.org/stable/crow-translate/$NASUX_PKG_VERSION/crow-translate-$NASUX_PKG_VERSION.tar.gz"
+NASUX_PKG_SHA256=e24b8e78b0bffa5dd02875e25126c371967f53729102c784e4e02d165feb3753
+NASUX_PKG_DEPENDS="libc++, hicolor-icon-theme, kwayland, libx11, libxcb, onnxruntime, qt6-qtbase, qt6-qtmultimedia, qt6-qtscxml, qt6-qtspeech, tesseract"
 TERMUX_PKG_BUILD_DEPENDS="extra-cmake-modules, protobuf, qt6-qttools, qt6-qttools-cross-tools"
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_HOSTBUILD=true
@@ -24,7 +24,7 @@ termux_step_post_get_source() {
 	# convert CRLF to LF like in libpluto package
 	if [[ "$TERMUX_ON_DEVICE_BUILD" == "false" ]]; then
 		DOS2UNIX="$TERMUX_PKG_TMPDIR/dos2unix"
-		(. "$TERMUX_SCRIPTDIR/packages/dos2unix/build.sh"; TERMUX_PKG_SRCDIR="$DOS2UNIX" termux_step_get_source)
+		(. "$NASUX_SCRIPTDIR/packages/dos2unix/build.sh"; TERMUX_PKG_SRCDIR="$DOS2UNIX" termux_step_get_source)
 		pushd "$DOS2UNIX"
 		make dos2unix
 		popd # DOS2UNIX
@@ -39,8 +39,8 @@ termux_step_host_build() {
 		return
 	fi
 
-	termux_setup_cmake
-	termux_setup_ninja
+	nasux_setup_cmake
+	nasux_setup_ninja
 
 	cmake -G Ninja \
 		"$TERMUX_PKG_SRCDIR/src/3rdparty/espeak-ng" \

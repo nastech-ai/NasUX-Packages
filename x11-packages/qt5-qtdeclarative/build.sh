@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE=https://www.qt.io/
-TERMUX_PKG_DESCRIPTION="The Qt Declarative module provides classes for using GUIs created using QML"
-TERMUX_PKG_LICENSE="LGPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="5.15.18"
-TERMUX_PKG_SRCURL="https://download.qt.io/archive/qt/${TERMUX_PKG_VERSION%.*}/${TERMUX_PKG_VERSION}/submodules/qtdeclarative-everywhere-opensource-src-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=876f20c476f07a07c53756b84c8ede7162d455ee0927b995acceb7c64e5c17a7
-TERMUX_PKG_DEPENDS="libc++, qt5-qtbase"
+NASUX_PKG_HOMEPAGE=https://www.qt.io/
+NASUX_PKG_DESCRIPTION="The Qt Declarative module provides classes for using GUIs created using QML"
+NASUX_PKG_LICENSE="LGPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="5.15.18"
+NASUX_PKG_SRCURL="https://download.qt.io/archive/qt/${NASUX_PKG_VERSION%.*}/${NASUX_PKG_VERSION}/submodules/qtdeclarative-everywhere-opensource-src-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=876f20c476f07a07c53756b84c8ede7162d455ee0927b995acceb7c64e5c17a7
+NASUX_PKG_DEPENDS="libc++, qt5-qtbase"
 TERMUX_PKG_BUILD_DEPENDS="qt5-qtbase-cross-tools"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_NO_STATICSPLIT=true
 
 # Ignore bootstrap changes because of the hijacking
@@ -21,7 +21,7 @@ TERMUX_PKG_REPLACES="qt5-declarative"
 termux_step_pre_configure () {
 	pushd "${TERMUX_PKG_SRCDIR}/src/qmltyperegistrar"
 	"${TERMUX_PREFIX}/opt/qt/cross/bin/qmake" \
-		-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/termux-host"
+		-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/nasux-host"
 	make -j "${TERMUX_PKG_MAKE_PROCESSES}"
 	popd
 
@@ -41,7 +41,7 @@ termux_step_pre_configure () {
 
 termux_step_configure () {
 	"${TERMUX_PREFIX}/opt/qt/cross/bin/qmake" \
-		-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/termux-cross"
+		-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/nasux-cross"
 }
 
 termux_step_post_make_install () {
@@ -55,7 +55,7 @@ termux_step_post_make_install () {
 	for i in qmlcachegen qmlformat qmlimportscanner qmllint qmlmin; do
 		cd "${TERMUX_PKG_SRCDIR}/tools/${i}" && {
 			"${TERMUX_PREFIX}/opt/qt/cross/bin/qmake" \
-				-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/termux-cross"
+				-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/nasux-cross"
 
 			make -j "${TERMUX_PKG_MAKE_PROCESSES}"
 			install -Dm700 "../../bin/${i}" "${TERMUX_PREFIX}/bin/${i}"
@@ -67,7 +67,7 @@ termux_step_post_make_install () {
 			make clean
 
 			"${TERMUX_PREFIX}/opt/qt/cross/bin/qmake" \
-				-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/termux-cross"
+				-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/nasux-cross"
 
 			make -j "${TERMUX_PKG_MAKE_PROCESSES}"
 			install -Dm700 "../../bin/${i}" "${TERMUX_PREFIX}/bin/${i}"
@@ -103,7 +103,7 @@ termux_step_post_make_install () {
 		make clean
 
 		"${TERMUX_PREFIX}/opt/qt/cross/bin/qmake" \
-			-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/termux-host"
+			-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/nasux-host"
 
 		make -j "${TERMUX_PKG_MAKE_PROCESSES}"
 		install -Dm644 ../../lib/libQt5QmlDevTools.a "${TERMUX_PREFIX}/opt/qt/cross/lib/libQt5QmlDevTools.a"
@@ -116,7 +116,7 @@ termux_step_post_make_install () {
 			make clean
 
 			"${TERMUX_PREFIX}/opt/qt/cross/bin/qmake" \
-				-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/termux-host"
+				-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/nasux-host"
 
 			make -j "${TERMUX_PKG_MAKE_PROCESSES}"
 			install -Dm700 "../../bin/${i}" "${TERMUX_PREFIX}/opt/qt/cross/bin/${i}"
@@ -128,7 +128,7 @@ termux_step_post_make_install () {
 			make clean
 
 			"${TERMUX_PREFIX}/opt/qt/cross/bin/qmake" \
-				-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/termux-host"
+				-spec "${TERMUX_PREFIX}/lib/qt/mkspecs/nasux-host"
 
 			make -j "${TERMUX_PKG_MAKE_PROCESSES}"
 			install -Dm700 "../../bin/${i}" "${TERMUX_PREFIX}/opt/qt/cross/bin/${i}"
@@ -157,7 +157,7 @@ termux_step_post_make_install () {
 
 termux_step_create_debscripts() {
 	# Some clean-up is happening via `postinst`
-	# Because we're using this package in both host (Ubuntu glibc) and device (Termux)
+	# Because we're using this package in both host (Ubuntu glibc) and device (NasUX)
 	cp -f "${TERMUX_PKG_BUILDER_DIR}/postinst" ./
 	sed -i "s|@TERMUX_PREFIX@|$TERMUX_PREFIX|g" ./postinst
 }

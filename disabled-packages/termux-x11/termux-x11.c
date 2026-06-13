@@ -61,15 +61,15 @@ void start_xwayland(char *argv[]) {
 
 int main(int argc, char *argv[]) {
 	if (!dir_exists(TERMUX_X11_DIR)) {
-		printf("Termux:X11 is not installed\n");
+		printf("NasUX:X11 is not installed\n");
 		return 1;
 	}
 
-	char *server_argv[] = {TERMUX_PREFIX "/bin/am", "start", "-n", "com.termux.x11/.MainActivity", NULL};
+	char *server_argv[] = {TERMUX_PREFIX "/bin/am", "start", "-n", "com.nasux.x11/.MainActivity", NULL};
 
 	if (!connection_exists()) {
 		if (start_server(server_argv) == -1) {
-			printf("Error starting Termux:X11\n");
+			printf("Error starting NasUX:X11\n");
 			return 1;
 		}
 	}
@@ -84,7 +84,7 @@ int main(int argc, char *argv[]) {
 		sleep(1);
 	}
 
-	printf("Failed starting Termux:X11: timeout\n");
+	printf("Failed starting NasUX:X11: timeout\n");
 
 	return 1;
 }

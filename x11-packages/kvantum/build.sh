@@ -1,13 +1,13 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/tsujan/Kvantum
-TERMUX_PKG_DESCRIPTION="SVG-based theme engine for Qt6"
-TERMUX_PKG_LICENSE="GPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="1.1.8"
-TERMUX_PKG_SRCURL="https://github.com/tsujan/Kvantum/releases/download/V${TERMUX_PKG_VERSION}/Kvantum-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=7aa9099345e48048ebdad768f583944ac042f87b216fa0b26a169c7e05425047
+NASUX_PKG_HOMEPAGE=https://github.com/tsujan/Kvantum
+NASUX_PKG_DESCRIPTION="SVG-based theme engine for Qt6"
+NASUX_PKG_LICENSE="GPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="1.1.8"
+NASUX_PKG_SRCURL="https://github.com/tsujan/Kvantum/releases/download/V${NASUX_PKG_VERSION}/Kvantum-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=7aa9099345e48048ebdad768f583944ac042f87b216fa0b26a169c7e05425047
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_UPDATE_VERSION_REGEXP="\d+\.\d+\.\d+"
-TERMUX_PKG_DEPENDS="kf6-kwindowsystem, libc++, libx11, qt6-qtbase, qt6-qtsvg"
+NASUX_PKG_DEPENDS="kf6-kwindowsystem, libc++, libx11, qt6-qtbase, qt6-qtsvg"
 TERMUX_PKG_BUILD_DEPENDS="qt6-qtbase-cross-tools, qt6-qttools-cross-tools"
 
 termux_step_post_get_source() {

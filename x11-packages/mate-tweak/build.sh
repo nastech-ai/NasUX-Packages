@@ -1,17 +1,17 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/ubuntu-mate/mate-tweak
-TERMUX_PKG_DESCRIPTION="Tweak tool for the MATE Desktop"
-TERMUX_PKG_LICENSE="GPL-2.0-or-later"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="22.10.0"
+NASUX_PKG_HOMEPAGE=https://github.com/ubuntu-mate/mate-tweak
+NASUX_PKG_DESCRIPTION="Tweak tool for the MATE Desktop"
+NASUX_PKG_LICENSE="GPL-2.0-or-later"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="22.10.0"
 TERMUX_PKG_REVISION=1
-TERMUX_PKG_SRCURL="https://github.com/ubuntu-mate/mate-tweak/archive/refs/tags/$TERMUX_PKG_VERSION.tar.gz"
-TERMUX_PKG_SHA256=c33c092b0151b50d8a5706825f1bcef57f1738f8f5cf22af49c11f45bc14e84a
+NASUX_PKG_SRCURL="https://github.com/ubuntu-mate/mate-tweak/archive/refs/tags/$NASUX_PKG_VERSION.tar.gz"
+NASUX_PKG_SHA256=c33c092b0151b50d8a5706825f1bcef57f1738f8f5cf22af49c11f45bc14e84a
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_PYTHON_RUNTIME_DEPS="distro, setproctitle"
-TERMUX_PKG_DEPENDS="dconf, gsettings-desktop-schemas, ldd, libnotify, libmatekbd, mate-applets, mate-panel, pygobject, python, python-pip, python-psutil"
+NASUX_PKG_DEPENDS="dconf, gsettings-desktop-schemas, ldd, libnotify, libmatekbd, mate-applets, mate-panel, pygobject, python, python-pip, python-psutil"
 TERMUX_PKG_SUGGESTS="mate-applet-brisk-menu, plank-reloaded, tilda, mate-applet-appmenu"
 TERMUX_PKG_PLATFORM_INDEPENDENT=true
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_RM_AFTER_INSTALL="
 local
 share/polkit-1

@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://pidgin.im/
-TERMUX_PKG_DESCRIPTION="Multi-protocol instant messaging client"
-TERMUX_PKG_LICENSE="GPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
+NASUX_PKG_HOMEPAGE=https://pidgin.im/
+NASUX_PKG_DESCRIPTION="Multi-protocol instant messaging client"
+NASUX_PKG_LICENSE="GPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
 # please sync version and patches with packages/finch
-TERMUX_PKG_VERSION="2.14.14"
+NASUX_PKG_VERSION="2.14.14"
 TERMUX_PKG_REVISION=2
-TERMUX_PKG_SRCURL=https://downloads.sourceforge.net/pidgin/pidgin-${TERMUX_PKG_VERSION}.tar.bz2
-TERMUX_PKG_SHA256=0ffc9994def10260f98a55cd132deefa8dc4a9835451cc0e982747bd458e2356
+NASUX_PKG_SRCURL=https://downloads.sourceforge.net/pidgin/pidgin-${NASUX_PKG_VERSION}.tar.bz2
+NASUX_PKG_SHA256=0ffc9994def10260f98a55cd132deefa8dc4a9835451cc0e982747bd458e2356
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="atk, dbus, dbus-glib, fontconfig, freetype, gdk-pixbuf, glib, gst-plugins-base, gstreamer, gtk2, harfbuzz, libcairo, libgnt, libgnutls, libice, libidn, libsasl, libsm, libx11, libxcomposite, libxcursor, libxdamage, libxext, libxfixes, libxinerama, libxml2, libxrandr, libxrender, libxss, ncurses, pango, tcl, tk"
+NASUX_PKG_DEPENDS="atk, dbus, dbus-glib, fontconfig, freetype, gdk-pixbuf, glib, gst-plugins-base, gstreamer, gtk2, harfbuzz, libcairo, libgnt, libgnutls, libice, libidn, libsasl, libsm, libx11, libxcomposite, libxcursor, libxdamage, libxext, libxfixes, libxinerama, libxml2, libxrandr, libxrender, libxss, ncurses, pango, tcl, tk"
 TERMUX_PKG_CONFLICTS="finch"
 TERMUX_PKG_REPLACES="finch"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="

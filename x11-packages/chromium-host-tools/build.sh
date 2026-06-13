@@ -1,30 +1,30 @@
-TERMUX_PKG_HOMEPAGE=https://www.chromium.org/Home
-TERMUX_PKG_DESCRIPTION="Chromium web browser (Host tools)"
-TERMUX_PKG_LICENSE="BSD 3-Clause"
-TERMUX_PKG_MAINTAINER="@licy183"
-TERMUX_PKG_VERSION="149.0.7827.114"
-TERMUX_PKG_SRCURL=https://commondatastorage.googleapis.com/chromium-browser-official/chromium-$TERMUX_PKG_VERSION-lite.tar.xz
-TERMUX_PKG_SHA256=6d31995447d1b505ce007cea67d5f66d10710e1660a1c304d0ae5c54aeca4eff
-TERMUX_PKG_DEPENDS="atk, cups, dbus, fontconfig, gtk3, krb5, libc++, libevdev, libxkbcommon, libminizip, libnss, libx11, mesa, openssl, pango, pipewire, pulseaudio, zlib"
+NASUX_PKG_HOMEPAGE=https://www.chromium.org/Home
+NASUX_PKG_DESCRIPTION="Chromium web browser (Host tools)"
+NASUX_PKG_LICENSE="BSD 3-Clause"
+NASUX_PKG_MAINTAINER="@licy183"
+NASUX_PKG_VERSION="149.0.7827.114"
+NASUX_PKG_SRCURL=https://commondatastorage.googleapis.com/chromium-browser-official/chromium-$NASUX_PKG_VERSION-lite.tar.xz
+NASUX_PKG_SHA256=6d31995447d1b505ce007cea67d5f66d10710e1660a1c304d0ae5c54aeca4eff
+NASUX_PKG_DEPENDS="atk, cups, dbus, fontconfig, gtk3, krb5, libc++, libevdev, libxkbcommon, libminizip, libnss, libx11, mesa, openssl, pango, pipewire, pulseaudio, zlib"
 TERMUX_PKG_BUILD_DEPENDS="libffi-static"
 # TODO: Split chromium-common and chromium-headless
-# TERMUX_PKG_DEPENDS+=", chromium-common"
+# NASUX_PKG_DEPENDS+=", chromium-common"
 # TERMUX_PKG_SUGGESTS="chromium-headless, chromium-driver"
 # Chromium doesn't support i686 on Linux.
-TERMUX_PKG_EXCLUDED_ARCHES="i686"
+NASUX_PKG_EXCLUDED_ARCHES="i686"
 TERMUX_PKG_NO_STRIP=true
 TERMUX_PKG_NO_ELF_CLEANER=true
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_ON_DEVICE_BUILD_NOT_SUPPORTED=true
 
 SYSTEM_LIBRARIES="    fontconfig"
-# TERMUX_PKG_DEPENDS="fontconfig"
+# NASUX_PKG_DEPENDS="fontconfig"
 
 termux_pkg_auto_update() {
 	local latest_version="$(curl -s 'https://chromiumdash.appspot.com/fetch_releases?channel=Stable&platform=Linux&num=10&offset=0' | jq -rc '.[].version' | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | tail -n 1)"
 
 	if ! termux_pkg_is_update_needed \
-		"${TERMUX_PKG_VERSION#*:}" "${latest_version}"; then
+		"${NASUX_PKG_VERSION#*:}" "${latest_version}"; then
 		echo "INFO: No update needed. Already at version '${latest_version}'."
 		return 0
 	fi
@@ -93,12 +93,12 @@ termux_step_post_get_source() {
 		$SYSTEM_LIBRARIES
 
 	# Remove the source file to keep more space
-	rm -f "$TERMUX_PKG_CACHEDIR/chromium-$TERMUX_PKG_VERSION-lite.tar.xz"
+	rm -f "$TERMUX_PKG_CACHEDIR/chromium-$NASUX_PKG_VERSION-lite.tar.xz"
 }
 
 termux_step_configure() {
 	cd $TERMUX_PKG_SRCDIR
-	termux_setup_ninja
+	nasux_setup_ninja
 
 	# Fetch depot_tools
 	export DEPOT_TOOLS_UPDATE=0
@@ -123,7 +123,7 @@ termux_step_configure() {
 EOF
 	fi
 
-	# Remove termux's dummy pkg-config
+	# Remove nasux's dummy pkg-config
 	rm -rf $TERMUX_PKG_CACHEDIR/host-pkg-config-bin
 	mkdir -p $TERMUX_PKG_CACHEDIR/host-pkg-config-bin
 	ln -s /usr/bin/pkg-config "$TERMUX_PKG_CACHEDIR"/host-pkg-config-bin/pkg-config
@@ -177,8 +177,8 @@ print(deps['src/third_party/node/node_modules']['objects'][0]['sha256sum'])
 		popd # third_party/devtools-frontend/src
 	fi
 
-	local CARGO_TARGET_NAME="${TERMUX_ARCH}-linux-android"
-	if [[ "${TERMUX_ARCH}" == "arm" ]]; then
+	local CARGO_TARGET_NAME="${NASUX_ARCH}-linux-android"
+	if [[ "${NASUX_ARCH}" == "arm" ]]; then
 		CARGO_TARGET_NAME="armv7-linux-androideabi"
 	fi
 
@@ -196,7 +196,7 @@ print(deps['src/third_party/node/node_modules']['objects'][0]['sha256sum'])
 	ln -sfr $TERMUX_PREFIX/lib/libffi.a $TERMUX_PREFIX/lib/libffi_pic.a
 
 	# Merge sysroots
-	if [ ! -d "$TERMUX_PKG_CACHEDIR/sysroot-$TERMUX_ARCH" ]; then
+	if [ ! -d "$TERMUX_PKG_CACHEDIR/sysroot-$NASUX_ARCH" ]; then
 		rm -rf $TERMUX_PKG_TMPDIR/sysroot
 		mkdir -p $TERMUX_PKG_TMPDIR/sysroot
 		pushd $TERMUX_PKG_TMPDIR/sysroot
@@ -214,7 +214,7 @@ print(deps['src/third_party/node/node_modules']['objects'][0]['sha256sum'])
 		cp -Rf $TERMUX_PREFIX/bin/cups-config usr/bin/
 		chmod +x usr/bin/cups-config
 		popd
-		mv $TERMUX_PKG_TMPDIR/sysroot $TERMUX_PKG_CACHEDIR/sysroot-$TERMUX_ARCH
+		mv $TERMUX_PKG_TMPDIR/sysroot $TERMUX_PKG_CACHEDIR/sysroot-$NASUX_ARCH
 	fi
 
 	# Construct args
@@ -225,14 +225,14 @@ print(deps['src/third_party/node/node_modules']['objects'][0]['sha256sum'])
 	local _target_clang_base_path="$TERMUX_STANDALONE_TOOLCHAIN"
 	local _target_cc="$_target_clang_base_path/bin/clang"
 	local _target_clang_version=$($_target_cc --version | grep -m1 version | sed -E 's|.*\bclang version ([0-9]+).*|\1|')
-	local _target_cpu _target_sysroot="$TERMUX_PKG_CACHEDIR/sysroot-$TERMUX_ARCH"
+	local _target_cpu _target_sysroot="$TERMUX_PKG_CACHEDIR/sysroot-$NASUX_ARCH"
 	local _v8_toolchain_name _v8_current_cpu _v8_sysroot_path
-	if [ "$TERMUX_ARCH" = "aarch64" ]; then
+	if [ "$NASUX_ARCH" = "aarch64" ]; then
 		_target_cpu="arm64"
 		_v8_current_cpu="arm64"
 		_v8_sysroot_path="$_amd64_sysroot_path"
 		_v8_toolchain_name="host"
-	elif [ "$TERMUX_ARCH" = "arm" ]; then
+	elif [ "$NASUX_ARCH" = "arm" ]; then
 		# Install i386 rootfs
 		build/linux/sysroot_scripts/install-sysroot.py --arch=i386
 		local _i386_sysroot_path="$(pwd)/build/linux/$(ls build/linux | grep 'i386-sysroot')"
@@ -240,7 +240,7 @@ print(deps['src/third_party/node/node_modules']['objects'][0]['sha256sum'])
 		_v8_current_cpu="x86"
 		_v8_sysroot_path="$_i386_sysroot_path"
 		_v8_toolchain_name="clang_x86_v8_arm"
-	elif [ "$TERMUX_ARCH" = "x86_64" ]; then
+	elif [ "$NASUX_ARCH" = "x86_64" ]; then
 		_target_cpu="x64"
 		_v8_current_cpu="x64"
 		_v8_sysroot_path="$_amd64_sysroot_path"
@@ -320,11 +320,11 @@ use_jumbo_build = true
 # Compile pdfium as a static library
 pdf_is_complete_lib = true
 # NDK r29 can't compile chromium with cxx23, see
-# https://github.com/termux/termux-packages/issues/28459#issuecomment-3991943697
+# https://github.com/nastech-ai/NasUX-Packages/issues/28459#issuecomment-3991943697
 use_cxx23 = false
 " > $_common_args_file
 
-	if [ "$TERMUX_ARCH" = "arm" ]; then
+	if [ "$NASUX_ARCH" = "arm" ]; then
 		echo "arm_arch = \"armv7-a\"" >> $_common_args_file
 		echo "arm_float_abi = \"softfp\"" >> $_common_args_file
 	fi

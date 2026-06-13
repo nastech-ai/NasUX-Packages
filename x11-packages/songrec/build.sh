@@ -1,16 +1,16 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/marin-m/SongRec
-TERMUX_PKG_DESCRIPTION="Open-source, unofficial Shazam client"
-TERMUX_PKG_LICENSE="GPL-3.0-only"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="0.7.3"
-TERMUX_PKG_SRCURL="https://github.com/marin-m/SongRec/archive/refs/tags/$TERMUX_PKG_VERSION.tar.gz"
-TERMUX_PKG_SHA256=f88bd166b1385ddd94e759fab72a997c87077043d0232c2395440941bc694a92
+NASUX_PKG_HOMEPAGE=https://github.com/marin-m/SongRec
+NASUX_PKG_DESCRIPTION="Open-source, unofficial Shazam client"
+NASUX_PKG_LICENSE="GPL-3.0-only"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="0.7.3"
+NASUX_PKG_SRCURL="https://github.com/marin-m/SongRec/archive/refs/tags/$NASUX_PKG_VERSION.tar.gz"
+NASUX_PKG_SHA256=f88bd166b1385ddd94e759fab72a997c87077043d0232c2395440941bc694a92
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_BUILD_IN_SRC=true
-TERMUX_PKG_DEPENDS="gtk4, alsa-lib, alsa-plugins, openssl, ffmpeg, libc++, gettext, glib, pango, libcairo, dbus, hicolor-icon-theme, gdk-pixbuf, libadwaita, pulseaudio, libsoup3"
+NASUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_DEPENDS="gtk4, alsa-lib, alsa-plugins, openssl, ffmpeg, libc++, gettext, glib, pango, libcairo, dbus, hicolor-icon-theme, gdk-pixbuf, libadwaita, pulseaudio, libsoup3"
 
 termux_step_make() {
-	termux_setup_rust
+	nasux_setup_rust
 
 	export GETTEXT_DIR="$PREFIX"
 

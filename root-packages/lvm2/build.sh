@@ -1,16 +1,16 @@
-TERMUX_PKG_HOMEPAGE=https://sourceware.org/lvm2/
-TERMUX_PKG_DESCRIPTION="A device-mapper library from LVM2 package"
-TERMUX_PKG_LICENSE="GPL-2.0, LGPL-2.1, BSD 2-Clause"
-TERMUX_PKG_LICENSE_FILE="COPYING, COPYING.BSD, COPYING.LIB"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="2.03.41"
-TERMUX_PKG_SRCURL=https://mirrors.kernel.org/sourceware/lvm2/releases/LVM2.${TERMUX_PKG_VERSION}.tgz
-TERMUX_PKG_SHA256=d58011b845df8ec13816ca13ea6c39d4cb3d038cd2d7d387acdf5681ad7d6637
+NASUX_PKG_HOMEPAGE=https://sourceware.org/lvm2/
+NASUX_PKG_DESCRIPTION="A device-mapper library from LVM2 package"
+NASUX_PKG_LICENSE="GPL-2.0, LGPL-2.1, BSD 2-Clause"
+NASUX_PKG_LICENSE_FILE="COPYING, COPYING.BSD, COPYING.LIB"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="2.03.41"
+NASUX_PKG_SRCURL=https://mirrors.kernel.org/sourceware/lvm2/releases/LVM2.${NASUX_PKG_VERSION}.tgz
+NASUX_PKG_SHA256=d58011b845df8ec13816ca13ea6c39d4cb3d038cd2d7d387acdf5681ad7d6637
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="libaio, libandroid-support, libblkid, readline"
+NASUX_PKG_DEPENDS="libaio, libandroid-support, libblkid, readline"
 TERMUX_PKG_BREAKS="libdevmapper-dev"
 TERMUX_PKG_REPLACES="libdevmapper-dev"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --enable-pkgconfig
 --disable-selinux

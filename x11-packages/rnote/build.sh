@@ -1,22 +1,22 @@
-TERMUX_PKG_HOMEPAGE="https://github.com/flxzt/rnote"
-TERMUX_PKG_DESCRIPTION="An infinite canvas vector-based drawing application for handwritten notes"
-TERMUX_PKG_LICENSE="GPL-3.0"
-TERMUX_PKG_MAINTAINER="@EDLLT"
-TERMUX_PKG_VERSION="0.14.2"
-TERMUX_PKG_SRCURL="https://github.com/flxzt/rnote/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz"
-TERMUX_PKG_SHA256=10dd7849b593034b7fbd55f5b5baa51fb082ef48d96e1a6200d361e6ed49363e
+NASUX_PKG_HOMEPAGE="https://github.com/flxzt/rnote"
+NASUX_PKG_DESCRIPTION="An infinite canvas vector-based drawing application for handwritten notes"
+NASUX_PKG_LICENSE="GPL-3.0"
+NASUX_PKG_MAINTAINER="@EDLLT"
+NASUX_PKG_VERSION="0.14.2"
+NASUX_PKG_SRCURL="https://github.com/flxzt/rnote/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz"
+NASUX_PKG_SHA256=10dd7849b593034b7fbd55f5b5baa51fb082ef48d96e1a6200d361e6ed49363e
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="alsa-lib, gdk-pixbuf, gettext, glib, graphene, gtk4, hicolor-icon-theme, libadwaita, libcairo, pipewire, pango, poppler"
+NASUX_PKG_DEPENDS="alsa-lib, gdk-pixbuf, gettext, glib, graphene, gtk4, hicolor-icon-theme, libadwaita, libcairo, pipewire, pango, poppler"
 TERMUX_PKG_BUILD_DEPENDS="libiconv"
 TERMUX_PKG_PYTHON_CROSS_BUILD_DEPS="toml2json"
 
 termux_step_pre_configure() {
-	termux_setup_cmake
-	termux_setup_glib_cross_pkg_config_wrapper
+	nasux_setup_cmake
+	nasux_setup_glib_cross_pkg_config_wrapper
 }
 
 termux_step_make() {
-	termux_setup_rust
+	nasux_setup_rust
 
 	local env_host=$(printf $CARGO_TARGET_NAME | tr a-z A-Z | sed s/-/_/g)
 	export CARGO_TARGET_${env_host}_RUSTFLAGS+=" -C link-arg=-liconv"

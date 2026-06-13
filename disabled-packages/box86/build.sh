@@ -1,18 +1,18 @@
-TERMUX_PKG_HOMEPAGE=https://ptitseb.github.io/box86/
-TERMUX_PKG_DESCRIPTION="Linux Userspace x86 Emulator"
-TERMUX_PKG_LICENSE="MIT"
-TERMUX_PKG_MAINTAINER="@termux"
+NASUX_PKG_HOMEPAGE=https://ptitseb.github.io/box86/
+NASUX_PKG_DESCRIPTION="Linux Userspace x86 Emulator"
+NASUX_PKG_LICENSE="MIT"
+NASUX_PKG_MAINTAINER="@nastech-ai"
 _COMMIT=ed3296978ebeee19009b7bd78ea6219cf9996611
 _COMMIT_DATE=20230402
 _COMMIT_TIME=164444
-TERMUX_PKG_VERSION="0.3.0.20230402.164444ged329697"
-TERMUX_PKG_SRCURL=git+https://github.com/ptitSeb/box86
+NASUX_PKG_VERSION="0.3.0.20230402.164444ged329697"
+NASUX_PKG_SRCURL=git+https://github.com/ptitSeb/box86
 TERMUX_PKG_GIT_BRANCH=master
-TERMUX_PKG_DEPENDS="libandroid-complex-math, libandroid-glob, libandroid-spawn, libandroid-sysv-semaphore"
+NASUX_PKG_DEPENDS="libandroid-complex-math, libandroid-glob, libandroid-spawn, libandroid-sysv-semaphore"
 TERMUX_PKG_AUTO_UPDATE=true
 
 # box86 is for arm only
-TERMUX_PKG_EXCLUDED_ARCHES="aarch64, i686, x86_64"
+NASUX_PKG_EXCLUDED_ARCHES="aarch64, i686, x86_64"
 
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DANDROID=ON
@@ -28,7 +28,7 @@ termux_pkg_auto_update() {
 	fi
 
 	if [[ "${latest_commit}" == "${_COMMIT}" ]]; then
-		echo "INFO: No update needed. Already at version '${TERMUX_PKG_VERSION}'."
+		echo "INFO: No update needed. Already at version '${NASUX_PKG_VERSION}'."
 		return 0
 	fi
 
@@ -40,7 +40,7 @@ termux_pkg_auto_update() {
 	local latest_commit_date=$(echo "${latest_commit_date_tz}" | sed -e 's|\(.*\)T\(.*\)Z|\1|' -e 's|\-||g')
 	local latest_commit_time=$(echo "${latest_commit_date_tz}" | sed -e 's|\(.*\)T\(.*\)Z|\2|' -e 's|\:||g')
 
-	# https://github.com/termux/termux-packages/issues/11827
+	# https://github.com/nastech-ai/NasUX-Packages/issues/11827
 	# really fix it by including longer date time info into versioning
 	# always check this in case upstream change the version format
 	local latest_version="0.3.0.${latest_commit_date}.${latest_commit_time}g${latest_commit:0:8}"
@@ -53,8 +53,8 @@ termux_pkg_auto_update() {
 		return 0
 	fi
 
-	if ! dpkg --compare-versions "${latest_version}" gt "${TERMUX_PKG_VERSION}"; then
-		termux_error_exit "Resulting latest version is not counted as update to the current version (${latest_version} < ${TERMUX_PKG_VERSION})"
+	if ! dpkg --compare-versions "${latest_version}" gt "${NASUX_PKG_VERSION}"; then
+		termux_error_exit "Resulting latest version is not counted as update to the current version (${latest_version} < ${NASUX_PKG_VERSION})"
 	fi
 
 	# unlikely to happen

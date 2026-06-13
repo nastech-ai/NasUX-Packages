@@ -1,7 +1,7 @@
 # shellcheck shell=bash
 
 # Title:          termux_package
-# Description:    A library for Termux package utils.
+# Description:    A library for NasUX package utils.
 
 
 
@@ -112,7 +112,7 @@ termux_package__add_prefix_glibc_to_package_name() {
 # .
 # .
 # **Parameters:**
-# `package_list` - List of package names (eg `TERMUX_PKG_DEPENDS`).
+# `package_list` - List of package names (eg `NASUX_PKG_DEPENDS`).
 # .
 # **Returns:**
 # Returns a modified list of package names.

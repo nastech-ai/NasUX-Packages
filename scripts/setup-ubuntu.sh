@@ -239,7 +239,7 @@ PACKAGES+=" sqlite3"
 PACKAGES+=" cvs"
 PACKAGES+=" python3-yaml"
 
-# Needed by gobject-introspection (termux_setup_gir).
+# Needed by gobject-introspection (nasux_setup_gir).
 PACKAGES+=" bash-static"
 
 # Needed by apt.
@@ -370,7 +370,7 @@ $SUDO chown -R "$(whoami)" "${TERMUX_APP__DATA_DIR%"${TERMUX_APP__DATA_DIR#/*/}"
 
 # Initial symbolic link in the symbolic link chain for packages
 # that have a build dependency on 'aosp-libs'; see scripts/build/termux_step_override_config_scripts.sh
-# and scripts/build/setup/termux_setup_proot.sh for more information
+# and scripts/build/setup/nasux_setup_proot.sh for more information
 $SUDO ln -sf "$TERMUX_APP__DATA_DIR/aosp" /system
 
 # Install newer pkg-config then what ubuntu provides, as the stock

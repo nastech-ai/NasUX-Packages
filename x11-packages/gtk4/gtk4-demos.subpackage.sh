@@ -1,4 +1,4 @@
-TERMUX_SUBPKG_INCLUDE="
+NASUX_SUBPKG_INCLUDE="
 bin/gtk4-demo
 bin/gtk4-demo-application
 bin/gtk4-icon-editor
@@ -14,4 +14,4 @@ share/glib-2.0/schemas/org.gtk.Demo4.gschema.xml
 share/icons
 share/metainfo
 "
-TERMUX_SUBPKG_DESCRIPTION="gtk4 demonstration application"
+NASUX_SUBPKG_DESCRIPTION="gtk4 demonstration application"

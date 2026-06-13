@@ -1,16 +1,16 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/jessfraz/cliaoke
-TERMUX_PKG_DESCRIPTION="Command line karaoke"
-TERMUX_PKG_LICENSE="MIT"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=0.2.4
+NASUX_PKG_HOMEPAGE=https://github.com/jessfraz/cliaoke
+NASUX_PKG_DESCRIPTION="Command line karaoke"
+NASUX_PKG_LICENSE="MIT"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=0.2.4
 TERMUX_PKG_REVISION=5
-TERMUX_PKG_SRCURL=https://github.com/jessfraz/cliaoke/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=df601b7d118acb8c0b7251c42b5b2623335bfc51f5dc94135fa6722850955f50
+NASUX_PKG_SRCURL=https://github.com/jessfraz/cliaoke/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=df601b7d118acb8c0b7251c42b5b2623335bfc51f5dc94135fa6722850955f50
 TERMUX_PKG_RECOMMENDS="fluidsynth"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 
 termux_step_make() {
-	termux_setup_golang
+	nasux_setup_golang
 	go mod init || :
 	go mod tidy
 	go mod vendor

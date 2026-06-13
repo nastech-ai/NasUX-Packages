@@ -1,25 +1,25 @@
 ##
-## Since Termux is continuing to use APT as package manager, abuild & apk-tools
+## Since NasUX is continuing to use APT as package manager, abuild & apk-tools
 ## are disabled because don't have real use-cases currently.
 ##
 
-TERMUX_PKG_HOMEPAGE=https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management
-TERMUX_PKG_DESCRIPTION="Alpine Linux package management tools"
-TERMUX_PKG_LICENSE="GPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=2.10.4
-TERMUX_PKG_SRCURL=https://github.com/alpinelinux/apk-tools/archive/v${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=c08aa725a0437a6a83c5364a1a3a468e4aef5d1d09523369074779021397281c
-TERMUX_PKG_DEPENDS="openssl, zlib"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_HOMEPAGE=https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management
+NASUX_PKG_DESCRIPTION="Alpine Linux package management tools"
+NASUX_PKG_LICENSE="GPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=2.10.4
+NASUX_PKG_SRCURL=https://github.com/alpinelinux/apk-tools/archive/v${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=c08aa725a0437a6a83c5364a1a3a468e4aef5d1d09523369074779021397281c
+NASUX_PKG_DEPENDS="openssl, zlib"
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_EXTRA_MAKE_ARGS="LUAAPK="
 TERMUX_PKG_CONFFILES="etc/apk/repositories"
 
 termux_step_post_make_install() {
     mkdir -p $TERMUX_PREFIX/etc/apk/
-    echo $TERMUX_ARCH > $TERMUX_PREFIX/etc/apk/arch
+    echo $NASUX_ARCH > $TERMUX_PREFIX/etc/apk/arch
 
-    echo "https://termux.net/apk/main" > $TERMUX_PREFIX/etc/apk/repositories
+    echo "https://nasux.net/apk/main" > $TERMUX_PREFIX/etc/apk/repositories
 }
 
 termux_step_post_massage() {

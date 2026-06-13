@@ -4,8 +4,8 @@ set -e -u
 
 start_time="$(date +%10s.%3N)"
 
-TERMUX_SCRIPTDIR=$(realpath "$(dirname "$0")/../")
-. "$TERMUX_SCRIPTDIR/scripts/properties.sh"
+NASUX_SCRIPTDIR=$(realpath "$(dirname "$0")/../")
+. "$NASUX_SCRIPTDIR/scripts/properties.sh"
 
 check_package_license() {
 	local pkg_licenses license license_ok=true
@@ -160,15 +160,15 @@ check_version() {
 		printf '%s\n' "FAIL" \
 			"Couldn't determine HEAD commit of 'origin/master'." \
 			"This shouldn't be able to happen..."
-		ls -AR "$TERMUX_SCRIPTDIR/.git/refs/remotes/origin"
+		ls -AR "$NASUX_SCRIPTDIR/.git/refs/remotes/origin"
 		return 1
 	} >&2
 
-	# If TERMUX_PKG_VERSION is an array that changes the formatting.
-	local version i=0 error=0 is_array="${TERMUX_PKG_VERSION@a}"
+	# If NASUX_PKG_VERSION is an array that changes the formatting.
+	local version i=0 error=0 is_array="${NASUX_PKG_VERSION@a}"
 	printf '%s' "${is_array:+$'ARRAY\n'}"
 
-	for version in "${TERMUX_PKG_VERSION[@]}"; do
+	for version in "${NASUX_PKG_VERSION[@]}"; do
 		printf '%s' "${is_array:+$'\t'}"
 
 		# Is this version valid?
@@ -181,19 +181,19 @@ check_version() {
 		local version_new version_old
 		version_new="${version}-${TERMUX_PKG_REVISION:-0}"
 		version_old=$(
-			unset TERMUX_PKG_VERSION TERMUX_PKG_REVISION
+			unset NASUX_PKG_VERSION TERMUX_PKG_REVISION
 			# shellcheck source=/dev/null
 			. <(git -P show "${base_commit}:${package_dir}/build.sh" 2> /dev/null)
-			# ${TERMUX_PKG_VERSION[0]} also works fine for non-array versions.
+			# ${NASUX_PKG_VERSION[0]} also works fine for non-array versions.
 			# Since those resolve in 1 iteration, no higher index is ever attempted to be called.
-			echo "${TERMUX_PKG_VERSION[$i]:-0}-${TERMUX_PKG_REVISION:-0}"
+			echo "${NASUX_PKG_VERSION[$i]:-0}-${TERMUX_PKG_REVISION:-0}"
 		)
 
 		# Is ${version_old} valid?
 		local version_old_is_bad=""
 		dpkg --validate-version "${version_old}" &> /dev/null || version_old_is_bad="0~invalid"
 
-		# The rest of the checks aren't useful past the first index when $TERMUX_PKG_VERSION is an array
+		# The rest of the checks aren't useful past the first index when $NASUX_PKG_VERSION is an array
 		# since that is the index that determines the actual version.
 		if (( i++ > 0 )); then
 			echo "PASS - ${version_old%-0}${version_old_is_bad:+" (INVALID)"} -> ${version_new%-0}"
@@ -218,7 +218,7 @@ check_version() {
 				"FAILED ${version_old_is_bad:-$version_old} -> ${version_new}" \
 				"" \
 				"Version of '$package_name' has not been incremented." \
-				"Either 'TERMUX_PKG_VERSION' or 'TERMUX_PKG_REVISION'" \
+				"Either 'NASUX_PKG_VERSION' or 'TERMUX_PKG_REVISION'" \
 				"need to be modified in the build.sh when changing a package build." \
 				"You can use ./scripts/bin/revbump '$package_name' to do this automatically."
 
@@ -227,7 +227,7 @@ check_version() {
 			printf '%s\n' \
 				"" \
 				"- If you are reverting '$package_name' to an older version use the '+really' suffix" \
-				"e.g. TERMUX_PKG_VERSION=${version_new%-*}+really${version_old%-*}" \
+				"e.g. NASUX_PKG_VERSION=${version_new%-*}+really${version_old%-*}" \
 				"- If ${package_name}'s version scheme has changed completely an epoch may be needed." \
 				"For more information see:" \
 				"https://www.debian.org/doc/debian-policy/ch-controlfields.html#epochs-should-be-used-sparingly"
@@ -250,14 +250,14 @@ check_version() {
 				"Got     : ${version_old} -> ${version_new}" \
 				"Expected: ${version_old} -> ${version}-$((old_revision + 1))"
 			continue
-		# If that check passed the TERMUX_PKG_VERSION must have changed,
+		# If that check passed the NASUX_PKG_VERSION must have changed,
 		# in which case TERMUX_PKG_REVISION should be reset to 0.
 		elif [[ "${version_new%-*}" != "${version_old%-*}" && "$new_revision" != "0" ]]; then
 			(( error++ )) # Not reset
 			printf '%s\n' \
 				"FAILED - $version_old -> $version_new" \
 				"" \
-				"TERMUX_PKG_VERSION was bumped but TERMUX_PKG_REVISION wasn't reset." \
+				"NASUX_PKG_VERSION was bumped but TERMUX_PKG_REVISION wasn't reset." \
 				"Please remove the 'TERMUX_PKG_REVISION=${new_revision}' line." \
 				""
 			continue
@@ -282,8 +282,8 @@ lint_package() {
 	echo -n "Layout: "
 	local channel in_dir=''
 	for channel in $TERMUX_PACKAGES_DIRECTORIES; do
-		[[ -d "$TERMUX_SCRIPTDIR/$channel/$package_name" ]] && {
-			in_dir="$TERMUX_SCRIPTDIR/$channel/$package_name"
+		[[ -d "$NASUX_SCRIPTDIR/$channel/$package_name" ]] && {
+			in_dir="$NASUX_SCRIPTDIR/$channel/$package_name"
 			break
 		}
 	done
@@ -372,9 +372,9 @@ lint_package() {
 
 		pkg_lint_error=false
 
-		echo -n "TERMUX_PKG_HOMEPAGE: "
-		if (( ${#TERMUX_PKG_HOMEPAGE} )); then
-			if [[ ! "$TERMUX_PKG_HOMEPAGE" == 'https://'* ]]; then
+		echo -n "NASUX_PKG_HOMEPAGE: "
+		if (( ${#NASUX_PKG_HOMEPAGE} )); then
+			if [[ ! "$NASUX_PKG_HOMEPAGE" == 'https://'* ]]; then
 				echo "NON-HTTPS (acceptable)"
 			else
 				echo "PASS"
@@ -384,10 +384,10 @@ lint_package() {
 			pkg_lint_error=true
 		fi
 
-		echo -n "TERMUX_PKG_DESCRIPTION: "
-		if (( ${#TERMUX_PKG_DESCRIPTION} )); then
+		echo -n "NASUX_PKG_DESCRIPTION: "
+		if (( ${#NASUX_PKG_DESCRIPTION} )); then
 
-			if (( ${#TERMUX_PKG_DESCRIPTION} > 100 )); then
+			if (( ${#NASUX_PKG_DESCRIPTION} > 100 )); then
 				echo "TOO LONG (allowed: 100 characters max)"
 			else
 				echo "PASS"
@@ -398,12 +398,12 @@ lint_package() {
 			pkg_lint_error=true
 		fi
 
-		echo -n "TERMUX_PKG_LICENSE: "
-		if (( ${#TERMUX_PKG_LICENSE} )); then
-			case "$TERMUX_PKG_LICENSE" in
+		echo -n "NASUX_PKG_LICENSE: "
+		if (( ${#NASUX_PKG_LICENSE} )); then
+			case "$NASUX_PKG_LICENSE" in
 				*custom*) echo "CUSTOM" ;;
 				'non-free') echo "NON-FREE";;
-				*) check_package_license "$TERMUX_PKG_LICENSE" || pkg_lint_error=true
+				*) check_package_license "$NASUX_PKG_LICENSE" || pkg_lint_error=true
 				;;
 			esac
 		else
@@ -411,8 +411,8 @@ lint_package() {
 			pkg_lint_error=true
 		fi
 
-		echo -n "TERMUX_PKG_MAINTAINER: "
-		if (( ${#TERMUX_PKG_MAINTAINER} )); then
+		echo -n "NASUX_PKG_MAINTAINER: "
+		if (( ${#NASUX_PKG_MAINTAINER} )); then
 			echo "PASS"
 		else
 			echo "NOT SET"
@@ -435,7 +435,7 @@ lint_package() {
 			fi
 		fi
 
-		echo -n "TERMUX_PKG_VERSION: "
+		echo -n "NASUX_PKG_VERSION: "
 		check_version "$package_script" || pkg_lint_error=true
 
 		if (( ${#TERMUX_PKG_REVISION} )); then
@@ -461,12 +461,12 @@ lint_package() {
 			esac
 		fi
 
-		echo -n "TERMUX_PKG_SRCURL: "
-		if (( ${#TERMUX_PKG_SRCURL} )); then
-			for (( i = 0; i < ${#TERMUX_PKG_SRCURL[@]}; i++ )); do
-				url="${TERMUX_PKG_SRCURL[$i]}"
+		echo -n "NASUX_PKG_SRCURL: "
+		if (( ${#NASUX_PKG_SRCURL} )); then
+			for (( i = 0; i < ${#NASUX_PKG_SRCURL[@]}; i++ )); do
+				url="${NASUX_PKG_SRCURL[$i]}"
 				(( ${#url} )) || {
-					echo "NOT SET (\${TERMUX_PKG_SRCURL[$i]} has no value)"
+					echo "NOT SET (\${NASUX_PKG_SRCURL[$i]} has no value)"
 					pkg_lint_error=true
 					break
 				}
@@ -566,12 +566,12 @@ lint_package() {
 			done
 			unset i url protocol host user repo ref_path protocol_type tarball_type lint_msg
 
-			echo -n "TERMUX_PKG_SHA256: "
-			if (( ${#TERMUX_PKG_SHA256} )); then
-				if (( ${#TERMUX_PKG_SRCURL[@]} == ${#TERMUX_PKG_SHA256[@]} )); then
+			echo -n "NASUX_PKG_SHA256: "
+			if (( ${#NASUX_PKG_SHA256} )); then
+				if (( ${#NASUX_PKG_SRCURL[@]} == ${#NASUX_PKG_SHA256[@]} )); then
 					sha256_ok="PASS"
 
-					for sha256 in "${TERMUX_PKG_SHA256[@]}"; do
+					for sha256 in "${NASUX_PKG_SHA256[@]}"; do
 						if [[ "$sha256" == 'SKIP_CHECKSUM' ]]; then
 							sha256_ok="PASS (SKIP_CHECKSUM)"
 						elif [[ ! "$sha256" =~ [0-9a-f]{64} ]]; then
@@ -584,11 +584,11 @@ lint_package() {
 					echo "$sha256_ok"
 					unset sha256 sha256_ok
 				else
-					echo "LENGTHS OF 'TERMUX_PKG_SRCURL' AND 'TERMUX_PKG_SHA256' ARRAYS ARE NOT EQUAL"
+					echo "LENGTHS OF 'NASUX_PKG_SRCURL' AND 'NASUX_PKG_SHA256' ARRAYS ARE NOT EQUAL"
 					pkg_lint_error=true
 				fi
-			elif [[ "${TERMUX_PKG_SRCURL:0:4}" == 'git+' ]]; then
-				echo "NOT SET (acceptable since TERMUX_PKG_SRCURL is git repo)"
+			elif [[ "${NASUX_PKG_SRCURL:0:4}" == 'git+' ]]; then
+				echo "NOT SET (acceptable since NASUX_PKG_SRCURL is git repo)"
 			else
 				echo "NOT SET"
 				pkg_lint_error=true
@@ -639,10 +639,10 @@ lint_package() {
 			esac
 		fi
 
-		if (( ${#TERMUX_PKG_BUILD_IN_SRC} )); then
-		echo -n "TERMUX_PKG_BUILD_IN_SRC: "
+		if (( ${#NASUX_PKG_BUILD_IN_SRC} )); then
+		echo -n "NASUX_PKG_BUILD_IN_SRC: "
 
-			case "$TERMUX_PKG_BUILD_IN_SRC" in
+			case "$NASUX_PKG_BUILD_IN_SRC" in
 				'true'|'false')
 					echo "PASS";;
 				*)
@@ -783,7 +783,7 @@ linter_main() {
 	if [[ "$problems_found" == 'true' ]]; then
 		echo "================================================================"
 		echo
-		echo "A problem has been found in '$(realpath --relative-to="$TERMUX_SCRIPTDIR" "$package_script")'."
+		echo "A problem has been found in '$(realpath --relative-to="$NASUX_SCRIPTDIR" "$package_script")'."
 		echo "Checked $package_counter packages before the first error was detected."
 		echo
 		echo "================================================================"
@@ -818,7 +818,7 @@ if (( $# )); then
 	linter_main "$@"
 	unset package_counter
 else
-	for repo_dir in $(jq --raw-output 'del(.pkg_format) | keys | .[]' "$TERMUX_SCRIPTDIR/repo.json"); do
+	for repo_dir in $(jq --raw-output 'del(.pkg_format) | keys | .[]' "$NASUX_SCRIPTDIR/repo.json"); do
 		linter_main "$repo_dir"/*/build.sh
 	done
 	unset package_counter

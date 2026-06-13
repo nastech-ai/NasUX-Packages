@@ -43,7 +43,7 @@ body:
     attributes:
       label: System information
       description: |
-        Provide the output of `nasux-info` (or `termux-info` if not yet replaced),
+        Provide the output of `nasux-info` (or `nasux-info` if not yet replaced),
         Android version, device model, and NasUX app version.
       render: shell
     validations:

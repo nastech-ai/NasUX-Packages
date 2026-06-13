@@ -1,12 +1,12 @@
-TERMUX_PKG_HOMEPAGE=https://mate-desktop.org/
-TERMUX_PKG_DESCRIPTION="Common MATE utilities for viewing disk usage, logs and fonts, taking screenshots, managing dictionaries and searching files"
-TERMUX_PKG_LICENSE="GPL-2.0-or-later"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="1.28.1"
-TERMUX_PKG_SRCURL="https://github.com/mate-desktop/mate-utils/releases/download/v$TERMUX_PKG_VERSION/mate-utils-$TERMUX_PKG_VERSION.tar.xz"
-TERMUX_PKG_SHA256=0dbfbee7a966ddf114e62c6d49ea8f35c1d4bf14d275a1369c324e36ff84ab9a
+NASUX_PKG_HOMEPAGE=https://mate-desktop.org/
+NASUX_PKG_DESCRIPTION="Common MATE utilities for viewing disk usage, logs and fonts, taking screenshots, managing dictionaries and searching files"
+NASUX_PKG_LICENSE="GPL-2.0-or-later"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="1.28.1"
+NASUX_PKG_SRCURL="https://github.com/mate-desktop/mate-utils/releases/download/v$NASUX_PKG_VERSION/mate-utils-$NASUX_PKG_VERSION.tar.xz"
+NASUX_PKG_SHA256=0dbfbee7a966ddf114e62c6d49ea8f35c1d4bf14d275a1369c324e36ff84ab9a
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="mate-desktop, gettext, libcanberra, libgtop, libsm, libxml2"
+NASUX_PKG_DEPENDS="mate-desktop, gettext, libcanberra, libgtop, libsm, libxml2"
 TERMUX_PKG_SUGGESTS="mate-panel"
 TERMUX_PKG_BUILD_DEPENDS="autoconf-archive, glib, inkscape, mate-common, mate-panel, python"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
@@ -20,7 +20,7 @@ etc/mate-system-log.conf
 
 termux_step_post_make_install() {
 	# populate a custom configuration file in syslog.conf-like format
-	# with log file locations that are likely to exist in Termux
+	# with log file locations that are likely to exist in NasUX
 	mkdir -p "$TERMUX_PREFIX/etc"
 	if [[ "$TERMUX_PACKAGE_FORMAT" == "debian" ]]; then
 		cat <<- EOF > "$TERMUX_PREFIX/etc/mate-system-log.conf"

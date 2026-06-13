@@ -1,36 +1,36 @@
-TERMUX_PKG_HOMEPAGE=https://simulide.com/p/
-TERMUX_PKG_DESCRIPTION="Simple real time electronic circuit simulator"
-TERMUX_PKG_LICENSE="AGPL-V3"
-TERMUX_PKG_MAINTAINER="@termux"
+NASUX_PKG_HOMEPAGE=https://simulide.com/p/
+NASUX_PKG_DESCRIPTION="Simple real time electronic circuit simulator"
+NASUX_PKG_LICENSE="AGPL-V3"
+NASUX_PKG_MAINTAINER="@nastech-ai"
 _COMMIT=13cb963d9aae083b22e3446fafdfbcb1a3af7310
-TERMUX_PKG_VERSION=2025.10.29
-TERMUX_PKG_SRCURL=git+https://github.com/eeTools/SimulIDE-dev
-TERMUX_PKG_SHA256=73d85be6baad944a709c470088a47e5da1dd939bcc67343134027921891e843c
+NASUX_PKG_VERSION=2025.10.29
+NASUX_PKG_SRCURL=git+https://github.com/eeTools/SimulIDE-dev
+NASUX_PKG_SHA256=73d85be6baad944a709c470088a47e5da1dd939bcc67343134027921891e843c
 TERMUX_PKG_AUTO_UPDATE=false
 TERMUX_PKG_GIT_BRANCH=master
-TERMUX_PKG_DEPENDS="libc++, libelf, qt5-qtbase, qt5-qtmultimedia, qt5-qtscript, qt5-qtserialport, qt5-qtsvg, simulide-data"
+NASUX_PKG_DEPENDS="libc++, libelf, qt5-qtbase, qt5-qtmultimedia, qt5-qtscript, qt5-qtserialport, qt5-qtsvg, simulide-data"
 TERMUX_PKG_BUILD_DEPENDS="dos2unix, qt5-qtbase-cross-tools, qt5-qttools-cross-tools"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 
 termux_step_post_get_source() {
 	git fetch --unshallow
 	git checkout $_COMMIT
 
 	local version="$(git log -1 --format=%cs | sed 's/-/./g')"
-	if [ "$version" != "$TERMUX_PKG_VERSION" ]; then
-		echo -n "ERROR: The specified version \"$TERMUX_PKG_VERSION\""
+	if [ "$version" != "$NASUX_PKG_VERSION" ]; then
+		echo -n "ERROR: The specified version \"$NASUX_PKG_VERSION\""
 		echo " is different from what is expected to be: \"$version\""
 		return 1
 	fi
 
 	local s=$(find . -type f ! -path '*/.git/*' -print0 | xargs -0 sha256sum | LC_ALL=C sort | sha256sum)
-	if [[ "${s}" != "${TERMUX_PKG_SHA256}  "* ]]; then
+	if [[ "${s}" != "${NASUX_PKG_SHA256}  "* ]]; then
 		termux_error_exit "Checksum mismatch for source files."
 	fi
 
 	if [[ "$TERMUX_ON_DEVICE_BUILD" == "false" ]]; then
 		DOS2UNIX="$TERMUX_PKG_TMPDIR/dos2unix"
-		(. "$TERMUX_SCRIPTDIR/packages/dos2unix/build.sh"; TERMUX_PKG_SRCDIR="$DOS2UNIX" termux_step_get_source)
+		(. "$NASUX_SCRIPTDIR/packages/dos2unix/build.sh"; TERMUX_PKG_SRCDIR="$DOS2UNIX" termux_step_get_source)
 		pushd "$DOS2UNIX"
 		make dos2unix
 		popd # DOS2UNIX
@@ -46,7 +46,7 @@ termux_step_pre_configure() {
 }
 
 termux_step_configure() {
-	qmake -spec "$TERMUX_PREFIX/lib/qt/mkspecs/termux-cross"
+	qmake -spec "$TERMUX_PREFIX/lib/qt/mkspecs/nasux-cross"
 }
 
 termux_step_make_install() {

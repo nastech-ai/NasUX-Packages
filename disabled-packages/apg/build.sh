@@ -1,16 +1,16 @@
 ## Note: APG project seems dead. Official homepage & src urls
 ## disappeared.
 
-TERMUX_PKG_HOMEPAGE=http://www.adel.nursat.kz/apg/index.shtml
-TERMUX_PKG_DESCRIPTION="Automated Password Generator"
-TERMUX_PKG_LICENSE="BSD"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=2.3.0b
+NASUX_PKG_HOMEPAGE=http://www.adel.nursat.kz/apg/index.shtml
+NASUX_PKG_DESCRIPTION="Automated Password Generator"
+NASUX_PKG_LICENSE="BSD"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=2.3.0b
 TERMUX_PKG_REVISION=4
-TERMUX_PKG_SRCURL=https://github.com/termux/distfiles/releases/download/2021.01.04/apg-${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=d1e52029709e2d7f9cb99bedce3e02ee7a63cff7b8e2b4c2bc55b3dc03c28b92
-TERMUX_PKG_DEPENDS="libcrypt"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_SRCURL=https://github.com/nasux/distfiles/releases/download/2021.01.04/apg-${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=d1e52029709e2d7f9cb99bedce3e02ee7a63cff7b8e2b4c2bc55b3dc03c28b92
+NASUX_PKG_DEPENDS="libcrypt"
+NASUX_PKG_BUILD_IN_SRC=true
 
 termux_step_post_extract_package() {
 	# Fix permissions.

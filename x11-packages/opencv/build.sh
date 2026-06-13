@@ -1,19 +1,19 @@
-TERMUX_PKG_HOMEPAGE=https://opencv.org/
-TERMUX_PKG_DESCRIPTION="Open Source Computer Vision Library"
-TERMUX_PKG_LICENSE="Apache-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="4.13.0"
+NASUX_PKG_HOMEPAGE=https://opencv.org/
+NASUX_PKG_DESCRIPTION="Open Source Computer Vision Library"
+NASUX_PKG_LICENSE="Apache-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="4.13.0"
 TERMUX_PKG_REVISION=2
-TERMUX_PKG_SRCURL=(
-	"https://github.com/opencv/opencv/archive/refs/tags/${TERMUX_PKG_VERSION}/opencv-${TERMUX_PKG_VERSION}.tar.gz"
-	"https://github.com/opencv/opencv_contrib/archive/refs/tags/${TERMUX_PKG_VERSION}/opencv_contrib-${TERMUX_PKG_VERSION}.tar.gz"
+NASUX_PKG_SRCURL=(
+	"https://github.com/opencv/opencv/archive/refs/tags/${NASUX_PKG_VERSION}/opencv-${NASUX_PKG_VERSION}.tar.gz"
+	"https://github.com/opencv/opencv_contrib/archive/refs/tags/${NASUX_PKG_VERSION}/opencv_contrib-${NASUX_PKG_VERSION}.tar.gz"
 )
-TERMUX_PKG_SHA256=(
+NASUX_PKG_SHA256=(
 	1d40ca017ea51c533cf9fd5cbde5b5fe7ae248291ddf2af99d4c17cf8e13017d
 	1e0077a4fd2960a7d2f4c9e49d6ba7bb891cac2d1be36d7e8e47aa97a9d1039b
 )
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="abseil-cpp, ffmpeg, libc++, libjpeg-turbo, libopenblas, libpng, libprotobuf, libtiff, libwebp, openjpeg, openjpeg-tools, qt6-qtbase, qt6-qt5compat, zlib"
+NASUX_PKG_DEPENDS="abseil-cpp, ffmpeg, libc++, libjpeg-turbo, libopenblas, libpng, libprotobuf, libtiff, libwebp, openjpeg, openjpeg-tools, qt6-qtbase, qt6-qt5compat, zlib"
 TERMUX_PKG_BUILD_DEPENDS="python-numpy-static"
 TERMUX_PKG_PYTHON_COMMON_BUILD_DEPS="Cython, wheel"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
@@ -27,13 +27,13 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DBUILD_PROTOBUF=OFF
 -DBUILD_TESTS=OFF
 -DPROTOBUF_UPDATE_FILES=ON
--DOPENCV_EXTRA_MODULES_PATH=$TERMUX_PKG_SRCDIR/opencv_contrib-$TERMUX_PKG_VERSION/modules \
+-DOPENCV_EXTRA_MODULES_PATH=$TERMUX_PKG_SRCDIR/opencv_contrib-$NASUX_PKG_VERSION/modules \
 -DOPENCV_GENERATE_PKGCONFIG=ON
 -DOPENCV_SKIP_CMAKE_CXX_STANDARD=ON
 "
 
 termux_step_pre_configure() {
-	termux_setup_protobuf
+	nasux_setup_protobuf
 
 	if [ "$TERMUX_ON_DEVICE_BUILD" = "false" ]; then
 		# By default cmake will pick $TERMUX_PREFIX/bin/protoc, we should avoid it when cross-compiling
@@ -42,7 +42,7 @@ termux_step_pre_configure() {
 
 	# Keep this the same version which abseil-cpp requires
 	CXXFLAGS+=" -std=c++17"
-	LDFLAGS+=" $($TERMUX_SCRIPTDIR/packages/libprotobuf/interface_link_libraries.sh)"
+	LDFLAGS+=" $($NASUX_SCRIPTDIR/packages/libprotobuf/interface_link_libraries.sh)"
 	LDFLAGS+=" -llog"
 
 	find "$TERMUX_PKG_SRCDIR" -name CMakeLists.txt -o -name '*.cmake' | \

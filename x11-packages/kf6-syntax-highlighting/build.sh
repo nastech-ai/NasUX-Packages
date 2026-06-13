@@ -1,11 +1,11 @@
-TERMUX_PKG_HOMEPAGE="https://invent.kde.org/frameworks/syntax-highlighting"
-TERMUX_PKG_DESCRIPTION="Syntax highlighting Engine for Structured Text and Code"
-TERMUX_PKG_LICENSE="GPL-2.0-only, LGPL-2.0-or-later"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="6.26.0"
-TERMUX_PKG_SRCURL="https://download.kde.org/stable/frameworks/${TERMUX_PKG_VERSION%.*}/syntax-highlighting-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=a4e86d167cd5f3c4318584119451f891551c24cd4a0ff1f7ef95e2476a39c5ac
-TERMUX_PKG_DEPENDS="libc++, qt6-qtdeclarative, qt6-qtbase"
+NASUX_PKG_HOMEPAGE="https://invent.kde.org/frameworks/syntax-highlighting"
+NASUX_PKG_DESCRIPTION="Syntax highlighting Engine for Structured Text and Code"
+NASUX_PKG_LICENSE="GPL-2.0-only, LGPL-2.0-or-later"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="6.26.0"
+NASUX_PKG_SRCURL="https://download.kde.org/stable/frameworks/${NASUX_PKG_VERSION%.*}/syntax-highlighting-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=a4e86d167cd5f3c4318584119451f891551c24cd4a0ff1f7ef95e2476a39c5ac
+NASUX_PKG_DEPENDS="libc++, qt6-qtdeclarative, qt6-qtbase"
 TERMUX_PKG_BUILD_DEPENDS="extra-cmake-modules, qt6-qttools"
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_HOSTBUILD=true
@@ -20,8 +20,8 @@ termux_step_host_build() {
 		return
 	fi
 
-	termux_setup_cmake
-	termux_setup_ninja
+	nasux_setup_cmake
+	nasux_setup_ninja
 
 	cmake -G Ninja \
 		-S "${TERMUX_PKG_SRCDIR}" \

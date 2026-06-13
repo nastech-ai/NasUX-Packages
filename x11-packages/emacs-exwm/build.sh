@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/emacs-exwm/exwm
-TERMUX_PKG_DESCRIPTION="Emacs X Window Manager"
-TERMUX_PKG_LICENSE="GPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="0.34"
-TERMUX_PKG_SRCURL="https://github.com/emacs-exwm/exwm/archive/refs/tags/$TERMUX_PKG_VERSION.tar.gz"
-TERMUX_PKG_SHA256=ebe730bbda5bce75baf4532173171a9283a58684e7ec84192ba03c3d8328cf0a
-TERMUX_PKG_DEPENDS="emacs-x, emacs-xelb"
+NASUX_PKG_HOMEPAGE=https://github.com/emacs-exwm/exwm
+NASUX_PKG_DESCRIPTION="Emacs X Window Manager"
+NASUX_PKG_LICENSE="GPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="0.34"
+NASUX_PKG_SRCURL="https://github.com/emacs-exwm/exwm/archive/refs/tags/$NASUX_PKG_VERSION.tar.gz"
+NASUX_PKG_SHA256=ebe730bbda5bce75baf4532173171a9283a58684e7ec84192ba03c3d8328cf0a
+NASUX_PKG_DEPENDS="emacs-x, emacs-xelb"
 TERMUX_PKG_RECOMMENDS="dbus"
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_HOSTBUILD=true
 
 termux_step_host_build() {
@@ -66,7 +66,7 @@ termux_step_create_debscripts() {
 	echo
 	echo "  In-depth configuration examples are available in the official documentation: https://github.com/emacs-exwm/exwm/wiki#bootstrap"
 	echo "3. launch the X11 server with emacs as the window manager:"
-	echo "  $ termux-x11 -xstartup \"dbus-launch --exit-with-session emacs\""
+	echo "  $ nasux-x11 -xstartup \"dbus-launch --exit-with-session emacs\""
 	EOF
 	chmod +x ./postinst
 }

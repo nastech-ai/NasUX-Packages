@@ -8,11 +8,11 @@ termux_pkg_get_update_method() {
 	TERMUX_PKG_UPDATE_METHOD="$(set +e +u; . "${TERMUX_PKG_BUILDER_DIR}/build.sh" &> /dev/null ; echo "${TERMUX_PKG_UPDATE_METHOD:-}")"
 
 	# Example:
-	# https://github.com/vim/vim/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz
+	# https://github.com/vim/vim/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz
 	#            _="https:"
 	#            _=""
 	# project_host="github.com"
-	#            _="vim/vim/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz"
+	#            _="vim/vim/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz"
 	local project_host
 	IFS='/' read -r _ _ project_host _ <<< "${source_url}"
 
@@ -20,7 +20,7 @@ termux_pkg_get_update_method() {
 	# GitHub Actions with HTTP 403 errors in January 2026.
 	# Example command failing in GitHub Actions:
 	# curl https://gitlab.gnome.org/api/v4/projects/GNOME%2Fvte/releases/permalink/latest
-	# See: https://github.com/termux/termux-packages/issues/28242
+	# See: https://github.com/nastech-ai/NasUX-Packages/issues/28242
 	if [[ -z "${TERMUX_PKG_UPDATE_METHOD:-}" ]]; then
 		if [[ "${project_host}" == "github.com" ]]; then
 			TERMUX_PKG_UPDATE_METHOD="github"
@@ -40,10 +40,10 @@ termux_pkg_auto_update() {
 	fi
 
 	local TERMUX_PKG_UPDATE_METHOD
-	TERMUX_PKG_UPDATE_METHOD="$(termux_pkg_get_update_method "${TERMUX_PKG_SRCURL}")"
+	TERMUX_PKG_UPDATE_METHOD="$(termux_pkg_get_update_method "${NASUX_PKG_SRCURL}")"
 	case "$TERMUX_PKG_UPDATE_METHOD" in
 		github)
-			if [[ "${TERMUX_PKG_SRCURL}" != *"${TERMUX_PKG_UPDATE_METHOD}.com"* ]]; then
+			if [[ "${NASUX_PKG_SRCURL}" != *"${TERMUX_PKG_UPDATE_METHOD}.com"* ]]; then
 				termux_error_exit <<-EndOfError
 					source url's hostname is not ${TERMUX_PKG_UPDATE_METHOD}.com, but has been
 					configured to use ${TERMUX_PKG_UPDATE_METHOD}'s method.

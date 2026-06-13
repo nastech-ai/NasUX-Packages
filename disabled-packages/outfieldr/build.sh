@@ -1,18 +1,18 @@
-TERMUX_PKG_HOMEPAGE=https://gitlab.com/ve-nt/outfieldr
-TERMUX_PKG_DESCRIPTION="A TLDR client in Zig"
-TERMUX_PKG_LICENSE="MIT"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION=1.0.3
-TERMUX_PKG_SRCURL=git+https://gitlab.com/ve-nt/outfieldr
-TERMUX_PKG_GIT_BRANCH=$TERMUX_PKG_VERSION
-TERMUX_PKG_DEPENDS="libc++"
-TERMUX_PKG_BUILD_IN_SRC=true
-TERMUX_PKG_EXCLUDED_ARCHES="arm, i686"
+NASUX_PKG_HOMEPAGE=https://gitlab.com/ve-nt/outfieldr
+NASUX_PKG_DESCRIPTION="A TLDR client in Zig"
+NASUX_PKG_LICENSE="MIT"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION=1.0.3
+NASUX_PKG_SRCURL=git+https://gitlab.com/ve-nt/outfieldr
+TERMUX_PKG_GIT_BRANCH=$NASUX_PKG_VERSION
+NASUX_PKG_DEPENDS="libc++"
+NASUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_EXCLUDED_ARCHES="arm, i686"
 TERMUX_ZIG_VERSION="0.9.1"
 
 termux_step_make() {
-	termux_setup_zig
-	ZIG_TARGET_NAME=${TERMUX_ARCH}-linux-android
+	nasux_setup_zig
+	ZIG_TARGET_NAME=${NASUX_ARCH}-linux-android
 	zig build -Dtarget=$ZIG_TARGET_NAME
 }
 

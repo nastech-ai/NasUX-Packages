@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://www.mozilla.org/firefox
-TERMUX_PKG_DESCRIPTION="Mozilla Firefox web browser"
-TERMUX_PKG_LICENSE="MPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="151.0.4"
-TERMUX_PKG_SRCURL="https://archive.mozilla.org/pub/firefox/releases/${TERMUX_PKG_VERSION#*really}/source/firefox-${TERMUX_PKG_VERSION#*really}.source.tar.xz"
-TERMUX_PKG_SHA256=ffda1991cc3b9b35d3c034314d253a51d6a20f603b693db2f55a00fa840e83a7
+NASUX_PKG_HOMEPAGE=https://www.mozilla.org/firefox
+NASUX_PKG_DESCRIPTION="Mozilla Firefox web browser"
+NASUX_PKG_LICENSE="MPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="151.0.4"
+NASUX_PKG_SRCURL="https://archive.mozilla.org/pub/firefox/releases/${NASUX_PKG_VERSION#*really}/source/firefox-${NASUX_PKG_VERSION#*really}.source.tar.xz"
+NASUX_PKG_SHA256=ffda1991cc3b9b35d3c034314d253a51d6a20f603b693db2f55a00fa840e83a7
 # ffmpeg and pulseaudio are dependencies through dlopen(3):
-TERMUX_PKG_DEPENDS="ffmpeg, fontconfig, freetype, gdk-pixbuf, glib, gtk3, libandroid-shmem, libandroid-spawn, libc++, libcairo, libevent, libffi, libice, libicu, libjpeg-turbo, libnspr, libnss, libpixman, libsm, libvpx, libwebp, libx11, libxcb, libxcomposite, libxdamage, libxext, libxfixes, libxrandr, libxtst, pango, pulseaudio, zlib"
+NASUX_PKG_DEPENDS="ffmpeg, fontconfig, freetype, gdk-pixbuf, glib, gtk3, libandroid-shmem, libandroid-spawn, libc++, libcairo, libevent, libffi, libice, libicu, libjpeg-turbo, libnspr, libnss, libpixman, libsm, libvpx, libwebp, libx11, libxcb, libxcomposite, libxdamage, libxext, libxfixes, libxrandr, libxtst, pango, pulseaudio, zlib"
 TERMUX_PKG_BUILD_DEPENDS="libcpufeatures, libice, libsm"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_AUTO_UPDATE=true
 
 # NOTE:
@@ -58,14 +58,14 @@ termux_step_post_get_source() {
 	sed -i 's|^\(\[patch\.crates-io\]\)$|\1\ncc = { path = "third_party/rust/cc" }|g' \
 		Cargo.toml
 	(
-		termux_setup_rust
+		nasux_setup_rust
 		cargo update -p cc
 	)
 }
 
 termux_step_pre_configure() {
-	termux_setup_nodejs
-	termux_setup_rust
+	nasux_setup_nodejs
+	nasux_setup_rust
 
 	# https://github.com/rust-lang/rust/issues/49853
 	# https://github.com/rust-lang/rust/issues/45854
@@ -90,7 +90,7 @@ termux_step_pre_configure() {
 	CXXFLAGS+=" -U__ANDROID__ -D_LIBCPP_HAS_NO_C11_ALIGNED_ALLOC"
 	LDFLAGS+=" -landroid-shmem -landroid-spawn -llog"
 
-	if [ "$TERMUX_ARCH" = "arm" ]; then
+	if [ "$NASUX_ARCH" = "arm" ]; then
 		# For symbol android_getCpuFeatures
 		LDFLAGS+=" -l:libndk_compat.a"
 	fi
@@ -143,7 +143,7 @@ termux_step_make_install() {
 }
 
 termux_step_post_make_install() {
-	# https://github.com/termux/termux-packages/issues/18429
+	# https://github.com/nastech-ai/NasUX-Packages/issues/18429
 	# https://phabricator.services.mozilla.com/D181687
 	# Android 8.x and older not support "-z pack-relative-relocs" / DT_RELR
 	local r=$("${READELF}" -d "${TERMUX_PREFIX}/bin/firefox")

@@ -1,16 +1,16 @@
-TERMUX_PKG_HOMEPAGE=https://www.qt.io/
-TERMUX_PKG_DESCRIPTION="A cross-platform application and UI framework"
-TERMUX_PKG_LICENSE="LGPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="5.15.18"
+NASUX_PKG_HOMEPAGE=https://www.qt.io/
+NASUX_PKG_DESCRIPTION="A cross-platform application and UI framework"
+NASUX_PKG_LICENSE="LGPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="5.15.18"
 TERMUX_PKG_REVISION=4
-TERMUX_PKG_SRCURL="https://download.qt.io/archive/qt/${TERMUX_PKG_VERSION%.*}/${TERMUX_PKG_VERSION}/submodules/qtbase-everywhere-opensource-src-${TERMUX_PKG_VERSION}.tar.xz"
-TERMUX_PKG_SHA256=7b632550ea1048fc10c741e46e2e3b093e5ca94dfa6209e9e0848800e247023b
-TERMUX_PKG_DEPENDS="dbus, double-conversion, freetype, glib, harfbuzz, krb5, libandroid-execinfo, libandroid-posix-semaphore, libandroid-shmem, libc++, libice, libicu, libjpeg-turbo, libpng, libsm, libuuid, libx11, libxcb, libxi, libxkbcommon, opengl, openssl, pcre2, postgresql, ttf-dejavu, vulkan-loader, xcb-util-image, xcb-util-keysyms, xcb-util-renderutil, xcb-util-wm, xdg-utils, zlib"
+NASUX_PKG_SRCURL="https://download.qt.io/archive/qt/${NASUX_PKG_VERSION%.*}/${NASUX_PKG_VERSION}/submodules/qtbase-everywhere-opensource-src-${NASUX_PKG_VERSION}.tar.xz"
+NASUX_PKG_SHA256=7b632550ea1048fc10c741e46e2e3b093e5ca94dfa6209e9e0848800e247023b
+NASUX_PKG_DEPENDS="dbus, double-conversion, freetype, glib, harfbuzz, krb5, libandroid-execinfo, libandroid-posix-semaphore, libandroid-shmem, libc++, libice, libicu, libjpeg-turbo, libpng, libsm, libuuid, libx11, libxcb, libxi, libxkbcommon, opengl, openssl, pcre2, postgresql, ttf-dejavu, vulkan-loader, xcb-util-image, xcb-util-keysyms, xcb-util-renderutil, xcb-util-wm, xdg-utils, zlib"
 # gtk3 dependency is a run-time dependency only for the gtk platformtheme subpackage
 TERMUX_PKG_BUILD_DEPENDS="gtk3, vulkan-headers"
 TERMUX_PKG_SUGGESTS="qt5-qmake"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_NO_STATICSPLIT=true
 
 TERMUX_PKG_RM_AFTER_INSTALL="
@@ -23,7 +23,7 @@ TERMUX_PKG_REPLACES="qt5-base"
 TERMUX_PKG_BREAKS="qt5-x11extras, qt5-tools, qt5-declarative"
 
 termux_step_pre_configure () {
-	if [ "${TERMUX_ARCH}" = "arm" ]; then
+	if [ "${NASUX_ARCH}" = "arm" ]; then
 		## -mfpu=neon causes build failure on ARM.
 		CFLAGS="${CFLAGS/-mfpu=neon/} -mfpu=vfp"
 		CXXFLAGS="${CXXFLAGS/-mfpu=neon/} -mfpu=vfp"
@@ -31,7 +31,7 @@ termux_step_pre_configure () {
 
 	# This is needed for some packages depends on qt5-qtbase, such
 	# as qt5-qtwebengine
-	# https://github.com/termux/termux-packages/issues/18810
+	# https://github.com/nastech-ai/NasUX-Packages/issues/18810
 	export LDFLAGS+=" -Wl,--undefined-version"
 
 	## Create qmake.conf suitable for cross-compiling.
@@ -47,7 +47,7 @@ termux_step_pre_configure () {
 		-e "s|@TERMUX_CFLAGS@|${CPPFLAGS} ${CFLAGS}|" \
 		-e "s|@TERMUX_CXXFLAGS@|${CPPFLAGS} ${CXXFLAGS}|" \
 		-e "s|@TERMUX_LDFLAGS@|${LDFLAGS}|" \
-		"${TERMUX_PKG_BUILDER_DIR}/qmake.conf" > "${TERMUX_PKG_SRCDIR}/mkspecs/termux-cross/qmake.conf"
+		"${TERMUX_PKG_BUILDER_DIR}/qmake.conf" > "${TERMUX_PKG_SRCDIR}/mkspecs/nasux-cross/qmake.conf"
 }
 
 termux_step_configure () {
@@ -58,7 +58,7 @@ termux_step_configure () {
 		-confirm-license \
 		-release \
 		-optimized-tools \
-		-xplatform termux-cross \
+		-xplatform nasux-cross \
 		-shared \
 		-no-rpath \
 		-no-use-gold-linker \
@@ -133,7 +133,7 @@ termux_step_post_make_install() {
 		make clean
 
 		"${TERMUX_PREFIX}/opt/qt/cross/bin/qmake" \
-			-spec "${TERMUX_PKG_SRCDIR}/mkspecs/termux-cross" \
+			-spec "${TERMUX_PKG_SRCDIR}/mkspecs/nasux-cross" \
 			DEFINES+="QT_POSIX_IPC"
 
 		make -j "${TERMUX_PKG_MAKE_PROCESSES}"
@@ -145,7 +145,7 @@ termux_step_post_make_install() {
 		make clean
 
 		"${TERMUX_PREFIX}/opt/qt/cross/bin/qmake" \
-			-spec "${TERMUX_PKG_SRCDIR}/mkspecs/termux-cross"
+			-spec "${TERMUX_PKG_SRCDIR}/mkspecs/nasux-cross"
 
 		make -j "${TERMUX_PKG_MAKE_PROCESSES}"
 	}
@@ -163,7 +163,7 @@ termux_step_post_make_install() {
 			fi
 
 			"${TERMUX_PREFIX}/opt/qt/cross/bin/qmake" \
-				-spec "${TERMUX_PKG_SRCDIR}/mkspecs/termux-cross"
+				-spec "${TERMUX_PKG_SRCDIR}/mkspecs/nasux-cross"
 
 			## Fix build failure on at least 'i686'.
 			sed \
@@ -198,15 +198,15 @@ termux_step_post_make_install() {
 	## Create qmake.conf suitable for compiling host tools (for other modules)
 	install -Dm644 \
 		"${TERMUX_PKG_BUILDER_DIR}/qplatformdefs.host.h" \
-		"${TERMUX_PREFIX}/lib/qt/mkspecs/termux-host/qplatformdefs.h"
+		"${TERMUX_PREFIX}/lib/qt/mkspecs/nasux-host/qplatformdefs.h"
 	sed \
 		-e "s|@TERMUX_PREFIX@|${TERMUX_PREFIX}|g" \
-		"${TERMUX_PKG_BUILDER_DIR}/qmake.host.conf" > "${TERMUX_PREFIX}/lib/qt/mkspecs/termux-host/qmake.conf"
+		"${TERMUX_PKG_BUILDER_DIR}/qmake.host.conf" > "${TERMUX_PREFIX}/lib/qt/mkspecs/nasux-host/qmake.conf"
 }
 
 termux_step_create_debscripts() {
 	# Some clean-up is happening via `postinst`
-	# Because we're using this package in both host (Ubuntu glibc) and device (Termux)
+	# Because we're using this package in both host (Ubuntu glibc) and device (NasUX)
 	cp -f "${TERMUX_PKG_BUILDER_DIR}/postinst" ./
 	sed -i "s|@TERMUX_PREFIX@|$TERMUX_PREFIX|g" ./postinst
 }

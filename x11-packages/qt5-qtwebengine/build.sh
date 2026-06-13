@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/qt/qtwebengine
-TERMUX_PKG_DESCRIPTION="Qt 5 Web Engine Library"
-TERMUX_PKG_LICENSE="LGPL-3.0, GPL-2.0, GPL-3.0, BSD 3-Clause"
-TERMUX_PKG_LICENSE_FILE="LICENSE.LGPL3, LICENSE.GPL2, LICENSE.GPL3, LICENSE.Chromium"
-TERMUX_PKG_MAINTAINER="@licy183"
-TERMUX_PKG_VERSION="5.15.19"
+NASUX_PKG_HOMEPAGE=https://github.com/qt/qtwebengine
+NASUX_PKG_DESCRIPTION="Qt 5 Web Engine Library"
+NASUX_PKG_LICENSE="LGPL-3.0, GPL-2.0, GPL-3.0, BSD 3-Clause"
+NASUX_PKG_LICENSE_FILE="LICENSE.LGPL3, LICENSE.GPL2, LICENSE.GPL3, LICENSE.Chromium"
+NASUX_PKG_MAINTAINER="@licy183"
+NASUX_PKG_VERSION="5.15.19"
 TERMUX_PKG_REVISION=1
-TERMUX_PKG_SRCURL=git+https://github.com/qt/qtwebengine
-TERMUX_PKG_GIT_BRANCH=v$TERMUX_PKG_VERSION-lts
+NASUX_PKG_SRCURL=git+https://github.com/qt/qtwebengine
+TERMUX_PKG_GIT_BRANCH=v$NASUX_PKG_VERSION-lts
 TERMUX_PKG_AUTO_UPDATE=false
-TERMUX_PKG_DEPENDS="dbus, fontconfig, libc++, libexpat, libjpeg-turbo, libminizip, libnspr, libnss, libopus, libpng, libsnappy, libvpx, libwebp, libx11, libxkbfile, qt5-qtbase, qt5-qtdeclarative, zlib"
+NASUX_PKG_DEPENDS="dbus, fontconfig, libc++, libexpat, libjpeg-turbo, libminizip, libnspr, libnss, libopus, libpng, libsnappy, libvpx, libwebp, libx11, libxkbfile, qt5-qtbase, qt5-qtdeclarative, zlib"
 TERMUX_PKG_BUILD_DEPENDS="libdrm, qt5-qtbase-cross-tools, qt5-qtdeclarative-cross-tools"
 TERMUX_PKG_NO_STATICSPLIT=true
 TERMUX_PKG_HOSTBUILD=true
@@ -35,13 +35,13 @@ termux_step_pre_configure() {
 
 termux_step_configure() {
 	cd $TERMUX_PKG_SRCDIR
-	termux_setup_ninja
-	termux_setup_nodejs
+	nasux_setup_ninja
+	nasux_setup_nodejs
 
 	# https://gitweb.gentoo.org/repo/gentoo.git/commit/?id=adb049350a5d4b15b5ee19739d9f2baed83f6acf
 	export LDFLAGS+=" -Wl,--undefined-version"
 
-	# Remove termux's dummy pkg-config
+	# Remove nasux's dummy pkg-config
 	local _host_pkg_config="$(cat $(command -v pkg-config) | grep exec | awk '{print $2}')"
 	rm -rf $TERMUX_PKG_TMPDIR/host-pkg-config-bin
 	mkdir -p $TERMUX_PKG_TMPDIR/host-pkg-config-bin
@@ -114,6 +114,6 @@ termux_step_post_make_install() {
 
 termux_step_post_massage() {
 	# Replace version for cmake
-	local _QT_BASE_VERSION=$(. $TERMUX_SCRIPTDIR/x11-packages/qt5-qtbase/build.sh; echo $TERMUX_PKG_VERSION)
-	sed -e "s|$TERMUX_PKG_VERSION\ |$_QT_BASE_VERSION |" -i lib/cmake/*/*Config.cmake
+	local _QT_BASE_VERSION=$(. $NASUX_SCRIPTDIR/x11-packages/qt5-qtbase/build.sh; echo $NASUX_PKG_VERSION)
+	sed -e "s|$NASUX_PKG_VERSION\ |$_QT_BASE_VERSION |" -i lib/cmake/*/*Config.cmake
 }

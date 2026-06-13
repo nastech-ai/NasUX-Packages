@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/XmacsLabs/mogan
-TERMUX_PKG_DESCRIPTION="A structure editor forked from GNU TeXmacs"
-TERMUX_PKG_LICENSE="GPL-3.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="1.2.9.8"
+NASUX_PKG_HOMEPAGE=https://github.com/XmacsLabs/mogan
+NASUX_PKG_DESCRIPTION="A structure editor forked from GNU TeXmacs"
+NASUX_PKG_LICENSE="GPL-3.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="1.2.9.8"
 TERMUX_PKG_REVISION=5
-TERMUX_PKG_SRCURL="https://github.com/XmacsLabs/mogan/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz"
-TERMUX_PKG_SHA256=70af74dad16816a8097b877dc4cd94202f35517468ab54f6ae6f84ede32746fb
-TERMUX_PKG_DEPENDS="freetype, ghostscript, libandroid-complex-math, libandroid-execinfo, libandroid-spawn, libandroid-wordexp, libc++, libcurl, libgit2, libiconv, libjpeg-turbo, libpng, qt6-qtbase, qt6-qtsvg, zlib"
+NASUX_PKG_SRCURL="https://github.com/XmacsLabs/mogan/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz"
+NASUX_PKG_SHA256=70af74dad16816a8097b877dc4cd94202f35517468ab54f6ae6f84ede32746fb
+NASUX_PKG_DEPENDS="freetype, ghostscript, libandroid-complex-math, libandroid-execinfo, libandroid-spawn, libandroid-wordexp, libc++, libcurl, libgit2, libiconv, libjpeg-turbo, libpng, qt6-qtbase, qt6-qtsvg, zlib"
 TERMUX_PKG_BUILD_DEPENDS="qt6-qtbase-cross-tools"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_RM_AFTER_INSTALL="
 lib/libcurl.so
@@ -39,10 +39,10 @@ termux_step_post_get_source() {
 
 termux_step_pre_configure() {
 	# this is a workaround for build-all.sh issue
-	TERMUX_PKG_DEPENDS+=", mogan-data"
+	NASUX_PKG_DEPENDS+=", mogan-data"
 
-	termux_setup_cmake
-	termux_setup_xmake
+	nasux_setup_cmake
+	nasux_setup_xmake
 
 	# xmake tests -ldl wrongly?
 	LD="${CXX}"
@@ -54,7 +54,7 @@ termux_step_pre_configure() {
 	export XMAKE_GLOBALDIR="$TERMUX_PKG_TMPDIR"
 
 	# for some reason building mogan can corrupt $TERMUX_PREFIX/lib/libcurl.so
-	# and /home/builder/.termux-build/_cache/xmake-2.9.5/bin/xmake ,
+	# and /home/builder/.nasux-build/_cache/xmake-2.9.5/bin/xmake ,
 	# but if they are backed up, then restored when the build completes, the chance
 	# of ruining the builds of other packages after mogan (including repeated builds of mogan)
 	# is reduced.
@@ -74,8 +74,8 @@ termux_step_pre_configure() {
 }
 
 termux_step_make() {
-	local host_platform="${TERMUX_ARCH}-linux-android"
-	case "${TERMUX_ARCH}" in
+	local host_platform="${NASUX_ARCH}-linux-android"
+	case "${NASUX_ARCH}" in
 	arm) host_platform="armv7a-linux-androideabi" ;;
 	esac
 

@@ -1,6 +1,6 @@
-TERMUX_SUBPKG_DESCRIPTION="An emulator for running Game Boy Advance games (Qt GUI)"
+NASUX_SUBPKG_DESCRIPTION="An emulator for running Game Boy Advance games (Qt GUI)"
 TERMUX_SUBPKG_DEPENDS="libc++, libmgba, qt5-qtbase, qt5-qtmultimedia, sdl2 | sdl2-compat"
-TERMUX_SUBPKG_INCLUDE="
+NASUX_SUBPKG_INCLUDE="
 bin/mgba-qt
 share/applications
 share/doc

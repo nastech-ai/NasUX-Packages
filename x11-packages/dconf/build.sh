@@ -1,12 +1,12 @@
-TERMUX_PKG_HOMEPAGE=https://wiki.gnome.org/Projects/dconf
-TERMUX_PKG_DESCRIPTION="dconf is a simple key/value storage system that is heavily optimised for reading"
-TERMUX_PKG_LICENSE="LGPL-2.1"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="0.49.0"
+NASUX_PKG_HOMEPAGE=https://wiki.gnome.org/Projects/dconf
+NASUX_PKG_DESCRIPTION="dconf is a simple key/value storage system that is heavily optimised for reading"
+NASUX_PKG_LICENSE="LGPL-2.1"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="0.49.0"
 TERMUX_PKG_REVISION=1
-TERMUX_PKG_SRCURL=https://download.gnome.org/sources/dconf/${TERMUX_PKG_VERSION%.*}/dconf-${TERMUX_PKG_VERSION}.tar.xz
-TERMUX_PKG_SHA256=16a47e49a58156dbb96578e1708325299e4c19eea9be128d5bd12fd0963d6c36
-TERMUX_PKG_DEPENDS="dbus, glib"
+NASUX_PKG_SRCURL=https://download.gnome.org/sources/dconf/${NASUX_PKG_VERSION%.*}/dconf-${NASUX_PKG_VERSION}.tar.xz
+NASUX_PKG_SHA256=16a47e49a58156dbb96578e1708325299e4c19eea9be128d5bd12fd0963d6c36
+NASUX_PKG_DEPENDS="dbus, glib"
 TERMUX_PKG_BUILD_DEPENDS="glib-cross, valac"
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
@@ -17,5 +17,5 @@ lib/systemd
 "
 
 termux_step_pre_configure() {
-	termux_setup_glib_cross_pkg_config_wrapper
+	nasux_setup_glib_cross_pkg_config_wrapper
 }

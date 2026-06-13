@@ -1,14 +1,14 @@
-TERMUX_PKG_HOMEPAGE=https://www.geany.org/
-TERMUX_PKG_DESCRIPTION="Fast and lightweight IDE"
-TERMUX_PKG_LICENSE="GPL-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="2.1"
+NASUX_PKG_HOMEPAGE=https://www.geany.org/
+NASUX_PKG_DESCRIPTION="Fast and lightweight IDE"
+NASUX_PKG_LICENSE="GPL-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="2.1"
 TERMUX_PKG_REVISION=1
-TERMUX_PKG_SRCURL=https://download.geany.org/geany-${TERMUX_PKG_VERSION}.tar.bz2
-TERMUX_PKG_SHA256=6b96a8844463300c10b9692a0a5edad8236eec9e84342f575f83d4fc89331228
+NASUX_PKG_SRCURL=https://download.geany.org/geany-${NASUX_PKG_VERSION}.tar.bz2
+NASUX_PKG_SHA256=6b96a8844463300c10b9692a0a5edad8236eec9e84342f575f83d4fc89331228
 TERMUX_PKG_AUTO_UPDATE=true
 # libvte is dlopen(3)ed:
-TERMUX_PKG_DEPENDS="atk, gdk-pixbuf, glib, gtk3, harfbuzz, libandroid-glob, libc++, libcairo, libvte, pango"
+NASUX_PKG_DEPENDS="atk, gdk-pixbuf, glib, gtk3, harfbuzz, libandroid-glob, libc++, libcairo, libvte, pango"
 TERMUX_PKG_RECOMMENDS="clang, make"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="--enable-gtk3 --enable-vte"
 

@@ -5,7 +5,7 @@ termux_github_auto_update() {
 	latest_tag="$(termux_github_api_get_tag)"
 
 	if [[ -z "${latest_tag}" ]]; then
-		termux_error_exit "Unable to get tag from ${TERMUX_PKG_SRCURL}"
+		termux_error_exit "Unable to get tag from ${NASUX_PKG_SRCURL}"
 	fi
 	termux_pkg_upgrade_version "${latest_tag}"
 }

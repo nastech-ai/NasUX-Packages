@@ -1,17 +1,17 @@
-TERMUX_PKG_HOMEPAGE=https://github.com/facebookincubator/below
-TERMUX_PKG_DESCRIPTION="An interactive tool to view and record historical system data"
-TERMUX_PKG_LICENSE="Apache-2.0"
-TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="0.11.0"
-TERMUX_PKG_SRCURL=https://github.com/facebookincubator/below/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=bc5cb3a5d9b62768bbabe09431737d631e244fffcc06dada88c3f6c81a23da9a
-TERMUX_PKG_DEPENDS="libelf, zlib"
-TERMUX_PKG_BUILD_IN_SRC=true
+NASUX_PKG_HOMEPAGE=https://github.com/facebookincubator/below
+NASUX_PKG_DESCRIPTION="An interactive tool to view and record historical system data"
+NASUX_PKG_LICENSE="Apache-2.0"
+NASUX_PKG_MAINTAINER="@nastech-ai"
+NASUX_PKG_VERSION="0.11.0"
+NASUX_PKG_SRCURL=https://github.com/facebookincubator/below/archive/refs/tags/v${NASUX_PKG_VERSION}.tar.gz
+NASUX_PKG_SHA256=bc5cb3a5d9b62768bbabe09431737d631e244fffcc06dada88c3f6c81a23da9a
+NASUX_PKG_DEPENDS="libelf, zlib"
+NASUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_UPDATE_TAG_TYPE="newest-tag"
 
 termux_step_pre_configure() {
-	termux_setup_rust
+	nasux_setup_rust
 	: "${CARGO_HOME:=$HOME/.cargo}"
 	export CARGO_HOME
 

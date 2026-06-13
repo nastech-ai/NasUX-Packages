@@ -4,5 +4,5 @@
 # More information available on the NasUX Developer's Wiki page:
 # https://github.com/nastech-ai/NasUX-Packages/wiki/Creating-new-package#writing-a-subpackage-script
 
-TERMUX_SUBPKG_DESCRIPTION=""
-TERMUX_SUBPKG_INCLUDE=""
+NASUX_SUBPKG_DESCRIPTION=""
+NASUX_SUBPKG_INCLUDE=""
