@@ -1,6 +1,6 @@
 # shellcheck shell=bash disable=SC2155
 # NasUX build helper — sets up a Zig toolchain for NasUX package builds.
-# Originally: termux_setup_zig (kept as alias for build system compatibility)
+# Backward-compatible with termux_setup_zig via alias at bottom of file.
 nasux_setup_zig() {
 	# TODO need to figure out if zig supports android targets
 	export ZIG_TARGET_NAME="${TERMUX_ARCH}-linux-musl"
