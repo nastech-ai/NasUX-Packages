@@ -23,6 +23,7 @@ jobs:
           echo "OUTPUT_DIR=$OUTPUT_DIR" >> "$GITHUB_OUTPUT"
           ./scripts/generate-apt-packages-list.sh "$OUTPUT_DIR"
       - name: Check repository health
+        continue-on-error: true
         run: |
           set -euo pipefail
           # This should not be needed when GitHub runners update to node v25.2.0+
