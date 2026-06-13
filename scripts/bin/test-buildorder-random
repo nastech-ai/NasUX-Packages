@@ -2,6 +2,7 @@
 # Randomise buildorder.py test on packages directory
 
 export TERMUX_SCRIPTDIR
+export TERMUX_ARCH="${TERMUX_ARCH:-${NASUX_ARCH:-}}"
 TERMUX_SCRIPTDIR=$(realpath "$(dirname "$0")/../..") # Root of repository.
 
 cd "${TERMUX_SCRIPTDIR}" || exit 1
