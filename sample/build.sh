@@ -1,11 +1,11 @@
-# Skeleton build.sh script for new package.
-# For reference about available fields, check the Termux Developer's Wiki page:
-# https://github.com/termux/termux-packages/wiki/Creating-new-package
+# Skeleton build.sh script for a new NasUX-Packages package.
+# For reference about available fields, see the Developer Wiki:
+# https://github.com/nastech-ai/NasUX-Packages/wiki/Creating-new-package
 
 TERMUX_PKG_HOMEPAGE=
 TERMUX_PKG_DESCRIPTION=""
 TERMUX_PKG_LICENSE=""
-TERMUX_PKG_MAINTAINER="@termux"
+TERMUX_PKG_MAINTAINER="@nastech-ai"
 TERMUX_PKG_VERSION=
 TERMUX_PKG_SRCURL=
 TERMUX_PKG_SHA256=
