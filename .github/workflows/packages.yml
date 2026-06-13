@@ -241,7 +241,7 @@ jobs:
     - name: Build docker image
       if: ${{ steps.build-info.outputs.needs-docker-build == 'true' }}
       run: |
-        docker build -t ghcr.io/termux/package-builder:latest scripts/
+        docker build -t ghcr.io/nastech-ai/nasux-package-builder:latest scripts/
         docker buildx prune -af
 
     - name: Load Docker image
@@ -274,7 +274,7 @@ jobs:
     - name: Generate build artifacts
       if: always()
       run: |
-        test -d termux-packages/output && mv termux-packages/output/* ./output/
+        test -d nasux-packages/output && mv nasux-packages/output/* ./output/
 
         for repo in $(jq --raw-output 'del(.pkg_format) | .[].name' repo.json); do
           # Put package lists into directory with *.deb files so they will be transferred to
@@ -347,7 +347,7 @@ jobs:
   upload-test:
     permissions:
       contents: read
-    if: github.repository == 'termux/termux-packages' && github.ref != 'refs/heads/master'
+    if: github.repository == 'nastech-ai/NasUX-Packages' && github.ref != 'refs/heads/master'
     needs: build
     runs-on: ubuntu-slim
     steps:
@@ -392,7 +392,7 @@ jobs:
             if [ ! -f "Packages-${repo}-${arch}" ]; then
               echo "[*] Downloading ${url}/dists/${distribution}/${component}/binary-${arch}/Packages.bz2"
               curl -s \
-                --user-agent 'Termux-Packages/1.0\ (https://github.com/termux/termux-packages)' \
+                --user-agent 'NasUX-Packages/1.0\ (https://github.com/nastech-ai/NasUX-Packages)' \
                 "${url}/dists/${distribution}/${component}/binary-${arch}/Packages.bz2" \
                 -o "Packages-${repo}-${arch}.bz2"
               7z x "Packages-${repo}-${arch}.bz2" > /dev/null
@@ -414,7 +414,7 @@ jobs:
     concurrency: ${{ github.workflow }}
     permissions:
       contents: read
-    if: github.repository == 'termux/termux-packages' && github.ref == 'refs/heads/master'
+    if: github.repository == 'nastech-ai/NasUX-Packages' && github.ref == 'refs/heads/master'
     needs: build
     runs-on: ubuntu-slim
     steps:
@@ -424,9 +424,9 @@ jobs:
       uses: actions/download-artifact@v7
       with:
         path: ./
-    - name: Upload to packages.termux.dev
+    - name: Upload to NasUX package repository
       env:
-        REPOSITORY_URL: https://packages.termux.dev/aptly-api
+        REPOSITORY_URL: https://packages.nastech.ai/aptly-api
         GITHUB_SHA: ${{ github.sha }}
         APTLY_API_AUTH: ${{ secrets.APTLY_API_AUTH }}
         GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
