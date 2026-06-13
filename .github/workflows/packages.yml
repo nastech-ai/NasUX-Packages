@@ -330,19 +330,19 @@ jobs:
     - name: Randomise buildorder.py test (aarch64)
       env:
         NASUX_ARCH: aarch64
-      run: TERMUX_ARCH=aarch64 ./scripts/bin/test-buildorder-random
+      run: ./scripts/bin/test-buildorder-random
     - name: Randomise buildorder.py test (arm)
       env:
         NASUX_ARCH: arm
-      run: TERMUX_ARCH=arm ./scripts/bin/test-buildorder-random
+      run: ./scripts/bin/test-buildorder-random
     - name: Randomise buildorder.py test (i686)
       env:
         NASUX_ARCH: i686
-      run: TERMUX_ARCH=i686 ./scripts/bin/test-buildorder-random
+      run: ./scripts/bin/test-buildorder-random
     - name: Randomise buildorder.py test (x86_64)
       env:
         NASUX_ARCH: x86_64
-      run: TERMUX_ARCH=x86_64 ./scripts/bin/test-buildorder-random
+      run: ./scripts/bin/test-buildorder-random
 
   upload-test:
     permissions:
