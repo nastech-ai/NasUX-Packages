@@ -24,8 +24,8 @@ TERMUX_PACKAGE_MANAGERS=("apt" "pacman")
 
 # The repository base urls mapping for package managers.
 declare -A REPO_BASE_URLS=(
-	["apt"]="https://packages-cf.nasux.dev/apt/nasux-main"
-	["pacman"]="https://sync.nasux-pacman.dev/main"
+["apt"]="https://packages.termux.dev/apt/termux-main"
+["pacman"]="https://packages.termux.dev/pacman/termux-main"
 )
 
 # The package manager that will be installed in bootstrap.
