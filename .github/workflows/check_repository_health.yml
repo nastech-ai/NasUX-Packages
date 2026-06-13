@@ -50,4 +50,4 @@ jobs:
               --search "$ISSUE_TITLE in:title type:issue" \
               --json number | jq -r '.[] | .number'
           )
-          gh issue create --title "$ISSUE_TITLE" --body "$ISSUE_BODY" --label "health-check" --assignee "thunder-coding"
+          gh issue create --title "$ISSUE_TITLE" --body "$ISSUE_BODY" --label "health-check" --assignee "nastech-ai"
