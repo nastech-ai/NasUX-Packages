@@ -77,14 +77,14 @@ REPLACEMENTS = [
      "ghcr.io/nastech-ai/nasux-package-builder",  "GHCR image"),
     (r"grimler/package-builder",
      "nastech-ai/nasux-package-builder",           "Docker Hub image"),
-    (r"tag termux/package-builder",
+    (r"tag nastech-ai/nasux-package-builder",
      "tag nastech-ai/nasux-package-builder",       "Docker tag"),
-    (r"users/termux/packages/container/package-builder",
+    (r"users/nastech-ai/packages/container/nasux-package-builder",
      "users/nastech-ai/packages/container/nasux-package-builder",
      "GHCR API path"),
 
     # ── Identity / contact ─────────────────────────────────────────────────
-    (r"Termux Github Actions",
+    (r"NasTech Bot",
      "NasTech Bot",                               "bot git name"),
     (r"contact@termux\.dev",
      "nastech-bot@users.noreply.github.com",       "bot email"),
@@ -152,7 +152,7 @@ REPLACEMENTS = [
      "username: nastech-ai",                      "Docker Hub username (alt)"),
 
     # ── Documentation / prose ─────────────────────────────────────────────
-    (r"Bootstrap archives for Termux application",
+    (r"Bootstrap archives for NasUX application",
      "Bootstrap archives for NasUX application",  "bootstrap title"),
     (r"Termux Developer['\u2019]s Wiki",
      "NasUX Developer's Wiki",                    "wiki label"),
