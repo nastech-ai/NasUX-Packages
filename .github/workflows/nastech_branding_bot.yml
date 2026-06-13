@@ -37,7 +37,7 @@ jobs:
           git add -A
           if ! git diff --cached --quiet; then
             CHANGED=$(git diff --cached --name-only | wc -l | tr -d ' ')
-            git commit -m "fix(branding): auto-fix Termux violations [skip ci] (${CHANGED} file(s))"
+            git commit -m "fix(branding): auto-fix NasUX branding violations [skip ci] (${CHANGED} file(s))"
             git push origin HEAD
             echo "Pushed branding fixes."
           else
