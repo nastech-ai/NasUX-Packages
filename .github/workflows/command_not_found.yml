@@ -13,7 +13,7 @@ jobs:
       issues: write
       contents: write
     if: github.repository == 'nastech-ai/NasUX-Packages'
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     steps:
       - name: Clone repository
         uses: actions/checkout@v6
