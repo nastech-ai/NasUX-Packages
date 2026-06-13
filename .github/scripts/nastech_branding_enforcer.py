@@ -39,10 +39,12 @@ SKIP_DIRS = {
     "terminal-emulator/build", "terminal-view/build",
 }
 
-# Files to never modify (bot should not self-modify)
+# Files to never modify (bot should not self-modify or corrupt its own patterns)
 SKIP_FILES = {
-    "nastech_branding_enforcer.py",
-    "nastech_branding_bot.py",
+    "nastech_branding_enforcer.py",   # this script
+    "nastech_branding_enforcer.yml",  # this workflow
+    "nastech_branding_bot.py",        # old bot script (regex patterns inside)
+    "nastech_branding_bot.yml",       # old bot workflow (patterns inside)
 }
 
 # File extensions eligible for scanning
@@ -77,14 +79,14 @@ REPLACEMENTS = [
      "ghcr.io/nastech-ai/nasux-package-builder",  "GHCR image"),
     (r"grimler/package-builder",
      "nastech-ai/nasux-package-builder",           "Docker Hub image"),
-    (r"tag nastech-ai/nasux-package-builder",
+    (r"tag termux/package-builder",
      "tag nastech-ai/nasux-package-builder",       "Docker tag"),
-    (r"users/nastech-ai/packages/container/nasux-package-builder",
+    (r"users/termux/packages/container/package-builder",
      "users/nastech-ai/packages/container/nasux-package-builder",
      "GHCR API path"),
 
     # ── Identity / contact ─────────────────────────────────────────────────
-    (r"NasTech Bot",
+    (r"Termux Github Actions",
      "NasTech Bot",                               "bot git name"),
     (r"contact@termux\.dev",
      "nastech-bot@users.noreply.github.com",       "bot email"),
@@ -152,7 +154,7 @@ REPLACEMENTS = [
      "username: nastech-ai",                      "Docker Hub username (alt)"),
 
     # ── Documentation / prose ─────────────────────────────────────────────
-    (r"Bootstrap archives for NasUX application",
+    (r"Bootstrap archives for Termux application",
      "Bootstrap archives for NasUX application",  "bootstrap title"),
     (r"Termux Developer['\u2019]s Wiki",
      "NasUX Developer's Wiki",                    "wiki label"),
