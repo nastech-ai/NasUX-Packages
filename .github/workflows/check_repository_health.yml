@@ -36,6 +36,8 @@ jobs:
         run: |
           ISSUE_TITLE="Repository Health Check Failed"
           ISSUE_BODY=$(cat repository-health.txt)
+          # Truncate to GitHub issue body limit (65536 chars)
+          ISSUE_BODY="${ISSUE_BODY:0:65000}"
           # if any previous Repository Health Check Failed issues are open, close them first
           while read -r number; do
             echo "INFO: Closing issue number: $number"
