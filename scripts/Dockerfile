@@ -10,12 +10,12 @@ FROM ubuntu:24.04
 ENV LANG=en_US.UTF-8
 
 # Needed for setup:
-RUN rm -rf /tmp/termux-packages
-RUN mkdir -p /tmp/termux-packages
-RUN mkdir -p /tmp/termux-packages/scripts
-COPY ./llvm-snapshot.gpg.key ./properties.sh ./setup-android-sdk.sh ./setup-cgct.sh ./setup-ubuntu.sh /tmp/termux-packages/scripts/
-RUN mkdir -p /tmp/termux-packages/scripts/build
-COPY ./build/termux_download.sh /tmp/termux-packages/scripts/build/
+RUN rm -rf /tmp/nasux-packages
+RUN mkdir -p /tmp/nasux-packages
+RUN mkdir -p /tmp/nasux-packages/scripts
+COPY ./llvm-snapshot.gpg.key ./properties.sh ./setup-android-sdk.sh ./setup-cgct.sh ./setup-ubuntu.sh /tmp/nasux-packages/scripts/
+RUN mkdir -p /tmp/nasux-packages/scripts/build
+COPY ./build/termux_download.sh /tmp/nasux-packages/scripts/build/
 
 # Setup needed packages and the Android SDK and NDK and the CGCT:
 RUN apt-get update && \
@@ -38,5 +38,5 @@ RUN apt-get update && \
 # Switch User
 USER builder:builder
 
-# We expect this to be mounted with '-v $PWD:/home/builder/termux-packages':
-WORKDIR /home/builder/termux-packages
+# We expect this to be mounted with '-v $PWD:/home/builder/nasux-packages':
+WORKDIR /home/builder/nasux-packages
