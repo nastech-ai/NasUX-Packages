@@ -1,0 +1,223 @@
+name: NasTech Branding Bot
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  schedule:
+    - cron: "0 6 * * 1"   # Every Monday 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  branding-enforce:
+    name: Scan & Auto-Fix Branding Violations
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run NasTech Branding Bot
+        id: bot
+        shell: bash
+        run: |
+          python3 - << 'PYEOF'
+          import os, re
+
+          ROOT = os.getcwd()
+          OUTPUT  = os.environ.get("GITHUB_OUTPUT", "/dev/null")
+          SUMMARY = os.environ.get("GITHUB_STEP_SUMMARY", "/dev/null")
+
+          # Paths to scan — GitHub meta and sample only.
+          # We deliberately skip build-system internals because TERMUX_PKG_* variables
+          # are the build-system convention and renaming them would break every package.
+          SCAN_DIRS = [".github", "sample"]
+          SCAN_EXTS = {".yml", ".yaml", ".sh", ".md", ".py", ".txt"}
+
+          EXCLUDE_SUBSTRINGS = [
+              "scripts/build/", "scripts/properties", "build-package.sh",
+              "build-all.sh", "scripts/generate-", "scripts/lint-",
+              "scripts/setup-", "scripts/buildorder", "scripts/check-",
+              "scripts/run-docker", "scripts/update-", "scripts/free-space",
+              "scripts/list-",
+          ]
+
+          # Auto-fix rules: (regex_pattern, replacement, human_label)
+          FIXES = [
+              (r"github\.repository\s*==\s*['\"]termux/termux-packages['\"]",
+               "github.repository == 'nastech-ai/NasUX-Packages'",
+               "repo guard condition"),
+              (r"Termux Github Actions",
+               "NasTech Bot",
+               "bot git name"),
+              (r"contact@termux\.dev",
+               "nastech-bot@users.noreply.github.com",
+               "bot git email"),
+              (r"secrets\.TERMUXBOT2_TOKEN",
+               "secrets.NASTECH_BOT_TOKEN",
+               "bot secret name"),
+              (r"https://termux\.dev/donate",
+               "https://github.com/sponsors/nastech-ai",
+               "funding URL"),
+              (r"Bootstrap archives for Termux application",
+               "Bootstrap archives for NasUX application",
+               "bootstrap release title"),
+              (r"ghcr\.io/termux/package-builder",
+               "ghcr.io/nastech-ai/nasux-package-builder",
+               "GHCR image name"),
+              (r"(?<![/\w])termux/package-builder:latest",
+               "nastech-ai/nasux-package-builder:latest",
+               "Docker image name"),
+              (r"tag termux/package-builder",
+               "tag nastech-ai/nasux-package-builder",
+               "Docker tag command"),
+              (r"users/termux/packages/container/package-builder",
+               "users/nastech-ai/packages/container/nasux-package-builder",
+               "GHCR API path"),
+              (r'TERMUX_PKG_MAINTAINER="@termux"',
+               'TERMUX_PKG_MAINTAINER="@nastech-ai"',
+               "sample maintainer"),
+          ]
+
+          # Violations that need manual review — cannot auto-fix safely
+          MANUAL_PATTERNS = [
+              (r"@termux\.dev",                                   "Termux email domain"),
+              (r"termux\.dev(?!/donate)",                         "termux.dev URL"),
+              (r"discord\.gg/HXpF69X",                           "Termux Discord invite"),
+              (r"t\.me/termux",                                   "Termux Telegram"),
+              (r"github\.com/termux/termux-packages/discussions", "Termux discussions link"),
+              (r"--assignee\s+['\"]?thunder-coding['\"]?",        "Termux assignee"),
+              (r"username:\s*grimler",                            "Termux Docker Hub username"),
+          ]
+
+          def should_skip(path):
+              rel = os.path.relpath(path, ROOT)
+              return any(s in rel for s in EXCLUDE_SUBSTRINGS)
+
+          fixes_log      = []
+          violations_log = []
+
+          def scan_and_fix(path):
+              if should_skip(path):
+                  return
+              _, ext = os.path.splitext(path)
+              if ext not in SCAN_EXTS:
+                  return
+              try:
+                  with open(path, "r", encoding="utf-8", errors="replace") as fh:
+                      original = fh.read()
+              except Exception:
+                  return
+
+              content = original
+              rel = os.path.relpath(path, ROOT)
+
+              for pattern, replacement, label in FIXES:
+                  new, n = re.subn(pattern, replacement, content)
+                  if n:
+                      content = new
+                      fixes_log.append(f"  [{label}] {rel}  ({n}x)")
+                      print(f"  fix: {label} — {rel}")
+
+              if content != original:
+                  with open(path, "w", encoding="utf-8") as fh:
+                      fh.write(content)
+
+              for pattern, label in MANUAL_PATTERNS:
+                  hits = re.findall(pattern, content)
+                  if hits:
+                      violations_log.append(
+                          f"- **{label}** in `{rel}` ({len(hits)} match(es))")
+
+          for scan_dir in SCAN_DIRS:
+              full = os.path.join(ROOT, scan_dir)
+              if os.path.isfile(full):
+                  scan_and_fix(full)
+              elif os.path.isdir(full):
+                  for dirpath, dirs, files in os.walk(full):
+                      dirs[:] = [d for d in dirs if d != ".git"]
+                      for fname in files:
+                          scan_and_fix(os.path.join(dirpath, fname))
+
+          print(f"\nResult: {len(fixes_log)} auto-fix(es), {len(violations_log)} manual violation(s)")
+
+          with open(OUTPUT, "a") as fh:
+              fh.write(f"fixes_count={len(fixes_log)}\n")
+              fh.write(f"violations_count={len(violations_log)}\n")
+
+          with open("/tmp/violations.md", "w") as fh:
+              if violations_log:
+                  fh.write("## Branding Violations — Manual Review Required\n\n")
+                  fh.write("The NasTech Branding Bot found references that could not be auto-fixed.\n\n")
+                  for v in violations_log:
+                      fh.write(v + "\n")
+                  fh.write("\n---\n*NasTech Branding Bot — nastech-ai/NasUX-Packages*\n")
+
+          with open(SUMMARY, "a") as fh:
+              fh.write("## NasTech Branding Bot\n\n")
+              fh.write("| | |\n|---|---|\n")
+              fh.write(f"| Repo | `nastech-ai/NasUX-Packages` |\n")
+              fh.write(f"| Auto-fixes applied | **{len(fixes_log)}** |\n")
+              fh.write(f"| Manual violations  | **{len(violations_log)}** |\n")
+              if fixes_log:
+                  fh.write("\n### Auto-fixes\n```\n" + "\n".join(fixes_log) + "\n```\n")
+              if violations_log:
+                  fh.write("\n### Manual violations\n" + "\n".join(violations_log) + "\n")
+          PYEOF
+
+      - name: Commit auto-fixes
+        if: steps.bot.outputs.fixes_count != '0'
+        shell: bash
+        run: |
+          git config user.name  "NasTech Branding Bot"
+          git config user.email "nastech-bot@users.noreply.github.com"
+          git add -A
+          if ! git diff --cached --quiet; then
+            CHANGED=$(git diff --cached --name-only | wc -l | tr -d ' ')
+            git commit -m "fix(branding): auto-fix Termux branding violations [skip ci]
+
+Applied by NasTech Branding Bot. Files changed: ${CHANGED}"
+            git push origin HEAD
+            echo "Pushed branding fixes."
+          else
+            echo "Nothing staged to commit."
+          fi
+
+      - name: Open issue for manual violations
+        if: steps.bot.outputs.violations_count != '0'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          TITLE="Branding Violations Require Manual Review"
+          BODY="$(cat /tmp/violations.md)"
+
+          while IFS= read -r number; do
+            [ -n "$number" ] && gh issue close "$number" --reason completed 2>/dev/null || true
+          done < <(
+            gh issue list --limit 50 --state open \
+              --search "$TITLE in:title" \
+              --json number | jq -r '.[] | .number' 2>/dev/null
+          )
+
+          gh issue create \
+            --title "$TITLE" \
+            --body "$BODY" \
+            --label "branding" \
+          || echo "Could not create issue (label may not exist yet)."
+
+      - name: Summary
+        if: always()
+        shell: bash
+        run: |
+          echo "NasTech Branding Bot complete."
+          echo "  Auto-fixes : ${{ steps.bot.outputs.fixes_count }}"
+          echo "  Violations : ${{ steps.bot.outputs.violations_count }}"
