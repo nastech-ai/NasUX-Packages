@@ -470,10 +470,10 @@ for package_arch in "${TERMUX_ARCHITECTURES[@]}"; do
 	pull_package psmisc
 	pull_package sed
 	pull_package tar
-	pull_package nasux-core
+	pull_package termux-tools  # nasux-core (NasUX CDN) -> termux-tools (upstream fallback)
 	pull_package termux-exec
-	pull_package nasux-keyring
-	pull_package nasux-tools
+	pull_package termux-keyring  # nasux-keyring (NasUX CDN) -> termux-keyring (upstream fallback)
+	# pull_package nasux-tools  # skipped: not available on termux-main upstream (covered by termux-tools)
 	pull_package util-linux
 	pull_package xz-utils
 
