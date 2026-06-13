@@ -12,20 +12,20 @@ jobs:
     permissions:
       issues: write
       contents: write
-    if: github.repository == 'termux/termux-packages'
+    if: github.repository == 'nastech-ai/NasUX-Packages'
     runs-on: ubuntu-slim
     steps:
       - name: Clone repository
         uses: actions/checkout@v6
         with:
           fetch-depth: 1
-          token: ${{ secrets.TERMUXBOT2_TOKEN }}
+          token: ${{ secrets.NASTECH_BOT_TOKEN }}
       - name: Revbump main/command-not-found
         env:
-          GITHUB_TOKEN: ${{ secrets.TERMUXBOT2_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.NASTECH_BOT_TOKEN }}
         run: |
-          git config --global user.name "Termux Github Actions"
-          git config --global user.email "contact@termux.dev"
+          git config --global user.name "NasTech Bot"
+          git config --global user.email "nastech-bot@users.noreply.github.com"
 
           ./scripts/bin/revbump command-not-found
           git add .
