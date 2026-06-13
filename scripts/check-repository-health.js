@@ -163,41 +163,38 @@ async function getTermuxPackages(
     `${outputDir}/apt-packages-list-${arch}.txt`,
     "utf8",
   );
-  data
-    .trim()
-    .split("\n")
-    .forEach((line) => {
-      let [pkgName, pkgRepo, pkgVersion, pkgMayHaveStaticSubpkg] =
-        line.split(" ");
-      if (termuxPackages.has(pkgName)) {
-        errors.push(`Duplicate package in nasux-packages: "${pkgName}"`);
-        proposedManualFixes.push(
-          `Duplicate package "${pkgName}" earlier found in "${termuxPackages.get(pkgName).repo}" also in "${pkgRepo}" needs to be removed from nasux-packages`,
-        );
+  for (const line of data.trim().split("\n")) {
+    let [pkgName, pkgRepo, pkgVersion, pkgMayHaveStaticSubpkg] =
+      line.split(" ");
+    if (termuxPackages.has(pkgName)) {
+      errors.push(`Duplicate package in nasux-packages: "${pkgName}"`);
+      proposedManualFixes.push(
+        `Duplicate package "${pkgName}" earlier found in "${termuxPackages.get(pkgName).repo}" also in "${pkgRepo}" needs to be removed from nasux-packages`,
+      );
+    }
+    const repoPath = repoPathMap.get(pkgRepo);
+    let lastModified = Math.floor(new Date().getTime() / 1000);
+    if (repoPath) {
+      try {
+        const { stdout } = await execFileAsync("git", [
+          "log",
+          "-1",
+          "--format=%at",
+          repoPath,
+        ]);
+        const parsed = Number.parseInt(stdout);
+        if (!isNaN(parsed)) lastModified = parsed;
+      } catch (_e) {
+        // git log failed — fall back to current time
       }
-      const repoPath = repoPathMap.get(pkgRepo);
-      let lastModified = Math.floor(new Date().getTime() / 1000);
-      if (repoPath) {
-        try {
-          const { stdout } = await execFileAsync("git", [
-            "log",
-            "-1",
-            "--format=%at",
-            repoPath,
-          ]);
-          const parsed = Number.parseInt(stdout);
-          if (!isNaN(parsed)) lastModified = parsed;
-        } catch (_e) {
-          // git log failed — fall back to current time
-        }
-      }
-      termuxPackages.set(pkgName, {
-        version: pkgVersion,
-        repo: pkgRepo,
-        mayHaveStaticSubpkg: pkgMayHaveStaticSubpkg === "true",
-        lastModified,
-      });
+    }
+    termuxPackages.set(pkgName, {
+      version: pkgVersion,
+      repo: pkgRepo,
+      mayHaveStaticSubpkg: pkgMayHaveStaticSubpkg === "true",
+      lastModified,
     });
+  }
   return termuxPackages;
 }
 
