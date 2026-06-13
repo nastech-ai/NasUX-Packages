@@ -91,7 +91,7 @@ jobs:
           exit 1
         fi
 
-        OLD_COMMIT="$OLD_COMMIT" HEAD_COMMIT="$HEAD_COMMIT" GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}" scripts/utils/termux_reuse_pr_build_artifacts.sh "${{ github.event_name }}" "${{ matrix.target_arch }}" || true
+        OLD_COMMIT="$OLD_COMMIT" HEAD_COMMIT="$HEAD_COMMIT" GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}" scripts/utils/nasux_reuse_pr_build_artifacts.sh "${{ github.event_name }}" "${{ matrix.target_arch }}" || true
 
         if [ "${{ github.event_name }}" != "workflow_dispatch" ]; then
           # GitHub sometimes add merge commits at the end
@@ -329,20 +329,20 @@ jobs:
       run: ./scripts/bin/test-buildorder-random
     - name: Randomise buildorder.py test (aarch64)
       env:
-        TERMUX_ARCH: aarch64
-      run: ./scripts/bin/test-buildorder-random
+        NASUX_ARCH: aarch64
+      run: TERMUX_ARCH=aarch64 ./scripts/bin/test-buildorder-random
     - name: Randomise buildorder.py test (arm)
       env:
-        TERMUX_ARCH: arm
-      run: ./scripts/bin/test-buildorder-random
+        NASUX_ARCH: arm
+      run: TERMUX_ARCH=arm ./scripts/bin/test-buildorder-random
     - name: Randomise buildorder.py test (i686)
       env:
-        TERMUX_ARCH: i686
-      run: ./scripts/bin/test-buildorder-random
+        NASUX_ARCH: i686
+      run: TERMUX_ARCH=i686 ./scripts/bin/test-buildorder-random
     - name: Randomise buildorder.py test (x86_64)
       env:
-        TERMUX_ARCH: x86_64
-      run: ./scripts/bin/test-buildorder-random
+        NASUX_ARCH: x86_64
+      run: TERMUX_ARCH=x86_64 ./scripts/bin/test-buildorder-random
 
   upload-test:
     permissions:
