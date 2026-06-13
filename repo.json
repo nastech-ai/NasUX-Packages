@@ -4,18 +4,18 @@
     "name": "nasux-main",
     "distribution": "stable",
     "component": "main",
-    "url": "https://packages-cf.nasux.dev/apt/nasux-main"
+    "url": "https://packages.termux.dev/apt/termux-main"
   },
   "root-packages": {
     "name": "nasux-root",
     "distribution": "root",
     "component": "stable",
-    "url": "https://packages-cf.nasux.dev/apt/nasux-root"
+    "url": "https://packages.termux.dev/apt/termux-root"
   },
   "x11-packages": {
     "name": "nasux-x11",
     "distribution": "x11",
     "component": "main",
-    "url": "https://packages-cf.nasux.dev/apt/nasux-x11"
+    "url": "https://packages.termux.dev/apt/termux-x11"
   }
 }
