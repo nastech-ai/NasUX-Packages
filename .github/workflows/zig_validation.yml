@@ -9,7 +9,7 @@ on:
   pull_request:
     paths:
     - 'packages/zig/build.sh'
-    - 'scripts/build/setup/termux_setup_zig.sh'
+    - 'scripts/build/setup/nasux_setup_zig.sh'
 
 jobs:
   planning:
