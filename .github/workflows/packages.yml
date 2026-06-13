@@ -321,7 +321,7 @@ jobs:
   test-buildorder-random:
     permissions:
       contents: read
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     steps:
     - name: Clone repository
       uses: actions/checkout@v6
@@ -349,7 +349,7 @@ jobs:
       contents: read
     if: github.repository == 'nastech-ai/NasUX-Packages' && github.ref != 'refs/heads/master'
     needs: build
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     steps:
     - name: Clone repository
       uses: actions/checkout@v6
@@ -416,7 +416,7 @@ jobs:
       contents: read
     if: github.repository == 'nastech-ai/NasUX-Packages' && github.ref == 'refs/heads/master'
     needs: build
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     steps:
     - name: Clone repository
       uses: actions/checkout@v6
