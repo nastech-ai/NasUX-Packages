@@ -1,5 +1,5 @@
 # NasUX build helper — sets up a Go toolchain for NasUX package builds.
-# Originally: termux_setup_golang (kept as alias for build system compatibility)
+# Backward-compatible with termux_setup_golang via alias at bottom of file.
 # Utility function for golang-using packages to setup a go toolchain.
 nasux_setup_golang() {
 	export GOPATH="${TERMUX_COMMON_CACHEDIR}/go-path" GOCACHE="${TERMUX_COMMON_CACHEDIR}/go-build"
