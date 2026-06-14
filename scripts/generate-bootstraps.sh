@@ -24,8 +24,8 @@ TERMUX_PACKAGE_MANAGERS=("apt" "pacman")
 
 # The repository base urls mapping for package managers.
 declare -A REPO_BASE_URLS=(
-["apt"]="https://packages.termux.dev/apt/termux-main"
-["pacman"]="https://packages.termux.dev/pacman/termux-main"
+["apt"]="https://packages.termux.dev/apt/nasux-main"
+["pacman"]="https://packages.termux.dev/pacman/nasux-main"
 )
 
 # The package manager that will be installed in bootstrap.
@@ -270,9 +270,9 @@ add_termux_bootstrap_second_stage_files() {
 		-e "s|@TERMUX__PREFIX__PROFILE_D_DIR@|${TERMUX__PREFIX__PROFILE_D_DIR}|g" \
 		-e "s|@TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_DIR@|${TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_DIR}|g" \
 		-e "s|@TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUBFILE@|${TERMUX_BOOTSTRAP__BOOTSTRAP_SECOND_STAGE_ENTRY_POINT_SUBFILE}|g" \
-		"$NASUX_SCRIPTDIR/scripts/bootstrap/01-termux-bootstrap-second-stage-fallback.sh" \
-		> "${BOOTSTRAP_ROOTFS}/${TERMUX__PREFIX__PROFILE_D_DIR}/01-termux-bootstrap-second-stage-fallback.sh"
-	chmod 600 "${BOOTSTRAP_ROOTFS}/${TERMUX__PREFIX__PROFILE_D_DIR}/01-termux-bootstrap-second-stage-fallback.sh"
+		"$NASUX_SCRIPTDIR/scripts/bootstrap/01-nasux-bootstrap-second-stage-fallback.sh" \
+		> "${BOOTSTRAP_ROOTFS}/${TERMUX__PREFIX__PROFILE_D_DIR}/01-nasux-bootstrap-second-stage-fallback.sh"
+	chmod 600 "${BOOTSTRAP_ROOTFS}/${TERMUX__PREFIX__PROFILE_D_DIR}/01-nasux-bootstrap-second-stage-fallback.sh"
 
 }
 
@@ -471,10 +471,10 @@ for package_arch in "${TERMUX_ARCHITECTURES[@]}"; do
 	pull_package psmisc
 	pull_package sed
 	pull_package tar
-	pull_package termux-tools  # nasux-core (NasUX CDN) -> termux-tools (upstream fallback)
+	pull_package nasux-tools  # nasux-core (NasUX CDN) -> nasux-tools (upstream fallback)
 	pull_package termux-exec
-	pull_package termux-keyring  # nasux-keyring (NasUX CDN) -> termux-keyring (upstream fallback)
-	# pull_package nasux-tools  # skipped: not available on termux-main upstream (covered by termux-tools)
+	pull_package nasux-keyring  # nasux-keyring (NasUX CDN) -> nasux-keyring (upstream fallback)
+	# pull_package nasux-tools  # skipped: not available on nasux-main upstream (covered by nasux-tools)
 	pull_package util-linux
 	pull_package xz-utils
 
